@@ -1,0 +1,77 @@
+<html>
+<head>
+    <link href="sucodo.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="loca_data.js"></script>
+    <script type="text/javascript" src="loca.js"></script>
+    <script type="text/javascript" src="tests.js"></script>
+    <script type="text/javascript" src="sucodo.js"></script>
+</head>
+<body>
+
+<div id="header">
+    <div id="navigation">
+        <span id="txt_title"></span>
+        <div id="navlinks">
+            1. <a href="#" id="nav1"><span id="txt_nav_step1" class="navspan"></span></a>
+            2. <a href="#" id="nav2"><span id="txt_nav_step2" class="navspan"></span></a>
+            3. <a href="#" id="nich bav3"><span id="txt_nav_step3" class="navspan"></span></a>
+            4. <a href="#" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+
+    <div id="content1" class="content">
+        <h1 class="headline"><span id="txt_nav_step1"></span></h1>
+        <textarea id="plagtext" onfocus="clearTextArea(this, 'txt_sampletext')" onblur="restoreTextArea(this, 'txt_sampletext')" cols="50" rows="15"></textarea>
+        <p><a href="#" class="accept_link" id="btn_analyze"><span id="txt_analyze_now"></span></a></p>
+    </div>
+
+    <div id="content2" class="content">
+        <h1 class="headline"><span id="txt_nav_step2"></span></h1>
+        <p>
+            <span id="txt_word_group_length"></span>
+            <select id="grouplen">
+                <option value="3" id="txt_grouplen3"></option>
+                <option value="4" id="txt_grouplen4"></option>
+                <option value="5" id="txt_grouplen5"></option>
+                <option value="8" id="txt_grouplen8" selected="selected"></option>
+                <option value="10" id="txt_grouplen10"></option>
+                <option value="15" id="txt_grouplen15"></option>
+                <option value="20" id="txt_grouplen20"></option>
+            </select>
+        </p>
+
+        <span id="txt_textview"></span>
+        <div id="textview" class="textview">
+        </div>
+        <span id="txt_resultview"></span>
+        <div id="resultview" class="textview">
+        </div>
+        <p>
+            <span id="analyzer_status_text">...</span>
+        </p>
+    </div>
+
+    <div id="content3" class="content">
+        <h1 class="headline"><span id="txt_nav_step3"></span></h1>
+    </div>
+
+    <div id="content4" class="content">
+        <h1 class="headline"><span id="txt_nav_step4"></span></h1>
+        <p><span id="txt_help"></span></p>
+    </div>
+
+</div>
+
+<div id="lang_select">
+</div>
+
+<div id="testresults">
+</div>
+
+
+</body>
+</html>

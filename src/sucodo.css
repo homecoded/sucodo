@@ -1,0 +1,138 @@
+#txt_title {
+	font-size: 25pt;
+    line-height: 14pt;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0px 0px 8px #000;
+	float: right;
+}
+
+#txt_title_subphrase {
+	font-size: 14pt;
+	color: #171A5D;
+}	
+
+#header {
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+#lang_select, #navigation {
+	padding: 3px;
+}
+
+#content {
+	margin: 0px;
+	padding: 0px;
+}
+
+#content1 {
+	background-color: #D1FFD2;
+	text-align: center;
+}
+
+#content2 {
+	background-color: #B2ECFF;
+	text-align: center;
+}	
+
+#content3 {
+	background-color: #FDF4BB;
+}
+
+#content4 {
+	background-color: #F0EEEE;
+}	
+
+#plagtext {
+	width: 600px;
+	height: 300px;
+	margin: auto;
+}
+
+#testresults {
+    color: #AAA;
+    font-family: monospace;
+    margin-top: 20px;
+}
+
+.textview {
+	width: 600px;
+	height: 150px;			
+	overflow: auto;	
+	margin: auto;	
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#resultview, #textview {
+    text-align: left;
+}
+
+#grouplen {
+	width: 45px;
+}
+
+#gaplen	{
+	width: 45px;
+}
+
+.navspan {
+	margin-right: 30px;
+}
+
+.lang_link {
+	margin: 20px;
+}
+           			
+.active	{
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+.accept_link {
+	padding: 5px;
+	border-left: 2px solid #FFFFFF;
+	border-top: 2px solid #FFFFFF;
+	border-right: 2px solid #555555;
+	border-bottom: 2px solid #555555;
+	background-color: #CCCCCC;
+	text-decoration: none;
+	color: #000000;
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.content {
+	display: none;
+	height: 550px;
+}       
+
+.headline {
+	text-align: left;
+	border-bottom: 1px solid #542;
+	border-top: 1px solid #A72;
+	margin: 0px;
+	margin-bottom: 20px;
+	padding: 5px;
+	background-color: #443321;
+	color: #FFFFFF;
+	text-indent: 20px;
+	font-size: 18pt;
+	-moz-box-shadow: 0px 5px 16px #000;
+	-webkit-box-shadow: 0px 5px 16px #000;
+	box-shadow: 0px 5px 16px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#000000');				
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+}
