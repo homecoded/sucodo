@@ -26,7 +26,7 @@
 		"txt_nav_step3":
 		[
 			"Manual Inspection",
-			"Manuelle Überprüfung"
+			"Manuelle ï¿½berprï¿½fung"
 		],
 		
 		"txt_nav_step4":
@@ -49,8 +49,8 @@
 		
 		"txt_sampletext":
 		[
-			"Enter or rather copy & paste the text you want to analyze here ...",
-			"Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einfügen) ..."
+			"Enter or rather copy & paste the text you want to analyze here:",
+			"Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einfï¿½gen):"
 		],	
 		
 		"txt_analyze_now":
@@ -62,7 +62,7 @@
 		"txt_lang_select":
 		[
 			"Select your language:",
-			"Wähle Deine Sprache:"
+			"Wï¿½hle Deine Sprache:"
 		],	
 		
 		"txt_lang_name":
@@ -80,20 +80,20 @@
 		"txt_textview":
 		[
 			"Text View (Suspicious parts of the text are marked red. Click on them to get detailed info)",
-			"Textanzeige (Verdächtige Textanteile werden rot markiert. Klicke darauf um mehr Infos zu bekommen)"
+			"Textanzeige (Verdï¿½chtige Textanteile werden rot markiert. Klicke darauf um mehr Infos zu bekommen)"
 		],
 		
 		"txt_word_group_length":
 		[
 			"Words per test group:",
-			"Wörter pro Testgruppe:"
+			"Wï¿½rter pro Testgruppe:"
 		],	
 		
 		
 		"txt_grouplen3":
 		[
 			"3  (very small, expect false positives and long execution time)",
-			"3  (sehr klein, Falschmeldungen und lange Ausführzeit werden erwartet)"
+			"3  (sehr klein, Falschmeldungen und lange Ausfï¿½hrzeit werden erwartet)"
 		],	
 		
 		"txt_grouplen4":
@@ -129,7 +129,7 @@
 		"txt_grouplen20":
 		[
 			"20 (very big, may lead to inaccurate results)",
-			"20 (sehr groß, kann zu ungenauen Ergebnissen führen)"
+			"20 (sehr groï¿½, kann zu ungenauen Ergebnissen fï¿½hren)"
 		],	
 	
 		"last element":   

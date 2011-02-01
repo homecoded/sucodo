@@ -54,61 +54,64 @@ var tests = (function () {
             locatest.tearDown();
         }
     }
+
+    var textBreakerTest = {
+        _testTextBreaker: function () {
+             // one paragraph
+             var text = "I am a text. I am a text. I am a text.";
+            
+             var paragraphs = textBreaker.breakUp(text, 3);
+             impunit.assertEqual("I am a", paragraphs[0][0]);
+             impunit.assertEqual("text. I am", paragraphs[0][1]);
+             impunit.assertEqual("a text. I", paragraphs[0][2]);
+             impunit.assertEqual("am a text.", paragraphs[0][3]);
+
+             paragraphs = textBreaker.breakUp(text, 4);
+             impunit.assertEqual("I am a text.", paragraphs[0][0]);
+             impunit.assertEqual("I am a text.", paragraphs[0][1]);
+             impunit.assertEqual("I am a text.", paragraphs[0][2]);
+
+             paragraphs = textBreaker.breakUp(text, 5);
+             impunit.assertEqual("I am a text. I", paragraphs[0][0]);
+             impunit.assertEqual("am a text. I am", paragraphs[0][1]);
+             impunit.assertEqual("a text.", paragraphs[0][2]);
+        },
+        _testTextBreakerOnParagraph: function () {
+             // more than one paragraph
+             var text = "I am a text. I am a text.\nI am 2nd paragraph. I am 2nd paragraph.";
+             paragraphs = textBreaker.breakUp(text, 3);
+             impunit.assertEqual(2, paragraphs.length);
+             impunit.assertEqual("I am a", paragraphs[0][0]);
+             impunit.assertEqual("text. I am", paragraphs[0][1]);
+             impunit.assertEqual("a text.", paragraphs[0][2]);
+             impunit.assertEqual("I am 2nd", paragraphs[1][0]);
+             impunit.assertEqual("paragraph. I am", paragraphs[1][1]);
+             impunit.assertEqual("2nd paragraph.", paragraphs[1][2]);
+        }
+    }
+
     return {
         runTests: function () {
-            impunit.runTests(locatest);
-            if (impunit.testsRun() > 0 && impunit.testsFailed() == 0) {
-                $('#testresults').html('TESTS: OK');
+            var tests = [locatest, textBreakerTest];
+            var testRun = 0, testsFailed = 0, messages = "";
+
+            for (var i = 0; i < tests.length; i++) {
+                impunit.runTests(tests[i]);
+                testRun += impunit.testsRun();
+                testsFailed += impunit.testsFailed();
+                messages += impunit.messages();
+            }
+
+            if (testRun > 0 && testsFailed == 0) {
+                $('#testresults').html('TESTS: OK (' + testRun + ' tests)');
             }
             else {
                 $('#testresults').html('TESTS: FAILED'
-                        + '<br>tests run: ' + impunit.testsRun()
-                        + '<br>tests failed: ' + impunit.testsFailed()
-                        + '<br>messages <pre>: ' + impunit.messages()
+                        + '<br>tests run: ' + testRun
+                        + '<br>tests failed: ' + testsFailed
+                        + '<br>messages <pre>: ' + messages
                         + '</pre>');
             }
         }
     }
 }());
-
-
-/*
- later to come tests ...
- ////////////////////
- function _testTextbreaker()
- {
- // one paragraph
- var text = "I am a text. I am a text. I am a text.";
-
- var paragraphs = textBreaker_break(text, 3);
- assertEqual("I am a", paragraphs[0][0]);
- assertEqual("text. I am", paragraphs[0][1]);
- assertEqual("a text. I", paragraphs[0][2]);
- assertEqual("am a text.", paragraphs[0][3]);
-
- paragraphs = textBreaker_break(text, 4);
- assertEqual("I am a text.", paragraphs[0][0]);
- assertEqual("I am a text.", paragraphs[0][1]);
- assertEqual("I am a text.", paragraphs[0][2]);
-
- paragraphs = textBreaker_break(text, 5);
- assertEqual("I am a text. I", paragraphs[0][0]);
- assertEqual("am a text. I am", paragraphs[0][1]);
- assertEqual("a text.", paragraphs[0][2]);
- }
-
- function _testTextbreakerOnParagraph()
- {
- // more than one paragraph
- var text = "I am a text. I am a text.\nI am 2nd paragraph. I am 2nd paragraph.";
- paragraphs = textBreaker_break(text, 3);
- assertEqual(2, paragraphs.length);
- assertEqual("I am a", paragraphs[0][0]);
- assertEqual("text. I am", paragraphs[0][1]);
- assertEqual("a text.", paragraphs[0][2]);
- assertEqual("I am 2nd", paragraphs[1][0]);
- assertEqual("paragraph. I am", paragraphs[1][1]);
- assertEqual("2nd paragraph.", paragraphs[1][2]);
- }
-
- */

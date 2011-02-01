@@ -56,14 +56,14 @@ var navi = {
                 }
                 );
     },
-	execute: function (id) {
-	     switch (id)
-	     {
-		 	case 2:
-		 		//navi_analyzeText();
-		 		break;
-		 }
-	}
+    execute: function (id) {
+        switch (id)
+        {
+            case 2:
+                //navi_analyzeText();
+                break;
+        }
+    }
 };
 
 /********************************************************************************************
@@ -75,13 +75,6 @@ var sucodoLoca = {
         var oldLoca = sucodoLoca.lang;
         sucodoLoca.lang = id;
         loca.applyLocalization(id);
-
-        // set the standard text in the input field
-        var plagiarismText = $("#plagtext");
-        if (plagiarismText.val() == ""
-                || plagiarismText.val() == loca.getLocaData("txt_sampletext", oldLoca)) {
-            plagiarismText.val(loca.getLocaData("txt_sampletext", id));
-        }
 
         // update the options in the select boxes
         $.each($("#grouplen").children(), function () {
