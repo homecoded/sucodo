@@ -79,13 +79,6 @@ var sucodoLoca = {
         sucodoLoca.lang = id;
         loca.applyLocalization(id);
 
-        // set the standard text in the input field
-        var plagiarismText = $("#plagtext");
-        if (plagiarismText.val() == ""
-                || plagiarismText.val() == loca.getLocaData("txt_sampletext", oldLoca)) {
-            plagiarismText.val(loca.getLocaData("txt_sampletext", id));
-        }
-
         // update the options in the select boxes
         $.each($("#grouplen").children(), function () {
             $(this).text(loca.getLocaData(this.id, id));

@@ -5,6 +5,7 @@
     <script type="text/javascript" src="loca_data.js"></script>
     <script type="text/javascript" src="loca.js"></script>
     <script type="text/javascript" src="textanalyzer.js"></script>
+    <script type="text/javascript" src="textbreaker.js"></script>
     <script type="text/javascript" src="tests.js"></script>
     <script type="text/javascript" src="sucodo.js"></script>
 </head>
@@ -26,7 +27,8 @@
 
     <div id="content1" class="content">
         <h1 class="headline"><span id="txt_nav_step1"></span></h1>
-        <textarea id="plagtext" onfocus="clearTextArea(this, 'txt_sampletext')" onblur="restoreTextArea(this, 'txt_sampletext')" cols="50" rows="15"></textarea>
+        <p></p><span id="txt_sampletext"></span></p>
+        <textarea id="plagtext" cols="50" rows="15"></textarea>
         <p><a href="#" class="accept_link" id="btn_analyze"><span id="txt_analyze_now"></span></a></p>
     </div>
 
