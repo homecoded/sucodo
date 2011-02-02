@@ -55,8 +55,8 @@
 		
 		"txt_analyze_now":
 		[
-			"Go to analyzer!",
-			"Jetzt zum Analysieren!"
+			"Give me academic peace-of-mind!",
+			"Gib mir akademischen Seelenfrieden!"
 		],	
 		
 		"txt_lang_select":
