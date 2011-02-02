@@ -12,16 +12,18 @@ $(document).ready(function () {
             };
         }());
     }
+    $('#btn_analyze').click(function () {
+        navi.goto(2); 
+    });
     // run tests
     tests.runTests();
-
     // init language
     loca.dict = loca__dictionary;
     sucodoLoca.createLinks();
     sucodoLoca.setLang(sucodoLoca.lang);
     // go to first site
     navi.goto(1);
-})
+});
 
 /********************************************************************************************
  * Navi
@@ -60,7 +62,8 @@ var navi = {
 	     switch (id)
 	     {
 		 	case 2:
-		 		//navi_analyzeText();
+                var text = $('#plagtext').val();
+		 		textanalyzer.go(text);
 		 		break;
 		 }
 	}
