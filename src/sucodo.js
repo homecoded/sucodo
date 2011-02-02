@@ -51,9 +51,9 @@ var navi = {
         $("#content").children().each(
                 function (_i, _element)	{
                     if ($(this).is(activeElementId)) {
-                        $(this).css("display", "block");
+                        $(this).fadeIn();
                     } else {
-                        $(this).css("display", "none");
+                        $(this).fadeOut();
                     }
                 }
                 );

@@ -26,7 +26,7 @@
 		"txt_nav_step3":
 		[
 			"Manual Inspection",
-			"Manuelle �berpr�fung"
+			"Manuelle Überprüfung"
 		],
 		
 		"txt_nav_step4":
@@ -62,7 +62,7 @@
 		"txt_lang_select":
 		[
 			"Select your language:",
-			"W�hle Deine Sprache:"
+			"Wähle Deine Sprache:"
 		],	
 		
 		"txt_lang_name":
@@ -80,20 +80,20 @@
 		"txt_textview":
 		[
 			"Text View (Suspicious parts of the text are marked red. Click on them to get detailed info)",
-			"Textanzeige (Verd�chtige Textanteile werden rot markiert. Klicke darauf um mehr Infos zu bekommen)"
+			"Textanzeige (Verdächtige Textanteile werden rot markiert. Klicke darauf um mehr Infos zu bekommen)"
 		],
 		
 		"txt_word_group_length":
 		[
 			"Words per test group:",
-			"W�rter pro Testgruppe:"
+			"Wörter pro Testgruppe:"
 		],	
 		
 		
 		"txt_grouplen3":
 		[
 			"3  (very small, expect false positives and long execution time)",
-			"3  (sehr klein, Falschmeldungen und lange Ausf�hrzeit werden erwartet)"
+			"3  (sehr klein, Falschmeldungen und lange Ausführzeit werden erwartet)"
 		],	
 		
 		"txt_grouplen4":
@@ -129,7 +129,7 @@
 		"txt_grouplen20":
 		[
 			"20 (very big, may lead to inaccurate results)",
-			"20 (sehr gro�, kann zu ungenauen Ergebnissen f�hren)"
+			"20 (sehr groß, kann zu ungenauen Ergebnissen führen)"
 		],	
 	
 		"last element":   
