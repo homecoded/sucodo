@@ -63,7 +63,9 @@ var navi = {
 	     {
 		 	case 2:
                 var text = $('#plagtext').val();
-		 		textanalyzer.go(text);
+                var wordGroupLen = parseInt($('#grouplen').val());
+		 		textAnalyzer.go(text, wordGroupLen);
+                $('#textview').html(textAnalyzer.getResult());
 		 		break;
 		 }
 	}

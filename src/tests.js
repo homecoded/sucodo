@@ -90,10 +90,27 @@ var tests = (function () {
         }
     }
 
+    var searcherTest =  {
+        _testSearch : function () {
+            var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
+                impunit.assertTrue(numResults > 0);
+                impunit.assertEqual('test', phrase);
+            });
+            webSearcher.search('test', asyncCallback);
+        }
+    }
+
     return {
         runTests: function () {
-            var tests = [locatest, textBreakerTest];
+            var tests = [locatest, textBreakerTest, searcherTest];
             var testRun = 0, testsFailed = 0, messages = "";
+
+            impunit.onAsyncTestFailed(function () {
+                var content = $('#asynctestresults').html();
+                $('#asynctestresults').html(content + '<p>Asynchronous Tests failed:  '
+                        + impunit.asyncTestsFailed() + '</p>'
+                        + '<pre>' + impunit.asyncMessages() + '</pre>');
+            });
 
             for (var i = 0; i < tests.length; i++) {
                 impunit.runTests(tests[i]);
