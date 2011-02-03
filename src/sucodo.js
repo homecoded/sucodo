@@ -34,30 +34,41 @@ var navi = {
         navi.showContent(id);
         navi.execute(id);
     },
+    /*
+        Highlights the active link
+     */
     highlight: function (id) {
         var activeElementId = "#nav" + id;
-        $("#navigation").children().each(
+        $("#navlinks").children().each(
                 function (_i, _element) {
-                    if ($(this).is(activeElementId) && !$(this).hasClass('active')) {
-                        $(this).addClass('active');
+                    if ($(this).is(activeElementId)) {
+                        if (!$(this).hasClass('active')) {
+                            $(this).addClass('active');
+                        }
                     } else if ($(this).hasClass('active')) {
                         $(this).removeClass('active');
                     }
                 }
                 );
     },
+    /*
+        Shows the correct main screen
+     */
     showContent: function (id)	{
         var activeElementId = "#content"+id;
         $("#content").children().each(
                 function (_i, _element)	{
                     if ($(this).is(activeElementId)) {
-                        $(this).fadeIn();
+                        $(this).show();
                     } else {
-                        $(this).fadeOut();
+                        $(this).hide();
                     }
                 }
                 );
     },
+    /*
+        Runs the code necessary for a state
+     */
 	execute: function (id) {
 	     switch (id)
 	     {

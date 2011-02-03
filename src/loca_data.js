@@ -50,7 +50,7 @@
 		"txt_sampletext":
 		[
 			"Enter or rather copy & paste the text you want to analyze here:",
-			"Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einf�gen):"
+			"Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einfügen):"
 		],	
 		
 		"txt_analyze_now":

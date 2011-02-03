@@ -1,6 +1,157 @@
 // impunit (https://github.com/homecoded/ImpUnit)
 // Apache 2 license
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('l 2=(3(){3 m(){l 2={},h="",j="",k,f=-1,b=-1,g=-1,d=u,7,8=x,z=[],9=x;3 i(6,8){k=u;4(8){j+="S v ("+8+"):\\n"+6+"\\n\\n";g+=1;4(9){9()}}T{h+=6+"\\n\\n"}4(!d){Q(6)}}2.V=3(a){4(!a){i("N: L P M O.")}l o;f=0;b=0;g=0;h="";z=[];8="";U(o 10 a){4(a.13(o)){7=o;W{4(H(a[7])==="3"&&7.12("11")===0){k=w;f+=1;a[7]();4(k){b+=1}}}X(e){b+=1;i("v B\\y C: "+7+"\\Y: "+e)}}}};3 r(A,K,6,8){4(A===w){i("v B\\y C: "+7+"\\n"+K+": "+6,8)}4(8&&9){9()}}2.s=3(D,6){r(D,"s",6,2.s.J.I)};2.q=3(t,p,6){r(t===p,"q <"+t+"> != <"+p+">",6,2.q.J.I)};2.h=3(){5 h};2.j=3(){5 j};2.b=3(){5 b};2.g=3(){5 g};2.f=3(){5 f};2.d=3(G){4(E.F>0){d=(G)?u:w}5 d};2.Z=3(c){4(E.F>0&&H c===\'3\'){9=c}5 9};2.R=3(c){c.7=7;5 c};5 2}l 2=m();2.m=m;5 2}());',62,66,'||impunit|function|if|return|msg|testName|asyncTestName|asyncCb|testSuite|testsFailed|callback|silent||testsRun|asyncTestsFailed|messages|reportError|asyncMessages|isTestFailed|var|createInstance||test|exp2|assertEqual|assert|assertTrue|exp1|true|TEST|false|null|nTest|asyncTests|expr|FAILED|Name|boolExpr|arguments|length|value|typeof|name|caller|testIdent|No|Suite|ERROR|specified|Test|alert|asyncCallback|ASYNC|else|for|runTests|try|catch|nError|onAsyncTestFailed|in|_test|indexOf|hasOwnProperty'.split('|'),0,{}))
+//eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('l 2=(3(){3 m(){l 2={},h="",j="",k,f=-1,b=-1,g=-1,d=u,7,8=x,z=[],9=x;3 i(6,8){k=u;4(8){j+="S v ("+8+"):\\n"+6+"\\n\\n";g+=1;4(9){9()}}T{h+=6+"\\n\\n"}4(!d){Q(6)}}2.V=3(a){4(!a){i("N: L P M O.")}l o;f=0;b=0;g=0;h="";z=[];8="";U(o 10 a){4(a.13(o)){7=o;W{4(H(a[7])==="3"&&7.12("11")===0){k=w;f+=1;a[7]();4(k){b+=1}}}X(e){b+=1;i("v B\\y C: "+7+"\\Y: "+e)}}}};3 r(A,K,6,8){4(A===w){i("v B\\y C: "+7+"\\n"+K+": "+6,8)}4(8&&9){9()}}2.s=3(D,6){r(D,"s",6,2.s.J.I)};2.q=3(t,p,6){r(t===p,"q <"+t+"> != <"+p+">",6,2.q.J.I)};2.h=3(){5 h};2.j=3(){5 j};2.b=3(){5 b};2.g=3(){5 g};2.f=3(){5 f};2.d=3(G){4(E.F>0){d=(G)?u:w}5 d};2.Z=3(c){4(E.F>0&&H c===\'3\'){9=c}5 9};2.R=3(c){c.7=7;5 c};5 2}l 2=m();2.m=m;5 2}());',62,66,'||impunit|function|if|return|msg|testName|asyncTestName|asyncCb|testSuite|testsFailed|callback|silent||testsRun|asyncTestsFailed|messages|reportError|asyncMessages|isTestFailed|var|createInstance||test|exp2|assertEqual|assert|assertTrue|exp1|true|TEST|false|null|nTest|asyncTests|expr|FAILED|Name|boolExpr|arguments|length|value|typeof|name|caller|testIdent|No|Suite|ERROR|specified|Test|alert|asyncCallback|ASYNC|else|for|runTests|try|catch|nError|onAsyncTestFailed|in|_test|indexOf|hasOwnProperty'.split('|'),0,{}))
+
+/*
+ Copyright 2011 Manuel Rülke, http://homecoded.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+var impunit = (function () {
+
+    function createInstance() {
+        var impunit = {}, messages = '', asyncMessages = '', isTestFailed,
+                testsRun = -1, testsFailed = -1, asyncTestsFailed = -1,
+                silent = true, testName, asyncTestName = null,
+                asyncTests = [], asyncCb = null;
+
+        // private function to report an error
+        function reportError(msg, asyncTestName) {
+            isTestFailed = true;
+            if (asyncTestName) {
+                asyncMessages += 'ASYNC TEST (' + asyncTestName + '):\n' + msg + '\n\n';
+                asyncTestsFailed += 1;
+                if (asyncCb) {
+                    asyncCb();
+                }
+            } else {
+                messages += msg + '\n\n';
+            }
+            if (!silent) {
+                alert(msg);
+            }
+        }
+
+        // run the tests in a test container
+        impunit.runTests = function (testSuite) {
+            if (!testSuite) {
+                reportError('ERROR: No Test Suite specified.');
+            }
+
+            var test;
+            testsRun = 0;
+            testsFailed = 0;
+            asyncTestsFailed = 0;
+            asyncTestsRun = 0;
+            messages = "";
+            asyncTests = [];
+            asyncTestName = "";
+
+            for (test in testSuite) {
+                if (testSuite.hasOwnProperty(test)) {
+                    testName = test;
+                    try {
+                        if (typeof (testSuite[testName]) === 'function' && testName.indexOf('_test') === 0) {
+                            isTestFailed = false;
+                            testsRun += 1;
+                            testSuite[testName]();
+                            if (isTestFailed) {
+                                testsFailed += 1;
+                            }
+                        }
+                    } catch (e) {
+                        testsFailed += 1;
+                        reportError('TEST FAILED\nTest Name: ' + testName + '\nError: ' + e);
+                    }
+                }
+            }
+        };
+
+        function assert(expr, testIdent, msg, asyncTestName) {
+            if (expr === false) {
+                reportError('TEST FAILED\nTest Name: ' + testName + '\n' + testIdent + ': ' + msg,
+                        asyncTestName);
+            }
+            if (asyncTestName && asyncCb) {
+                if (asyncTests.indexOf(asyncTestName) < 0 ) {
+                    asyncTests.push(asyncTestName);
+                }
+                asyncCb();
+            }
+        }
+
+        impunit.assertTrue = function (boolExpr, msg) {
+            assert(boolExpr, 'assertTrue', msg, impunit.assertTrue.caller.testName);
+        };
+
+        impunit.assertEqual = function (exp1, exp2, msg) {
+            assert(exp1 === exp2, 'assertEqual <' + exp1 + '> != <' + exp2 + '>', msg, impunit.assertEqual.caller.testName);
+        };
+
+        impunit.messages = function () { return messages; };
+        impunit.asyncMessages = function () { return asyncMessages; };
+        impunit.testsFailed = function () { return testsFailed; };
+        impunit.asyncTestsFailed = function () { return asyncTestsFailed; };
+        impunit.testsRun = function () { return testsRun; };
+        impunit.asyncTestsRun = function () { return asyncTests.length; };
+
+        impunit.silent = function (value) {
+            if (arguments.length > 0) {
+                silent = (value) ? true : false;
+            }
+            return silent;
+        };
+
+        impunit.onAsyncTestFailed = function (callback) {
+            if (arguments.length > 0 && typeof callback === 'function') {
+                asyncCb = callback;
+            }
+            return asyncCb;
+        };
+
+        impunit.asyncCallback = function (callback) {
+            callback.testName = testName;
+            return callback;
+        };
+
+        return impunit;
+    }
+
+    var impunit = createInstance();
+    impunit.createInstance = createInstance;
+    return impunit;
+}());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var tests = (function () {
     // test loca
@@ -94,7 +245,7 @@ var tests = (function () {
         _testSearch : function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
                 impunit.assertTrue(numResults > 0);
-                impunit.assertEqual('test', phrase);
+                impunit.assertEqual('testf', phrase);
             });
             webSearcher.search('test', asyncCallback);
         }
@@ -106,9 +257,10 @@ var tests = (function () {
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {
-                var content = $('#asynctestresults').html();
-                $('#asynctestresults').html(content + '<p>Asynchronous Tests failed:  '
-                        + impunit.asyncTestsFailed() + '</p>'
+                $('#asynctestresults').html('<pre>Asynchronous Tests run: '
+                        + impunit.asyncTestsRun() + '\n'
+                        + 'Asynchronous Tests failed:  '
+                        + impunit.asyncTestsFailed() + '</pre>'
                         + '<pre>' + impunit.asyncMessages() + '</pre>');
             });
 

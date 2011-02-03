@@ -1,7 +1,9 @@
 var webSearcher = (function () {
 
     function search(phrase, callback) {
-        callback(phrase, 0);  
+        setTimeout(function () {
+            callback(phrase, 0);
+        }, 200);
     }
 
     return {
