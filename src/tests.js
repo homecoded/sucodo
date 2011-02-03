@@ -248,6 +248,29 @@ var tests = (function () {
                 impunit.assertEqual('test', phrase);
             });
             webSearcher.search('test', asyncCallback);
+        },
+        multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
+        _testMultiSearch : function () {
+            var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
+                impunit.assertTrue(numResults > 0);
+                var index = searcherTest.multiSearchTerms.indexOf(phrase);
+                impunit.assertTrue(index >= 0);
+                searcherTest.multiSearchTerms[index] = null;
+            });
+
+            for (var i = 0; i < searcherTest.multiSearchTerms.length; i++) {
+                webSearcher.search(searcherTest.multiSearchTerms[i], asyncCallback);
+            }
+        },
+        _testAllMultiSearchesCompleted : function () {
+            var asyncCallback = impunit.asyncCallback(function () {
+                for (var i = 0; i < searcherTest.multiSearchTerms.length; i++) {
+                    impunit.assertEqual(searcherTest.multiSearchTerms[i], null, 'The search term "'
+                            + searcherTest.multiSearchTerms[i] + '" has not been processed properly!');
+                }
+            });
+            // after 3s the results should be there
+            setTimeout(asyncCallback, 3000);
         }
     }
 

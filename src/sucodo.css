@@ -50,7 +50,7 @@
 	margin: auto;
 }
 
-#testresults {
+#testresults, #asynctestresults {
     color: #AAA;
     font-family: monospace;
     margin-top: 20px;
