@@ -1,6 +1,6 @@
 var webSearcher = (function () {
 
-    // TODO remove api key and unsert a warning
+    // TODO remove api key and insert a warning
     var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7';
     var callbacks = {};
     var phrases = [];

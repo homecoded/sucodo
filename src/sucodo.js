@@ -13,7 +13,7 @@ $(document).ready(function () {
         }());
     }
     $('#btn_analyze').click(function () {
-        navi.goto(2); 
+        navi.goto(2);
     });
     // run tests
     tests.runTests();
@@ -37,7 +37,7 @@ var navi = {
         }
     },
     /*
-        Highlights the active link
+     Highlights the active link
      */
     highlight: function (id) {
         var activeElementId = "#nav" + id;
@@ -54,7 +54,7 @@ var navi = {
                 );
     },
     /*
-        Shows the correct main screen
+     Shows the correct main screen
      */
     showContent: function (id)	{
         var activeElementId = "#content"+id;
@@ -69,12 +69,12 @@ var navi = {
                 );
     },
     /*
-        Runs the code necessary for a state
+     Runs the code necessary for a state
      */
-	execute: function (id) {
-	     switch (id)
-	     {
-		 	case 2:
+    execute: function (id) {
+        switch (id)
+        {
+            case 2:
                 var plagtext = $('#plagtext');
                 var text = plagtext.val();
                 if (text.length === 0) {
@@ -91,10 +91,10 @@ var navi = {
                     $('#textview').html(textAnalyzer.getResult());
                 }
 
-		 		break;
-		 }
+                break;
+        }
         return true;
-	}
+    }
 };
 
 /********************************************************************************************
