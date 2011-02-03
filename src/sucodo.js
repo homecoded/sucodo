@@ -30,9 +30,11 @@ $(document).ready(function () {
  */
 var navi = {
     goto: function (id) {
-        navi.highlight(id);
-        navi.showContent(id);
-        navi.execute(id);
+        var success = navi.execute(id);
+        if (success) {
+            navi.highlight(id);
+            navi.showContent(id);
+        }
     },
     /*
         Highlights the active link
@@ -73,12 +75,25 @@ var navi = {
 	     switch (id)
 	     {
 		 	case 2:
-                var text = $('#plagtext').val();
-                var wordGroupLen = parseInt($('#grouplen').val());
-		 		textAnalyzer.go(text, wordGroupLen);
-                $('#textview').html(textAnalyzer.getResult());
+                var plagtext = $('#plagtext');
+                var text = plagtext.val();
+                if (text.length === 0) {
+                    plagtext.css('border', '5px solid #f00');
+                    plagtext.css('background-color', '#fcc');
+                    setTimeout(function () {
+                        plagtext.css('border', '');
+                        plagtext.css('background-color', '');
+                    }, 1500);
+                    return false;
+                } else {
+                    var wordGroupLen = parseInt($('#grouplen').val());
+                    textAnalyzer.go(text, wordGroupLen);
+                    $('#textview').html(textAnalyzer.getResult());
+                }
+
 		 		break;
 		 }
+        return true;
 	}
 };
 
