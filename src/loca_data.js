@@ -55,7 +55,7 @@
 		
 		"txt_analyze_now":
 		[
-			"Give me academic peace-of-mind!",
+			"Give me academic peace of mind!",
 			"Gib mir akademischen Seelenfrieden!"
 		],	
 		

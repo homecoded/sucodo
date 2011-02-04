@@ -21,8 +21,11 @@ var webSearcher = (function () {
     }
 
     function searchDone(results) {
-        var phrase = results.SearchResponse.Query.SearchTerms
+        var phrase = results.SearchResponse.Query.SearchTerms;
         phrase = phrase.substring(1, phrase.length - 1);
+        if (!results.SearchResponse.Web) {
+            return;
+        }
         var numResults = results.SearchResponse.Web.Total;
 
         var cbs = callbacks[phrase];
@@ -52,6 +55,5 @@ var webSearcher = (function () {
     return {
         search : search,
         searchDone : searchDone
-
     }
 }());

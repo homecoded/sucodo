@@ -1,26 +1,56 @@
 var textAnalyzer = (function () {
 
     var phrases;
-    var text;
+    var webSearcher;
+    var callback;
+    var plagiarismCount;
 
-    function go (newtext, wordgrouplen) {
-        text = newtext;
-        phrases = textBreaker.breakUp(text, wordgrouplen);
+    function setWebSearcher(searcher) {
+        webSearcher = searcher;
+    }
+
+    function go (newText, wordgrouplen, cb) {
+        callback = cb;
+        phrases = [];
+        plagiarismCount = [];
+        var paragraphs = textBreaker.breakUp(newText, wordgrouplen);
+        var i;
+        for (i = 0; i < paragraphs.length; i++ ) {
+            if (paragraphs[i].constructor === Array)
+            {
+                var paragraph = paragraphs[i];
+                for (var j = 0; j < paragraph.length; j++) {
+                    phrases.push(paragraph[j]);
+                    plagiarismCount[paragraph[j]] = 0;
+                }
+            } else {
+                phrases.push(paragraphs[i]);
+                plagiarismCount[paragraphs[i]] = 0;
+            }
+        }
+
+        for (i = 0; i < phrases.length; i++) {
+            if (phrases[i] !== '') {
+                webSearcher.search(phrases[i], onNewResultReceived)
+            }
+        }
+
+    }
+
+    function onNewResultReceived(phrase, count) {
+        plagiarismCount[phrase] = count;
+        if (callback) {
+            callback();
+        }
     }
 
     function getResult() {
-        var resulttext = text;
-        resulttext = text.replace( /\n/g, '<br>' );
-        var color = '#800';
-        for (var i = 0; i < phrases.length; i++ ) {
-            //resulttext += '<span ="phrase'+i+'" style="color:'+color+'">' + phrases[i] + '</a>';
-        }
-        return resulttext;
+        return plagiarismCount;
     }
-
 
     return {
         go: go,
-        getResult: getResult        
+        getResult: getResult,
+        setWebSearcher : setWebSearcher
     }
 }());

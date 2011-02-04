@@ -87,8 +87,20 @@ var navi = {
                     return false;
                 } else {
                     var wordGroupLen = parseInt($('#grouplen').val());
-                    textAnalyzer.go(text, wordGroupLen);
-                    $('#textview').html(textAnalyzer.getResult());
+                    textAnalyzer.setWebSearcher(webSearcher);
+                    textAnalyzer.go(text, wordGroupLen, function () {
+                        var resultText = text;
+                        var result = textAnalyzer.getResult();
+                        for (var phrase in result) {
+                            if (result.hasOwnProperty(phrase)) {
+                                if (result[phrase] > 0 ) {
+                                    resultText.replace(phrase, '<span style="color:#f00;">' + phrase + '</span>');
+                                }
+                            }
+                        }
+                        resultText = resultText.replace( /\n/gi, '<br>');
+                        $('#textview').html(resultText);
+                    });
                 }
 
                 break;
