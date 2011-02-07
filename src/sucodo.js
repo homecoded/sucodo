@@ -94,7 +94,7 @@ var navi = {
                         for (var phrase in result) {
                             if (result.hasOwnProperty(phrase)) {
                                 if (result[phrase] > 0 ) {
-                                    resultText.replace(phrase, '<span style="color:#f00;">' + phrase + '</span>');
+                                    resultText = resultText.replace(phrase, '<span style="color:#f00;">' + phrase + '</span>');
                                 }
                             }
                         }

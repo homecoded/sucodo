@@ -50,6 +50,11 @@
 	margin: auto;
 }
 
+#credits {
+    float: right;
+    margin-right: 10px;
+}
+
 #testresults, #asynctestresults {
     color: #AAA;
     font-family: monospace;
@@ -58,7 +63,7 @@
 
 .textview {
 	width: 600px;
-	height: 150px;			
+	height: 350px;			
 	overflow: auto;	
 	margin: auto;	
 	background-color: #FFFFFF;

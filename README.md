@@ -11,4 +11,5 @@ The checked texts are not cached in any way.
 TODO
 ====
 
-* remove bing API key and insert a warning if no api key is available 
+* remove bing API key and insert a warning if no api key is available
+* add Privacy statement
