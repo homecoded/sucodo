@@ -205,36 +205,41 @@ var tests = (function () {
 
     var textBreakerTest = {
         _testTextBreaker: function () {
-             // one paragraph
-             var text = "I am a text. I am a text. I am a text.";
-            
-             var paragraphs = textBreaker.breakUp(text, 3);
-             impunit.assertEqual("I am a", paragraphs[0][0]);
-             impunit.assertEqual("text. I am", paragraphs[0][1]);
-             impunit.assertEqual("a text. I", paragraphs[0][2]);
-             impunit.assertEqual("am a text.", paragraphs[0][3]);
+            // one paragraph
+            var text = "I am a text. I am a text. I am a text.";
 
-             paragraphs = textBreaker.breakUp(text, 4);
-             impunit.assertEqual("I am a text.", paragraphs[0][0]);
-             impunit.assertEqual("I am a text.", paragraphs[0][1]);
-             impunit.assertEqual("I am a text.", paragraphs[0][2]);
+            var paragraphs = textBreaker.breakUp(text, 3);
+            impunit.assertEqual("I am a", paragraphs[0][0]);
+            impunit.assertEqual("text. I am", paragraphs[0][1]);
+            impunit.assertEqual("a text. I", paragraphs[0][2]);
+            impunit.assertEqual("am a text.", paragraphs[0][3]);
 
-             paragraphs = textBreaker.breakUp(text, 5);
-             impunit.assertEqual("I am a text. I", paragraphs[0][0]);
-             impunit.assertEqual("am a text. I am", paragraphs[0][1]);
-             impunit.assertEqual("a text.", paragraphs[0][2]);
+            paragraphs = textBreaker.breakUp(text, 4);
+            impunit.assertEqual("I am a text.", paragraphs[0][0]);
+            impunit.assertEqual("I am a text.", paragraphs[0][1]);
+            impunit.assertEqual("I am a text.", paragraphs[0][2]);
+
+            paragraphs = textBreaker.breakUp(text, 5);
+            impunit.assertEqual("I am a text. I", paragraphs[0][0]);
+            impunit.assertEqual("am a text. I am", paragraphs[0][1]);
+            impunit.assertEqual("a text.", paragraphs[0][2]);
         },
         _testTextBreakerOnParagraph: function () {
-             // more than one paragraph
-             var text = "I am a text. I am a text.\nI am 2nd paragraph. I am 2nd paragraph.";
-             paragraphs = textBreaker.breakUp(text, 3);
-             impunit.assertEqual(2, paragraphs.length);
-             impunit.assertEqual("I am a", paragraphs[0][0]);
-             impunit.assertEqual("text. I am", paragraphs[0][1]);
-             impunit.assertEqual("a text.", paragraphs[0][2]);
-             impunit.assertEqual("I am 2nd", paragraphs[1][0]);
-             impunit.assertEqual("paragraph. I am", paragraphs[1][1]);
-             impunit.assertEqual("2nd paragraph.", paragraphs[1][2]);
+            // more than one paragraph
+            var text = "I am a text. I am a text.\nI am 2nd paragraph. I am 2nd paragraph.";
+            paragraphs = textBreaker.breakUp(text, 3);
+            impunit.assertEqual(2, paragraphs.length);
+            impunit.assertEqual("I am a", paragraphs[0][0]);
+            impunit.assertEqual("text. I am", paragraphs[0][1]);
+            impunit.assertEqual("a text.", paragraphs[0][2]);
+            impunit.assertEqual("I am 2nd", paragraphs[1][0]);
+            impunit.assertEqual("paragraph. I am", paragraphs[1][1]);
+            impunit.assertEqual("2nd paragraph.", paragraphs[1][2]);
+        },
+        _testTextBreakerInvalidInput : function () {
+            var undef;
+            impunit.assertEqual(null, textBreaker.breakUp(null, 3));
+            impunit.assertEqual(null, textBreaker.breakUp(undef, 3));
         }
     }
 
@@ -311,9 +316,42 @@ var tests = (function () {
             });
             var checkTextFinishedCallback = impunit.asyncCallback(function () {
                 impunit.assertEqual(4, textAnalyzerTest.callbackCount, "Not all test results were properly returned!");
+                textAnalyzerTest.chain_testAnalyzerStop();
+
             })
             setTimeout(checkTextFinishedCallback, 2000);
             textAnalyzer.go(text, 3, asyncCallback);
+        },
+
+        resetHasBeenCalled: false,
+        chain_testAnalyzerStop: function () {
+            // do another test
+            textAnalyzer.setWebSearcher(webSearcher);
+            var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
+            var text2 = "Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood ";
+            textAnalyzerTest.resetHasBeenCalled = false;
+
+            var testCallback = impunit.asyncCallback(function () {
+                var results = textAnalyzer.getResult();
+                for (var phrase in results) {
+                    if (results.hasOwnProperty(phrase)) {
+                        impunit.assertTrue(phrase.indexOf("Test") < 0, "Old phrase returned after reset: " + phrase);
+                        impunit.assertTrue(phrase.indexOf("Mood") >= 0, "New phrase not returned after reset: " + phrase);
+                    }
+                }
+            });
+
+            var resetCallCallback = impunit.asyncCallback(function () {
+                if (textAnalyzerTest.resetHasBeenCalled) {
+                    impunit.assertTrue(false, "The reset of analyzer did not work!");
+                    textAnalyzer.stop();
+                    return;
+                }
+                textAnalyzerTest.resetHasBeenCalled = true;
+                textAnalyzer.stop();
+                textAnalyzer.go(text2, 3, testCallback);
+            });
+            textAnalyzer.go(text1, 3, resetCallCallback);
         }
     };
 

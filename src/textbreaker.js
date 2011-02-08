@@ -4,9 +4,12 @@ var textBreaker = {
      */
     breakUp: function (text, wordGroupLen)
     {
-        function sanitizeString(_text)
+        function sanitizeString(text)
         {
-            var text = _text.replace(/</g, '&lt');
+            if (typeof(text) !== 'string' ) {
+                return null;
+            }
+            var text = text.replace(/</g, '&lt');
             text = text.replace(/>/g, '&gt');
             return text;
         }
@@ -16,6 +19,10 @@ var textBreaker = {
         }
 
         var text = sanitizeString(text);
+        if (text === null) {
+            return null;
+        }
+        
         var paragraphs = text.split('\n');
         var wordGroups = [];
         var result = [];

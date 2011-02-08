@@ -34,7 +34,12 @@ var textAnalyzer = (function () {
                 webSearcher.search(phrases[i], onNewResultReceived)
             }
         }
+    }
 
+    function stop() {
+        webSearcher.stopScripts();
+        callback = null;
+        phrases = [];
     }
 
     function onNewResultReceived(phrase, count) {
@@ -50,6 +55,7 @@ var textAnalyzer = (function () {
 
     return {
         go: go,
+        stop: stop,
         getResult: getResult,
         setWebSearcher : setWebSearcher
     }

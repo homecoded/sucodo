@@ -4,7 +4,9 @@ var webSearcher = (function () {
     var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7';
     var callbacks = {};
     var phrases = [];
-    var threadIsRunning = false;
+    var scripts = [];
+    var allowUpdates = true;
+    var intervalId = null;
 
     function search(phrase, cb) {
         if (cb) {
@@ -14,10 +16,7 @@ var webSearcher = (function () {
             }
         }
         phrases.push(phrase);
-        if (!threadIsRunning) {
-            setInterval(update, 250);
-            threadIsRunning = true;
-        }
+        startThread();
     }
 
     function searchDone(results) {
@@ -42,6 +41,7 @@ var webSearcher = (function () {
         script.type = "text/javascript";
         script.src = 'http://api.search.live.net/json.aspx?JsonType=callback&JsonCallback=webSearcher.searchDone&sources=web&Appid=' + apikey
                 + '&query="' + phrase + '"';
+        scripts.push(script);
         document.getElementsByTagName('head')[0].appendChild(script);
     }
 
@@ -52,8 +52,31 @@ var webSearcher = (function () {
         }
     }
 
+    function stopScripts() {
+        callbacks = {};
+        phrases = [];
+        var numToRemove = scripts.length;
+        for (var i = 0; i < numToRemove; i++) {
+            document.getElementsByTagName('head')[0].removeChild(scripts[i]);
+        }
+        scripts = [];
+    }
+
+    function startThread() {
+        if (!intervalId) {
+            intervalId = setInterval(update, 250);
+        }
+    }
+
+    function stopThread() {
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+    }
+
     return {
         search : search,
-        searchDone : searchDone
+        searchDone : searchDone,
+        stopScripts: stopScripts
     }
 }());

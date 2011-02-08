@@ -3,18 +3,7 @@
  */
 $(document).ready(function () {
     // setup callbacks
-    var numLinks = $('#navlinks').children().length;
-    for (var i = 1; i <= numLinks; i++) {
-        $('#nav' + i).click(function () {
-            var id = i;
-            return function () {
-                navi.goto(id);
-            };
-        }());
-    }
-    $('#btn_analyze').click(function () {
-        navi.goto(2);
-    });
+    navi.setup();
     // run tests
     tests.runTests();
     // init language
@@ -87,7 +76,7 @@ var navi = {
                     return false;
                 } else {
                     var wordGroupLen = parseInt($('#grouplen').val());
-                    textAnalyzer.setWebSearcher(webSearcher);
+                    textAnalyzer.stop();
                     textAnalyzer.go(text, wordGroupLen, function () {
                         var resultText = text;
                         var result = textAnalyzer.getResult();
@@ -102,10 +91,35 @@ var navi = {
                         $('#textview').html(resultText);
                     });
                 }
-
                 break;
         }
         return true;
+    },
+    /*
+        Setup callbacks
+     */
+    setup: function (id) {
+        // global navi
+        var numLinks = $('#navlinks').children().length;
+        for (var i = 1; i <= numLinks; i++) {
+            $('#nav' + i).click(function () {
+                var id = i;
+                return function () {
+                    navi.goto(id);
+                };
+            }());
+        }
+
+        // Enter Text Screen
+        $('#btn_analyze').click(function () {
+            navi.goto(2);
+        });
+
+        // Analyze Screen
+        $('#grouplen').change(function () {
+            navi.goto(2);
+        });
+        textAnalyzer.setWebSearcher(webSearcher);
     }
 };
 
