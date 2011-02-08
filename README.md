@@ -13,3 +13,4 @@ TODO
 
 * remove bing API key and insert a warning if no api key is available
 * add Privacy statement
+* show estimated time left for search
