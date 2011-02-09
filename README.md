@@ -18,3 +18,4 @@ TODO
 DONE
 ====
 * show estimated time left for search
+* color the suspicious phrases depending on the number of search results found for it

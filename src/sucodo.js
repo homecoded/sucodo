@@ -77,7 +77,9 @@ var navi = {
                         for (var phrase in result) {
                             if (result.hasOwnProperty(phrase)) {
                                 if (result[phrase] > 0 ) {
-                                    resultText = resultText.replace(phrase, '<span style="color:#f00;">' + phrase + '</span>');
+                                    var col = colorWarner.getColor(result[phrase]);
+                                    resultText = resultText.replace(new RegExp(phrase,'gi'), '<span style="color:'
+                                            + col + '">' + phrase + '</span>');
                                 }
                             }
                         }
@@ -124,6 +126,21 @@ var navi = {
         textAnalyzer.setWebSearcher(webSearcher);
     }
 };
+
+var colorWarner = {
+    getColor: function (number) {
+        if (number <= 0)
+            return '#000000';
+        if (number > 256) {
+            return '#ff0000'; // a lot of results, total red!
+        } else {
+            var green = Math.round((256 - number) / 2); // the less results the more yellow it gets
+            var hex = green.toString(16);
+            hex = (hex.length === 1) ? '0' + hex : hex;
+            return ('#80' + hex + '00').toLowerCase();
+        }
+    }
+}
 
 /********************************************************************************************
  * sucodo loca
