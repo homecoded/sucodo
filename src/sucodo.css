@@ -61,6 +61,11 @@
     margin-top: 20px;
 }
 
+#analyze_time_left {
+    font-size: 12pt;
+    font-weight: normal;
+}
+
 .textview {
 	width: 600px;
 	height: 350px;			

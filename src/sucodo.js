@@ -1,28 +1,22 @@
 /********************************************************************************************
- * entry point of app
- */
-$(document).ready(function () {
-    // setup callbacks
-    navi.setup();
-    // run tests
-    tests.runTests();
-    // init language
-    loca.dict = loca__dictionary;
-    sucodoLoca.createLinks();
-    sucodoLoca.setLang(sucodoLoca.lang);
-    // go to first site
-    navi.goto(1);
-});
-
-/********************************************************************************************
  * Navi
  */
 var navi = {
+    PAGE_ENTER_TEXT: 1,
+    PAGE_ANALYZE: 2,
+    PAGE_HELP: 3,
+
     goto: function (id) {
         var success = navi.execute(id);
         if (success) {
             navi.highlight(id);
             navi.showContent(id);
+        } else {
+            if (id === navi.PAGE_ANALYZE) {
+                // attempt to go to analyze screen but no text was entered
+                // then go to enter text screen
+                navi.goto(navi.PAGE_ENTER_TEXT);
+            }
         }
     },
     /*
@@ -63,7 +57,7 @@ var navi = {
     execute: function (id) {
         switch (id)
         {
-            case 2:
+            case navi.PAGE_ANALYZE:
                 var plagtext = $('#plagtext');
                 var text = plagtext.val();
                 if (text.length === 0) {
@@ -120,12 +114,12 @@ var navi = {
 
         // Enter Text Screen
         $('#btn_analyze').click(function () {
-            navi.goto(2);
+            navi.goto(navi.PAGE_ANALYZE);
         });
 
         // Analyze Screen
         $('#grouplen').change(function () {
-            navi.goto(2);
+            navi.goto(navi.PAGE_ANALYZE);
         });
         textAnalyzer.setWebSearcher(webSearcher);
     }
@@ -145,6 +139,8 @@ var sucodoLoca = {
         $.each($("#grouplen").children(), function () {
             $(this).text(loca.getLocaData(this.id, id));
         });
+
+        sucodoLoca.createLinks();
     },
     createLinks: function () {
         var lang_select = $('#lang_select');
@@ -160,3 +156,19 @@ var sucodoLoca = {
         document.getElementById('lang_select').innerHTML = htmlCode;
     }
 }
+
+/********************************************************************************************
+ * entry point of app
+ */
+$(document).ready(function () {
+    // setup callbacks
+    navi.setup();
+    // run tests
+    tests.runTests();
+    // init language
+    loca.dict = loca__dictionary;
+    sucodoLoca.createLinks();
+    sucodoLoca.setLang(sucodoLoca.lang);
+    // go to first site
+    navi.goto(navi.PAGE_ENTER_TEXT);
+});
