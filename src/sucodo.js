@@ -57,6 +57,9 @@ var navi = {
     execute: function (id) {
         switch (id)
         {
+            case navi.PAGE_ENTER_TEXT:
+                    textAnalyzer.stop();
+                    break;
             case navi.PAGE_ANALYZE:
                 var plagtext = $('#plagtext');
                 var text = plagtext.val();
@@ -78,7 +81,7 @@ var navi = {
                             if (result.hasOwnProperty(phrase)) {
                                 if (result[phrase] > 0 ) {
                                     var col = colorWarner.getColor(result[phrase]);
-                                    resultText = resultText.replace(new RegExp(phrase,'gi'), '<span style="color:'
+                                    resultText = resultText.replace(new RegExp(phrase,'g'), '<span style="color:'
                                             + col + '">' + phrase + '</span>');
                                 }
                             }
