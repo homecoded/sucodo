@@ -248,9 +248,12 @@ var tests = (function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
                 impunit.assertTrue(numResults > 0);
                 impunit.assertEqual('test', phrase);
+                ws.destroy();
             });
-            webSearcher.search('test', asyncCallback);
+            var ws = webSearcher.createInstance();
+            ws.search('test', asyncCallback);
         },
+        multSearchWs:webSearcher.createInstance(),
         multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
         _testMultiSearch : function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
@@ -259,9 +262,8 @@ var tests = (function () {
                 impunit.assertTrue(index >= 0);
                 searcherTest.multiSearchTerms[index] = null;
             });
-
             for (var i = 0; i < searcherTest.multiSearchTerms.length; i++) {
-                webSearcher.search(searcherTest.multiSearchTerms[i], asyncCallback);
+                searcherTest.multSearchWs.search(searcherTest.multiSearchTerms[i], asyncCallback);
             }
         },
         _testAllMultiSearchesCompleted : function () {
@@ -270,6 +272,7 @@ var tests = (function () {
                     impunit.assertEqual(searcherTest.multiSearchTerms[i], null, 'The search term "'
                             + searcherTest.multiSearchTerms[i] + '" has not been processed properly!');
                 }
+                searcherTest.multSearchWs.destroy();
             });
             // after 3s the results should be there
             setTimeout(asyncCallback, 3000);
@@ -293,12 +296,14 @@ var tests = (function () {
             }
         },
         callbackCount: 0,
+
         _testAnalyzer : function () {
+            var ta = textAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.\nIch bin zwei Hamburger.";
-            textAnalyzer.setWebSearcher(textAnalyzerTest.mockSearcher);
+            ta.setWebSearcher(textAnalyzerTest.mockSearcher);
 
             var asyncCallback = impunit.asyncCallback(function () {
-                var results = textAnalyzer.getResult();
+                var results = ta.getResult();
                 var resultCount = 0;
                 for (var phrase in results) {
                     if (results.hasOwnProperty(phrase)) {
@@ -316,42 +321,48 @@ var tests = (function () {
             });
             var checkTextFinishedCallback = impunit.asyncCallback(function () {
                 impunit.assertEqual(4, textAnalyzerTest.callbackCount, "Not all test results were properly returned!");
-                textAnalyzerTest.chain_testAnalyzerStop();
 
             })
             setTimeout(checkTextFinishedCallback, 2000);
-            textAnalyzer.go(text, 3, asyncCallback);
+            ta.go(text, 3, asyncCallback);
         },
 
         resetHasBeenCalled: false,
-        chain_testAnalyzerStop: function () {
-            // do another test
-            textAnalyzer.setWebSearcher(webSearcher);
-            var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
-            var text2 = "Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood ";
-            textAnalyzerTest.resetHasBeenCalled = false;
+        
+        _testAnalyzerStop: function () {
+            var callback = impunit.asyncCallback(function () {
+                // do another test
+                var ws = webSearcher.createInstance();
+                var ta = textAnalyzer.createInstance();
+                ta.setWebSearcher(ws);
+                var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
+                var text2 = "Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood ";
+                textAnalyzerTest.resetHasBeenCalled = false;
 
-            var testCallback = impunit.asyncCallback(function () {
-                var results = textAnalyzer.getResult();
-                for (var phrase in results) {
-                    if (results.hasOwnProperty(phrase)) {
-                        impunit.assertTrue(phrase.indexOf("Test") < 0, "Old phrase returned after reset: " + phrase);
-                        impunit.assertTrue(phrase.indexOf("Mood") >= 0, "New phrase not returned after reset: " + phrase);
+                var testCallback = impunit.asyncCallback(function () {
+                    var results = ta.getResult();
+                    for (var phrase in results) {
+                        if (results.hasOwnProperty(phrase)) {
+                            impunit.assertTrue(phrase.indexOf("Test") < 0, "Old phrase returned after reset: " + phrase);
+                            impunit.assertTrue(phrase.indexOf("Mood") >= 0, "New phrase not returned after reset: " + phrase);
+                        }
                     }
-                }
-            });
+                    ws.destroy();
+                });
 
-            var resetCallCallback = impunit.asyncCallback(function () {
-                if (textAnalyzerTest.resetHasBeenCalled) {
-                    impunit.assertTrue(false, "The reset of analyzer did not work!");
-                    textAnalyzer.stop();
-                    return;
-                }
-                textAnalyzerTest.resetHasBeenCalled = true;
-                textAnalyzer.stop();
-                textAnalyzer.go(text2, 3, testCallback);
+                var resetCallCallback = impunit.asyncCallback(function () {
+                    if (textAnalyzerTest.resetHasBeenCalled) {
+                        impunit.assertTrue(false, "The reset of analyzer did not work!");
+                        ta.stop();
+                        return;
+                    }
+                    textAnalyzerTest.resetHasBeenCalled = true;
+                    ta.stop();
+                    ta.go(text2, 3, testCallback);
+                });
+                ta.go(text1, 3, resetCallCallback);
             });
-            textAnalyzer.go(text1, 3, resetCallCallback);
+            setTimeout(callback, 3000);
         }
     };
 
@@ -373,12 +384,25 @@ var tests = (function () {
             impunit.assertEqual('#808000', colorWarner.getColor(1));
             impunit.assertEqual('#807f00', colorWarner.getColor(2));
         }
-
     };
+
+    var webSearcherCleanUpTest = {
+        _testAllWebSearchersDestroyed : function () {
+
+            var checkCleanupCallback = impunit.asyncCallback(function () {
+                impunit.assertTrue(webSearcherTable[0] !== null, "The main websearcher does not exist");
+                for (var i = 1; i < webSearcherTable.length; i++) {
+                    impunit.assertTrue(webSearcherTable[i] === null, "A test websearcher still exists at " + i);
+                }
+            });
+            setTimeout(checkCleanupCallback, 6000);
+        }
+    }
 
     return {
         runTests: function () {
-            var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest, colorWarnerTest];
+            var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
+                colorWarnerTest, webSearcherCleanUpTest];
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {
