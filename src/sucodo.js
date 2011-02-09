@@ -87,6 +87,14 @@ var navi = {
                                 }
                             }
                         }
+                        var timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
+                        if (timeLeft > 0) {
+                            $('#analyze_time_left').fadeIn();
+                            $('#analyze_time').html(timeLeft);
+                        } else {
+                            $('#analyze_time_left').fadeOut();
+                        }
+
                         resultText = resultText.replace( /\n/gi, '<br>');
                         $('#textview').html(resultText);
                     });

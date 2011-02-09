@@ -130,7 +130,13 @@
 		[
 			"20 (very big, may lead to inaccurate results)",
 			"20 (sehr groß, kann zu ungenauen Ergebnissen führen)"
-		],	
+		],
+
+		"txt_time_remaining":
+		[
+			"sec",
+			"Sek"
+		],
 	
 		"last element":   
 		[

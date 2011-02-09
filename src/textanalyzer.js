@@ -57,6 +57,9 @@ var textAnalyzer = (function () {
         go: go,
         stop: stop,
         getResult: getResult,
-        setWebSearcher : setWebSearcher
+        setWebSearcher : setWebSearcher,
+        timeLeft: function () {
+            return webSearcher.timeLeft();
+        }
     }
 }());

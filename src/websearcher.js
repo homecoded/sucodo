@@ -7,6 +7,7 @@ var webSearcher = (function () {
     var scripts = [];
     var allowUpdates = true;
     var intervalId = null;
+    var INTERVAL_WAIT_TIME = 250;
 
     function search(phrase, cb) {
         if (cb) {
@@ -64,7 +65,7 @@ var webSearcher = (function () {
 
     function startThread() {
         if (!intervalId) {
-            intervalId = setInterval(update, 250);
+            intervalId = setInterval(update, INTERVAL_WAIT_TIME);
         }
     }
 
@@ -74,9 +75,14 @@ var webSearcher = (function () {
         }
     }
 
+    function timeLeft() {
+        return phrases.length * INTERVAL_WAIT_TIME;
+    }
+
     return {
         search : search,
         searchDone : searchDone,
-        stopScripts: stopScripts
+        stopScripts: stopScripts,
+        timeLeft: timeLeft
     }
 }());

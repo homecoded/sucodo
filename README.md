@@ -13,4 +13,8 @@ TODO
 
 * remove bing API key and insert a warning if no api key is available
 * add Privacy statement
+* Enable "start analyze" button AFTER unit tests finished
+
+DONE
+====
 * show estimated time left for search
