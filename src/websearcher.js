@@ -3,7 +3,7 @@ var webSearcher = (function () {
     // TODO remove api key and insert a warning
     var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7';
     var callbacks = {};
-    var phrases = [];
+    var phraseQueue = [];
     var scripts = [];
     var allowUpdates = true;
     var intervalId = null;
@@ -13,10 +13,17 @@ var webSearcher = (function () {
         if (cb) {
             if (!callbacks[phrase]) {
                 callbacks[phrase] = [];
+            }
+            // only add the callback if it's not already in
+            if (callbacks[phrase].indexOf(cb) < 0) {
                 callbacks[phrase].push(cb);
             }
         }
-        phrases.push(phrase);
+        // stop here if the phrase is already in the queue
+        if (phraseQueue.indexOf(phrase) >= 0) {
+            return;
+        }
+        phraseQueue.push(phrase);
         startThread();
     }
 
@@ -47,15 +54,15 @@ var webSearcher = (function () {
     }
 
     function update() {
-        if (phrases.length > 0) {
-            var phrase = phrases.pop();
+        if (phraseQueue.length > 0) {
+            var phrase = phraseQueue.pop();
             doSearch(phrase);
         }
     }
 
     function stopScripts() {
         callbacks = {};
-        phrases = [];
+        phraseQueue = [];
         var numToRemove = scripts.length;
         for (var i = 0; i < numToRemove; i++) {
             document.getElementsByTagName('head')[0].removeChild(scripts[i]);
@@ -76,7 +83,7 @@ var webSearcher = (function () {
     }
 
     function timeLeft() {
-        return phrases.length * INTERVAL_WAIT_TIME;
+        return phraseQueue.length * INTERVAL_WAIT_TIME;
     }
 
     return {
