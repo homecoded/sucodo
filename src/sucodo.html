@@ -8,6 +8,7 @@
     <script type="text/javascript" src="textanalyzer.js"></script>
     <script type="text/javascript" src="textbreaker.js"></script>
     <script type="text/javascript" src="websearcher.js"></script>
+    <script type="text/javascript" src="textmarkup.js"></script>
     <script type="text/javascript" src="tests.js"></script>
     <script type="text/javascript" src="sucodo.js"></script>
 </head>
@@ -32,7 +33,7 @@
     <div id="content1" class="content">
         <h1 class="headline"><span id="txt_nav_step1"></span></h1>
         <p></p><span id="txt_sampletext"></span></p>
-        <textarea id="plagtext" cols="50" rows="15"></textarea>
+        <textarea id="plagtext" class="textview_size" cols="50" rows="15"></textarea>
         <p><a href="#" class="accept_link" id="btn_analyze"><span id="txt_analyze_now"></span></a></p>
     </div>
 
@@ -50,13 +51,10 @@
                 <option value="20" id="txt_grouplen20"></option>
             </select>
         </p>
-        <p>
-            <span id="txt_textview"></span>
-        </p>
         <div id="textview" class="textview">
         </div>
         <p>
-            <span id="analyzer_status_text">...</span>
+            <span id="txt_textview"></span>
         </p>
     </div>
 

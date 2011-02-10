@@ -79,8 +79,8 @@
 		
 		"txt_textview":
 		[
-			"Text View (Suspicious parts of the text are marked red. Click on them to get detailed info)",
-			"Textanzeige (Verdächtige Textanteile werden rot markiert. Klicke darauf um mehr Infos zu bekommen)"
+			"Colored parts are suspicious. Click on them to get detailed info.",
+			"Eingefärbte Textanteile sind verdächtig. Klicke darauf um mehr Infos zu bekommen."
 		],
 		
 		"txt_word_group_length":

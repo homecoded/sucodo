@@ -45,8 +45,6 @@
 }	
 
 #plagtext {
-	width: 600px;
-	height: 300px;
 	margin: auto;
 }
 
@@ -66,10 +64,13 @@
     font-weight: normal;
 }
 
+.textview_size, .textview {
+    width: 750px;
+    height: 350px;
+}
+
 .textview {
-	width: 600px;
-	height: 350px;			
-	overflow: auto;	
+	overflow: auto;
 	margin: auto;	
 	background-color: #FFFFFF;
 	border: 1px solid black;
