@@ -77,6 +77,7 @@ var impunit = (function () {
 
         function assert(expr, testIdent, msg, asyncTestName) {
             if (expr === false) {
+                testIdent = testIdent.replace(/</gi, '&lt;');
                 reportError('TEST FAILED\nTest Name: ' + testName + '\n' + testIdent + ': ' + msg,
                         asyncTestName);
             }
@@ -93,7 +94,7 @@ var impunit = (function () {
         };
 
         impunit.assertEqual = function (exp1, exp2, msg) {
-            assert(exp1 === exp2, 'assertEqual <' + exp1 + '> != <' + exp2 + '>', msg, impunit.assertEqual.caller.testName);
+            assert(exp1 === exp2, 'assertEqual [' + exp1 + '] != [' + exp2 + ']', msg, impunit.assertEqual.caller.testName);
         };
 
         impunit.messages = function () { return messages; };
@@ -397,12 +398,53 @@ var tests = (function () {
             });
             setTimeout(checkCleanupCallback, 6000);
         }
-    }
+    };
+
+    var textMarkupTest = {
+        _testMarkup : function () {
+            var text = ["bla"];
+            var result = textMarkup.markup(text);
+            impunit.assertEqual('<span id="phrase0" style="color:#000000">bla</span> <br>\n', result);
+        },
+        _testMarkupParagraphs : function () {
+            var text = ["bla", "blub"];
+            var result = textMarkup.markup(text);
+            var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
+                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
+            impunit.assertEqual(expected, result);
+        },
+        _testMarkupParagraphs3 : function () {
+            var text = ["bla", "blub", "honk"];
+            var result = textMarkup.markup(text);
+            var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
+                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
+                + '<span id="phrase2" style="color:#000000">honk</span> <br>\n';
+            impunit.assertEqual(expected, result);
+        },
+        _testMarkupParagraphsArray : function () {
+            var text = [["bla", "blub"]];
+            var result = textMarkup.markup(text);
+            var expected = '<span id="phrase0" style="color:#000000">bla</span> '
+                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
+            impunit.assertEqual(expected, result);
+        },
+        _testMarkupParagraphsArray3 : function () {
+            var text = [["bla", "blub"], ["bla", "blub"], ["bla", "blub"]];
+            var result = textMarkup.markup(text);
+            var expected = '<span id="phrase0" style="color:#000000">bla</span> '
+                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
+                + '<span id="phrase2" style="color:#000000">bla</span> '
+                + '<span id="phrase3" style="color:#000000">blub</span> <br>\n'
+                + '<span id="phrase4" style="color:#000000">bla</span> '
+                + '<span id="phrase5" style="color:#000000">blub</span> <br>\n';
+            impunit.assertEqual(expected, result);
+        }
+    };
 
     return {
         runTests: function () {
             var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
-                colorWarnerTest, webSearcherCleanUpTest];
+                colorWarnerTest, webSearcherCleanUpTest, textMarkupTest];
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {

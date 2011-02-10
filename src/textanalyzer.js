@@ -6,7 +6,7 @@ var textAnalyzer = (function () {
         var phrases;
         var webSearcher;
         var callback;
-        var plagiarismCount;
+        var plagiarismCountMap;
 
         function setWebSearcher(searcher) {
             webSearcher = searcher;
@@ -15,7 +15,7 @@ var textAnalyzer = (function () {
         function go (newText, wordgrouplen, cb) {
             callback = cb;
             phrases = [];
-            plagiarismCount = [];
+            plagiarismCountMap = [];
             var paragraphs = textBreaker.breakUp(newText, wordgrouplen);
             var i;
             for (i = 0; i < paragraphs.length; i++ ) {
@@ -24,11 +24,11 @@ var textAnalyzer = (function () {
                     var paragraph = paragraphs[i];
                     for (var j = 0; j < paragraph.length; j++) {
                         phrases.push(paragraph[j]);
-                        plagiarismCount[paragraph[j]] = 0;
+                        plagiarismCountMap[paragraph[j]] = 0;
                     }
                 } else {
                     phrases.push(paragraphs[i]);
-                    plagiarismCount[paragraphs[i]] = 0;
+                    plagiarismCountMap[paragraphs[i]] = 0;
                 }
             }
 
@@ -43,6 +43,7 @@ var textAnalyzer = (function () {
                     webSearcher.search(randPhrases[i], onNewResultReceived)
                 }
             }
+            return paragraphs;
         }
 
         function stop() {
@@ -52,14 +53,14 @@ var textAnalyzer = (function () {
         }
 
         function onNewResultReceived(phrase, count) {
-            plagiarismCount[phrase] = count;
+            plagiarismCountMap[phrase] = count;
             if (callback) {
                 callback();
             }
         }
 
         function getResult() {
-            return plagiarismCount;
+            return plagiarismCountMap;
         }
 
         return {

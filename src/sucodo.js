@@ -74,18 +74,7 @@ var navi = {
                 } else {
                     var wordGroupLen = parseInt($('#grouplen').val());
                     textAnalyzer.stop();
-                    textAnalyzer.go(text, wordGroupLen, function () {
-                        var resultText = text;
-                        var result = textAnalyzer.getResult();
-                        for (var phrase in result) {
-                            if (result.hasOwnProperty(phrase)) {
-                                if (result[phrase] > 0 ) {
-                                    var col = colorWarner.getColor(result[phrase]);
-                                    resultText = resultText.replace(new RegExp(phrase,'g'), '<span style="color:'
-                                            + col + '">' + phrase + '</span>');
-                                }
-                            }
-                        }
+                    var phrases = textAnalyzer.go(text, wordGroupLen, function () {
                         var timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
                             $('#analyze_time_left').fadeIn();
@@ -94,7 +83,7 @@ var navi = {
                             $('#analyze_time_left').fadeOut();
                         }
 
-                        resultText = resultText.replace( /\n/gi, '<br>');
+                        var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
                         $('#textview').html(resultText);
                     });
                 }
