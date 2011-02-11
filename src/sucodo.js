@@ -85,6 +85,7 @@ var navi = {
 
                         var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
                         $('#textview').html(resultText);
+                        textMarkup.updateMouseInteractivity();
                     });
                 }
                 break;

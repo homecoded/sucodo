@@ -2,7 +2,7 @@ var textMarkup = (function () {
 
     var id;
     var phraseDict;
-    var oldPhrases;
+    var phraseMap;
 
     function createPhraseMarkup (text, count) {
         id += 1;
@@ -24,6 +24,7 @@ var textMarkup = (function () {
         var searchCount;
         id = -1;
         phraseDict = {};
+        phraseMap = phraseCountMap;
 
         for (var i = 0; i < numElements; i++) {
             entry = phrases[i];
@@ -49,7 +50,35 @@ var textMarkup = (function () {
         return result;
     }
 
+    function updateMouseInteractivity() {
+        var phrase;
+        var phraseIds;
+        var i;
+        var resultCount;
+        var span;
+
+        for (phrase in phraseDict) {
+            phraseIds = phraseDict[phrase];
+            for (i = 0; i < phraseIds.length; i++) {
+                span = $('#phrase' + phraseIds[i]);
+                resultCount = phraseMap[phrase];
+                if (resultCount > 0) {
+                    span.mouseover(function () {
+                        var currPhrase = phrase;
+                        var currCount = resultCount;
+                        return function () {
+                            $('#resultinfo_count').html(currCount);
+                            $('#resultinfo_phrase').html(currPhrase);
+                            $('#resultinfo').fadeIn();
+                        }
+                    }());
+                }
+            }
+        }
+    }
+
     return {
-        markup : markup
+        markup : markup,
+        updateMouseInteractivity: updateMouseInteractivity
     }
 }());

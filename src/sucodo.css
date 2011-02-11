@@ -66,7 +66,7 @@
 
 .textview_size, .textview {
     width: 750px;
-    height: 350px;
+    height: 320px;
 }
 
 .textview {
@@ -79,8 +79,38 @@
     text-align: left;
 }
 
+#resultinfo {
+    background-color: #FFFF00;
+    border: 1px solid black;
+    font-size: 8pt;
+    font-weight: normal;
+    width: 750px;
+    height: 35px;
+    overflow: auto;
+    padding: 10px;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#txt_resultinfo_count {
+    font-size: 10pt;
+}
+
+#resultinfo_count {
+    font-size: 12pt;
+}
+
+#resultinfo_count {
+    font-weight: bold;
+}
+
 #resultview, #textview {
     text-align: left;
+}
+
+#txt_textview {
+    font-size: 10pt;
 }
 
 #grouplen {
@@ -121,8 +151,8 @@
 
 .content {
 	display: none;
-	height: 550px;
-}       
+	min-height: 560px;
+}
 
 .headline {
 	text-align: left;

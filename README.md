@@ -14,6 +14,7 @@ TODO
 * remove bing API key and insert a warning if no api key is available
 * add Privacy statement
 * add "lock icon" for https
+* make results clickable
 
 DONE
 ====
@@ -25,3 +26,4 @@ DONE
 * BUG: global replacement of texts sometimes destroys information (every part has to be identified uniquely)
   reproduce with word group length === 3 and text
   "Lorem Ipsum is ..."
+* show number of results as popup
