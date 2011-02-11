@@ -15,6 +15,7 @@ TODO
 * add Privacy statement
 * add "lock icon" for https
 * make results clickable
+* JSLint check every Javascript file
 
 DONE
 ====
