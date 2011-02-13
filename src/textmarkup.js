@@ -3,6 +3,7 @@ var textMarkup = (function () {
     var id;
     var phraseDict;
     var phraseMap;
+    var allowMouseOverSelect = true;
 
     function createPhraseMarkup (text, count) {
         id += 1;
@@ -63,22 +64,60 @@ var textMarkup = (function () {
                 span = $('#phrase' + phraseIds[i]);
                 resultCount = phraseMap[phrase];
                 if (resultCount > 0) {
+                    span.mouseout(function () {
+                        $(this).css('background-color', '');
+                    });
                     span.mouseover(function () {
+                        var currPhrase = phrase;
+                        var currCount = resultCount;
+                        return function () {
+                            $(this).css('background-color', '#eee');
+
+                            if (!allowMouseOverSelect) {
+                                return;
+                            }
+                            $('#resultinfo_count').html(currCount);
+                            $('#resultinfo_phrase').html(currPhrase);
+                            $('#resultinfo').fadeIn();
+                            $('#resultinfo_controls').hide();
+                        }
+                    }());
+                    span.click(function () {
                         var currPhrase = phrase;
                         var currCount = resultCount;
                         return function () {
                             $('#resultinfo_count').html(currCount);
                             $('#resultinfo_phrase').html(currPhrase);
                             $('#resultinfo').fadeIn();
+                            $('#resultinfo_controls').fadeIn();
+                            allowMouseOverSelect = false;
                         }
                     }());
+                    span.dblclick(function () {
+                        showSearchResults();
+                    });
                 }
             }
         }
     }
 
+    function closeDetails(closeInfoCompletely) {
+        allowMouseOverSelect = true;
+        $('#resultinfo_controls').fadeOut();
+        if (closeInfoCompletely) {
+            $('#resultinfo').fadeOut();
+        }
+    }
+
+    function showSearchResults () {
+        var query = '"' + $('#resultinfo_phrase').html() + '"';
+        var wind = window.open('http://www.bing.com/search?q=' + query,'Results','');
+    }
+
     return {
         markup : markup,
-        updateMouseInteractivity: updateMouseInteractivity
+        updateMouseInteractivity: updateMouseInteractivity,
+        closeDetails : closeDetails,
+        showSearchResults : showSearchResults
     }
 }());

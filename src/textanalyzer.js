@@ -43,6 +43,11 @@ var textAnalyzer = (function () {
                     webSearcher.search(randPhrases[i], onNewResultReceived)
                 }
             }
+
+            // count the search on sucodo.de
+            var reg = new Image();
+            reg.src='http://sucodo.de/reg.php'; 
+
             return paragraphs;
         }
 

@@ -88,6 +88,7 @@ var navi = {
                         textMarkup.updateMouseInteractivity();
                     });
                 }
+                textMarkup.closeDetails(true);
                 break;
         }
         return true;
@@ -116,6 +117,9 @@ var navi = {
         $('#grouplen').change(function () {
             navi.goto(navi.PAGE_ANALYZE);
         });
+        $('#resultinfo_close').click(textMarkup.closeDetails);
+        $('#resultinfo_inspect').click(textMarkup.showSearchResults);
+
         textAnalyzer.setWebSearcher(webSearcher);
     }
 };
@@ -158,7 +162,7 @@ var sucodoLoca = {
 
         for (var i = 0; i < NUM_LANGUAGES; i++)
         {
-            htmlCode += '<a href="#" onclick="sucodoLoca.setLang('+i+')" '
+            htmlCode += '<a href="javascript:void(0)" onclick="sucodoLoca.setLang('+i+')" '
                     + 'class="lang_link">'
                     + loca.getLocaData('txt_lang_name', i)
                     + '</a>';
@@ -182,3 +186,4 @@ $(document).ready(function () {
     // go to first site
     navi.goto(navi.PAGE_ENTER_TEXT);
 });
+

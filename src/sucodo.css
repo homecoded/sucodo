@@ -80,21 +80,26 @@
 }
 
 #resultinfo {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    position: relative;
+    padding: 0px;
+}
+
+#resultinfo_data {
     background-color: #FFFF00;
     border: 1px solid black;
     font-size: 8pt;
     font-weight: normal;
-    width: 750px;
-    height: 35px;
     overflow: auto;
-    padding: 10px;
-    display: none;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 1px;
 }
 
 #txt_resultinfo_count {
     font-size: 10pt;
+    margin-top: 3px;
 }
 
 #resultinfo_count {
@@ -103,6 +108,26 @@
 
 #resultinfo_count {
     font-weight: bold;
+}
+
+#resultinfo_close {
+    font-size: 9pt;
+    float: right;
+    margin: 0px;
+}
+
+#resultinfo_controls {
+    border-top: 1px solid #999;
+    background-color: #EE0;
+    padding: 3px;
+    margin-top: 4px;
+    display: none;
+}
+
+#resultinfo_inspect {
+    font-size: 9pt;
+    text-align: center;
+    margin: 0px;
 }
 
 #resultview, #textview {

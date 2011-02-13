@@ -18,12 +18,12 @@
     <div id="navigation">
         <span id="txt_title"></span>
         <div id="navlinks">
-            1. <a href="#" id="nav1"><span id="txt_nav_step1" class="navspan"></span></a>
-            2. <a href="#" id="nav2"><span id="txt_nav_step2" class="navspan"></span></a>
+            1. <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="navspan"></span></a>
+            2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="navspan"></span></a>
             <div style="display: none">
-                3. <a href="#" id="nav3"><span id="txt_nav_step3" class="navspan"></span></a>
+                3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="navspan"></span></a>
             </div>
-            3. <a href="#" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
+            3. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
         </div>
     </div>
 </div>
@@ -34,7 +34,7 @@
         <h1 class="headline"><span id="txt_nav_step1"></span></h1>
         <p></p><span id="txt_sampletext"></span></p>
         <textarea id="plagtext" class="textview_size" cols="50" rows="15"></textarea>
-        <p><a href="#" class="accept_link" id="btn_analyze"><span id="txt_analyze_now"></span></a></p>
+        <p><a href="javascript:void(0);" class="accept_link" id="btn_analyze"><span id="txt_analyze_now"></span></a></p>
     </div>
 
     <div id="content2" class="content">
@@ -56,10 +56,17 @@
         <p id="resultdesc">
             <span id="txt_textview"></span>
         </p>
-        <p id="resultinfo">
-            <span id="txt_resultinfo_count"></span> <span id="resultinfo_count"></span><br>
-            "<span id="resultinfo_phrase"></span>"
-        </p>
+
+        <div id="resultinfo">
+            <div id="resultinfo_data">
+                <span id="txt_resultinfo_count"></span> <span id="resultinfo_count"></span><br>
+                "<span id="resultinfo_phrase"></span>"
+                <div id="resultinfo_controls">
+                    <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
+                    <a href="javascript:void(0)"id="resultinfo_inspect"><span id="txt_inspect"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="content3" class="content">

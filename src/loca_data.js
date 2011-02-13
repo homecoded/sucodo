@@ -43,8 +43,8 @@ var loca__dictionary =
 
     "txt_help":
             [
-                "Supercopydog will help you find plagiarims in your text. Just click on 'Enter Text' and paste the text into textfield.",
-                "Supercopydog hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
+                "Sucodo will help you find plagiarims in your text. Just click on 'Enter Text' and paste the text into textfield.",
+                "Sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
             ],
 
     "txt_sampletext":
@@ -79,8 +79,8 @@ var loca__dictionary =
 
     "txt_textview":
             [
-                "Colored text parts are suspicious. Mouse your mouse over them them to get detailed info. Click on them to see the search results.",
-                "Eingefärbte Textanteile sind verdächtig. Bewege die Maus darüber um mehr Informationen zu bekommen. Klicke darauf um die Ergebnisse zu sehen."
+                "Colored text parts are suspicious. Move your mouse over them or click them to get detailed info.",
+                "Eingefärbte Textanteile sind verdächtig. Bewege die Maus darüber oder klicke sie an um mehr Informationen zu bekommen."
             ],
 
     "txt_word_group_length":
@@ -144,11 +144,20 @@ var loca__dictionary =
                 "Anzahl der Suchergebnisse:"
             ],
 
+    "txt_close":
+            [
+                "Close",
+                "Schließen"
+            ],
+
+    "txt_inspect":
+            [
+                "Inspect",
+                "Untersuchen"
+            ],
     "last element":
             [
                 "",
                 ""
             ]
-
-
 };
