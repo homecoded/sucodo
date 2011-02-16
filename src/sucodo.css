@@ -15,34 +15,39 @@
 #header {
 	padding: 10px;
 	margin-bottom: 5px;
+    border-bottom: 1px solid #000000;
+    margin: 0px;
+    color: #EEEEEE;
 }
 
 #lang_select, #navigation {
 	padding: 3px;
 }
 
-#content {
+#content, #content1, #content2, #content3, #content4 {
 	margin: 0px;
 	padding: 0px;
+    border-bottom: 1px solid #7d5503;
 }
 
 #content1 {
-	background-color: #D1FFD2;
+	background-color: #fbc576;
 	text-align: center;
 }
 
 #content2 {
-	background-color: #B2ECFF;
+	background-color: #d9a04d;
 	text-align: center;
-}	
+}
 
 #content3 {
-	background-color: #FDF4BB;
+	background-color: #d9a04d;
+    display: none;
 }
 
 #content4 {
-	background-color: #F0EEEE;
-}	
+	background-color: #cd9035;
+}
 
 #plagtext {
 	margin: auto;
@@ -89,12 +94,16 @@
 }
 
 #resultinfo_data {
-    background-color: #FFFF00;
-    border: 1px solid black;
+    background-color: #694302;
+    border-top: 1px solid #382300;
+    border-left: 1px solid #382300;
+    border-bottom: 1px solid #ffcc99;
+    border-right: 1px solid #ffcc99;
     font-size: 8pt;
     font-weight: normal;
     overflow: auto;
     padding: 1px;
+    color: #feeac2;
 }
 
 #txt_resultinfo_count {
@@ -117,8 +126,7 @@
 }
 
 #resultinfo_controls {
-    border-top: 1px solid #999;
-    background-color: #EE0;
+    border-top: 1px solid #533700;
     padding: 3px;
     margin-top: 4px;
     display: none;
@@ -146,6 +154,10 @@
 	width: 45px;
 }
 
+#txt_help {
+    padding: 20px;
+}
+
 .navspan {
 	margin-right: 30px;
 }
@@ -157,7 +169,7 @@
 .active	{
 	font-weight: bold;
 	text-decoration: none;
-	color: black;
+    color: #DDDDDD;
 }
 
 .accept_link {
@@ -177,30 +189,33 @@
 .content {
 	display: none;
 	min-height: 560px;
+    margin: 0px;
 }
 
 .headline {
-	text-align: left;
-	border-bottom: 1px solid #542;
-	border-top: 1px solid #A72;
-	margin: 0px;
+	text-align: center;
+	border-bottom: 1px solid #13499c;
+	border-top: 1px solid #a4b7f0;
+	background-color: #6fadfb;
+    text-shadow: #000000 2px 2px 8px;
+    color: #f9eee3;
+    margin: 0px;
 	margin-bottom: 20px;
 	padding: 5px;
-	background-color: #443321;
-	color: #FFFFFF;
-	text-indent: 20px;
-	font-size: 18pt;
-	-moz-box-shadow: 0px 5px 16px #000;
-	-webkit-box-shadow: 0px 5px 16px #000;
-	box-shadow: 0px 5px 16px #000;
-	/* For IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#000000')";
-	/* For IE 5.5 - 7 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#000000');				
+	font-size: 29pt;
+    font-family: serif;
+    font-variant: small-caps;
+    font-weight: normal;
 }
 
 body {
 	margin: 0px;
 	padding: 0px;
 	font-family: sans-serif;
+    background-color: #466899;
+    color: #111111;
+}
+
+a {
+    color: #BBBBBB;    
 }
