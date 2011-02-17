@@ -392,16 +392,18 @@ var tests = (function () {
             impunit.assertEqual('#ff0000', colorWarner.getColor(1000000000));
         },
         _testColorMediumValues : function () {
-            impunit.assertEqual('#800000', colorWarner.getColor(256));
-            impunit.assertEqual('#800100', colorWarner.getColor(255));
-            impunit.assertEqual('#800100', colorWarner.getColor(254));
-            impunit.assertEqual('#804000', colorWarner.getColor(128));
+            impunit.assertEqual('#ff0000', colorWarner.getColor(256), "256");
+            impunit.assertEqual('#ff0000', colorWarner.getColor(255), "255");
+            impunit.assertEqual('#fe0100', colorWarner.getColor(254), "254");
+            impunit.assertEqual('#bf2000', colorWarner.getColor(128), "128");
         },
         _testColorSmallValues : function () {
-            impunit.assertEqual('#000000', colorWarner.getColor(0));
-            impunit.assertEqual('#000000', colorWarner.getColor(-1));
-            impunit.assertEqual('#808000', colorWarner.getColor(1));
-            impunit.assertEqual('#807f00', colorWarner.getColor(2));
+            impunit.assertEqual('#000000', colorWarner.getColor(0), "0");
+            impunit.assertEqual('#000000', colorWarner.getColor(-1), "-1");
+            impunit.assertEqual('#804000', colorWarner.getColor(1), "1");
+            impunit.assertEqual('#804000', colorWarner.getColor(2), "2");
+            impunit.assertEqual('#813f00', colorWarner.getColor(3), "3");
+            impunit.assertEqual('#813f00', colorWarner.getColor(4), "4");
         }
     };
 

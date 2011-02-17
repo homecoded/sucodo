@@ -34,9 +34,11 @@ var textAnalyzer = (function () {
 
             // randomize the orde in which phrases are searched
             var randPhrases = phrases.slice(0);
-            randPhrases.sort(function (a,b) {
+            var sortRule = function (a,b) {
                 return (Math.random() >= 0.5) ? 1 : -1;
-            });
+            };
+            randPhrases.sort(sortRule);
+            randPhrases.sort(sortRule);
 
             for (i = 0; i < randPhrases.length; i++) {
                 if (randPhrases[i] !== '') {

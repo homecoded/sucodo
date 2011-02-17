@@ -63,6 +63,7 @@ var navi = {
             case navi.PAGE_ANALYZE:
                 var plagtext = $('#plagtext');
                 var text = plagtext.val();
+                $('#resultinfo').hide();
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
                     plagtext.css('background-color', '#fcc');
@@ -75,19 +76,20 @@ var navi = {
                     var wordGroupLen = parseInt($('#grouplen').val());
                     textAnalyzer.stop();
                     var phrases = textAnalyzer.go(text, wordGroupLen, function () {
+                        var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
+                        $('#textview').html(resultText);
                         var timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
                             $('#analyze_time_left').fadeIn();
                             $('#analyze_progress').fadeIn();
                             $('#analyze_time').html(timeLeft);
+                            $('#textview').css('background-color', '#fbc576');
                         } else {
                             $('#analyze_time_left').fadeOut();
                             $('#analyze_progress').fadeOut();
+                            $('#textview').css('background-color', '#FFFFFF');
+                            textMarkup.updateMouseInteractivity();
                         }
-
-                        var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
-                        $('#textview').html(resultText);
-                        textMarkup.updateMouseInteractivity();
                     });
                 }
                 textMarkup.closeDetails(true);
@@ -136,10 +138,14 @@ var colorWarner = {
         if (number > 256) {
             return '#ff0000'; // a lot of results, total red!
         } else {
-            var green = Math.round((256 - number) / 2); // the less results the more yellow it gets
-            var hex = green.toString(16);
-            hex = (hex.length === 1) ? '0' + hex : hex;
-            return ('#80' + hex + '00').toLowerCase();
+            var red = Math.round(number/2);
+            var green = Math.round(64 - red/2);
+            red += 127;
+            var hexRed = red.toString(16);
+            var hexGreen = green.toString(16);
+            hexRed = (hexRed.length === 1) ? '0' + hexRed : hexRed;
+            hexGreen = (hexGreen.length === 1) ? '0' + hexGreen : hexGreen;
+            return ('#' + hexRed + hexGreen + '00').toLowerCase();
         }
     }
 }

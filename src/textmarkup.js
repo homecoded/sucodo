@@ -4,6 +4,15 @@ var textMarkup = (function () {
     var phraseDict;
     var phraseMap;
     var allowMouseOverSelect = true;
+    var currentPhraseText;
+    var highlightedPhrase;
+
+    function unhighlightPhrase() {
+        if (highlightedPhrase) {
+            highlightedPhrase.css('background-color', '');
+            highlightedPhrase = null;
+        }
+    }
 
     function createPhraseMarkup (text, count) {
         id += 1;
@@ -65,32 +74,54 @@ var textMarkup = (function () {
                 resultCount = phraseMap[phrase];
                 if (resultCount > 0) {
                     span.mouseout(function () {
-                        $(this).css('background-color', '');
+                        if (!highlightedPhrase
+                                || (highlightedPhrase.attr('id') !== $(this).attr('id'))) {
+                            $(this).css('background-color', '');
+                        }
+                        if (!allowMouseOverSelect) {
+                            return;
+                        }
+                        unhighlightPhrase();
+                        $('#resultinfo_stick').hide();
                     });
                     span.mouseover(function () {
                         var currPhrase = phrase;
                         var currCount = resultCount;
                         return function () {
-                            $(this).css('background-color', '#eee');
-
+                            if (!highlightedPhrase
+                                    || (highlightedPhrase.attr('id') !== $(this).attr('id'))) {
+                                $(this).css('background-color', '#a4b7f0');
+                            }
                             if (!allowMouseOverSelect) {
                                 return;
                             }
                             $('#resultinfo_count').html(currCount);
-                            $('#resultinfo_phrase').html(currPhrase);
                             $('#resultinfo').fadeIn();
                             $('#resultinfo_controls').hide();
+                            $('#resultinfo_stick').show();
+                            $('#resultinfo_close').hide();
                         }
                     }());
                     span.click(function () {
                         var currPhrase = phrase;
                         var currCount = resultCount;
                         return function () {
-                            $('#resultinfo_count').html(currCount);
-                            $('#resultinfo_phrase').html(currPhrase);
-                            $('#resultinfo').fadeIn();
-                            $('#resultinfo_controls').fadeIn();
-                            allowMouseOverSelect = false;
+
+                            if (highlightedPhrase && highlightedPhrase.attr('id') === $(this).attr('id')) {
+                                closeDetails(false);
+                            } else {
+                                $('#resultinfo').fadeIn();
+                                $('#resultinfo_controls').fadeIn();
+                                $('#resultinfo_close').fadeIn();
+                                $(this).css('background-color', 'FFFFFF');
+                                $('#textview').css('background-color', '#b4c7ff');
+                                $('#resultinfo_count').html(currCount);
+                                $('#resultinfo_stick').fadeOut();
+                                allowMouseOverSelect = false;
+                                unhighlightPhrase($(this));
+                                highlightedPhrase = $(this);
+                                currentPhraseText = currPhrase;
+                            }
                         }
                     }());
                     span.dblclick(function () {
@@ -107,10 +138,13 @@ var textMarkup = (function () {
         if (closeInfoCompletely) {
             $('#resultinfo').fadeOut();
         }
+        $('#resultinfo_close').fadeOut();
+        unhighlightPhrase();
+        $('#textview').css('background-color', '#FFFFFF');
     }
 
     function showSearchResults () {
-        var query = '"' + $('#resultinfo_phrase').html() + '"';
+        var query = '"' + currentPhraseText + '"';
         var wind = window.open('http://www.bing.com/search?q=' + query,'Results','');
     }
 

@@ -32,12 +32,12 @@
 
     <div id="content1" class="content">
         <h1 class="headline"><span id="txt_nav_step1"></span></h1>
-        <p></p><span id="txt_sampletext"></span></p>
-        <textarea id="plagtext" class="textview_size" cols="50" rows="15"></textarea>
-        <p>
+        <p><span id="txt_entertext"></span></p>
+        <textarea id="plagtext" class="textview_size" cols="50" rows="17"></textarea>
+        <p id="edit_control"> 
             <input type="button" id="btn_analyze" value="txt_analyze_now" >
         </p>
-
+        <p id="explanation_process"><span id="txt_process"></span></p>
     </div>
 
     <div id="content2" class="content">
@@ -45,33 +45,33 @@
             <div id="analyze_progress" class="progress_indicator"></div>
             <span id="txt_nav_step2"></span>
             <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
-        <p>
+        <p id="textview_explanation">
             <span id="txt_textview"></span>
         </p>
-        <p id="analyze_control">
-            <span id="txt_word_group_length"></span>
-            <select id="grouplen">
-                <option value="3" id="txt_grouplen3"></option>
-                <option value="4" id="txt_grouplen4"></option>
-                <option value="5" id="txt_grouplen5"></option>
-                <option value="8" id="txt_grouplen8" selected="selected"></option>
-                <option value="10" id="txt_grouplen10"></option>
-                <option value="15" id="txt_grouplen15"></option>
-                <option value="20" id="txt_grouplen20"></option>
-            </select>
-             <input type="button" id="btn_edit" value="txt_button_edit" >
-        </p>
-
         <div id="textview" class="textview">
         </div>
-
+        <p id="analyze_control">
+            <span id="grouplen_control">
+                <span id="txt_word_group_length"></span>
+                <select id="grouplen">
+                    <option value="3" id="txt_grouplen3"></option>
+                    <option value="4" id="txt_grouplen4"></option>
+                    <option value="5" id="txt_grouplen5"></option>
+                    <option value="8" id="txt_grouplen8" selected="selected"></option>
+                    <option value="10" id="txt_grouplen10"></option>
+                    <option value="15" id="txt_grouplen15"></option>
+                    <option value="20" id="txt_grouplen20"></option>
+                </select>
+             </span>
+             <input type="button" id="btn_edit" value="txt_button_edit" >
+        </p>
         <div id="resultinfo">
             <div id="resultinfo_data">
                 <span id="txt_resultinfo_count"></span> <span id="resultinfo_count"></span><br>
-                "<span id="resultinfo_phrase"></span>"
+                <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
+                <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
                 <div id="resultinfo_controls">
-                    <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
-                    <a href="javascript:void(0)"id="resultinfo_inspect"><span id="txt_inspect"></span></a>
+                    <input type="button" id="resultinfo_inspect" value="txt_inspect">
                 </div>
             </div>
         </div>
@@ -98,6 +98,7 @@
 </div>
 <div id="asynctestresults">
 </div>
+<div id="bla"></div>
 
 </body>
 </html>

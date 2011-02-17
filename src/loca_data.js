@@ -7,8 +7,8 @@ var loca__dictionary =
 {
     "txt_title":
             [
-                "sucodo",
-                "sucodo"
+                "⍾ sucodo",
+                "⍾ sucodo"
             ],
 
     "txt_nav_step1":
@@ -47,22 +47,28 @@ var loca__dictionary =
                 "Sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
             ],
 
-    "txt_sampletext":
+    "txt_entertext":
             [
                 "Enter or rather copy & paste the text you want to analyze here:",
                 "Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einfügen):"
             ],
 
+    "txt_process":
+            [
+                "<strong>What is going to happen?</strong><br>The text will be split up into fix-length word groups. Each word group is checked against a search engine. A word group is suspicious if the search engine returns any results for it.",
+                "<strong>Was wird passieren?</strong><br> Der Text wird in Wortgruppen mit fester Wortanzahl zerteilt. Jede Gruppe wird über eine Suchmaschine untersucht. Eine Gruppe gilt als verdächtig, wenn die Suchmaschine Ergebnisse für sie liefert."
+            ],
+
     "txt_analyze_now":
             [
-                "Give me academic peace of mind! >>",
-                "Gib mir akademischen Seelenfrieden! >>"
+                "Give me academic peace of mind! ⧐",
+                "Gib mir akademischen Seelenfrieden! ⧐"
             ],
 
     "txt_button_edit":
             [
-                    "<< Edit text",
-                    "<< Text editieren"
+                    "⧏ Edit text",
+                    "⧏ Text editieren"
             ],
 
     "txt_lang_select":
@@ -85,8 +91,8 @@ var loca__dictionary =
 
     "txt_textview":
             [
-                "Colored text parts (that is all not-black printed test) are suspicious. Use your mouse to inspect them.",
-                "Eingefärbte (nicht schwarze) Textanteile sind verdächtig. Benutze deine Maus um sie zu untersuchen."
+                "<strong>Colored (non-black) text parts returned search results are therefore suspicious!</strong><br> The more red you see, the more likely the text contains plagiarisms! <br>Use your mouse to inspect them.",
+                "<strong>Eingefärbte (nicht schwarze) Textanteile lieferten Suchergebnisse und sind damit verdächtig!</strong><br> Je mehr rot Du siehst, desto wahrscheinlicher beinhaltet der Text Plagiate! <br>Benutze Deine Maus um sie zu untersuchen."
             ],
 
     "txt_word_group_length":
@@ -152,14 +158,20 @@ var loca__dictionary =
 
     "txt_close":
             [
-                "Close",
-                "Schließen"
+                "Hide extended control ⏏",
+                "Erweiterte Anzeige verstecken ⏏"
+            ],
+
+    "txt_stick":
+            [
+                "Click to select ⏎",
+                "Klicke um zu selektieren ⏎"
             ],
 
     "txt_inspect":
             [
-                "Inspect",
-                "Untersuchen"
+                "୍  Show all search results (opens new window)",
+                "୍  Zeige mir all Suchergebnisse (öffnet neues Fenster)"
             ],
     "last element":
             [

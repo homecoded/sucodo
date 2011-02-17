@@ -24,14 +24,24 @@
 	padding: 3px;
 }
 
-#analyze_control {
+#analyze_control, #edit_control {
     width: 750px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#analyze_control {
     text-align: left;
 }
 
+#edit_control {
+    text-align: right;
+}
+
 #btn_edit {
+}
+
+#grouplen_control {
     float: right;
 }
 
@@ -106,7 +116,7 @@
 }
 
 #resultinfo_data {
-    background-color: #694302;
+    background-color: #492e01;
     border-top: 1px solid #382300;
     border-left: 1px solid #382300;
     border-bottom: 1px solid #ffcc99;
@@ -114,9 +124,18 @@
     font-size: 8pt;
     font-weight: normal;
     overflow: auto;
-    padding: 1px;
+    padding: 4px;
     color: #feeac2;
     margin-bottom: 20px;
+    text-align:left;
+}
+
+#explanation_process {
+    width: 750px;
+    margin-top: 30px;
+    font-size: 10pt;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .progress_indicator {
@@ -128,21 +147,26 @@
 
 #txt_resultinfo_count {
     font-size: 10pt;
-    margin-top: 3px;
+    margin-left: 15px;    
 }
 
 #resultinfo_count {
-    font-size: 12pt;
+    font-size: 18pt;
 }
 
 #resultinfo_count {
     font-weight: bold;
 }
 
-#resultinfo_close {
+#resultinfo_close, #resultinfo_stick {
     font-size: 9pt;
     float: right;
-    margin: 0px;
+    margin: 4px;
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    text-decoration: none;
+    display: none;
 }
 
 #resultinfo_controls {
@@ -150,16 +174,18 @@
     padding: 3px;
     margin-top: 4px;
     display: none;
+    text-align: center;
 }
 
-#resultinfo_inspect {
-    font-size: 9pt;
-    text-align: center;
-    margin: 0px;
-}
 
 #resultview, #textview {
     text-align: left;
+}
+
+#textview_explanation {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #txt_textview {
@@ -208,7 +234,7 @@
 
 .content {
 	display: none;
-	min-height: 580px;
+	min-height: 630px;
     margin: 0px;
 }
 
