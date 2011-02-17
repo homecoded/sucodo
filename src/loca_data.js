@@ -55,8 +55,14 @@ var loca__dictionary =
 
     "txt_analyze_now":
             [
-                "Give me academic peace of mind!",
-                "Gib mir akademischen Seelenfrieden!"
+                "Give me academic peace of mind! >>",
+                "Gib mir akademischen Seelenfrieden! >>"
+            ],
+
+    "txt_button_edit":
+            [
+                    "<< Edit text",
+                    "<< Text editieren"
             ],
 
     "txt_lang_select":

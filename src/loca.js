@@ -1,5 +1,6 @@
 var loca = {
-    dict: {},
+    dict: null,
+    buttonDict: null,
     /*
      returns the loca data for a specific text id
      @id: text id
@@ -22,11 +23,35 @@ var loca = {
         var textSpans = document.getElementsByTagName("span");
         if (textSpans == null)
             return;
-        var locaValue;
-        for (var i = textSpans.length - 1; i >= 0; i--) {
+        var locaValue, i;
+        for (i = textSpans.length - 1; i >= 0; i--) {
             locaValue = loca.getLocaData(textSpans[i].id, langId);
             if (locaValue != null) {
                 textSpans[i].innerHTML = locaValue;
+            }
+        }
+
+        // create a list of all button and their respective text-id
+        var buttons = document.getElementsByTagName("input");
+        var button;
+        if (!loca.buttonDict && loca.dict) {
+            loca.buttonDict = {};
+            for (i = buttons.length - 1; i >= 0; i--) {
+                button = buttons[i];
+                locaValue = loca.getLocaData(button.value, langId);
+                if (locaValue != null) {
+                    loca.buttonDict[button.id] = button.value;
+                }
+            }
+        }
+
+        // update all buttons
+        var locaId;
+        for (i = buttons.length - 1; i >= 0; i--) {
+            button = buttons[i];
+            locaId = loca.buttonDict[button.id];
+            if (locaId && button.value) {
+                button.value = loca.getLocaData(locaId, langId);
             }
         }
     }

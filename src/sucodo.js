@@ -119,6 +119,9 @@ var navi = {
         });
         $('#resultinfo_close').click(textMarkup.closeDetails);
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
+        $('#btn_edit').click(function () {
+            navi.goto(navi.PAGE_ENTER_TEXT);
+        });
 
         textAnalyzer.setWebSearcher(webSearcher);
     }
@@ -181,6 +184,7 @@ $(document).ready(function () {
     tests.runTests();
     // init language
     loca.dict = loca__dictionary;
+    loca.buttonDict = null;
     sucodoLoca.createLinks();
     sucodoLoca.setLang(sucodoLoca.lang);
     // go to first site
