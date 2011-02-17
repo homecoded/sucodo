@@ -6,7 +6,6 @@ var textMarkup = (function () {
     var allowMouseOverSelect = true;
     var currentPhraseText;
     var highlightedPhrase;
-    var searchResultWindow;
 
     function unhighlightPhrase() {
         if (highlightedPhrase) {
@@ -146,10 +145,7 @@ var textMarkup = (function () {
 
     function showSearchResults () {
         var query = '"' + currentPhraseText + '"';
-        if (searchResultWindow) {
-        	searchResultWindow.close();
-        }
-        searchResultWindow = window.open('http://www.bing.com/search?q=' + query,'Results','');
+        searchResultWindow = window.open('http://www.bing.com/search?q=' + query);
     }
 
     return {
