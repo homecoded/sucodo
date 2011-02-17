@@ -85,8 +85,8 @@ var loca__dictionary =
 
     "txt_textview":
             [
-                "Colored text parts are suspicious. Move your mouse over them or click them to get detailed info.",
-                "Eingefärbte Textanteile sind verdächtig. Bewege die Maus darüber oder klicke sie an um mehr Informationen zu bekommen."
+                "Colored text parts (that is all not-black printed test) are suspicious. Use your mouse to inspect them.",
+                "Eingefärbte (nicht schwarze) Textanteile sind verdächtig. Benutze deine Maus um sie zu untersuchen."
             ],
 
     "txt_word_group_length":
