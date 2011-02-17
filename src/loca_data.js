@@ -7,8 +7,8 @@ var loca__dictionary =
 {
     "txt_title":
             [
-                "⍾ sucodo",
-                "⍾ sucodo"
+                "♘ sucodo",
+                "♘ sucodo"
             ],
 
     "txt_nav_step1":
@@ -61,14 +61,14 @@ var loca__dictionary =
 
     "txt_analyze_now":
             [
-                "Give me academic peace of mind! ⧐",
-                "Gib mir akademischen Seelenfrieden! ⧐"
+                "Give me academic peace of mind! ►",
+                "Gib mir akademischen Seelenfrieden! ►"
             ],
 
     "txt_button_edit":
             [
-                    "⧏ Edit text",
-                    "⧏ Text editieren"
+                    "◄ Edit text",
+                    "◄ Text editieren"
             ],
 
     "txt_lang_select":
@@ -158,20 +158,20 @@ var loca__dictionary =
 
     "txt_close":
             [
-                "Hide extended control ⏏",
-                "Erweiterte Anzeige verstecken ⏏"
+                "Hide extended control ▲",
+                "Erweiterte Anzeige verstecken ▲"
             ],
 
     "txt_stick":
             [
-                "Click to select ⏎",
-                "Klicke um zu selektieren ⏎"
+                "Click to select ▼",
+                "Klicke um zu selektieren ▼"
             ],
 
     "txt_inspect":
             [
-                "୍  Show all search results (opens new window)",
-                "୍  Zeige mir all Suchergebnisse (öffnet neues Fenster)"
+                "▼  Show all search results (opens new window)",
+                "▼  Zeige mir all Suchergebnisse (öffnet neues Fenster)"
             ],
     "last element":
             [
