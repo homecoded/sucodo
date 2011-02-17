@@ -145,7 +145,7 @@ var textMarkup = (function () {
 
     function showSearchResults () {
         var query = '"' + currentPhraseText + '"';
-        searchResultWindow = window.open('http://www.bing.com/search?q=' + query);
+        var searchResultWindow = window.open('http://www.bing.com/search?q=' + query);
     }
 
     return {
