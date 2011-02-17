@@ -78,9 +78,11 @@ var navi = {
                         var timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
                             $('#analyze_time_left').fadeIn();
+                            $('#analyze_progress').fadeIn();
                             $('#analyze_time').html(timeLeft);
                         } else {
                             $('#analyze_time_left').fadeOut();
+                            $('#analyze_progress').fadeOut();
                         }
 
                         var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());

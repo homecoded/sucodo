@@ -41,7 +41,13 @@
     </div>
 
     <div id="content2" class="content">
-        <h1 class="headline"><span id="txt_nav_step2"></span> <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
+        <h1 class="headline">
+            <div id="analyze_progress" class="progress_indicator"></div>
+            <span id="txt_nav_step2"></span>
+            <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
+        <p>
+            <span id="txt_textview"></span>
+        </p>
         <p id="analyze_control">
             <span id="txt_word_group_length"></span>
             <select id="grouplen">
@@ -55,11 +61,9 @@
             </select>
              <input type="button" id="btn_edit" value="txt_button_edit" >
         </p>
+
         <div id="textview" class="textview">
         </div>
-        <p id="resultdesc">
-            <span id="txt_textview"></span>
-        </p>
 
         <div id="resultinfo">
             <div id="resultinfo_data">
