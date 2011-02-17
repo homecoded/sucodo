@@ -8,9 +8,14 @@ only get chunks of the original data in a random order to make reconstructing
 the text on the side of the search engine provider a bit harder.
 The checked texts are not cached in any way.
 
+USABILITY FEEDBACK
+==================
+* change wording regarding "test group" to something more understandable
+* add an edit-text-button to text analyzer
+* increase size of "Inspect"-link and add a magnifying-glass icon
+
 TODO
 ====
-
 * remove bing API key and insert a warning if no api key is available
 * add Privacy statement
 * add "lock icon" for https
