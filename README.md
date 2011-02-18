@@ -11,16 +11,9 @@ The checked texts are not cached in any way.
 USABILITY FEEDBACK
 ==================
 * change wording regarding "test group" to something more understandable
-* add an edit-text-button to text analyzer
-* increase size of "Inspect"-link and add a magnifying-glass icon
-* move explanation text in analyzer to top of text field
 * add [i] at some parts to explain what these parts mean
 	* Words per test group
 	* Explain colors
-* rename "Inspect" to "Show search results (opens new window)"
-* rename "Close" to "Return to mouse-over mode"
-* pull search result window to front (in case user left it open)
-* use coloring for number of search results
 
 TODO
 ====
@@ -34,9 +27,19 @@ FEATURE REQUESTS
 * more heuristic search with additional keywords
 * manual search by selecting the word groups manually
 * adding adjustable gaps between the test groups  
+* merge edit and analyze mode into one screen (like a rich text editor widget)
 
 DONE
 ====
+
+USABILITY FEEDBACK:
+
+* add an edit-text-button to text analyzer
+* increase size of "Inspect"-link and add a magnifying-glass icon
+* move explanation text in analyzer to top of text field
+* rename "Inspect" to "Show search results (opens new window)"
+* rename "Close" to "Return to mouse-over mode"
+* pull search result window to front (in case user left it open)
 
 TODOs:
 
