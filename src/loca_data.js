@@ -7,8 +7,8 @@ var loca__dictionary =
 {
     "txt_title":
             [
-                "♘ sucodo",
-                "♘ sucodo"
+                "sucodo",
+                "sucodo"
             ],
 
     "txt_nav_step1":

@@ -63,7 +63,7 @@ var navi = {
             case navi.PAGE_ANALYZE:
                 var plagtext = $('#plagtext');
                 var text = plagtext.val();
-                $('#resultinfo').hide();
+                $('#resultinfo').hide();                
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
                     plagtext.css('background-color', '#fcc');
