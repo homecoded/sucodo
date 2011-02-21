@@ -21,7 +21,7 @@ var loca = {
     applyLocalization: function (langId)
     {
         var textSpans = document.getElementsByTagName("span");
-        if (textSpans == null)
+        if (!textSpans)
             return;
         var locaValue, i;
         for (i = textSpans.length - 1; i >= 0; i--) {

@@ -55,7 +55,7 @@ var loca__dictionary =
 
     "txt_process":
             [
-                "<strong>What is going to happen?</strong><br>The text will be split up into fix-length word groups. Each word group is checked against a search engine. A word group is suspicious if the search engine returns any results for it.",
+                "<strong>What is going to happen?</strong><br>The text will be split up into fix-length word groups. Each word group is checked against a search engine. A word group is suspicious if the search engine returns one or more results for it.",
                 "<strong>Was wird passieren?</strong><br> Der Text wird in Wortgruppen mit fester Wortanzahl zerteilt. Jede Gruppe wird über eine Suchmaschine untersucht. Eine Gruppe gilt als verdächtig, wenn die Suchmaschine Ergebnisse für sie liefert."
             ],
 

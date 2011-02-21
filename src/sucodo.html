@@ -9,6 +9,7 @@
     <script type="text/javascript" src="textbreaker.js"></script>
     <script type="text/javascript" src="websearcher.js"></script>
     <script type="text/javascript" src="textmarkup.js"></script>
+    <script type="text/javascript" src="helpcontrol.js"></script>
     <script type="text/javascript" src="tests.js"></script>
     <script type="text/javascript" src="sucodo.js"></script>
 </head>
@@ -22,7 +23,7 @@
             2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="navspan"></span></a>
             <div style="display: none">
                 3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="navspan"></span></a>
-	            4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
+                4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
             </div>
         </div>
     </div>
@@ -34,7 +35,7 @@
         <h1 class="headline"><span id="txt_nav_step1"></span></h1>
         <p><span id="txt_entertext"></span></p>
         <textarea id="plagtext" class="textview_size" cols="50" rows="17"></textarea>
-        <p id="edit_control"> 
+        <p id="edit_control">
             <input type="button" id="btn_analyze" value="txt_analyze_now" >
         </p>
         <p id="explanation_process"><span id="txt_process"></span></p>
@@ -53,6 +54,7 @@
         <p id="analyze_control">
             <span id="grouplen_control">
                 <span id="txt_word_group_length"></span>
+                <span id="help_wordgroup_len">[i]</span>
                 <select id="grouplen">
                     <option value="3" id="txt_grouplen3"></option>
                     <option value="4" id="txt_grouplen4"></option>
@@ -63,7 +65,7 @@
                     <option value="20" id="txt_grouplen20"></option>
                 </select>
              </span>
-             <input type="button" id="btn_edit" value="txt_button_edit" >
+            <input type="button" id="btn_edit" value="txt_button_edit" >
         </p>
         <div id="resultinfo">
             <div id="resultinfo_data">
