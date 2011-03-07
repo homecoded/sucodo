@@ -210,7 +210,7 @@ $(document).ready(function () {
     // setup callbacks
     navi.setup();
     // run tests
-    if (tests) {
+    if (typeof tests !== 'undefined') {
         tests.runTests();
     }
     // init language
