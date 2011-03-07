@@ -173,6 +173,11 @@ var loca__dictionary =
                 "▼  Show all search results (opens new window)",
                 "▼  Zeige mir all Suchergebnisse (öffnet neues Fenster)"
             ],
+    "txt_privacy":
+            [
+                "Privacy Policy: sucodo does not collect any personal data. No cookies!",
+                "Privatsphäre: sucodo sammelt keine persönlichen Daten. Keine Cookies!"
+            ],
     "last element":
             [
                 "",

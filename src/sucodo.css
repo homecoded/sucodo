@@ -8,6 +8,10 @@
     height: 25pt;
 }
 
+#title_link {
+    text-decoration:none;
+}
+
 #txt_title_subphrase {
     font-size: 14pt;
     color: #171A5D;
@@ -84,7 +88,13 @@
     margin-right: 10px;
 }
 
+#privacy {
+    float: left;
+    margin-left: 4px;
+}
+
 #testresults, #asynctestresults {
+    clear: both;
     color: #AAA;
     font-family: monospace;
     margin-top: 20px;
@@ -223,6 +233,7 @@
     display: none;
     height: 630px;
     margin: 0px;
+    color: #111111;
 }
 
 .headline {
@@ -246,7 +257,7 @@ body {
     padding: 0px;
     font-family: sans-serif;
     background-color: #466899;
-    color: #111111;
+    color: #EEEEEE;
 }
 
 a {

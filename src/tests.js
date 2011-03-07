@@ -498,7 +498,7 @@ var tests = (function () {
         runTests: function () {
             var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
                 colorWarnerTest, webSearcherCleanUpTest, textMarkupTest,
-                helpControlTest];
+                /*helpControlTest*/];
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {

@@ -179,6 +179,27 @@ var sucodoLoca = {
                     + '</a>';
         }
         document.getElementById('lang_select').innerHTML = htmlCode;
+    },
+    initialize: function () {
+        sucodoLoca.createLinks();
+        var lang = sucodoLoca.getParameterByName("lang");
+        if (lang == "de") {
+            sucodoLoca.lang = LOCA_GER;
+        } else {
+            sucodoLoca.lang = LOCA_ENG;
+        }
+        
+    },
+    getParameterByName: function (name)
+    {
+      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+      var regexS = "[\\?&]"+name+"=([^&#]*)";
+      var regex = new RegExp( regexS );
+      var results = regex.exec( window.location.href );
+      if( results == null )
+        return "";
+      else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 }
 
@@ -189,11 +210,13 @@ $(document).ready(function () {
     // setup callbacks
     navi.setup();
     // run tests
-    tests.runTests();
+    if (tests) {
+        tests.runTests();
+    }
     // init language
     loca.dict = loca__dictionary;
     loca.buttonDict = null;
-    sucodoLoca.createLinks();
+    sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
     // go to first site
     navi.goto(navi.PAGE_ENTER_TEXT);

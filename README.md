@@ -20,15 +20,23 @@ TODO
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length 
 * remove bing API key and insert a warning if no api key is available
 * add Privacy statement
-* add "lock icon" for https
 * JSLint check every Javascript file
+* initial language support
+
 
 FEATURE REQUESTS
 ================
-* more heuristic search with additional keywords
+* more heuristic search with additional keywords (input for "site must also contain these words" to increase hit chances for small test groups)
 * manual search by selecting the word groups manually
 * adding adjustable gaps between the test groups  
 * merge edit and analyze mode into one screen (like a rich text editor widget)
+* add a sample text that can be used to illustrate how sucodo works
+* report after analysis:
+    * most use sources
+    * percentage indicator of how much text may be plagiarized
+* add a sources overview
+* add options:
+    * ignore correctly quoted sources (deselect from sources overview)
 
 DONE
 ====
