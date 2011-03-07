@@ -19,7 +19,6 @@ TODO
 ====
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length 
 * remove bing API key and insert a warning if no api key is available
-* add Privacy statement
 * JSLint check every Javascript file
 * initial language support
 
@@ -52,6 +51,7 @@ USABILITY FEEDBACK:
 
 TODOs:
 
+* add Privacy statement
 * show estimated time left for search
 * color the suspicious phrases depending on the number of search results found for it
 * FIX: omit double searches (if phrases are identical)
