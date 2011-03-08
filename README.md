@@ -28,7 +28,6 @@ FEATURE REQUESTS
 * manual search by selecting the word groups manually
 * adding adjustable gaps between the test groups  
 * merge edit and analyze mode into one screen (like a rich text editor widget)
-* add a sample text that can be used to illustrate how sucodo works
 * report after analysis:
     * most use sources
     * percentage indicator of how much text may be plagiarized
@@ -47,6 +46,10 @@ USABILITY FEEDBACK:
 * rename "Inspect" to "Show search results (opens new window)"
 * rename "Close" to "Return to mouse-over mode"
 * pull search result window to front (in case user left it open)
+
+FEATURE REQUESTS:
+
+* add a sample text that can be used to illustrate how sucodo works
 
 TODOs:
 

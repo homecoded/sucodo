@@ -29,6 +29,14 @@
     padding: 3px;
 }
 
+#insert_sample_text {
+    float: left;
+}
+
+#insert_sample_text a {
+    color: #555555;
+}
+
 #analyze_control, #edit_control {
     width: 750px;
     margin-left: auto;

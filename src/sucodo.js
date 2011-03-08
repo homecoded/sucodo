@@ -116,6 +116,13 @@ var navi = {
         $('#btn_analyze').click(function () {
             navi.goto(navi.PAGE_ANALYZE);
         });
+        $('#link_sample_text').click(function () {
+            var value = $('#plagtext').val();
+            var sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
+            if (value.indexOf(sampletext) < 0) {
+               $('#plagtext').val( value + sampletext);
+            }
+        });
 
         // Analyze Screen
         $('#grouplen').change(function () {
