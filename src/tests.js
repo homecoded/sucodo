@@ -232,10 +232,10 @@ var tests = (function () {
             };
             // create the spans
             $('#testresults').append('<div id="test_remove_me">'
-                    + '<span id="txt_help_test1"></span>'
-                    + '<p><span id="txt_help_test2"></span></p>'
-                    + '<p><div><span id="txt_help_test3"></span></div></p>'
-                    + '<div><p><div><span id="txt_help_test1"></span></div></p></div>'
+                    + '<span id="tooltip_help_test1"></span>'
+                    + '<p><span id="tooltip_help_test2"></span></p>'
+                    + '<p><div><span id="tooltip_help_test3"></span></div></p>'
+                    + '<div><p><div><span id="tooltip_help_test1"></span></div></p></div>'
                     + '</div>'
                     );
 
@@ -249,9 +249,10 @@ var tests = (function () {
             $('#test_remove_me').remove();
         },
         _testHelpControl: function () {
-            setup();
+            helpControlTest.setup();
             helpControl.updateControls();
-            tearDown();
+            impunit.assertTrue($('#tooltip_help_test1').html().indexOf(helpControl.infoHtml()) >= 0);
+            helpControlTest.tearDown();
         }
     };
 
@@ -498,7 +499,7 @@ var tests = (function () {
         runTests: function () {
             var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
                 colorWarnerTest, webSearcherCleanUpTest, textMarkupTest,
-                /*helpControlTest*/];
+                helpControlTest];
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {

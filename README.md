@@ -11,9 +11,6 @@ The checked texts are not cached in any way.
 USABILITY FEEDBACK
 ==================
 * change wording regarding "test group" to something more understandable
-* add [i] at some parts to explain what these parts mean
-	* Words per test group
-	* Explain colors
 
 TODO
 ====
@@ -40,6 +37,9 @@ DONE
 
 USABILITY FEEDBACK:
 
+* add [i] at some parts to explain what these parts mean
+	* Words per test group
+	* Explain colors
 * add an edit-text-button to text analyzer
 * increase size of "Inspect"-link and add a magnifying-glass icon
 * move explanation text in analyzer to top of text field

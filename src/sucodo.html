@@ -37,8 +37,12 @@
         <textarea id="plagtext" class="textview_size" cols="50" rows="17"></textarea>
         <p id="edit_control">
             <span id="insert_sample_text">
-                [<a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a>]
+                <span id="insert_sample_text_link">
+                    [<a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a>]
+                </span>
+                <span id="tooltip_help_sample_text"></span>
             </span>
+
             <input type="button" id="btn_analyze" value="txt_analyze_now" >
         </p>
         <p id="explanation_process"><span id="txt_process"></span></p>
@@ -51,13 +55,14 @@
             <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
         <p id="textview_explanation">
             <span id="txt_textview"></span>
+            <span id="tooltip_help_colors"></span>
         </p>
         <div id="textview" class="textview">
         </div>
         <p id="analyze_control">
             <span id="grouplen_control">
                 <span id="txt_word_group_length"></span>
-                <!--<span id="help_wordgroup_len">[i]</span>-->
+                <span id="tooltip_help_wordgroup_len"></span>
                 <select id="grouplen">
                     <option value="3" id="txt_grouplen3"></option>
                     <option value="4" id="txt_grouplen4"></option>
@@ -103,6 +108,9 @@
 <p id="credits">
     <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us ">Bing Terms of Use</a>
 </p>
+
+<div id="help_tooltip"></div>
+
 <div id="testresults">
 </div>
 <div id="asynctestresults">
