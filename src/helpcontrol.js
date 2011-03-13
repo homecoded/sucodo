@@ -1,7 +1,7 @@
 var helpControl = (function () {
 
     var ID_HELP_PREFIX = 'tooltip_help';
-    var INFO_HTML = '<span class="info_link"><a href="javascript:void(0)">i</a></span>';
+    var INFO_HTML = '<img src="data:image/gif;base64,R0lGODlhDwAPALMAAAAAACEtNTVKWUpoflJrhFJ3jFJ7lFp7lFp7nFqEnGiMoqCxvd7n597n7////////yH5BAEAAA8ALAAAAAAPAA8AAARM8MmXjrVp6ssYudpzHZ3wWdN4EII5UqMjD8WoqIrsqmMhBwOe6hcUXojGowM4SlQuOYegaFGIlLraISO5sAKBXchSIAwGhAI3dLNpIgA7" width="15" height="15">';
     var TOOLTIP_OFFSET = 5;
 
     function updateControls() {
@@ -13,7 +13,7 @@ var helpControl = (function () {
         for (i = spans.length - 1; i >= 0; i--) {
             if (spans[i].id.indexOf(ID_HELP_PREFIX) === 0) {
                 spans[i].innerHTML = INFO_HTML;
-                $('#' + spans[i].id).mouseover(function (e) {
+                $('#' + spans[i].id).mousemove(function (e) {
                     var span = spans[i];
                     return function (e) {
 

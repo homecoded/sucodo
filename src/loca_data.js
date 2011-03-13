@@ -203,8 +203,8 @@ var loca__dictionary =
 
     "txt_tooltip_help_colors":
             [
-                "The text will become colored. If a fairly low number of possible sources for a test group is found on the internet, this test group will become dark orange. In case there are many possible sources, it will become bright red.",
-                "Der Text wird unterschiedlich eingefärbt. Wenn für eine Testgruppe nur wenige mögliche Quellen im Internet gefunden wurden, dann wird er Textteil Dunkelorange eingefärbt. Werden viele mögliche Quellen gefunden, wird er Hellrot eingefärbt."
+                "The text will become colored. If a fairly low number of possible sources for a <br>test group is found on the internet, this test group will become dark orange.<br>In case there are many possible sources, it will become bright red.",
+                "Der Text wird unterschiedlich eingefärbt. Wenn für eine Testgruppe nur wenige <br>mögliche Quellen im Internet gefunden wurden, dann wird er Textteil Dunkelorange eingefärbt. <br>Werden viele mögliche Quellen gefunden, wird er Hellrot eingefärbt."
             ],
 
     "last element":

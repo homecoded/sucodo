@@ -10,14 +10,14 @@ The checked texts are not cached in any way.
 
 USABILITY FEEDBACK
 ==================
-* change wording regarding "test group" to something more understandable
+* // all done
 
 TODO
 ====
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length 
 * remove bing API key and insert a warning if no api key is available
 * JSLint check every Javascript file
-
+* check why unit test failes in IE8 (_testHelpControl)
 
 FEATURE REQUESTS
 ================
