@@ -9,10 +9,12 @@ var loca = {
     getLocaData: function (id, langId)
     {
         var s;
-        if (loca.dict == null || loca.dict[id] == s)
+        if (loca.dict === null || loca.dict[id] === s) {
             return null;
-        if (loca.dict[id][langId] == null)
+        }
+        if (loca.dict[id][langId] === null) {
             return loca.dict[id][0];
+        }
         return loca.dict[id][langId];
     },
     /*
@@ -21,12 +23,13 @@ var loca = {
     applyLocalization: function (langId)
     {
         var textSpans = document.getElementsByTagName("span");
-        if (!textSpans)
+        if (!textSpans) {
             return;
+        }
         var locaValue, i;
         for (i = textSpans.length - 1; i >= 0; i--) {
             locaValue = loca.getLocaData(textSpans[i].id, langId);
-            if (locaValue != null) {
+            if (locaValue !== null) {
                 textSpans[i].innerHTML = locaValue;
             }
         }
@@ -39,7 +42,7 @@ var loca = {
             for (i = buttons.length - 1; i >= 0; i--) {
                 button = buttons[i];
                 locaValue = loca.getLocaData(button.value, langId);
-                if (locaValue != null) {
+                if (locaValue !== null) {
                     loca.buttonDict[button.id] = button.value;
                 }
             }
@@ -55,4 +58,4 @@ var loca = {
             }
         }
     }
-}
+};

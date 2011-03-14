@@ -73,7 +73,7 @@ var navi = {
                     }, 1500);
                     return false;
                 } else {
-                    var wordGroupLen = parseInt($('#grouplen').val());
+                    var wordGroupLen = parseInt($('#grouplen').val(), 10);
                     textAnalyzer.stop();
                     var phrases = textAnalyzer.go(text, wordGroupLen, function () {
                         var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
