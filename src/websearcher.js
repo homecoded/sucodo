@@ -10,7 +10,6 @@ var webSearcher = (function () {
         var callbacks = {};
         var phraseQueue = [];
         var scripts = [];
-        var allowUpdates = true;
         var intervalId = null;
         var INTERVAL_WAIT_TIME = 250;
         var wsId;
@@ -42,9 +41,10 @@ var webSearcher = (function () {
             var numResults = results.SearchResponse.Web.Total;
 
             var cbs = callbacks[phrase];
+            var i;
             if (cbs) {
                 var numCallbacks = cbs.length;
-                for (var i = 0; i < numCallbacks; i++) {
+                for (i = 0; i < numCallbacks; i++) {
                     cbs[i](phrase, numResults);
                 }
             }
@@ -69,8 +69,9 @@ var webSearcher = (function () {
         function stopScripts() {
             callbacks = {};
             phraseQueue = [];
+            var i;
             var numToRemove = scripts.length;
-            for (var i = 0; i < numToRemove; i++) {
+            for (i = 0; i < numToRemove; i++) {
                 document.getElementsByTagName('head')[0].removeChild(scripts[i]);
             }
             scripts = [];

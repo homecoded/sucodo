@@ -17,12 +17,12 @@ var textAnalyzer = (function () {
             phrases = [];
             plagiarismCountMap = [];
             var paragraphs = textBreaker.breakUp(newText, wordgrouplen);
-            var i;
+            var i, j;
             for (i = 0; i < paragraphs.length; i++ ) {
                 if (paragraphs[i].constructor === Array)
                 {
                     var paragraph = paragraphs[i];
-                    for (var j = 0; j < paragraph.length; j++) {
+                    for (j = 0; j < paragraph.length; j++) {
                         phrases.push(paragraph[j]);
                         plagiarismCountMap[paragraph[j]] = 0;
                     }
@@ -42,7 +42,7 @@ var textAnalyzer = (function () {
 
             for (i = 0; i < randPhrases.length; i++) {
                 if (randPhrases[i] !== '') {
-                    webSearcher.search(randPhrases[i], onNewResultReceived)
+                    webSearcher.search(randPhrases[i], onNewResultReceived);
                 }
             }
 
@@ -79,7 +79,7 @@ var textAnalyzer = (function () {
             timeLeft: function () {
                 return webSearcher.timeLeft();
             }
-        }
+        };
 
     }
     instance = createInstance();
