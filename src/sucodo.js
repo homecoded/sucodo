@@ -6,7 +6,7 @@ var navi = {
     PAGE_ANALYZE: 2,
     PAGE_HELP: 3,
 
-    goto: function (id) {
+    "goto": function (id) {
         var success = navi.execute(id);
         if (success) {
             navi.highlight(id);
@@ -15,14 +15,14 @@ var navi = {
             if (id === navi.PAGE_ANALYZE) {
                 // attempt to go to analyze screen but no text was entered
                 // then go to enter text screen
-                navi.goto(navi.PAGE_ENTER_TEXT);
+                navi["goto"](navi.PAGE_ENTER_TEXT);
             }
         }
     },
     /*
      Highlights the active link
      */
-    highlight: function (id) {
+    "highlight": function (id) {
         var activeElementId = "#nav" + id;
         $("#navlinks").children().each(
                 function (_i, _element) {
@@ -39,7 +39,7 @@ var navi = {
     /*
      Shows the correct main screen
      */
-    showContent: function (id)	{
+    "showContent": function (id)	{
         var activeElementId = "#content"+id;
         $("#content").children().each(
                 function (_i, _element)	{
@@ -54,7 +54,7 @@ var navi = {
     /*
      Runs the code necessary for a state
      */
-    execute: function (id) {
+    "execute": function (id) {
         switch (id)
         {
             case navi.PAGE_ENTER_TEXT:
@@ -107,14 +107,14 @@ var navi = {
             $('#nav' + i).click(function () {
                 var id = i;
                 return function () {
-                    navi.goto(id);
+                    navi["goto"](id);
                 };
             }());
         }
 
         // Enter Text Screen
         $('#btn_analyze').click(function () {
-            navi.goto(navi.PAGE_ANALYZE);
+            navi["goto"](navi.PAGE_ANALYZE);
         });
         $('#link_sample_text').click(function () {
             var value = $('#plagtext').val();
@@ -126,12 +126,12 @@ var navi = {
 
         // Analyze Screen
         $('#grouplen').change(function () {
-            navi.goto(navi.PAGE_ANALYZE);
+            navi["goto"](PAGE_ANALYZE);
         });
         $('#resultinfo_close').click(textMarkup.closeDetails);
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
-            navi.goto(navi.PAGE_ENTER_TEXT);
+            navi["goto"](navi.PAGE_ENTER_TEXT);
         });
 
         textAnalyzer.setWebSearcher(webSearcher);
@@ -226,7 +226,7 @@ $(document).ready(function () {
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
     // go to first site
-    navi.goto(navi.PAGE_ENTER_TEXT);
+    navi["goto"](navi.PAGE_ENTER_TEXT);
 });
 
 /********************************************************************************************
