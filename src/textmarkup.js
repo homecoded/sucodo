@@ -1,11 +1,11 @@
 var textMarkup = (function () {
 
-    var id;
-    var phraseDict;
-    var phraseMap;
-    var allowMouseOverSelect = true;
-    var currentPhraseText;
-    var highlightedPhrase;
+    var id,
+        phraseDict,
+        phraseMap,
+        allowMouseOverSelect = true,
+        currentPhraseText,
+        highlightedPhrase;
 
     function unhighlightPhrase() {
         if (highlightedPhrase) {
@@ -27,12 +27,12 @@ var textMarkup = (function () {
     }
 
     function createMarkup(phrases, phraseCountMap) {
-        var resultText = '';
-        var entry;
-        var numElements = phrases.length;
-        var numPhrases;
-        var searchCount;
-        var i, j;
+        var resultText = '',
+            entry,
+            numElements = phrases.length,
+            numPhrases,
+            searchCount,
+            i, j;
         
         id = -1;
         phraseDict = {};
@@ -57,17 +57,15 @@ var textMarkup = (function () {
     }
 
     function markup (phrases, phraseCountMap) {
-        var result;
-        result = createMarkup(phrases, phraseCountMap);
-        return result;
+        return createMarkup(phrases, phraseCountMap);
     }
 
     function updateMouseInteractivity() {
-        var phrase;
-        var phraseIds;
-        var i;
-        var resultCount;
-        var span;
+        var phrase,
+            phraseIds,
+            i,
+            resultCount,
+            span;
 
         for (phrase in phraseDict) {
             if (phraseDict.hasOwnProperty(phrase) || true) {
@@ -88,8 +86,8 @@ var textMarkup = (function () {
                             $('#resultinfo_stick').hide();
                         });
                         span.mouseover(function () {
-                            var currPhrase = phrase;
-                            var currCount = resultCount;
+                            var currPhrase = phrase,
+                                currCount = resultCount;
                             return function () {
                                 if (!highlightedPhrase
                                         || (highlightedPhrase.attr('id') !== $(this).attr('id'))) {
@@ -106,8 +104,8 @@ var textMarkup = (function () {
                             };
                         }());
                         span.click(function () {
-                            var currPhrase = phrase;
-                            var currCount = resultCount;
+                            var currPhrase = phrase,
+                                currCount = resultCount;
                             return function () {
 
                                 if (highlightedPhrase && highlightedPhrase.attr('id') === $(this).attr('id')) {

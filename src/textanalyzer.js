@@ -3,10 +3,10 @@ var textAnalyzer = (function () {
     var instance;
 
     function createInstance() {
-        var phrases;
-        var webSearcher;
-        var callback;
-        var plagiarismCountMap;
+        var phrases,
+            webSearcher,
+            callback,
+            plagiarismCountMap;
 
         function setWebSearcher(searcher) {
             webSearcher = searcher;
@@ -16,12 +16,16 @@ var textAnalyzer = (function () {
             callback = cb;
             phrases = [];
             plagiarismCountMap = [];
-            var paragraphs = textBreaker.breakUp(newText, wordgrouplen);
-            var i, j;
+            var paragraphs = textBreaker.breakUp(newText, wordgrouplen),
+                i, j,
+                randPhrases, sortRule,
+                reg,
+                paragraph;
+
             for (i = 0; i < paragraphs.length; i++ ) {
                 if (paragraphs[i].constructor === Array)
                 {
-                    var paragraph = paragraphs[i];
+                    paragraph = paragraphs[i];
                     for (j = 0; j < paragraph.length; j++) {
                         phrases.push(paragraph[j]);
                         plagiarismCountMap[paragraph[j]] = 0;
@@ -33,8 +37,8 @@ var textAnalyzer = (function () {
             }
 
             // randomize the orde in which phrases are searched
-            var randPhrases = phrases.slice(0);
-            var sortRule = function (a,b) {
+            randPhrases = phrases.slice(0);
+            sortRule = function (a,b) {
                 return (Math.random() >= 0.5) ? 1 : -1;
             };
             randPhrases.sort(sortRule);
@@ -47,7 +51,7 @@ var textAnalyzer = (function () {
             }
 
             // count the search on sucodo.de
-            var reg = new Image();
+            reg = new Image();
             reg.src='http://sucodo.de/reg.php'; 
 
             return paragraphs;

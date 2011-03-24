@@ -1,9 +1,8 @@
 
-var LOCA_ENG = 0;
-var LOCA_GER = 1;
-var NUM_LANGUAGES = 2;
-
-var loca__dictionary =
+var LOCA_ENG = 0,
+    LOCA_GER = 1,
+    NUM_LANGUAGES = 2,
+    loca__dictionary =
 {
     "txt_title":
             [

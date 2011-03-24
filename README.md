@@ -14,10 +14,8 @@ USABILITY FEEDBACK
 
 TODO
 ====
-* !!! check why unit tests fail(_testHelpControl, _testLoca)
-* do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length 
+* do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length
 * remove bing API key and insert a warning if no api key is available
-* JSLint check every Javascript file
 
 FEATURE REQUESTS
 ================
@@ -53,6 +51,8 @@ FEATURE REQUESTS:
 
 TODOs:
 
+* JSLint check every Javascript file
+* check why unit tests fail(testHelpControl, testLoca)
 * initial language support
 * add Privacy statement
 * show estimated time left for search

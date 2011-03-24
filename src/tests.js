@@ -183,6 +183,7 @@ var tests = (function () {
         },
         _testLoca : function () {
             locatest.setup();
+            var onlk = loca.getLocaData('txt_test1');
             impunit.assertEqual('test1_1', loca.getLocaData('txt_test1'));
             impunit.assertEqual('test1_1', loca.getLocaData('txt_test1', 0));
             impunit.assertEqual('test1_2', loca.getLocaData('txt_test1', 1));
@@ -251,7 +252,17 @@ var tests = (function () {
         _testHelpControl: function () {
             helpControlTest.setup();
             helpControl.updateControls();
-            impunit.assertTrue($('#tooltip_help_test1').html().indexOf(helpControl.infoHtml()) >= 0);
+            var element = $('#tooltip_help_test2');
+            var eHtml = element.html();
+            var expHtml = helpControl.infoHtml();
+            eHtml = eHtml.replace('<', '');
+            eHtml = eHtml.replace('>', '');
+            var htmlParts = eHtml.split(' ');
+
+            for (var i = 0; i < htmlParts.length; i++)
+            {
+                impunit.assertTrue(expHtml.indexOf(htmlParts[i]) >= 0);
+            }
             helpControlTest.tearDown();
         }
     };

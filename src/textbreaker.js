@@ -23,18 +23,18 @@ var textBreaker = {
             return null;
         }
         
-        var paragraphs = text.split('\n');
-        var result = [];
-        var i, j;
-
-        var num_paragraphs = paragraphs.length;
+        var paragraphs = text.split('\n'),
+            result = [],
+            i, j,
+            num_paragraphs = paragraphs.length,
+            paragraph, parWords, numWords, group, parWrdGroupd;
 
         for (i = 0; i < num_paragraphs; i++) {
-            var paragraph = paragraphs[i];
-            var parWords = paragraph.split(' ');
-            var numWords = parWords.length;
-            var group;
-            var parWrdGroupd = [];
+            paragraph = paragraphs[i];
+            parWords = paragraph.split(' ');
+            numWords = parWords.length;
+            group;
+            parWrdGroupd = [];
 
             for (j = 0; j < numWords; j+=wordGroupLen)
             {

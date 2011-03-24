@@ -1,8 +1,8 @@
 var helpControl = (function () {
 
-    var ID_HELP_PREFIX = 'tooltip_help';
-    var INFO_HTML = '<img src="data:image/gif;base64,R0lGODlhDwAPALMAAAAAACEtNTVKWUpoflJrhFJ3jFJ7lFp7lFp7nFqEnGiMoqCxvd7n597n7////////yH5BAEAAA8ALAAAAAAPAA8AAARM8MmXjrVp6ssYudpzHZ3wWdN4EII5UqMjD8WoqIrsqmMhBwOe6hcUXojGowM4SlQuOYegaFGIlLraISO5sAKBXchSIAwGhAI3dLNpIgA7" width="15" height="15">';
-    var TOOLTIP_OFFSET = 5;
+    var ID_HELP_PREFIX = 'tooltip_help',
+        INFO_HTML = '<img src="data:image/gif;base64,R0lGODlhDwAPALMAAAAAACEtNTVKWUpoflJrhFJ3jFJ7lFp7lFp7nFqEnGiMoqCxvd7n597n7////////yH5BAEAAA8ALAAAAAAPAA8AAARM8MmXjrVp6ssYudpzHZ3wWdN4EII5UqMjD8WoqIrsqmMhBwOe6hcUXojGowM4SlQuOYegaFGIlLraISO5sAKBXchSIAwGhAI3dLNpIgA7" width="15" height="15">',
+        TOOLTIP_OFFSET = 5;
     
     function closeHelpTooltip() {
         $('#help_tooltip').fadeOut();
@@ -13,8 +13,8 @@ var helpControl = (function () {
         $('#help_tooltip').fadeIn();
 
         // calc offsets
-        var offsetX = 0;
-        var offsetY = 0;
+        var offsetX = 0,
+            offsetY = 0;
 
         if (($(document).width() / 2) < e.pageX) {
             // move tooltip left of cursor
@@ -32,7 +32,8 @@ var helpControl = (function () {
 	}
 
     function updateControls() {
-        var spans = document.getElementsByTagName('span');
+        var spans = document.getElementsByTagName('span'),
+                span;
         if (!spans) {
             return;
         }
@@ -41,7 +42,7 @@ var helpControl = (function () {
             if (spans[i].id.indexOf(ID_HELP_PREFIX) === 0) {
                 spans[i].innerHTML = INFO_HTML;
                 $('#' + spans[i].id).mousemove((function (e) {
-                    var span = spans[i];
+                    span = spans[i];
                     return function (e) {
 						openHelpTooltip(span.id, e);
                     };

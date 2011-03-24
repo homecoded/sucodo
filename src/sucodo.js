@@ -6,7 +6,7 @@ var navi = {
     PAGE_ANALYZE: 2,
     PAGE_HELP: 3,
 
-    "goto": function (id) {
+    openPage: function (id) {
         var success = navi.execute(id);
         if (success) {
             navi.highlight(id);
@@ -15,7 +15,7 @@ var navi = {
             if (id === navi.PAGE_ANALYZE) {
                 // attempt to go to analyze screen but no text was entered
                 // then go to enter text screen
-                navi["goto"](navi.PAGE_ENTER_TEXT);
+                navi.openPage(navi.PAGE_ENTER_TEXT);
             }
         }
     },
@@ -61,8 +61,9 @@ var navi = {
                     textAnalyzer.stop();
                     break;
             case navi.PAGE_ANALYZE:
-                var plagtext = $('#plagtext');
-                var text = plagtext.val();
+                var plagtext = $('#plagtext'),
+                    text = plagtext.val(),
+                    wordGroupLen, phrases, timeLeft, resultText;
                 $('#resultinfo').hide();                
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
@@ -73,12 +74,12 @@ var navi = {
                     }, 1500);
                     return false;
                 } else {
-                    var wordGroupLen = parseInt($('#grouplen').val(), 10);
+                    wordGroupLen = parseInt($('#grouplen').val(), 10);
                     textAnalyzer.stop();
-                    var phrases = textAnalyzer.go(text, wordGroupLen, function () {
-                        var resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
+                    phrases = textAnalyzer.go(text, wordGroupLen, function () {
+                        resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
                         $('#textview').html(resultText);
-                        var timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
+                        timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
                             $('#analyze_time_left').fadeIn();
                             $('#analyze_progress').fadeIn();
@@ -102,23 +103,24 @@ var navi = {
      */
     setup: function (id) {
         // global navi
-        var numLinks = $('#navlinks').children().length;
-        for (var i = 1; i <= numLinks; i++) {
+        var numLinks = $('#navlinks').children().length,
+            i;
+        for (i = 1; i <= numLinks; i++) {
             $('#nav' + i).click(function () {
                 var id = i;
                 return function () {
-                    navi["goto"](id);
+                    navi.openPage(id);
                 };
             }());
         }
 
         // Enter Text Screen
         $('#btn_analyze').click(function () {
-            navi["goto"](navi.PAGE_ANALYZE);
+            navi.openPage(navi.PAGE_ANALYZE);
         });
         $('#link_sample_text').click(function () {
-            var value = $('#plagtext').val();
-            var sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
+            var value = $('#plagtext').val(),
+                sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
             if (value.indexOf(sampletext) < 0) {
                $('#plagtext').val( value + sampletext);
             }
@@ -126,12 +128,12 @@ var navi = {
 
         // Analyze Screen
         $('#grouplen').change(function () {
-            navi["goto"](PAGE_ANALYZE);
+            navi.openPage(PAGE_ANALYZE);
         });
         $('#resultinfo_close').click(textMarkup.closeDetails);
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
-            navi["goto"](navi.PAGE_ENTER_TEXT);
+            navi.openPage(navi.PAGE_ENTER_TEXT);
         });
 
         textAnalyzer.setWebSearcher(webSearcher);
@@ -145,11 +147,12 @@ var colorWarner = {
         if (number > 256) {
             return '#ff0000'; // a lot of results, total red!
         } else {
-            var red = Math.round(number/2);
-            var green = Math.round(64 - red/2);
+            var red, green, hexRed, hexGreen;
+            red = Math.round(number/2);
+            green = Math.round(64 - red/2);
             red += 127;
-            var hexRed = red.toString(16);
-            var hexGreen = green.toString(16);
+            hexRed = red.toString(16);
+            hexGreen = green.toString(16);
             hexRed = (hexRed.length === 1) ? '0' + hexRed : hexRed;
             hexGreen = (hexGreen.length === 1) ? '0' + hexGreen : hexGreen;
             return ('#' + hexRed + hexGreen + '00').toLowerCase();
@@ -163,7 +166,6 @@ var colorWarner = {
 var sucodoLoca = {
     lang: LOCA_ENG,
     setLang: function (id) {
-        var oldLoca = sucodoLoca.lang;
         sucodoLoca.lang = id;
         loca.applyLocalization(id);
 
@@ -175,10 +177,11 @@ var sucodoLoca = {
         sucodoLoca.createLinks();
     },
     createLinks: function () {
-        var lang_select = $('#lang_select');
-        var htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) +  	" ";
+        var lang_select = $('#lang_select'),
+            htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) +  	" ",
+            i;
 
-        for (var i = 0; i < NUM_LANGUAGES; i++)
+        for (i = 0; i < NUM_LANGUAGES; i++)
         {
             htmlCode += '<a href="javascript:void(0)" onclick="sucodoLoca.setLang('+i+')" '
                     + 'class="lang_link">'
@@ -190,7 +193,7 @@ var sucodoLoca = {
     initialize: function () {
         sucodoLoca.createLinks();
         var lang = sucodoLoca.getParameterByName("lang");
-        if (lang == "de") {
+        if (lang === "de") {
             sucodoLoca.lang = LOCA_GER;
         } else {
             sucodoLoca.lang = LOCA_ENG;
@@ -200,9 +203,9 @@ var sucodoLoca = {
     getParameterByName: function (name)
     {
       name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-      var regexS = "[\\?&]"+name+"=([^&#]*)";
-      var regex = new RegExp( regexS );
-      var results = regex.exec( window.location.href );
+      var regexS = "[\\?&]"+name+"=([^&#]*)",
+        regex = new RegExp( regexS ),
+        results = regex.exec( window.location.href );
       if( results == null )
         return "";
       else
@@ -225,8 +228,9 @@ $(document).ready(function () {
     loca.buttonDict = null;
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
+    helpControl.updateControls();
     // go to first site
-    navi["goto"](navi.PAGE_ENTER_TEXT);
+    navi.openPage(navi.PAGE_ENTER_TEXT);
 });
 
 /********************************************************************************************

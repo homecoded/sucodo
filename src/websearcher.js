@@ -6,13 +6,14 @@ var webSearcher = (function () {
 
     function createInstance()  {
         // TODO remove api key and insert a warning
-        var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7';
-        var callbacks = {};
-        var phraseQueue = [];
-        var scripts = [];
-        var intervalId = null;
-        var INTERVAL_WAIT_TIME = 250;
-        var wsId;
+        var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7',
+            callbacks = {},
+            phraseQueue = [],
+            scripts = [],
+            intervalId = null,
+            INTERVAL_WAIT_TIME = 250,
+            wsId,
+            ws;
 
         function search(phrase, cb) {
             if (cb) {
@@ -33,17 +34,20 @@ var webSearcher = (function () {
         }
 
         function searchDone(results) {
-            var phrase = results.SearchResponse.Query.SearchTerms;
+            var phrase = results.SearchResponse.Query.SearchTerms,
+                numResults,
+                cbs, i,
+                numCallbacks;
+
             phrase = phrase.substring(1, phrase.length - 1);
             if (!results.SearchResponse.Web) {
                 return;
             }
-            var numResults = results.SearchResponse.Web.Total;
+            numResults = results.SearchResponse.Web.Total;
 
-            var cbs = callbacks[phrase];
-            var i;
+            cbs = callbacks[phrase];
             if (cbs) {
-                var numCallbacks = cbs.length;
+                numCallbacks = cbs.length;
                 for (i = 0; i < numCallbacks; i++) {
                     cbs[i](phrase, numResults);
                 }
@@ -69,8 +73,8 @@ var webSearcher = (function () {
         function stopScripts() {
             callbacks = {};
             phraseQueue = [];
-            var i;
-            var numToRemove = scripts.length;
+            var i,
+                numToRemove = scripts.length;
             for (i = 0; i < numToRemove; i++) {
                 document.getElementsByTagName('head')[0].removeChild(scripts[i]);
             }
@@ -98,7 +102,7 @@ var webSearcher = (function () {
             webSearcherTable[wsId] = null;
         }
 
-        var ws =  {
+        ws =  {
             createInstance: createInstance,
             destroy: destroy,
             search : search,

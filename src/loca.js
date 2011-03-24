@@ -8,8 +8,10 @@ var loca = {
      */
     getLocaData: function (id, langId)
     {
-        var s;
-        if (loca.dict === null || loca.dict[id] === s) {
+        if (!langId) {
+            langId = 0;
+        }
+        if (!loca.dict || !loca.dict[id]) {
             return null;
         }
         if (loca.dict[id][langId] === null) {
@@ -22,11 +24,13 @@ var loca = {
      */
     applyLocalization: function (langId)
     {
-        var textSpans = document.getElementsByTagName("span");
+        var textSpans = document.getElementsByTagName("span"),
+            buttons, button,
+            locaValue, i, locaId;
+
         if (!textSpans) {
             return;
         }
-        var locaValue, i;
         for (i = textSpans.length - 1; i >= 0; i--) {
             locaValue = loca.getLocaData(textSpans[i].id, langId);
             if (locaValue !== null) {
@@ -35,8 +39,8 @@ var loca = {
         }
 
         // create a list of all button and their respective text-id
-        var buttons = document.getElementsByTagName("input");
-        var button;
+        buttons = document.getElementsByTagName("input");
+        button;
         if (!loca.buttonDict && loca.dict) {
             loca.buttonDict = {};
             for (i = buttons.length - 1; i >= 0; i--) {
@@ -49,7 +53,6 @@ var loca = {
         }
 
         // update all buttons
-        var locaId;
         for (i = buttons.length - 1; i >= 0; i--) {
             button = buttons[i];
             locaId = loca.buttonDict[button.id];
