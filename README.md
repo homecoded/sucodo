@@ -14,6 +14,7 @@ USABILITY FEEDBACK
 
 TODO
 ====
+* Bug: Tooltips do not work correctly (always show the same text, maybe closure problem?)
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length
 * remove bing API key and insert a warning if no api key is available
 
