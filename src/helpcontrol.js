@@ -28,12 +28,11 @@ var helpControl = (function () {
         } else {
             offsetY = TOOLTIP_OFFSET;
         }
-        $('#help_tooltip').offset( { left:e.pageX + offsetX, top: e.pageY + offsetY});		
+        $('#help_tooltip').offset( { left:e.pageX + offsetX, top: e.pageY + offsetY});
 	}
 
     function updateControls() {
-        var spans = document.getElementsByTagName('span'),
-                span;
+        var spans = document.getElementsByTagName('span');
         if (!spans) {
             return;
         }
@@ -42,7 +41,7 @@ var helpControl = (function () {
             if (spans[i].id.indexOf(ID_HELP_PREFIX) === 0) {
                 spans[i].innerHTML = INFO_HTML;
                 $('#' + spans[i].id).mousemove((function (e) {
-                    span = spans[i];
+                    var span = spans[i];
                     return function (e) {
 						openHelpTooltip(span.id, e);
                     };
