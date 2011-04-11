@@ -114,8 +114,11 @@
 }
 
 .textview_size, .textview {
-    width: 750px;
-    height: 320px;
+    width: 650px;
+    font-family: Georgia, Times New Roman, serif;
+    line-height: 140%;
+    font-size: 120%;
+    padding: 10px;
 }
 
 .textview {
@@ -124,37 +127,54 @@
     background-color: #FFFFFF;
     border: 1px solid black;
     padding: 5px;
-    font-size: 10pt;
     text-align: left;
 }
 
 #resultinfo {
-    width: 750px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 300px;
+    height: 90px;
     display: none;
-    position: relative;
-    padding: 0px;
+    padding: 5px;
+    position:fixed;
+    top: 50px;
+    right: 0px;
+    text-align:center;
 }
 
-#resultinfo_data {
+#resultinfo_bg {
     background-color: #492e01;
     border-top: 1px solid #382300;
     border-left: 1px solid #382300;
     border-bottom: 1px solid #ffcc99;
     border-right: 1px solid #ffcc99;
-    font-size: 8pt;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    z-index: 3;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+    top: 0px;
+    -moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px 4px 4px 4px;
+}
+
+#resultinfo_data {
+    z-index: 4;
+    font-size: 80%;
     font-weight: normal;
-    overflow: auto;
     padding: 4px;
-    color: #feeac2;
+    color: #ffffff;
     margin-bottom: 20px;
-    text-align:left;
+    position: absolute;
+    top: 15px;
+    width: 100%
 }
 
 #explanation_process {
     width: 750px;
-    font-size: 10pt;
     margin-left: auto;
     margin-right: auto;
     padding: 30px;
@@ -164,28 +184,38 @@
     display: inline-block;
 }
 
-#txt_resultinfo_count {
-    font-size: 10pt;
+#txt_resultinfo_count, #resultinfo_count {
     margin-left: 15px;
 }
 
+
 #resultinfo_count {
-    font-size: 18pt;
+    font-size: 180%;
 }
 
 #resultinfo_count {
     font-weight: bold;
 }
 
-#resultinfo_close, #resultinfo_stick {
-    font-size: 9pt;
-    float: right;
-    margin: 4px;
-    position:absolute;
+#resultinfo_stick {
+    width: 100%;
+    text-align: center;
+    bottom: 0px;
+}
+
+#resultinfo_close{
     top: 0px;
     right: 0px;
+}
+
+
+#resultinfo_close, #resultinfo_stick {
+    font-size: 70%;
+    margin: 4px;
+    position:absolute;
     text-decoration: none;
     display: none;
+    z-index: 4;
 }
 
 #resultinfo_controls {
@@ -208,7 +238,6 @@
 }
 
 #txt_textview {
-    font-size: 10pt;
 }
 
 #grouplen {
@@ -239,7 +268,6 @@
 
 .content {
     display: none;
-    height: 630px;
     margin: 0px;
     color: #111111;
 }
@@ -254,7 +282,7 @@
     margin: 0px;
     margin-bottom: 20px;
     padding: 5px;
-    font-size: 29pt;
+    font-size: 260%;
     font-family: serif;
     font-variant: small-caps;
     font-weight: normal;
@@ -287,10 +315,12 @@ a {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 4px 4px;
-    font-size: 10pt;
 }
 
 #help_tooltip_content {
     margin: 10px;
 }
 
+.suspicious_text {
+    font-weight: bold;
+}

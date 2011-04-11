@@ -151,26 +151,25 @@ var LOCA_ENG = 0,
 
     "txt_resultinfo_count":
             [
-                "Number of search results:",
-                "Anzahl der Suchergebnisse:"
+                "Number of possible sources:",
+                "Anzahl der möglichen Quellen:"
             ],
 
     "txt_close":
             [
-                "Hide extended control ▲",
-                "Erweiterte Anzeige verstecken ▲"
+                "[ X ]"
             ],
 
     "txt_stick":
             [
-                "Click to select ▼",
-                "Klicke um zu selektieren ▼"
+                "Double-click on group to see where it was copied from.",
+                "Doppelklick, um zu sehen von wo es kopiert wurde."
             ],
 
     "txt_inspect":
             [
-                "▼  Show all search results (opens new window)",
-                "▼  Zeige mir all Suchergebnisse (öffnet neues Fenster)"
+                "Show me where this was copied from!",
+                "Zeige mir, von wo es kopiert wurde!"
             ],
     "txt_privacy":
             [

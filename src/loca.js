@@ -14,7 +14,7 @@ var loca = {
         if (!loca.dict || !loca.dict[id]) {
             return null;
         }
-        if (loca.dict[id][langId] === null) {
+        if (!loca.dict[id][langId]) {
             return loca.dict[id][0];
         }
         return loca.dict[id][langId];
