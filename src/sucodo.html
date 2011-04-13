@@ -20,40 +20,38 @@
 </head>
 <body>
 
-<div id="header">
-    <div id="navigation">
-        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title"></span></a>
-        <div id="navlinks">
-            1. <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="navspan"></span></a>
-            2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="navspan"></span></a>
-            <div style="display: none">
-                3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="navspan"></span></a>
-                4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="navspan"></span></a>
-            </div>
+<div id="header" class="noMP">
+    <div id="headerlogo" class="bgdark noMP">
+        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
+    </div>
+    <div id="navlinks" class="bgmiddle textFont textSizeL noMP">
+        1. <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="textFont"></span></a>
+        2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="textFont"></span></a>
+        <div style="display: none">
+            3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="textFont"></span></a>
+            4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="textFont"></span></a>
         </div>
     </div>
 </div>
-
-<div id="content">
-
-    <div id="content1" class="content">
-        <h1 class="headline"><span id="txt_nav_step1"></span></h1>
-        <p><span id="txt_entertext"></span></p>
-        <textarea id="plagtext" class="textview_size" cols="50" rows="17"></textarea>
-        <p id="edit_control">
+<div id="content" class="bglight noMP">
+    <div id="content1" class="noMP">
+        <p id="add_sample_text" class="textSizeM">
             <span id="insert_sample_text">
                 <span id="insert_sample_text_link">
-                    [<a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a>]
+                    [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
                 </span>
                 <span id="tooltip_help_sample_text"></span>
             </span>
+        </p>
+        <textarea id="plagtext" class="textview_size" cols="80" rows="25"></textarea>
+        <p id="edit_control">
 
             <input type="button" id="btn_analyze" value="txt_analyze_now" >
         </p>
         <p id="explanation_process"><span id="txt_process"></span></p>
     </div>
 
-    <div id="content2" class="content">
+    <div id="content2" class="noMP">
         <h1 class="headline">
             <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
             <span id="txt_nav_step2"></span>
@@ -82,15 +80,15 @@
         </p>
     </div>
 
-    <div id="content3" class="content">
+    <div id="content3" class="noMP">
         <h1 class="headline"><span id="txt_nav_step3"></span></h1>
     </div>
 
-    <div id="content4" class="content">
+    <div id="content4" class="noMP">
         <h1 class="headline"><span id="txt_nav_step4"></span></h1>
         <p><span id="txt_help"></span></p>
     </div>
-
+    -->
 </div>
 
 <div id="resultinfo">
