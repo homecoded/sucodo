@@ -46,22 +46,22 @@ var LOCA_ENG = 0,
                 "Sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
             ],
 
-    "txt_entertext":
+    "txt_hint_analyze":
             [
-                "Enter or rather copy & paste the text you want to analyze here:",
-                "Gib den Text, den du analysieren willst hier ein (beziehungsweise benutze Kopieren und Einfügen):"
+                "Enter or rather copy & paste the text you want to analyze into the text field. You can also add some sample text if you just want to give it a spin.",
+                "Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen)."
             ],
 
-    "txt_process":
+    "txt_hint":
             [
-                "<strong>What is going to happen?</strong><br>The text will be split up into fix-length word groups. Each word group is checked against a search engine. A word group is suspicious if the search engine returns one or more results for it.",
-                "<strong>Was wird passieren?</strong><br> Der Text wird in Wortgruppen mit fester Wortanzahl zerteilt. Jede Gruppe wird über eine Suchmaschine untersucht. Eine Gruppe gilt als verdächtig, wenn die Suchmaschine Ergebnisse für sie liefert."
+                "Hint:",
+                "Tip:"
             ],
 
     "txt_analyze_now":
             [
-                "Give me academic peace of mind! ►",
-                "Gib mir akademischen Seelenfrieden! ►"
+                "Examine Text",
+                "Untersuche Text"
             ],
 
     "txt_button_edit":
@@ -173,8 +173,13 @@ var LOCA_ENG = 0,
             ],
     "txt_privacy":
             [
-                "Privacy Policy: sucodo does not collect any personal data. No cookies!",
-                "Privatsphäre: sucodo sammelt keine persönlichen Daten. Keine Cookies!"
+                "<strong>Privacy Policy:</strong> sucodo does not collect any personal data. No cookies are used.",
+                "<strong>Privatsphäre:</strong> sucodo sammelt keine persönlichen Daten. Es werden keine Cookies gespeichert."
+            ],
+    "txt_privacy_see_also":
+            [
+                "Also check out: ",
+                "Siehe auch: "
             ],
     "txt_show_sample_text":
             [

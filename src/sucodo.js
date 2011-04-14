@@ -24,7 +24,7 @@ var navi = {
      */
     "highlight": function (id) {
         var activeElementId = "#nav" + id;
-        $("#navlinks").children().each(
+        $("#navlinks_inner").children().each(
                 function (_i, _element) {
                     if ($(this).is(activeElementId)) {
                         if (!$(this).hasClass('active')) {

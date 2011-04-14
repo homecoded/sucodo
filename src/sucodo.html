@@ -18,13 +18,17 @@
     <script type="text/javascript" src="sucodo_min.js"></script>
 -->
 </head>
-<body>
+<body class="bglight textFont darkText">
 
-<div id="header" class="noMP">
-    <div id="headerlogo" class="bgdark noMP">
-        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
-    </div>
-    <div id="navlinks" class="bgmiddle textFont textSizeL noMP">
+<div id="headerlogo" class="bgdark noMP">
+    <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
+    <p id="privacy" class="textSizeS lightText">
+        <span id="txt_privacy"></span><br>
+        <span id="txt_privacy_see_also"></span> <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us " class="lightText">Microsoft(c) Bing Terms of Use</a>
+    </p>
+</div>
+<div id="navlinks" class="bgmiddle textFont textSizeL noMP">
+    <div id="navlinks_inner">
         1. <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="textFont"></span></a>
         2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="textFont"></span></a>
         <div style="display: none">
@@ -33,29 +37,25 @@
         </div>
     </div>
 </div>
+
 <div id="content" class="bglight noMP">
     <div id="content1" class="noMP">
         <p id="add_sample_text" class="textSizeM">
-            <span id="insert_sample_text">
-                <span id="insert_sample_text_link">
-                    [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
-                </span>
-                <span id="tooltip_help_sample_text"></span>
+            <span id="insert_sample_text_link">
+                [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
             </span>
+            <span id="tooltip_help_sample_text"></span>
         </p>
-        <textarea id="plagtext" class="textview_size" cols="80" rows="25"></textarea>
-        <p id="edit_control">
-
-            <input type="button" id="btn_analyze" value="txt_analyze_now" >
-        </p>
-        <p id="explanation_process"><span id="txt_process"></span></p>
+        <textarea id="plagtext" class="textview_size textFont textSizeL" cols="80" rows="25"></textarea>
     </div>
 
     <div id="content2" class="noMP">
+        <!--
         <h1 class="headline">
             <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
             <span id="txt_nav_step2"></span>
             <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
+        -->
         <p id="textview_explanation">
             <span id="txt_textview"></span>
             <span id="tooltip_help_colors"></span>
@@ -81,46 +81,57 @@
     </div>
 
     <div id="content3" class="noMP">
-        <h1 class="headline"><span id="txt_nav_step3"></span></h1>
     </div>
 
     <div id="content4" class="noMP">
-        <h1 class="headline"><span id="txt_nav_step4"></span></h1>
         <p><span id="txt_help"></span></p>
     </div>
-    -->
 </div>
-
-<div id="resultinfo">
-    <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
-    <div id="resultinfo_data">
-        <span id="txt_resultinfo_count"></span><br>
-        <span id="resultinfo_count"></span><br>
-        <div id="resultinfo_controls">
-            <input type="button" id="resultinfo_inspect" value="txt_inspect">
-        </div>
-    </div>
-    <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
-    <div id="resultinfo_bg"></div>
+<div class="bglight noMP">
 </div>
-
-<div id="lang_select">
-</div>
-
-<p id="privacy">
-    <span id="txt_privacy"></span>
-</p>
-
-<p id="credits">
-    <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us ">Bing Terms of Use</a>
-</p>
-
-<div id="help_tooltip"></div>
 
 <div id="testresults">
 </div>
 <div id="asynctestresults">
 </div>
+
+<div id="infobar_placeholder" class="bglight">
+    &nbsp;
+</div>
+
+<div id="infobar" class="bgmiddle infobar noMP">
+    <div id="infobar_edit">
+        <div class="infobar_button">
+            <a href="javascript:void(0)" id="btn_analyze" class="action_button textLink darkText"><span id="txt_analyze_now"></span></a>
+        </div>
+        <div class="infobar_hint">
+            <span id="txt_hint" class="textSizeS bold"></span><br>
+            <span id="txt_hint_analyze" class="textSizeM"></span>
+        </div>
+    </div>
+    <div id="infobar_analyze">
+        <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
+        <div id="resultinfo_data">
+            <span id="txt_resultinfo_count"></span><br>
+            <span id="resultinfo_count"></span><br>
+            <div id="resultinfo_controls">
+                <input type="button" id="resultinfo_inspect" value="txt_inspect">
+            </div>
+        </div>
+        <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
+        <div id="resultinfo_bg"></div>
+    </div>
+</div>
+
+<div id="settings">
+    <div id="lang_select">
+    </div>
+</div>
+
+
+
+<div id="help_tooltip"></div>
+
 <div id="bla"></div>
 
 </body>
