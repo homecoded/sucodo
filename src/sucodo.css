@@ -1,14 +1,22 @@
 /*
     COLORS
 */
-.bgdark { background-color: #998467; }
-.bgmiddle { background-color: #E7E1D6; }
-.bglight { background-color: #FAF9F4; }
-.bgpaper { background-color: #FFFFFF; }
+.bgdark { background-color: #0079CE }
+.bgmiddle { background-color: #F7E3C7 }
+.bgaltmiddle { background-color: #C0DCE7}
+.bglight { background-color: #F4F3F1 }
+.bgpaper { background-color: #FFFFFF }
 
 .outline { color: #828282; }
 .lightText {color: #E7E1D6;}
+.lightAltText { color: #C0DCE7; }
 .darkText { color: #404040;}
+
+.topLineMiddle { border-top: 1px solid #FCF2E4; }
+.borderMiddle { border: 1px solid #828282; }
+.bottomLineMiddle { border-bottom: 1px solid #bfb6ac; }
+.topLineLight { border-top: 1px solid #bfb6ac; }
+.bottomLineDark { border-bottom: 1px solid #003B64; }
 
 /*
     FONTS
@@ -20,18 +28,34 @@
 
 .textSizeXXL {font-size: 300%; line-height: 120%; }
 .textSizeL {font-size: 140%; line-height: 140%; }
-.textSizeM {font-size: 100%; line-height: 100%; }
+.textSizeM {font-size: 100%; line-height: 120%; }
 .textSizeS {font-size: 80%; line-height: 140%; }
 
 body {
     margin: 0px;
     padding: 0px;
-    line-height: 140%;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-attachment: fixed;
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQABLAEsAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAJTAAkDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECCP/EABoQAQEBAQEBAQAAAAAAAAAAAAARAWEhUYH/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAVEQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEQMRAD8A66AZaAAAAAAAAAAAAAATFZKAAAACFQAEWgEKAghQQQBlazSgl+iVfBGarFUVilZxaDPh+pSiMlZq0VgvUq0RmlZzSis0QoJ4M5q3ojIzmqKyVKUEAEgCQIs7pO6AgFKDNKgNAALCKCAAoJSggAy//9k=);
+    overflow: hidden;
 }
 
 /*
     COMMON CLASSES
 */
+.scrollable_container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
+
 .noMP {
     margin: 0px;
     padding: 0px;
@@ -50,9 +74,6 @@ a {
 .action_button {
     float: right;
     text-align: center;
-    margin-right: 30px;
-    margin-left: 30px;
-    margin-top: 20px;
     padding: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -101,13 +122,14 @@ a {
 #headerlogo {
     margin: 0px;
     padding: 10px;
-    text-align: right;
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQABLAEsAAD/2wBDAAsICAoIBwsKCQoNDAsNERwSEQ8PESIZGhQcKSQrKigkJyctMkA3LTA9MCcnOEw5PUNFSElIKzZPVU5GVEBHSEX/2wBDAQwNDREPESESEiFFLicuRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCACMAZADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAECAwX/xAAYEAEBAQEBAAAAAAAAAAAAAAAAARESAv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgb/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEQH/2gAMAwEAAhEDEQA/APIUV1Lk0UakBJFxVkRUxqRZGpEaiSLI1I1IlWMcry3PLXKVY58nLrycpSOfJy68nJVjjycuvKclSOXKXy63yl8rSOVjNjrYzYtSOdjOOliWKzHPEsbsTFRhGrEVERQERQRAFAAAAAAAAAAAAAAAAGlFiKsWEWRFJGpFkakZaSRuQkb8xK1mJI1PLUjcjNazGJ5anl0nlqeWascp5Xl1nleUqxy5OXbk5KscOU5d+UvkqRwvlm+Xe+Wb5WpHC+WbHaxmxrNZ3HCxmx1sZsarO45WM2OljNjSMVmxuxmqyyjVRUZFQEFQQAUAAAAAAAAAAAAAAbajMaZaWNRmNxFajUZjcZaajfmMR08s61jcjcjEbjOt41I3IzGoy0si4RUUwxRFZxLGkqoxYzY3WKrLFjFjpXOtYzrn6Yrp6YreM6xWK3WK0yzWa1WarKVlqsqyiKigioIAKAAAAAAAAAAAAAANtRlZUVqNRhqVlpuNyucrUqK6SunmuMrcrO41mu0rcrjPTU9M7jea7ytSuE9NT2zFrtK1rj2vaRquumufadkK6alrHaX2QrVrNrN9s301GatrFpfTF9LmM7p6rFpaza1jO6lrNLWbWmSs0tStMpUKioIqAIqCACgAAAAAAAAAAAAADSoIrUqsrKitytSuayorpK3K5StSorrK1PTjK1PSRa7T0s9OUq9JGq69L05dHSRa7dHTl0dEK6dJ059J0QrpfTN9MdJasStWs2pfTNqxmrazalqWqhazaWoqCWlqKggioACIAAAoAAAAAAAAAAAAAAqoIKrKitSrrCg3qysauorcrWuWrqRa6avTnppFrr0vTl0dJCuvR059HRCunSdOfR0QrfSaxpqwrVqWs6mkSrampqaqNazaIqKggAAggAAKAAAAAAAAAAAAAAAAAAKIIKqAq6rIDWrrJoNausaaDems6IrWms6aDWmspoNaazpqo1qammgGoAqAICAACgAAAAAAAAAAAAAAAAAAAAAAAAAAACiCCiAKIAogCiAKIAogAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=);
+    background-repeat: no-repeat;
 }
 
 #txt_title {
     color: #FFFFFF;
     font-weight: bold;
-    text-shadow: 0px 0px 8px #000;
+    text-shadow: 0px 0px 1px #000;
     margin: 10px;
 }
 
@@ -117,17 +139,26 @@ a {
 
 #privacy {
     position: absolute;
-    top: 5px;
+    top: 50px;
+    right: 10px;
     padding: 0px;
     margin: 0px;
-    text-align: left;
+    text-align: right;
+}
+
+#tag_line {
+    margin-left: 30px;
+    margin-bottom: 15px;
 }
 
 #navlinks {
-    font-size: 150%;
     width: 100%;
     margin: 0px;
+    z-index: 1;
     padding:0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    position: relative;
 }
 
 #navlinks_inner {
@@ -147,6 +178,14 @@ a {
 
 .active	{
     font-weight: bold;
+    background-color: #F4F3F1;
+    padding: 14px;
+    border: 1px solid #bfb6ac;
+    border-top: 1px solid #FFFFFF;
+    border-right: 1px solid #736d67;
+    border-left: 1px solid #736d67;
+    border-bottom: 0;
+    position: relative;
 }
 
 /*
@@ -155,6 +194,7 @@ a {
 
 .textview_size, .textview {
     width: 650px;
+    height: 60%;
     font-size: 120%;
     padding: 10px;
 }
@@ -164,7 +204,7 @@ a {
 }
 
 #add_sample_text {
-    text-align: right;
+    text-align: left;
     width: 650px;
     margin-left: auto;
     margin-right: auto;
@@ -180,10 +220,20 @@ a {
     height: 120px;
 }
 
-.infobar {
-    width: 100%;
-    position: fixed;
+#infobar_container {
+    position: absolute;
     bottom: 0px;
+    width: 100%;
+}
+
+.infobar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    z-index: 1;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px 4px 4px;
 }
 
 #infobar_analyze {
@@ -191,11 +241,18 @@ a {
 }
 
 .infobar_hint {
-    width: 70%;
     height: 100%;
-    padding: 15px;
-    padding-left: 30px;
+    width: 70%;
+    position: relative;
+    top: 15px;
+    left: 30px;
+}
+
+.infobar_hintIndent {
+    padding: 0px;
     margin: 0px;
+    margin-left: 15px;
+    margin-top: 5px;
 }
 
 .infobar_button {
@@ -204,7 +261,10 @@ a {
     margin: 0px;
     padding: 0px;
     float: right;
-    padding: 15px;
+    position: relative;
+    top: 35px;
+    right: 35px;
+
 }
 
 /*
@@ -238,6 +298,10 @@ a {
 
 #help_tooltip_content {
     margin: 10px;
+}
+
+#test_container {
+    /* display: none; */
 }
 
 /*

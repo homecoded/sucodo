@@ -1,7 +1,9 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="sucodo.css" rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="loca_data.js"></script>
     <script type="text/javascript" src="loca.js"></script>
@@ -20,119 +22,125 @@
 </head>
 <body class="bglight textFont darkText">
 
-<div id="headerlogo" class="bgdark noMP">
-    <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
-    <p id="privacy" class="textSizeS lightText">
-        <span id="txt_privacy"></span><br>
-        <span id="txt_privacy_see_also"></span> <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us " class="lightText">Microsoft(c) Bing Terms of Use</a>
-    </p>
-</div>
-<div id="navlinks" class="bgmiddle textFont textSizeL noMP">
-    <div id="navlinks_inner">
-        1. <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="textFont"></span></a>
-        2. <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="textFont"></span></a>
-        <div style="display: none">
-            3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="textFont"></span></a>
-            4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="textFont"></span></a>
-        </div>
-    </div>
-</div>
+<div class="scrollable_container">
 
-<div id="content" class="bglight noMP">
-    <div id="content1" class="noMP">
-        <p id="add_sample_text" class="textSizeM">
-            <span id="insert_sample_text_link">
-                [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
-            </span>
-            <span id="tooltip_help_sample_text"></span>
+    <div id="headerlogo" class="bgdark noMP bottomLineDark">
+        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
+        <p id="privacy" class="textSizeS lightAltText">
+            <span id="txt_privacy"></span><br>
+            <span id="txt_privacy_see_also"></span> <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us " class="lightText">Microsoft(c) Bing Terms of Use</a>
         </p>
-        <textarea id="plagtext" class="textview_size textFont textSizeL" cols="80" rows="25"></textarea>
+        <p id="tag_line" class="lightText textFont bold"><span id="txt_tag_line"></span></p>
     </div>
 
-    <div id="content2" class="noMP">
-        <!--
-        <h1 class="headline">
-            <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
-            <span id="txt_nav_step2"></span>
-            <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
-        -->
-        <p id="textview_explanation">
-            <span id="txt_textview"></span>
-            <span id="tooltip_help_colors"></span>
-        </p>
-        <div id="textview" class="textview">
-        </div>
-        <p id="analyze_control">
-            <span id="grouplen_control">
-                <span id="txt_word_group_length"></span>
-                <span id="tooltip_help_wordgroup_len"></span>
-                <select id="grouplen">
-                    <option value="3" id="txt_grouplen3"></option>
-                    <option value="4" id="txt_grouplen4"></option>
-                    <option value="5" id="txt_grouplen5"></option>
-                    <option value="8" id="txt_grouplen8" selected="selected"></option>
-                    <option value="10" id="txt_grouplen10"></option>
-                    <option value="15" id="txt_grouplen15"></option>
-                    <option value="20" id="txt_grouplen20"></option>
-                </select>
-             </span>
-            <input type="button" id="btn_edit" value="txt_button_edit" >
-        </p>
-    </div>
-
-    <div id="content3" class="noMP">
-    </div>
-
-    <div id="content4" class="noMP">
-        <p><span id="txt_help"></span></p>
-    </div>
-</div>
-<div class="bglight noMP">
-</div>
-
-<div id="testresults">
-</div>
-<div id="asynctestresults">
-</div>
-
-<div id="infobar_placeholder" class="bglight">
-    &nbsp;
-</div>
-
-<div id="infobar" class="bgmiddle infobar noMP">
-    <div id="infobar_edit">
-        <div class="infobar_button">
-            <a href="javascript:void(0)" id="btn_analyze" class="action_button textLink darkText"><span id="txt_analyze_now"></span></a>
-        </div>
-        <div class="infobar_hint">
-            <span id="txt_hint" class="textSizeS bold"></span><br>
-            <span id="txt_hint_analyze" class="textSizeM"></span>
-        </div>
-    </div>
-    <div id="infobar_analyze">
-        <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
-        <div id="resultinfo_data">
-            <span id="txt_resultinfo_count"></span><br>
-            <span id="resultinfo_count"></span><br>
-            <div id="resultinfo_controls">
-                <input type="button" id="resultinfo_inspect" value="txt_inspect">
+    <div id="navlinks" class="bgmiddle textFont noMP topLineMiddle bottomLineMiddle">
+        <div id="navlinks_inner">
+            <a href="javascript:void(0)" id="nav1"><span id="txt_nav_step1" class="textFont"></span></a>
+            <a href="javascript:void(0)" id="nav2"><span id="txt_nav_step2" class="textFont"></span></a>
+            <div style="display: none">
+                3. <a href="javascript:void(0)" id="nav3"><span id="txt_nav_step3" class="textFont"></span></a>
+                4. <a href="javascript:void(0)" id="nav4"><span id="txt_nav_step4" class="textFont"></span></a>
             </div>
         </div>
-        <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
-        <div id="resultinfo_bg"></div>
+    </div>
+
+    <div id="content" class="noMP">
+        <div id="content1" class="noMP">
+            <p id="add_sample_text" class="textSizeM">
+                <span id="insert_sample_text_link">
+                    [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
+                </span>
+                <span id="tooltip_help_sample_text"></span>
+            </p>
+            <textarea id="plagtext" class="textview_size textFont textSizeL" cols="80" rows="25"></textarea>
+        </div>
+
+        <div id="content2" class="noMP">
+            <!--
+            <h1 class="headline">
+                <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
+                <span id="txt_nav_step2"></span>
+                <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
+            -->
+            <p id="textview_explanation">
+                <span id="txt_textview"></span>
+                <span id="tooltip_help_colors"></span>
+            </p>
+            <div id="textview" class="textview">
+            </div>
+            <p id="analyze_control">
+                <span id="grouplen_control">
+                    <span id="txt_word_group_length"></span>
+                    <span id="tooltip_help_wordgroup_len"></span>
+                    <select id="grouplen">
+                        <option value="3" id="txt_grouplen3"></option>
+                        <option value="4" id="txt_grouplen4"></option>
+                        <option value="5" id="txt_grouplen5"></option>
+                        <option value="8" id="txt_grouplen8" selected="selected"></option>
+                        <option value="10" id="txt_grouplen10"></option>
+                        <option value="15" id="txt_grouplen15"></option>
+                        <option value="20" id="txt_grouplen20"></option>
+                    </select>
+                 </span>
+                <input type="button" id="btn_edit" value="txt_button_edit" >
+            </p>
+        </div>
+
+        <div id="content3" class="noMP">
+        </div>
+
+        <div id="content4" class="noMP">
+            <p><span id="txt_help"></span></p>
+        </div>
+    </div>
+    <div class="bglight noMP">
+    </div>
+
+
+    <div id="test_container">
+        <div id="testresults">
+        </div>
+        <div id="asynctestresults">
+        </div>
+    </div>
+
+    <div id="infobar_placeholder" class="">
+        &nbsp;
+    </div>
+
+    <div id="settings">
+        <div id="lang_select">
+        </div>
+    </div>
+
+    <div id="help_tooltip"></div>
+</div>
+<div id="infobar_container">
+    <div id="infobar" class="bgaltmiddle infobar noMP borderMiddle">
+        <div id="infobar_edit">
+            <div class="infobar_button">
+                <a href="javascript:void(0)" id="btn_analyze" class="action_button textLink darkText"><span id="txt_analyze_now"></span></a>
+            </div>
+            <div class="infobar_hint">
+                <span id="txt_hint" class="textSizeS bold"></span>
+                <div class="infobar_hintIndent">
+                    <span id="txt_hint_analyze" class="textSizeM"></span>
+                </div>
+            </div>
+        </div>
+        <div id="infobar_analyze">
+            <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
+            <div id="resultinfo_data">
+                <span id="txt_resultinfo_count"></span><br>
+                <span id="resultinfo_count"></span><br>
+                <div id="resultinfo_controls">
+                    <input type="button" id="resultinfo_inspect" value="txt_inspect">
+                </div>
+            </div>
+            <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
+            <div id="resultinfo_bg"></div>
+        </div>
     </div>
 </div>
-
-<div id="settings">
-    <div id="lang_select">
-    </div>
-</div>
-
-
-
-<div id="help_tooltip"></div>
-
-<div id="bla"></div>
-
 </body>
 </html>

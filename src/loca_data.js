@@ -9,17 +9,23 @@ var LOCA_ENG = 0,
                 "sucodo",
                 "sucodo"
             ],
-
-    "txt_nav_step1":
+            
+    "txt_tag_line":
             [
-                "Enter Text",
-                "Text eingeben"
+                "Academic Peace Of Mind. For All. For Free.",
+                "Akademischer Seelenfrieden. Für Jeden. Kostenlos."
+            ],            
+
+    "txt_nav_step1":      
+            [
+                "1. Enter Text",
+                "1. Text eingeben"
             ],
 
     "txt_nav_step2":
             [
-                "Analyze Text",
-                "Text analysieren"
+                "2. Analyze Text",
+                "2. Text analysieren"
             ],
 
     "txt_nav_step3":
@@ -48,8 +54,8 @@ var LOCA_ENG = 0,
 
     "txt_hint_analyze":
             [
-                "Enter or rather copy & paste the text you want to analyze into the text field. You can also add some sample text if you just want to give it a spin.",
-                "Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen)."
+                "Sucodo examines a text and tells you about possible plagiarisms is finds. <br>Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also add some sample text if you just want to give it a spin.",
+                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. <br>Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch einen Beispieltext benutzen, wenn Du es nur mal ausprobieren möchtest."
             ],
 
     "txt_hint":
@@ -60,8 +66,8 @@ var LOCA_ENG = 0,
 
     "txt_analyze_now":
             [
-                "Examine Text",
-                "Untersuche Text"
+                "Go!",
+                "Los!"
             ],
 
     "txt_button_edit":
@@ -173,13 +179,13 @@ var LOCA_ENG = 0,
             ],
     "txt_privacy":
             [
-                "<strong>Privacy Policy:</strong> sucodo does not collect any personal data. No cookies are used.",
-                "<strong>Privatsphäre:</strong> sucodo sammelt keine persönlichen Daten. Es werden keine Cookies gespeichert."
+                "<strong>Privacy Policy:</strong> sucodo does not collect any personal data and it does not use cookies.",
+                "<strong>Privatsphäre:</strong> sucodo sammelt keine persönlichen Daten und verwendet keine Cookies."
             ],
     "txt_privacy_see_also":
             [
-                "Also check out: ",
-                "Siehe auch: "
+                "sucodo utilizes Bing: ",
+                "sucodo benutzt Bing: "
             ],
     "txt_show_sample_text":
             [
