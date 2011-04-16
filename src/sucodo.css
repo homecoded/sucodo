@@ -2,7 +2,8 @@
     COLORS
 */
 .bgdark { background-color: #0079CE }
-.bgmiddle { background-color: #F7E3C7 }
+.bgmiddle { background-color: #f2ba6b
+}
 .bgaltmiddle { background-color: #C0DCE7}
 .bglight { background-color: #F4F3F1 }
 .bgpaper { background-color: #FFFFFF }
@@ -222,7 +223,7 @@ a {
 
 #infobar_container {
     position: absolute;
-    bottom: 0px;
+    bottom: 15px;
     width: 100%;
 }
 
@@ -234,6 +235,10 @@ a {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 4px 4px;
+
+    -moz-box-shadow: 0px 2px 8px #999999;
+    -webkit-box-shadow: 0px 2px 8px #999999;
+    box-shadow: 0px 2px 8px #999999;
 }
 
 #infobar_analyze {
