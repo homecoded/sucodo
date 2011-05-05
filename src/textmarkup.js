@@ -83,7 +83,8 @@ var textMarkup = (function () {
                                 return;
                             }
                             unhighlightPhrase();
-                            $('#resultinfo_stick').hide();
+                            $('#infobar_analyze_hint').show();
+                            $('#resultinfo_data').hide();
                         });
                         span.mouseover(function () {
                             var currPhrase = phrase,
@@ -97,10 +98,9 @@ var textMarkup = (function () {
                                     return;
                                 }
                                 $('#resultinfo_count').html(currCount);
-                                $('#resultinfo').fadeIn();
                                 $('#resultinfo_controls').hide();
-                                $('#resultinfo_stick').show();
-                                $('#resultinfo_close').hide();
+                                $('#infobar_analyze_hint').hide();
+                                $('#resultinfo_data').show();
                             };
                         }());
                         span.click(function () {
@@ -113,11 +113,9 @@ var textMarkup = (function () {
                                 } else {
                                     $('#resultinfo').fadeIn();
                                     $('#resultinfo_controls').fadeIn();
-                                    $('#resultinfo_close').fadeIn();
                                     $(this).css('background-color', 'FFFFFF');
                                     $('#textview').css('background-color', '#b4c7ff');
                                     $('#resultinfo_count').html(currCount);
-                                    $('#resultinfo_stick').fadeOut();
                                     allowMouseOverSelect = false;
                                     unhighlightPhrase($(this));
                                     highlightedPhrase = $(this);
@@ -140,7 +138,6 @@ var textMarkup = (function () {
         if (closeInfoCompletely) {
             $('#resultinfo').fadeOut();
         }
-        $('#resultinfo_close').fadeOut();
         unhighlightPhrase();
         $('#textview').css('background-color', '#FFFFFF');
     }

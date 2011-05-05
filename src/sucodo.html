@@ -43,22 +43,18 @@
     <div id="content">
         <div id="content1">
             <p id="add_sample_text" class="textview_size topInfoText textSizeM">
-                <span id="insert_sample_text_link">
-                   <span id="txt_enter_some_text"></span>
-                </span>
+               <span id="txt_enter_some_text"></span>
             </p>
-            <textarea id="plagtext" class="textview_size textFont textSizeL" cols="80" rows="25"></textarea>
+            <textarea id="plagtext" class="textview_size textview textFont textSizeL" cols="80" rows="25"></textarea>
         </div>
 
         <div id="content2">
-            <!--
-            <h1 class="headline">
-            -->
-            <p id="textview_explanation" class="textview_size textSizeM topInfoText">
+            <p id="textview_explanation" class="textview_size topInfoText textSizeM">
                 <span id="txt_textview"></span>
-                <span id="tooltip_help_colors"></span>
             </p>
-            <div id="textview" class="textview textview_size textFont textSizeL borderMiddle">
+            <div id="textview_container" class="textview_size textFont textSizeL">
+                <div id="textview" class="textview borderMiddle">
+                </div>
             </div>
             <p id="analyze_control">
                 <span id="grouplen_control">
@@ -122,25 +118,36 @@
             <div class="infobar_hint">
                 <span id="txt_hint" class="textSizeS bold"></span>
                 <div class="infobar_hintIndent">
-                    <span id="txt_hint_analyze" class="textSizeM"></span>
+                    <span id="txt_hint_edit" class="textSizeM"></span>
                 </div>
             </div>
         </div>
         <div id="infobar_analyze" class="hidden">
             <div id="infobar_analyze_progress">
-                <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
-                <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
-            </div>
-            <div id="infobar_analyze_done">
-                <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
-                <div id="resultinfo_data">
-                    <span id="txt_resultinfo_count"></span><br>
-                    <span id="resultinfo_count"></span><br>
-                    <div id="resultinfo_controls">
-                        <input type="button" id="resultinfo_inspect" value="txt_inspect">
+                <div class="infobar_hint">
+                    <span id="txt_please_wait" class="textSizeS bold"></span>
+                    <div class="infobar_hintIndent">
+                        <span id="analyze_time"></span>
+                        <span id="txt_time_remaining"></span>
                     </div>
                 </div>
-                <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
+            </div>
+            <div id="infobar_analyze_done">
+                <div id="infobar_analyze_hint" class="infobar_hint">
+                    <span id="txt_hint" class="textSizeS bold"></span>
+                    <div class="infobar_hintIndent">
+                        <span id="txt_hint_analyze" class="textSizeM"></span>
+                    </div>
+                </div>
+                <div id="resultinfo_data" class="hidden infobar_hint">
+                    <span id="txt_resultinfo_count" class="textSizeS bold"></span> <span id="resultinfo_count" class="brightText"></span>
+                    <div class="infobar_hintIndent">
+                        <span id="txt_hint_analyze_click"></span>
+                        <div id="resultinfo_controls">
+                            <input type="button" id="resultinfo_inspect" value="txt_inspect">
+                        </div>
+                    </div>
+                </div>
                 <div id="resultinfo_bg"></div>
             </div>
         </div>

@@ -12,6 +12,7 @@
 .lightText {color: #E7E1D6;}
 .lightAltText { color: #7c898e; }
 .darkText { color: #404040;}
+.brightText { color: #b11010;}
 
 .topLineMiddle { border-top: 1px solid #FCF2E4; }
 .borderMiddle { border: 1px solid #828282; }
@@ -194,15 +195,21 @@ a {
     CONTENTS
 */
 
-.textview_size, .textview {
+.textview_size {
     width: 650px;
 }
 
-.textview {
+#textview_container {
+    margin: 0px;
+    padding: 0px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.textview {
     text-align: left;
     padding: 15px;
+    width: 610px;
 }
 
 #content1, #content2 {
@@ -280,6 +287,10 @@ a {
     top: 35px;
     right: 35px;
 
+}
+
+#infobar_analyze_progress_content {
+    padding: 15px;
 }
 
 /*

@@ -52,10 +52,22 @@ var LOCA_ENG = 0,
                 "Sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
             ],
 
-    "txt_hint_analyze":
+    "txt_hint_edit":
             [
                 "Sucodo examines a text and tells you about possible plagiarisms is finds. <br>Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
                 "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. <br>Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
+            ],
+
+    "txt_hint_analyze":
+            [
+                "Sucodo colors any parts of the text it finds suspicious. The more red you see, the more likely the text contains plagiarisms! Use your mouse to inspect them.",
+                "Sucodo färbt alle Textteile ein, die es als verdächtig eintuft. Je mehr rot im Text zu sehen ist, desto wahrscheinlicher enthält der Text Plagiate. Benutze deine Maus um sie zu untersuchen."
+            ],
+
+    "txt_hint_analyze_click":
+            [
+                "Click on this phrase to select it. Also: try a double-click. This will bring up a list of all possible sources in a new window.",
+                "Klicke auf diesen Abschnitt um ihn zu selektieren. Tipp: Benutze einen Doppelklick um eine Liste von allen möglichen Quellen für die Textstelle in einem neuen Fenster zu sehen."
             ],
 
     "txt_hint":
@@ -63,6 +75,13 @@ var LOCA_ENG = 0,
                 "Hint:",
                 "Tip:"
             ],
+
+    "txt_please_wait":
+            [
+                "sucodo is working for you. Please wait ...",
+                "sucodo arbeitet für Dich. Bitte warten ..."
+            ],
+
     "txt_enter_some_text":
             [
                 "Enter the text you want to analyze into the textfield below.",
@@ -77,8 +96,8 @@ var LOCA_ENG = 0,
 
     "txt_button_edit":
             [
-                    "◄ Edit text",
-                    "◄ Text editieren"
+                    "Edit text",
+                    "Text editieren"
             ],
 
     "txt_lang_select":
@@ -101,8 +120,8 @@ var LOCA_ENG = 0,
 
     "txt_textview":
             [
-                "sucodo colors any parts of the text it finds suspicious. The more red you see, the more likely the text contains plagiarisms! Use your mouse to inspect them.",
-                "sucodo färbt alle Textteile ein, die es als verdächtig eintuft. Je mehr rot im Text zu sehen ist, desto wahrscheinlicher enthält der Text Plagiate. Benutze deine Maus um sie zu untersuchen."
+                "Move your mouse over colored text parts to inspect them.",
+                "Bewege deinen Mauszeiger über eingefärbte Textteile, um sie zu untersuchen."
             ],
 
     "txt_word_group_length":
@@ -156,25 +175,14 @@ var LOCA_ENG = 0,
 
     "txt_time_remaining":
             [
-                "sec",
-                "Sek"
+                "seconds left",
+                "Sekunden übrig"
             ],
 
     "txt_resultinfo_count":
             [
                 "Number of possible sources:",
                 "Anzahl der möglichen Quellen:"
-            ],
-
-    "txt_close":
-            [
-                "[ X ]"
-            ],
-
-    "txt_stick":
-            [
-                "Double-click on group to see where it was copied from.",
-                "Doppelklick, um zu sehen von wo es kopiert wurde."
             ],
 
     "txt_inspect":
@@ -192,11 +200,7 @@ var LOCA_ENG = 0,
                 "sucodo utilizes Bing: ",
                 "sucodo benutzt Bing: "
             ],
-    "txt_show_sample_text":
-            [
-                "Add some sample text",
-                "Beispieltext anfügen"
-            ],
+
     "txt_sample_text":
             [
                 "Let’s have a moment here and talk about plagiarism. The internet is full of readily available information that is there to be grabbed, some might think. These are the ones who simply hand in a copy of an Wikipedia article as their homework, or use a brilliantly written blog post by someone else as their introduction to their scientific paper. Well, why bother thinking for yourself? You can just go and put together a great paper by simply copying text fragments from all over the internet and gluing them back together. A good work is only one Google or bing search away? Well, maybe not!\n\nStealing other peoples intellectual properties by not giving them due credit is not a new problem. The modern ideals for originality and against plagiarism appeared in the 18th century, in the context of the economic and political history of the book trade, which will be exemplary and influential for the subsequent broader introduction of capitalism. Originality, that traditionally had been deemed as impossible, was turned into an obligation by the emerging ideology of individualism. In 1755 the word made it into Johnson's influential A Dictionary of the English Language, where he was cited in the entry for copier (One that imitates; a plagiary; an imitator. Without invention a painter is but a copier, and a poet but a plagiary of others.), and in its own entry denoting both A thief in literature (one who steals the thoughts or writings of another) and The crime of literary theft. \n\nThe above paragraph has been shamelessly ripped from Wikipedia to illustrate how sucodo can help you identify plagiarized text parts. You will most likely find most of the hits in that paragraph.",
@@ -207,18 +211,6 @@ var LOCA_ENG = 0,
             [
                 "The text is split into word groups (test groups) with a defined number of words in each group. <br>Set the length you want to use for testing.",
                 "Der Text wird in Wortgruppen (Testgruppen) geteilt, wobei jede Wortgruppe eine definierte Länge hat.<br> Setze hier die Länge, die Du zum Testen benutzen möchtest."
-            ],
-
-    "txt_tooltip_help_sample_text":
-            [
-                "Click on this link and to add a small sample text to the input field. <br> The text contains original as well as plagiarized text.",
-                "Klicke auf diesen Link um dem Eingabefeld einen kurzen Beispieltext hinzuzufügen. <br> Der Text enthält originalen Text, sowie einen Plagiatsanteil."
-            ],
-
-    "txt_tooltip_help_colors":
-            [
-                "If a fairly low number of possible sources for a <br>test group is found on the internet, this test group will become dark orange.<br>In case there are many possible sources, it will become bright red.",
-                "Wenn für eine Testgruppe nur wenige <br>mögliche Quellen im Internet gefunden wurden, dann wird er Textteil Dunkelorange eingefärbt. <br>Werden viele mögliche Quellen gefunden, wird er Hellrot eingefärbt."
             ],
 
     "last element":

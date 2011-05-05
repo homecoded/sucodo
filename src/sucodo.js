@@ -91,14 +91,15 @@ var navi = {
                         $('#textview').html(resultText);
                         timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
-                            $('#analyze_time_left').fadeIn();
-                            $('#analyze_progress').fadeIn();
                             $('#analyze_time').html(timeLeft);
                             $('#textview').css('background-color', '#AAAAAA');
+                            $('#infobar_analyze_done').hide();
+                            $('#infobar_analyze_progress').fadeIn();
+
                         } else {
-                            $('#analyze_time_left').fadeOut();
-                            $('#analyze_progress').fadeOut();
                             $('#textview').css('background-color', '#FFFFFF');
+                            $('#infobar_analyze_done').show();
+                            $('#infobar_analyze_progress').hide();
                             textMarkup.updateMouseInteractivity();
                         }
                     });
@@ -141,7 +142,6 @@ var navi = {
         $('#grouplen').change(function () {
             navi.openPage(PAGE_ANALYZE);
         });
-        $('#resultinfo_close').click(textMarkup.closeDetails);
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
             navi.openPage(navi.PAGE_ENTER_TEXT);
