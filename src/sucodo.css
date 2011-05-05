@@ -10,7 +10,7 @@
 
 .outline { color: #828282; }
 .lightText {color: #E7E1D6;}
-.lightAltText { color: #C0DCE7; }
+.lightAltText { color: #7c898e; }
 .darkText { color: #404040;}
 
 .topLineMiddle { border-top: 1px solid #FCF2E4; }
@@ -56,6 +56,9 @@ body {
     height: 100%;
 }
 
+.hidden {
+    display: none;
+}
 
 .noMP {
     margin: 0px;
@@ -131,7 +134,7 @@ a {
     color: #FFFFFF;
     font-weight: bold;
     text-shadow: 0px 0px 1px #000;
-    margin: 10px;
+    margin: 15px;
 }
 
 #title_link {
@@ -139,16 +142,13 @@ a {
 }
 
 #privacy {
-    position: absolute;
-    top: 50px;
-    right: 10px;
     padding: 0px;
-    margin: 0px;
-    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #tag_line {
-    margin-left: 30px;
+    margin-left: 15px;
     margin-bottom: 15px;
 }
 
@@ -175,6 +175,7 @@ a {
 
 #navlinks a:hover {
     color: #666666;
+    text-decoration: underline;
 }
 
 .active	{
@@ -195,22 +196,27 @@ a {
 
 .textview_size, .textview {
     width: 650px;
-    height: 60%;
-    font-size: 120%;
-    padding: 10px;
 }
 
-#content1 {
+.textview {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding: 15px;
+}
+
+#content1, #content2 {
     text-align: center;
 }
 
-#add_sample_text {
+.topInfoText {
     text-align: left;
-    width: 650px;
+    margin: 0;
+    padding: 0px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 20px;
-    padding-bottom: 5px;
+    padding-top: 30px;
+    padding-bottom: 15px;
 }
 
 /*
@@ -219,6 +225,10 @@ a {
 
 #infobar_placeholder, #infobar {
     height: 120px;
+}
+
+#infobar {
+    display: none;
 }
 
 #infobar_container {

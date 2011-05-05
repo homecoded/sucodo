@@ -55,12 +55,22 @@ var navi = {
      Runs the code necessary for a state
      */
     "execute": function (id) {
+
+        function showInfobarContents(id) {
+            $.each($("#infobar").children(), function () {
+                $(this).hide();
+            });
+            $(id).show();
+        }
+
         switch (id)
         {
             case navi.PAGE_ENTER_TEXT:
-                    textAnalyzer.stop();
-                    break;
+                textAnalyzer.stop();
+                showInfobarContents("#infobar_edit");
+                break;
             case navi.PAGE_ANALYZE:
+                showInfobarContents("#infobar_analyze");
                 var plagtext = $('#plagtext'),
                     text = plagtext.val(),
                     wordGroupLen, phrases, timeLeft, resultText;
@@ -84,7 +94,7 @@ var navi = {
                             $('#analyze_time_left').fadeIn();
                             $('#analyze_progress').fadeIn();
                             $('#analyze_time').html(timeLeft);
-                            $('#textview').css('background-color', '#fbc576');
+                            $('#textview').css('background-color', '#AAAAAA');
                         } else {
                             $('#analyze_time_left').fadeOut();
                             $('#analyze_progress').fadeOut();
@@ -103,7 +113,7 @@ var navi = {
      */
     setup: function (id) {
         // global navi
-        var numLinks = $('#navlinks').children().length,
+        var numLinks = $('#navlinks_inner').children().length,
             i;
         for (i = 1; i <= numLinks; i++) {
             $('#nav' + i).click(function () {
@@ -118,6 +128,7 @@ var navi = {
         $('#btn_analyze').click(function () {
             navi.openPage(navi.PAGE_ANALYZE);
         });
+
         $('#link_sample_text').click(function () {
             var value = $('#plagtext').val(),
                 sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
@@ -175,6 +186,7 @@ var sucodoLoca = {
         });
 
         sucodoLoca.createLinks();
+        helpControl.updateControls();
     },
     createLinks: function () {
         var lang_select = $('#lang_select'),
@@ -217,8 +229,6 @@ var sucodoLoca = {
  * entry point of app
  */
 $(document).ready(function () {
-    // setup callbacks
-    navi.setup();
     // run tests
     if (typeof tests !== 'undefined') {
         tests.runTests();
@@ -228,9 +238,20 @@ $(document).ready(function () {
     loca.buttonDict = null;
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
-    helpControl.updateControls();
+    // setup callbacks
+    navi.setup();
+
     // go to first site
     navi.openPage(navi.PAGE_ENTER_TEXT);
+
+    // fade in infobar
+    $('#infobar').fadeTo(2000, 0.9);
+    $('#infobar').mouseenter(function () {
+        $('#infobar').fadeTo(200, 1);
+    });
+    $('#infobar').mouseleave(function () {
+        $('#infobar').fadeTo(200, 0.9);
+    });
 });
 
 /********************************************************************************************

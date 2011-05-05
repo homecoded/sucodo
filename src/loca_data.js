@@ -54,14 +54,19 @@ var LOCA_ENG = 0,
 
     "txt_hint_analyze":
             [
-                "Sucodo examines a text and tells you about possible plagiarisms is finds. <br>Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also add some sample text if you just want to give it a spin.",
-                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. <br>Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch einen Beispieltext benutzen, wenn Du es nur mal ausprobieren möchtest."
+                "Sucodo examines a text and tells you about possible plagiarisms is finds. <br>Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
+                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. <br>Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
             ],
 
     "txt_hint":
             [
                 "Hint:",
                 "Tip:"
+            ],
+    "txt_enter_some_text":
+            [
+                "Enter the text you want to analyze into the textfield below.",
+                "Gib den Text, den Du untersuchen willst, in das Textfeld ein."
             ],
 
     "txt_analyze_now":
@@ -96,8 +101,8 @@ var LOCA_ENG = 0,
 
     "txt_textview":
             [
-                "<strong>Colored (non-black) text parts returned search results are therefore suspicious!</strong><br> The more red you see, the more likely the text contains plagiarisms! <br>Use your mouse to inspect them.",
-                "<strong>Eingefärbte (nicht schwarze) Textanteile lieferten Suchergebnisse und sind damit verdächtig!</strong><br> Je mehr rot Du siehst, desto wahrscheinlicher beinhaltet der Text Plagiate! <br>Benutze Deine Maus um sie zu untersuchen."
+                "sucodo colors any parts of the text it finds suspicious. The more red you see, the more likely the text contains plagiarisms! Use your mouse to inspect them.",
+                "sucodo färbt alle Textteile ein, die es als verdächtig eintuft. Je mehr rot im Text zu sehen ist, desto wahrscheinlicher enthält der Text Plagiate. Benutze deine Maus um sie zu untersuchen."
             ],
 
     "txt_word_group_length":
@@ -212,8 +217,8 @@ var LOCA_ENG = 0,
 
     "txt_tooltip_help_colors":
             [
-                "The text will become colored. If a fairly low number of possible sources for a <br>test group is found on the internet, this test group will become dark orange.<br>In case there are many possible sources, it will become bright red.",
-                "Der Text wird unterschiedlich eingefärbt. Wenn für eine Testgruppe nur wenige <br>mögliche Quellen im Internet gefunden wurden, dann wird er Textteil Dunkelorange eingefärbt. <br>Werden viele mögliche Quellen gefunden, wird er Hellrot eingefärbt."
+                "If a fairly low number of possible sources for a <br>test group is found on the internet, this test group will become dark orange.<br>In case there are many possible sources, it will become bright red.",
+                "Wenn für eine Testgruppe nur wenige <br>mögliche Quellen im Internet gefunden wurden, dann wird er Textteil Dunkelorange eingefärbt. <br>Werden viele mögliche Quellen gefunden, wird er Hellrot eingefärbt."
             ],
 
     "last element":

@@ -25,12 +25,8 @@
 <div class="scrollable_container">
 
     <div id="headerlogo" class="bgdark noMP bottomLineDark">
-        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textLink textSizeXXL"></span></a>
-        <p id="privacy" class="textSizeS lightAltText">
-            <span id="txt_privacy"></span><br>
-            <span id="txt_privacy_see_also"></span> <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us " class="lightText">Microsoft(c) Bing Terms of Use</a>
-        </p>
-        <p id="tag_line" class="lightText textFont bold"><span id="txt_tag_line"></span></p>
+        <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textFont textSizeXXL"></span></a>
+        <p id="tag_line" class="lightText textFont"><span id="txt_tag_line"></span></p>
     </div>
 
     <div id="navlinks" class="bgmiddle textFont noMP topLineMiddle bottomLineMiddle">
@@ -44,29 +40,25 @@
         </div>
     </div>
 
-    <div id="content" class="noMP">
-        <div id="content1" class="noMP">
-            <p id="add_sample_text" class="textSizeM">
+    <div id="content">
+        <div id="content1">
+            <p id="add_sample_text" class="textview_size topInfoText textSizeM">
                 <span id="insert_sample_text_link">
-                    [   <a href="javascript:void(0)" id="link_sample_text"><span id="txt_show_sample_text"></span></a> ]
+                   <span id="txt_enter_some_text"></span>
                 </span>
-                <span id="tooltip_help_sample_text"></span>
             </p>
             <textarea id="plagtext" class="textview_size textFont textSizeL" cols="80" rows="25"></textarea>
         </div>
 
-        <div id="content2" class="noMP">
+        <div id="content2">
             <!--
             <h1 class="headline">
-                <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
-                <span id="txt_nav_step2"></span>
-                <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
             -->
-            <p id="textview_explanation">
+            <p id="textview_explanation" class="textview_size textSizeM topInfoText">
                 <span id="txt_textview"></span>
                 <span id="tooltip_help_colors"></span>
             </p>
-            <div id="textview" class="textview">
+            <div id="textview" class="textview textview_size textFont textSizeL borderMiddle">
             </div>
             <p id="analyze_control">
                 <span id="grouplen_control">
@@ -93,6 +85,12 @@
             <p><span id="txt_help"></span></p>
         </div>
     </div>
+    <p id="privacy" class="textview_size textSizeS lightAltText">
+        <span id="txt_privacy"></span><br>
+        <span id="txt_privacy_see_also"></span> <a href="http://help.live.com/help.aspx?project=searchtou&market=en-us " class="lightAltText">Microsoft(c) Bing Terms of Use</a>
+    </p>
+
+
     <div class="bglight noMP">
     </div>
 
@@ -117,7 +115,7 @@
 </div>
 <div id="infobar_container">
     <div id="infobar" class="bgaltmiddle infobar noMP borderMiddle">
-        <div id="infobar_edit">
+        <div id="infobar_edit" class="hidden">
             <div class="infobar_button">
                 <a href="javascript:void(0)" id="btn_analyze" class="action_button textLink darkText"><span id="txt_analyze_now"></span></a>
             </div>
@@ -128,17 +126,23 @@
                 </div>
             </div>
         </div>
-        <div id="infobar_analyze">
-            <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
-            <div id="resultinfo_data">
-                <span id="txt_resultinfo_count"></span><br>
-                <span id="resultinfo_count"></span><br>
-                <div id="resultinfo_controls">
-                    <input type="button" id="resultinfo_inspect" value="txt_inspect">
-                </div>
+        <div id="infobar_analyze" class="hidden">
+            <div id="infobar_analyze_progress">
+                <span id="analyze_progress" class="progress_indicator"><img src="progress.gif" alt="progress"></span>
+                <span id="analyze_time_left">(<span id="analyze_time"></span> <span id="txt_time_remaining"></span>)</span></h1>
             </div>
-            <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
-            <div id="resultinfo_bg"></div>
+            <div id="infobar_analyze_done">
+                <a href="javascript:void(0)" id="resultinfo_close"><span id="txt_close"></span></a>
+                <div id="resultinfo_data">
+                    <span id="txt_resultinfo_count"></span><br>
+                    <span id="resultinfo_count"></span><br>
+                    <div id="resultinfo_controls">
+                        <input type="button" id="resultinfo_inspect" value="txt_inspect">
+                    </div>
+                </div>
+                <a href="javascript:void(0)" id="resultinfo_stick"><span id="txt_stick"></span></a>
+                <div id="resultinfo_bg"></div>
+            </div>
         </div>
     </div>
 </div>
