@@ -309,8 +309,8 @@ var tests = (function () {
 
     var searcherTest =  {
         _testSearch : function () {
-            var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
-                impunit.assertTrue(numResults > 0);
+            var asyncCallback = impunit.asyncCallback(function (phrase, phraseData) {
+                impunit.assertTrue(phraseData.count > 0);
                 impunit.assertEqual('test', phrase);
                 ws.destroy();
             });
@@ -320,8 +320,8 @@ var tests = (function () {
         multSearchWs:webSearcher.createInstance(),
         multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
         _testMultiSearch : function () {
-            var asyncCallback = impunit.asyncCallback(function (phrase, numResults) {
-                impunit.assertTrue(numResults > 0);
+            var asyncCallback = impunit.asyncCallback(function (phrase, phraseData) {
+                impunit.assertTrue(phraseData.count > 0);
                 var index = searcherTest.multiSearchTerms.indexOf(phrase);
                 impunit.assertTrue(index >= 0);
                 searcherTest.multiSearchTerms[index] = null;
