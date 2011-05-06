@@ -299,6 +299,10 @@ a {
     padding: 15px;
 }
 
+#resultinfo_controls {
+    margin-left: 30px;
+}
+
 /*
     SETTINGS
 */

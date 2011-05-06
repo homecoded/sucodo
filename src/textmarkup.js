@@ -26,29 +26,41 @@ var textMarkup = (function () {
                 + text + '</span>';
     }
 
-    function createMarkup(phrases, phraseCountMap) {
+    function createMarkup(phrases, phraseInfoMap) {
         var resultText = '',
             entry,
             numElements = phrases.length,
             numPhrases,
+            phraseData,
             searchCount,
+            phrase,
             i, j;
         
         id = -1;
         phraseDict = {};
-        phraseMap = phraseCountMap;
+        phraseMap = phraseInfoMap;
 
         for (i = 0; i < numElements; i++) {
             entry = phrases[i];
             if (entry instanceof Array) {
                 numPhrases = entry.length;
                 for (j = 0; j < numPhrases; j++) {
-                    searchCount = (phraseCountMap) ? phraseCountMap[entry[j]] : 0;
+                    if (phraseInfoMap) {
+                        phrase = entry[j];
+                        phraseData = phraseInfoMap[phrase];
+                        if (phraseData) {
+                            searchCount = phraseData.count;
+                        } else {
+                            searchCount = 0;
+                        }
+                    } else {
+                        searchCount = 0;
+                    }
                     resultText += createPhraseMarkup(entry[j], searchCount) + ' ';
                 }
                 resultText += '\n';
             } else {
-                searchCount = (phraseCountMap) ? phraseCountMap[entry] : 0;
+                searchCount = (phraseInfoMap) ? phraseInfoMap[entry].count : 0;
                 resultText += createPhraseMarkup(entry, searchCount) + ' \n';
             }
         }
@@ -60,11 +72,35 @@ var textMarkup = (function () {
         return createMarkup(phrases, phraseCountMap);
     }
 
+    function createLink(url) {
+        if (!url) {
+            return "";
+        }
+        var urlName = url.replace("http://", "");
+        if (urlName.length > 35) {
+            urlName = urlName.substring(0, 35) + '...';
+        }
+        return '<a href="' + url + '" target="_blank">' + urlName + "</a>";
+    }
+    
+    function getMostLikelySourceUrl(sources) {
+        var i, url;
+        for (i = 0; i < sources.length; i++) {
+            url = sources[i].Url;
+            if (url.indexOf('wikipedia') >= 0) {
+                return createLink(url);
+            }
+        }
+
+        return createLink(sources[0].Url);
+    }
+
     function updateMouseInteractivity() {
         var phrase,
             phraseIds,
             i,
             resultCount,
+            sources,
             span;
 
         for (phrase in phraseDict) {
@@ -72,7 +108,8 @@ var textMarkup = (function () {
                 phraseIds = phraseDict[phrase];
                 for (i = 0; i < phraseIds.length; i++) {
                     span = $('#phrase' + phraseIds[i]);
-                    resultCount = phraseMap[phrase];
+                    resultCount = phraseMap[phrase].count;
+                    sources = phraseMap[phrase].sources
                     if (resultCount > 0) {
                         span.mouseout(function () {
                             if (!highlightedPhrase
@@ -88,7 +125,8 @@ var textMarkup = (function () {
                         });
                         span.mouseover(function () {
                             var currPhrase = phrase,
-                                currCount = resultCount;
+                                currCount = resultCount,
+                                mostLikelySource = getMostLikelySourceUrl(sources);
                             return function () {
                                 if (!highlightedPhrase
                                         || (highlightedPhrase.attr('id') !== $(this).attr('id'))) {
@@ -98,6 +136,7 @@ var textMarkup = (function () {
                                     return;
                                 }
                                 $('#resultinfo_count').html(currCount);
+                                $('#link_most_likely_source').html(mostLikelySource);
                                 $('#resultinfo_controls').hide();
                                 $('#infobar_analyze_hint').hide();
                                 $('#resultinfo_data').show();
@@ -105,7 +144,8 @@ var textMarkup = (function () {
                         }());
                         span.click(function () {
                             var currPhrase = phrase,
-                                currCount = resultCount;
+                                currCount = resultCount,
+                                mostLikelySource = getMostLikelySourceUrl(sources);
                             return function () {
 
                                 if (highlightedPhrase && highlightedPhrase.attr('id') === $(this).attr('id')) {
@@ -116,6 +156,7 @@ var textMarkup = (function () {
                                     $(this).css('background-color', 'FFFFFF');
                                     $('#textview').css('background-color', '#b4c7ff');
                                     $('#resultinfo_count').html(currCount);
+                                    $('#link_most_likely_source').html(mostLikelySource);
                                     allowMouseOverSelect = false;
                                     unhighlightPhrase($(this));
                                     highlightedPhrase = $(this);
@@ -134,7 +175,7 @@ var textMarkup = (function () {
 
     function closeDetails(closeInfoCompletely) {
         allowMouseOverSelect = true;
-        $('#resultinfo_controls').fadeOut();
+        $('#resultinfo_controls').hide();
         if (closeInfoCompletely) {
             $('#resultinfo').fadeOut();
         }

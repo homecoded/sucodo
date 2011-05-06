@@ -63,8 +63,8 @@ var textAnalyzer = (function () {
             phrases = [];
         }
 
-        function onNewResultReceived(phrase, count) {
-            plagiarismCountMap[phrase] = count;
+        function onNewResultReceived(phrase, phraseData) {
+            plagiarismCountMap[phrase] = phraseData;
             if (callback) {
                 callback();
             }

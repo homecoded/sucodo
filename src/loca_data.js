@@ -187,8 +187,8 @@ var LOCA_ENG = 0,
 
     "txt_inspect":
             [
-                "Show me where this was copied from!",
-                "Zeige mir, von wo es kopiert wurde!"
+                "Show me all the other possible sources!",
+                "Zeige mir die anderen möglichen Quellen!"
             ],
     "txt_privacy":
             [
@@ -228,6 +228,12 @@ var LOCA_ENG = 0,
             [
                 "Close settings",
                 "Einstellung schließen"
+            ],
+
+    "txt_most_likely_source":
+            [
+                "Most likely source:",
+                "Wahrscheinlichste Quelle:"
             ],
 
     "last element":

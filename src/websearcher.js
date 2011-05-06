@@ -35,7 +35,7 @@ var webSearcher = (function () {
 
         function searchDone(results) {
             var phrase = results.SearchResponse.Query.SearchTerms,
-                numResults,
+                result = {},
                 cbs, i,
                 numCallbacks;
 
@@ -43,13 +43,14 @@ var webSearcher = (function () {
             if (!results.SearchResponse.Web) {
                 return;
             }
-            numResults = results.SearchResponse.Web.Total;
+            result.count = results.SearchResponse.Web.Total;
+            result.sources = results.SearchResponse.Web.Results;
 
             cbs = callbacks[phrase];
             if (cbs) {
                 numCallbacks = cbs.length;
                 for (i = 0; i < numCallbacks; i++) {
-                    cbs[i](phrase, numResults);
+                    cbs[i](phrase, result);
                 }
             }
         }
