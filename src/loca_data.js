@@ -192,13 +192,13 @@ var LOCA_ENG = 0,
             ],
     "txt_privacy":
             [
-                "<strong>Privacy Policy:</strong> sucodo does not collect any personal data and it does not use cookies.",
-                "<strong>Privatsphäre:</strong> sucodo sammelt keine persönlichen Daten und verwendet keine Cookies."
+                "<strong>Privacy Policy:</strong><br>Sucodo is open source and provided free of charge. It does not use cookies. No personal data except IP addresses are logged (access log). Your IP address may be also transmitted to Microsoft while executing Bing search queries. Sucodo does not log any texts or parts of texts processed through it.",
+                "<strong>Privatsphäre:</strong><br>Sucodo ist Open Source und wird kostenlos zur Verfügung gestellt. Es werden keine Cookies benutzt und keine persönlichen Daten außer IP-Adressen gespeichert (Server Log). Durch das Ausführen von Suchanfragen über Bing wird deine IP auch an Microsoft übertragen. Sucodo speichert keine damit untersuchte Texte oder Textteile."
             ],
     "txt_privacy_see_also":
             [
-                "sucodo utilizes Bing: ",
-                "sucodo benutzt Bing: "
+                "Sucodo utilizes Bing, which is subject to the following terms & conditions: ",
+                "Sucodo benutzt Bing. Dafür gelten folgende Nutzungbedingungen: "
             ],
 
     "txt_sample_text":
