@@ -375,16 +375,16 @@ var tests = (function () {
                     }
                 }
                 textAnalyzerTest.callbackCount++;
-                if (textAnalyzerTest.callbackCount == 4) {
+                if (textAnalyzerTest.callbackCount == 2) {
                     impunit.assertEqual(4, resultCount, "The number of results returned by the textanalyzer did not match");
                     impunit.assertEqual(3, results['Ich bin ein']);
-                    impunit.assertEqual(8, results['Berliner.']);
+                    impunit.assertEqual(0, results['Berliner.']);  // not enough words
                     impunit.assertEqual(2, results['Ich bin zwei']);
-                    impunit.assertEqual(1, results['Hamburger.']);
+                    impunit.assertEqual(0, results['Hamburger.']); // not enough words
                 }
             });
             var checkTextFinishedCallback = impunit.asyncCallback(function () {
-                impunit.assertEqual(4, textAnalyzerTest.callbackCount, "Not all test results were properly returned!");
+                impunit.assertEqual(2, textAnalyzerTest.callbackCount, "Not all test results were properly returned!");
 
             })
             setTimeout(checkTextFinishedCallback, 2000);

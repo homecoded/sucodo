@@ -20,7 +20,8 @@ var textAnalyzer = (function () {
                 i, j,
                 randPhrases, sortRule,
                 reg,
-                paragraph;
+                paragraph,
+                phrase;
 
             for (i = 0; i < paragraphs.length; i++ ) {
                 if (paragraphs[i].constructor === Array)
@@ -36,17 +37,19 @@ var textAnalyzer = (function () {
                 }
             }
 
-            // randomize the orde in which phrases are searched
+            // randomize the order in which phrases are searched
             randPhrases = phrases.slice(0);
             sortRule = function (a,b) {
                 return (Math.random() >= 0.5) ? 1 : -1;
             };
+            // make sure it really is random
             randPhrases.sort(sortRule);
             randPhrases.sort(sortRule);
 
             for (i = 0; i < randPhrases.length; i++) {
-                if (randPhrases[i] !== '') {
-                    webSearcher.search(randPhrases[i], onNewResultReceived);
+                phrase = randPhrases[i];
+                if (phrase !== '' && phrase.split(' ').length == wordgrouplen) {
+                    webSearcher.search(phrase, onNewResultReceived);
                 }
             }
 
