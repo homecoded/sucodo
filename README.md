@@ -8,17 +8,15 @@ only get chunks of the original data in a random order to make reconstructing
 the text on the side of the search engine provider a bit harder.
 The checked texts are not cached in any way.
 
-USABILITY FEEDBACK
-==================
+TODOs:
+======
+
+USABILITY FEEDBACK:
+
 * // all done
 
-TODO
-====
-* update the colors in analyze mode
-* remove bing API key and insert a warning if no api key is available
+FEATURE REQUESTS :
 
-FEATURE REQUESTS
-================
 * show most likely source in mouse-over result info
 * more heuristic search with additional keywords (input for "site must also contain these words" to increase hit chances for small test groups)
 * manual search by selecting the word groups manually
@@ -30,6 +28,11 @@ FEATURE REQUESTS
 * add a sources overview
 * add options:
     * ignore correctly quoted sources (deselect from sources overview)
+
+OTHER TODOs:
+
+* update the colors in analyze mode
+* remove bing API key and insert a warning if no api key is available
 
 DONE
 ====
@@ -50,7 +53,7 @@ FEATURE REQUESTS:
 
 * add a sample text that can be used to illustrate how sucodo works
 
-TODOs:
+OTHER TODOs:
 
 * make "Go" button brighter
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length
