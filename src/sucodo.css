@@ -10,8 +10,8 @@
 
 .outline { color: #828282; }
 .lightText {color: #E7E1D6;}
-.lightAltText { color: #7c898e; }
-.darkText { color: #404040;}
+.lightAltText { color: #596266; }
+.darkText { color: #222;}
 .brightText { color: #b11010;}
 
 .topLineMiddle { border-top: 1px solid #FCF2E4; }
@@ -260,6 +260,8 @@ a {
     -moz-box-shadow: 0px 2px 8px #999999;
     -webkit-box-shadow: 0px 2px 8px #999999;
     box-shadow: 0px 2px 8px #999999;
+
+    overflow: auto;
 }
 
 #infobar_analyze {
@@ -300,10 +302,97 @@ a {
 /*
     SETTINGS
 */
-#settings {
-    display: none;
+#settings_content {
+    width: 50%;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    top: 25%;
+    left: 25%;
+    padding: 15px;
+    background-color: #eef;
+    border: 1px solid #668;
+    z-index: 4;
+
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px 8px 8px 8px;
+
+    -moz-box-shadow: 0px 2px 8px #999999;
+    -webkit-box-shadow: 0px 2px 8px #999999;
+    box-shadow: 0px 2px 8px #999999;
 }
 
+#settings_content p {
+    padding: 0px;
+    padding-bottom: 30px;
+    margin: 0px;
+}
+
+#settings_background {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    top: 0px;
+    left: 0px;
+}
+
+#settings_close {
+    float: right;
+}
+
+#settings_text_close {
+    padding: 0px;
+    margin: 0px;
+}
+
+#link_settings_close {
+    text-decoration: none;
+    font-weight: bold;
+    color: #666;
+}
+
+#link_settings_close:hover {
+    color: #222;
+}
+
+#lang_select a {
+    margin-right: 15px;
+}
+
+#link_settings {
+    background-color: #E7E1D6;
+    border: 1px solid #828282;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-box-shadow: 0px 0px 8px #aaf;
+    -webkit-box-shadow: 0px 0px 8px #aaf;
+    box-shadow: 0px 0px 8px #aaf;
+
+    position: fixed;
+    top: -8px;
+    right: 30px;
+    padding: 15px;
+    font-size: 90%;
+
+    z-index:2;
+}
+
+#link_settings:hover {
+    background-color: #f6f0e5;
+    color: #111111;
+    -moz-box-shadow: 0px 0px 8px #77a;
+    -webkit-box-shadow: 0px 0px 8px #77a;
+    box-shadow: 0px 0px 8px #77a;
+
+}
+
+#grouplen {
+    width: 90%;
+}
 
 /*
     TOOLTIP
@@ -324,6 +413,8 @@ a {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 4px 4px;
+    z-index: 5;
+    width: 45%;
 }
 
 #help_tooltip_content {

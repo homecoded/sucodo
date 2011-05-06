@@ -213,6 +213,23 @@ var LOCA_ENG = 0,
                 "Der Text wird in Wortgruppen (Testgruppen) geteilt, wobei jede Wortgruppe eine definierte Länge hat.<br> Setze hier die Länge, die Du zum Testen benutzen möchtest."
             ],
 
+    "txt_settings":
+            [
+                "Settings",
+                "Einstellungen"
+            ],
+
+    "txt_close":
+            [
+                "[x]"
+            ],
+
+    "txt_settings_close":
+            [
+                "Close settings",
+                "Einstellung schließen"
+            ],
+
     "last element":
             [
                 "",

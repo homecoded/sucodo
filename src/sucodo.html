@@ -40,6 +40,38 @@
         </div>
     </div>
 
+    <a href="javascript: void(0)" id="link_settings"><span id="txt_settings"></span></a>
+
+    <div id="settings" class="hidden">
+        <div id="settings_background"></div>
+        <div id="settings_content">
+            <div id="settings_close">
+                <a href="javascript: void(0)" id="link_settings_close"><span id="txt_close"></span></a>
+            </div>
+            <p id="settings_header" class="textSizeL"><span id="txt_settings"></span></p>
+            <p id="lang_select">
+            </p>
+            <p id="analyze_control">
+                <span id="grouplen_control">
+                    <span id="txt_word_group_length"></span>
+                    <span id="tooltip_help_wordgroup_len"></span><br>
+                    <select id="grouplen">
+                        <option value="3" id="txt_grouplen3"></option>
+                        <option value="4" id="txt_grouplen4"></option>
+                        <option value="5" id="txt_grouplen5"></option>
+                        <option value="8" id="txt_grouplen8" selected="selected"></option>
+                        <option value="10" id="txt_grouplen10"></option>
+                        <option value="15" id="txt_grouplen15"></option>
+                        <option value="20" id="txt_grouplen20"></option>
+                    </select>
+                 </span>
+            </p>
+            <div id="settings_text_close">
+                <a href="javascript: void(0)" id="link_settings_text_close" class="textSizeS bold"><span id="txt_settings_close"></span></a>
+            </div>
+        </div>
+    </div>
+
     <div id="content">
         <div id="content1">
             <p id="add_sample_text" class="textview_size topInfoText textSizeM">
@@ -56,22 +88,6 @@
                 <div id="textview" class="textview borderMiddle">
                 </div>
             </div>
-            <p id="analyze_control" class="hidden">
-                <span id="grouplen_control">
-                    <span id="txt_word_group_length"></span>
-                    <span id="tooltip_help_wordgroup_len"></span>
-                    <select id="grouplen">
-                        <option value="3" id="txt_grouplen3"></option>
-                        <option value="4" id="txt_grouplen4"></option>
-                        <option value="5" id="txt_grouplen5"></option>
-                        <option value="8" id="txt_grouplen8" selected="selected"></option>
-                        <option value="10" id="txt_grouplen10"></option>
-                        <option value="15" id="txt_grouplen15"></option>
-                        <option value="20" id="txt_grouplen20"></option>
-                    </select>
-                 </span>
-                <input type="button" id="btn_edit" value="txt_button_edit" >
-            </p>
         </div>
 
         <div id="content3" class="noMP">
@@ -100,11 +116,6 @@
 
     <div id="infobar_placeholder" class="">
         &nbsp;
-    </div>
-
-    <div id="settings">
-        <div id="lang_select">
-        </div>
     </div>
 
     <div id="help_tooltip"></div>

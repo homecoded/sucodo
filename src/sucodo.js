@@ -6,6 +6,7 @@ var navi = {
     PAGE_ANALYZE: 2,
     PAGE_HELP: 3,
 
+    currentPageId : -1,
     openPage: function (id) {
         var success = navi.execute(id);
         if (success) {
@@ -25,7 +26,7 @@ var navi = {
     "highlight": function (id) {
         var activeElementId = "#nav" + id;
         $("#navlinks_inner").children().each(
-                function (_i, _element) {
+                function () {
                     if ($(this).is(activeElementId)) {
                         if (!$(this).hasClass('active')) {
                             $(this).addClass('active');
@@ -42,7 +43,7 @@ var navi = {
     "showContent": function (id)	{
         var activeElementId = "#content"+id;
         $("#content").children().each(
-                function (_i, _element)	{
+                function ()	{
                     if ($(this).is(activeElementId)) {
                         $(this).show();
                     } else {
@@ -72,9 +73,9 @@ var navi = {
             case navi.PAGE_ANALYZE:
                 showInfobarContents("#infobar_analyze");
                 var plagtext = $('#plagtext'),
-                    text = plagtext.val(),
-                    wordGroupLen, phrases, timeLeft, resultText;
-                $('#resultinfo').hide();                
+                        text = plagtext.val(),
+                        wordGroupLen, phrases, timeLeft, resultText;
+                $('#resultinfo').hide();
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
                     plagtext.css('background-color', '#fcc');
@@ -107,23 +108,46 @@ var navi = {
                 textMarkup.closeDetails(true);
                 break;
         }
+
+        navi.currentPageId = id;
         return true;
     },
     /*
-        Setup callbacks
+     Setup callbacks
      */
-    setup: function (id) {
+    setup: function () {
         // global navi
         var numLinks = $('#navlinks_inner').children().length,
-            i;
+                i;
         for (i = 1; i <= numLinks; i++) {
-            $('#nav' + i).click(function () {
+            $('#nav' + i).click((function () {
                 var id = i;
                 return function () {
                     navi.openPage(id);
                 };
-            }());
+            })());
         }
+
+        // settings
+        $('#settings_background').fadeTo(0, 0.5);
+
+        var oldTestGroupLength = -1;
+        function closeSettings() {
+            $('#settings').fadeOut(100);
+            if (navi.currentPageId === navi.PAGE_ANALYZE
+                    && oldTestGroupLength !== $('#grouplen').val()) {
+                navi.openPage(navi.PAGE_ANALYZE);
+            }
+        }
+
+        $('#link_settings_close').click(closeSettings);
+        $('#link_settings_text_close').click(closeSettings);
+
+        $('#link_settings').click(function () {
+            $('#settings').fadeIn(100);
+            oldTestGroupLength = $('#grouplen').val();
+        });
+
 
         // Enter Text Screen
         $('#btn_analyze').click(function () {
@@ -132,16 +156,13 @@ var navi = {
 
         $('#link_sample_text').click(function () {
             var value = $('#plagtext').val(),
-                sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
+                    sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
             if (value.indexOf(sampletext) < 0) {
-               $('#plagtext').val( value + sampletext);
+                $('#plagtext').val( value + sampletext);
             }
         });
 
         // Analyze Screen
-        $('#grouplen').change(function () {
-            navi.openPage(PAGE_ANALYZE);
-        });
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
             navi.openPage(navi.PAGE_ENTER_TEXT);
@@ -153,8 +174,9 @@ var navi = {
 
 var colorWarner = {
     getColor: function (number) {
-        if (number <= 0)
+        if (number <= 0) {
             return '#000000';
+        }
         if (number > 256) {
             return '#ff0000'; // a lot of results, total red!
         } else {
@@ -169,7 +191,7 @@ var colorWarner = {
             return ('#' + hexRed + hexGreen + '00').toLowerCase();
         }
     }
-}
+};
 
 /********************************************************************************************
  * sucodo loca
@@ -190,8 +212,8 @@ var sucodoLoca = {
     },
     createLinks: function () {
         var lang_select = $('#lang_select'),
-            htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) +  	" ",
-            i;
+                htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) + "<br>",
+                i;
 
         for (i = 0; i < NUM_LANGUAGES; i++)
         {
@@ -200,7 +222,7 @@ var sucodoLoca = {
                     + loca.getLocaData('txt_lang_name', i)
                     + '</a>';
         }
-        document.getElementById('lang_select').innerHTML = htmlCode;
+        lang_select.html(htmlCode);
     },
     initialize: function () {
         sucodoLoca.createLinks();
@@ -210,20 +232,21 @@ var sucodoLoca = {
         } else {
             sucodoLoca.lang = LOCA_ENG;
         }
-        
+
     },
     getParameterByName: function (name)
     {
-      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-      var regexS = "[\\?&]"+name+"=([^&#]*)",
-        regex = new RegExp( regexS ),
-        results = regex.exec( window.location.href );
-      if( results == null )
-        return "";
-      else
-        return decodeURIComponent(results[1].replace(/\+/g, " "));
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)",
+                regex = new RegExp( regexS ),
+                results = regex.exec( window.location.href );
+        if( results === null ) {
+            return "";
+        } else {
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
     }
-}
+};
 
 /********************************************************************************************
  * entry point of app
@@ -258,12 +281,13 @@ $(document).ready(function () {
  * IE fix
  */
 if (!Array.indexOf) {
-  Array.prototype.indexOf = function (obj, start) {
-    for (var i = (start || 0); i < this.length; i++) {
-      if (this[i] === obj) {
-        return i;
-      }
-    }
-    return -1;
-  }
+    Array.prototype.indexOf = function (obj, start) {
+        var i;
+        for (i = (start || 0); i < this.length; i++) {
+            if (this[i] === obj) {
+                return i;
+            }
+        }
+        return -1;
+    };
 }
