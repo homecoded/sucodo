@@ -52,6 +52,7 @@ FEATURE REQUESTS:
 
 TODOs:
 
+* make "Go" button brighter
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length
 * Bug: Tooltips do not work correctly (always show the same text, maybe closure problem?)
 * JSLint check every Javascript file
