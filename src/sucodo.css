@@ -234,6 +234,10 @@ a {
     height: 120px;
 }
 
+#infobar_placeholder {
+    margin: 15px;
+}
+
 #infobar {
     display: none;
 }
