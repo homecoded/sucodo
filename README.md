@@ -19,6 +19,7 @@ TODO
 
 FEATURE REQUESTS
 ================
+* show most likely source in mouse-over result info
 * more heuristic search with additional keywords (input for "site must also contain these words" to increase hit chances for small test groups)
 * manual search by selecting the word groups manually
 * adding adjustable gaps between the test groups  
