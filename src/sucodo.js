@@ -53,9 +53,9 @@ var navi = {
                 );
     },
     /*
-     Runs the code necessary for a state
+        Initialize a screen
      */
-    "execute": function (id) {
+    "init": function (id) {
 
         function showInfobarContents(id) {
             $.each($("#infobar").children(), function () {
@@ -67,8 +67,16 @@ var navi = {
         switch (id)
         {
             case navi.PAGE_ENTER_TEXT:
-                textAnalyzer.stop();
                 showInfobarContents("#infobar_edit");
+
+                // update the add sample text link
+                $('#link_sample_text').click(function () {
+                    var value = $('#plagtext').val(),
+                            sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
+                    if (value.indexOf(sampletext) < 0) {
+                        $('#plagtext').val( value + sampletext);
+                    }
+                });
                 break;
             case navi.PAGE_ANALYZE:
                 showInfobarContents("#infobar_analyze");
@@ -108,7 +116,16 @@ var navi = {
                 textMarkup.closeDetails(true);
                 break;
         }
+        return true;
+    },
+    /*
+     Runs the code necessary for a state
+     */
+    "execute": function (id) {
 
+        if (!navi.init(id)) {
+            return false;
+        }
         navi.currentPageId = id;
         return true;
     },
@@ -152,14 +169,6 @@ var navi = {
         // Enter Text Screen
         $('#btn_analyze').click(function () {
             navi.openPage(navi.PAGE_ANALYZE);
-        });
-
-        $('#link_sample_text').click(function () {
-            var value = $('#plagtext').val(),
-                    sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
-            if (value.indexOf(sampletext) < 0) {
-                $('#plagtext').val( value + sampletext);
-            }
         });
 
         // Analyze Screen
@@ -208,7 +217,10 @@ var sucodoLoca = {
         });
 
         sucodoLoca.createLinks();
-        helpControl.updateControls();
+
+        // update the current page in case there were
+        // any language specific settings
+        navi.init(navi.currentPageId);
     },
     createLinks: function () {
         var lang_select = $('#lang_select'),
