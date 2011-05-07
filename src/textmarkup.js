@@ -5,7 +5,8 @@ var textMarkup = (function () {
         phraseMap,
         allowMouseOverSelect = true,
         currentPhraseText,
-        highlightedPhrase;
+        highlightedPhrase,
+        isGlobalListenerInitialized;
 
     function unhighlightPhrase() {
         if (highlightedPhrase) {
@@ -103,6 +104,16 @@ var textMarkup = (function () {
             sources,
             span;
 
+        if (!isGlobalListenerInitialized) {
+            isGlobalListenerInitialized = true;
+            $('body').click( function () {
+                if (allowMouseOverSelect) {
+                    return;
+                }
+                closeDetails(false);
+            });
+        }
+
         for (phrase in phraseDict) {
             if (phraseDict.hasOwnProperty(phrase) || true) {
                 phraseIds = phraseDict[phrase];
@@ -146,7 +157,7 @@ var textMarkup = (function () {
                             var currPhrase = phrase,
                                 currCount = resultCount,
                                 mostLikelySource = getMostLikelySourceUrl(sources);
-                            return function () {
+                            return function (event) {
 
                                 if (highlightedPhrase && highlightedPhrase.attr('id') === $(this).attr('id')) {
                                     closeDetails(false);
@@ -162,6 +173,7 @@ var textMarkup = (function () {
                                     highlightedPhrase = $(this);
                                     currentPhraseText = currPhrase;
                                 }
+                                event.stopPropagation();
                             };
                         }());
                         span.dblclick(function () {
