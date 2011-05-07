@@ -32,7 +32,6 @@ FEATURE REQUESTS :
 OTHER TODOs:
 
 * analyze view: click anywhere on the page but another suspicious phrase, will leave phrase select mode
-* update the colors in analyze mode
 * remove bing API key and insert a warning if no api key is available
 
 DONE
@@ -56,6 +55,7 @@ FEATURE REQUESTS:
 
 OTHER TODOs:
 
+* update the colors in analyze mode
 * make "Go" button brighter
 * do not check last word group in a paragraph if it is significantly smaller than the set wordgroup length
 * Bug: Tooltips do not work correctly (always show the same text, maybe closure problem?)
