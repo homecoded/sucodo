@@ -31,6 +31,7 @@ FEATURE REQUESTS :
 
 OTHER TODOs:
 
+* analyze view: click anywhere on the page but another suspicious phrase, will leave phrase select mode
 * update the colors in analyze mode
 * remove bing API key and insert a warning if no api key is available
 
