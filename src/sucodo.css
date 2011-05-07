@@ -82,7 +82,7 @@ a {
     padding: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #eecf95;
+    background-color: #f2ba6b;
     font-size: 140%;
     font-weight: bold;
     -moz-border-radius: 8px;
@@ -101,7 +101,7 @@ a {
 }
 
 .action_button:hover {
-    background-color: #f7dd9b;
+    background-color: #f5a73a;
     color: #606060;
     -moz-box-shadow: 0px 0px 4px #745A34;
     -webkit-box-shadow: 0px 0px 4px #745A34;
