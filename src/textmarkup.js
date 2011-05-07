@@ -130,7 +130,7 @@ var textMarkup = (function () {
                             return function () {
                                 if (!highlightedPhrase
                                         || (highlightedPhrase.attr('id') !== $(this).attr('id'))) {
-                                    $(this).css('background-color', '#a4b7f0');
+                                    $(this).css('background-color', '#ffda8b');
                                 }
                                 if (!allowMouseOverSelect) {
                                     return;
@@ -153,8 +153,8 @@ var textMarkup = (function () {
                                 } else {
                                     $('#resultinfo').fadeIn();
                                     $('#resultinfo_controls').fadeIn();
-                                    $(this).css('background-color', 'FFFFFF');
-                                    $('#textview').css('background-color', '#b4c7ff');
+                                    $(this).css('background-color', '#FFF');
+                                    $('#textview').css('background-color', '#ddd');
                                     $('#resultinfo_count').html(currCount);
                                     $('#link_most_likely_source').html(mostLikelySource);
                                     allowMouseOverSelect = false;
