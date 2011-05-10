@@ -226,8 +226,8 @@ var LOCA_ENG = 0,
 
     "txt_settings_close":
             [
-                "Close settings",
-                "Einstellung schließen"
+                "accept and close",
+                "übernehmen und schließen"
             ],
 
     "txt_most_likely_source":
