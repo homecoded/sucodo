@@ -236,9 +236,22 @@ var LOCA_ENG = 0,
                 "Wahrscheinlichste Quelle:"
             ],
 
+    "txt_resultview":
+            [
+                "Results:",
+                "Ergebnisse:"
+            ],
+
+    "txt_show_results":
+            [
+                "Results",
+                "Ergebnisse"
+            ],
+
     "last element":
             [
                 "",
                 ""
             ]
 };
+

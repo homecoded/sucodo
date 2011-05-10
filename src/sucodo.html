@@ -12,6 +12,7 @@
     <script type="text/javascript" src="websearcher.js"></script>
     <script type="text/javascript" src="textmarkup.js"></script>
     <script type="text/javascript" src="helpcontrol.js"></script>
+    <script type="text/javascript" src="resultview.js"></script>
     <script type="text/javascript" src="tests.js"></script>
     <script type="text/javascript" src="sucodo.js"></script>
 
@@ -45,10 +46,10 @@
     <div id="settings" class="hidden">
         <div id="settings_background"></div>
         <div id="settings_content">
-            <div id="settings_close">
-                <a href="javascript: void(0)" id="link_settings_close"><span id="txt_close"></span></a>
+            <div class="closeX">
+                <a href="javascript: void(0)" id="link_settings_close" class="noDeco"><span id="txt_close"></span></a>
             </div>
-            <p id="settings_header" class="textSizeL"><span id="txt_settings"></span></p>
+            <div id="settings_header" class="textSizeL popupHeaderUnderline"><span id="txt_settings"></span></div>
             <p id="lang_select">
             </p>
             <p id="analyze_control">
@@ -87,6 +88,15 @@
             <div id="textview_container" class="textview_size textFont textSizeL">
                 <div id="textview" class="textview borderMiddle">
                 </div>
+            </div>
+            <div id="resultview" class="borderMiddle">
+                <div class="closeX">
+                    <a href="javascript: void(0)" id="link_results_close" class="noDeco"><span id="txt_close"></span></a>
+                </div>
+                <div class="textSizeL popupHeaderUnderline"><span id="txt_resultview"></span></div>
+                <p id="results">
+                    Lalalal
+                </p>
             </div>
         </div>
 
@@ -144,7 +154,10 @@
                 </div>
             </div>
             <div id="infobar_analyze_done">
-                <div id="infobar_analyze_hint" class="infobar_hint">
+                <div class="infobar_button">
+                    <a href="javascript:void(0)" id="btn_results" class="action_button textLink darkText hidden"><span id="txt_show_results"></span></a>
+                </div>
+                <div id="infobar_analyze_hint" class="infobar_hint hidden">
                     <span id="txt_hint" class="textSizeS bold"></span>
                     <div class="infobar_hintIndent">
                         <span id="txt_hint_analyze" class="textSizeM"></span>

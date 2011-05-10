@@ -114,13 +114,17 @@ var textMarkup = (function () {
             });
         }
 
+        // standard: hint and button is shown
+        $('#infobar_analyze_hint').show();
+        $('#btn_results').fadeIn(2000);
+
         for (phrase in phraseDict) {
             if (phraseDict.hasOwnProperty(phrase) || true) {
                 phraseIds = phraseDict[phrase];
                 for (i = 0; i < phraseIds.length; i++) {
                     span = $('#phrase' + phraseIds[i]);
                     resultCount = phraseMap[phrase].count;
-                    sources = phraseMap[phrase].sources
+                    sources = phraseMap[phrase].sources;
                     if (resultCount > 0) {
                         span.mouseout(function () {
                             if (!highlightedPhrase

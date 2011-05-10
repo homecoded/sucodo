@@ -165,7 +165,6 @@ var navi = {
             oldTestGroupLength = $('#grouplen').val();
         });
 
-
         // Enter Text Screen
         $('#btn_analyze').click(function () {
             navi.openPage(navi.PAGE_ANALYZE);
@@ -175,6 +174,11 @@ var navi = {
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
             navi.openPage(navi.PAGE_ENTER_TEXT);
+        });
+
+        resultview.init();
+        $('#btn_results').click(function () {
+            resultview.show();
         });
 
         textAnalyzer.setWebSearcher(webSearcher);
