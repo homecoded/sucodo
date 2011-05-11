@@ -65,7 +65,7 @@ var loca = (function () {
     /*
      Applies all loca keys to the texts
      */
-    function applyLocalization(langId)
+    function applyLocalization(langId, variableUpdatesOnly)
     {
         var textSpans = document.getElementsByTagName("span"),
             buttons, button,
@@ -105,6 +105,22 @@ var loca = (function () {
     }
 
     /*
+        Updates the text in specified object with variables
+     */
+    function updateVariables(objid, langId) {
+        var obj = document.getElementById(objid), locaId;
+        if (!obj) {
+            return;
+        }
+        if (obj.tagName === 'SPAN') {
+            obj.innerHTML = getProcessedLocaData(objid, langId);
+        } else if (obj.tagName === 'INPUT') {
+           locaId = buttonDict[obj.id];
+           obj.value = getProcessedLocaData(locaId, langId);;
+        }
+    }
+
+    /*
         Sets a loca-variable, that can later be replaces in a loca-entry
     */
     function setVariable(key, value) {
@@ -117,6 +133,7 @@ var loca = (function () {
         getLocaData: getLocaData,
         applyLocalization: applyLocalization,
         setVariable: setVariable,
-        getProcessedLocaData: getProcessedLocaData
+        getProcessedLocaData: getProcessedLocaData,
+        updateVariables: updateVariables
     };
 })();

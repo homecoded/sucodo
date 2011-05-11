@@ -160,7 +160,7 @@ var tests = (function () {
                 txt_test1 : ['test1_1', 'test1_2'],
                 txt_test2 : ['test2_1', 'test2_2'],
                 txt_test3 : ['test3_1', 'test3_2'],
-                txt_text4 : ['#var# test', '#var# test2', { containsVariables: true}],
+                txt_test4 : ['#var# test', '#var# test2', { containsVariables: true}],
                 txt_text5: ['#var# test #var#', '#var# test2 #var#', { containsVariables: true}],
                 txt_text6: ['#var# test #var2#', '#var# test2 #var2#', { containsVariables: true}],
                 txt_text7: ['#var# test #var2#', '#var# test2 #var2#']
@@ -174,6 +174,7 @@ var tests = (function () {
                     + '<div><p><div><span id="txt_test1"></span></div></p></div>'
                     + '<input type="button" id="btn_1" value="txt_test1" >'
                     + '<input type="button" id="btn_2" value="txt_test2" >'
+                    + '<input type="button" id="btn_3" value="txt_text5" >'
                     + '</div>'
                     );
 
@@ -230,11 +231,11 @@ var tests = (function () {
             locatest.setup();
             var processedText;
             loca.setVariable('#var#', 66);
-            processedText = loca.getProcessedLocaData("txt_text4", 0);
+            processedText = loca.getProcessedLocaData("txt_test4", 0);
             impunit.assertEqual("66 test", processedText);
 
             loca.setVariable('#var#', "my");
-            processedText = loca.getProcessedLocaData("txt_text4", 1);
+            processedText = loca.getProcessedLocaData("txt_test4", 1);
             impunit.assertEqual("my test2", processedText);
             locatest.tearDown();
         },
@@ -277,8 +278,32 @@ var tests = (function () {
             processedText = loca.getProcessedLocaData("txt_text7", 1);
             impunit.assertEqual("#var# test2 #var2#", processedText)
             locatest.tearDown();
+        },
+        _testLocaProcessedButton: function () {
+            locatest.setup();
+            loca.applyLocalization(0);
+            var processedText;
+            loca.setVariable('#var#', 66);
+            loca.updateVariables('btn_3', 0);
+            impunit.assertEqual('66 test 66', $('#btn_3').val(), "Button 3 was not localized correctly");
+
+            loca.updateVariables('btn_3', 1);
+            impunit.assertEqual('66 test2 66', $('#btn_3').val(), "Button 3 was not localized correctly");
+            locatest.tearDown();
+        },
+        _testLocaProcessedSpan: function () {
+            locatest.setup();
+            var processedText;
+            loca.applyLocalization(0);
+            loca.setVariable('#var#', 66);
+            loca.updateVariables('txt_test4', 0);
+            impunit.assertEqual('66 test', $('#txt_test4').html());
+
+            loca.updateVariables('txt_test4', 1);
+            impunit.assertEqual('66 test2', $('#txt_test4').html());
+            locatest.tearDown();
         }
-    }
+    };
 
     var helpControlTest = {
         setup: function () {
