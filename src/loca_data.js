@@ -250,9 +250,33 @@ var LOCA_ENG = 0,
 
     "txt_percent_suspicious":
             [
-                "#percent_suspicious# of the text is suspicious.",
-                "#percent_suspicious# des Textes sind verdächtig.",
+                "#percent_suspicious# of this text is suspicious.",
+                "#percent_suspicious# dieses Textes sind verdächtig.",
                 { containsVariables: true }
+            ],
+
+    "txt_most_used_sources":
+            [
+                "Most likely used web sources:",
+                "Die wahrscheinlichsten Quellen:"
+            ],
+
+    "txt_result_negative":
+            [
+                "This text seems to be clean. No guaranties, though.",
+                "Dieser Text scheint in Ordnung zu sein. Garantien gibt es aber leider keine."
+            ],
+
+    "txt_result_suspicious":
+            [
+                "This text may contain plagiarims.",
+                "Dieser Text könnte Plagiate beinhalten."
+            ],
+
+    "txt_result_positive":
+            [
+                "Next steps:<br>You can go through the text below and check any reddish parts by moving your mouse over them or clicking them. You need to manually check if the suspicious text parts were really copied without proper quotes.",
+                "Nächste Schritte:<br> Du kannst nun den Text durchgehen und alle rötlichen Textteile untersuchen, in dem Du Deine Maus darüber bewegst oder auf sie klickst. Eine manuelle (menschliche) Untersuchung aller verdächtigen Textstellen ist notwendig, um abschließend klären zu können, ob diese tatsächlich nur kopiert oder doch richtig zitiert wurden."
             ],
 
     "last element":

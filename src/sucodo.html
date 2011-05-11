@@ -23,7 +23,7 @@
 </head>
 <body class="bglight textFont darkText">
 
-<div class="scrollable_container">
+<div id="scrollable_container" class="scrollable_container">
 
     <div id="headerlogo" class="bgdark noMP bottomLineDark">
         <a href="http://www.sucodo.de" id="title_link"><span id="txt_title" class="textFont textSizeXXL"></span></a>
@@ -49,7 +49,7 @@
             <div class="closeX">
                 <a href="javascript: void(0)" id="link_settings_close" class="noDeco"><span id="txt_close"></span></a>
             </div>
-            <div id="settings_header" class="textSizeL popupHeaderUnderline"><span id="txt_settings"></span></div>
+            <div id="settings_header" class="textSizeL headerUnderline"><span id="txt_settings"></span></div>
             <p id="lang_select">
             </p>
             <p id="analyze_control">
@@ -85,18 +85,30 @@
             <p id="textview_explanation" class="textview_size topInfoText textSizeM">
                 <span id="txt_textview"></span>
             </p>
+            <div id="resultview_container" class="textview_size">
+                <div id="resultview" class="textview borderLight">
+                    <div class="textSizeL headerUnderline">
+                        <span id="txt_resultview"></span>
+                    </div>
+                    <div id="results">
+                        <div id="result_positive" class="resultNextSteps borderLight bgred">
+                            <span id="txt_result_suspicious" class="bold"></span><br><br>
+                            <span id="txt_percent_suspicious"></span><br><br>
+                            <span id="txt_result_positive"></span>
+                        </div>
+                        <div id="result_negative" class="resultNextSteps borderLight bggreen">
+                            <span id="txt_result_negative"></span>
+                        </div>
+                        <div id="most_used_sources_container">
+                            <span id="txt_most_used_sources"></span>
+                            <div id="most_used_sources"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="textview_container" class="textview_size textFont textSizeL">
                 <div id="textview" class="textview borderMiddle">
                 </div>
-            </div>
-            <div id="resultview" class="borderMiddle">
-                <div class="closeX">
-                    <a href="javascript: void(0)" id="link_results_close" class="noDeco"><span id="txt_close"></span></a>
-                </div>
-                <div class="textSizeL popupHeaderUnderline"><span id="txt_resultview"></span></div>
-                <p id="results">
-                    Lalalal
-                </p>
             </div>
         </div>
 

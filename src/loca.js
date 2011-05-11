@@ -75,7 +75,7 @@ var loca = (function () {
             return;
         }
         for (i = textSpans.length - 1; i >= 0; i--) {
-            locaValue = loca.getLocaData(textSpans[i].id, langId);
+            locaValue = loca.getProcessedLocaData(textSpans[i].id, langId);
             if (locaValue !== null) {
                 textSpans[i].innerHTML = locaValue;
             }
@@ -87,7 +87,7 @@ var loca = (function () {
             buttonDict = {};
             for (i = buttons.length - 1; i >= 0; i--) {
                 button = buttons[i];
-                locaValue = getLocaData(button.value, langId);
+                locaValue = getProcessedLocaData(button.value, langId);
                 if (locaValue !== null) {
                     buttonDict[button.id] = button.value;
                 }
@@ -99,7 +99,7 @@ var loca = (function () {
             button = buttons[i];
             locaId = buttonDict[button.id];
             if (locaId && button.value) {
-                button.value = getLocaData(locaId, langId);
+                button.value = getProcessedLocaData(locaId, langId);
             }
         }
     }

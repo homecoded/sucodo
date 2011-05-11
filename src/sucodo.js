@@ -84,6 +84,7 @@ var navi = {
                         text = plagtext.val(),
                         wordGroupLen, phrases, timeLeft, resultText;
                 $('#resultinfo').hide();
+                resultview.reset();
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
                     plagtext.css('background-color', '#fcc');
@@ -104,11 +105,12 @@ var navi = {
                             $('#textview').css('background-color', '#AAAAAA');
                             $('#infobar_analyze_done').hide();
                             $('#infobar_analyze_progress').fadeIn();
-
+                            resultview.reset();
                         } else {
                             $('#textview').css('background-color', '#FFFFFF');
                             $('#infobar_analyze_done').show();
                             $('#infobar_analyze_progress').hide();
+                            resultview.show();
                             textMarkup.updateMouseInteractivity();
                         }
                     });
@@ -177,9 +179,9 @@ var navi = {
         });
 
         resultview.init();
-        $('#btn_results').click(function () {
-            resultview.show();
-        });
+        $('#btn_results').click((function () {
+           resultview.scrollToResults();
+        }));
 
         textAnalyzer.setWebSearcher(webSearcher);
     }
