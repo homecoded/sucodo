@@ -273,8 +273,8 @@ $(document).ready(function () {
         tests.runTests();
     }
     // init language
-    loca.dict = loca__dictionary;
-    loca.buttonDict = null;
+    loca.setDict(loca__dictionary);
+    loca.setButtonDict(null);
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
     // setup callbacks

@@ -54,8 +54,8 @@ var LOCA_ENG = 0,
 
     "txt_hint_edit":
             [
-                "Sucodo examines a text and tells you about possible plagiarisms is finds. <br>Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
-                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. <br>Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
+                "Sucodo examines a text and tells you about possible plagiarisms is finds. Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
+                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
             ],
 
     "txt_hint_analyze":
@@ -246,6 +246,13 @@ var LOCA_ENG = 0,
             [
                 "Results",
                 "Ergebnisse"
+            ],
+
+    "txt_percent_suspicious":
+            [
+                "#percent_suspicious# of the text is suspicious.",
+                "#percent_suspicious# des Textes sind verdächtig.",
+                { containsVariables: true }
             ],
 
     "last element":

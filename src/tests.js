@@ -159,13 +159,18 @@ var tests = (function () {
             var dict = {
                 txt_test1 : ['test1_1', 'test1_2'],
                 txt_test2 : ['test2_1', 'test2_2'],
-                txt_test3 : ['test3_1', 'test3_2']
+                txt_test3 : ['test3_1', 'test3_2'],
+                txt_text4 : ['#var# test', '#var# test2', { containsVariables: true}],
+                txt_text5: ['#var# test #var#', '#var# test2 #var#', { containsVariables: true}],
+                txt_text6: ['#var# test #var2#', '#var# test2 #var2#', { containsVariables: true}],
+                txt_text7: ['#var# test #var2#', '#var# test2 #var2#']
             };
             // create the spans
             $('#testresults').append('<div id="test_remove_me">'
                     + '<span id="txt_test1"></span>'
                     + '<p><span id="txt_test2"></span></p>'
                     + '<p><div><span id="txt_test3"></span></div></p>'
+                    + '<p><div><span id="txt_test4"></span></div></p>'
                     + '<div><p><div><span id="txt_test1"></span></div></p></div>'
                     + '<input type="button" id="btn_1" value="txt_test1" >'
                     + '<input type="button" id="btn_2" value="txt_test2" >'
@@ -173,11 +178,11 @@ var tests = (function () {
                     );
 
             // init the loca
-            loca.dict = dict;
+            loca.setDict(dict);
         },
         tearDown: function () {
-            loca.dict = null;
-            loca.buttonDict = null;
+            loca.setDict(null);
+            loca.setButtonDict(null);
             // remove the test elements
             $('#test_remove_me').remove();
         },
@@ -219,6 +224,58 @@ var tests = (function () {
             loca.applyLocalization(1);
             impunit.assertEqual('test1_2', $('#btn_1').val(), "Button 1 was not localized correctly");
             impunit.assertEqual('test2_2', $('#btn_2').val(), "Button 2 was not localized correctly");
+            locatest.tearDown();
+        },
+        _testLocaProcessed: function () {
+            locatest.setup();
+            var processedText;
+            loca.setVariable('#var#', 66);
+            processedText = loca.getProcessedLocaData("txt_text4", 0);
+            impunit.assertEqual("66 test", processedText);
+
+            loca.setVariable('#var#', "my");
+            processedText = loca.getProcessedLocaData("txt_text4", 1);
+            impunit.assertEqual("my test2", processedText);
+            locatest.tearDown();
+        },
+        _testLocaProcessedMultiSameVar: function () {
+            locatest.setup();
+            var processedText;
+            loca.setVariable('#var#', 66);
+            processedText = loca.getProcessedLocaData("txt_text5", 0);
+            impunit.assertEqual("66 test 66", processedText);
+
+            loca.setVariable('#var#', "my");
+            processedText = loca.getProcessedLocaData("txt_text5", 1);
+            impunit.assertEqual("my test2 my", processedText)
+            locatest.tearDown();
+        },
+        _testLocaProcessedMultiDiffVar: function () {
+            locatest.setup();
+            var processedText;
+            loca.setVariable('#var#', 66);
+            loca.setVariable('#var2#', 'wood');
+            processedText = loca.getProcessedLocaData("txt_text6", 0);
+            impunit.assertEqual("66 test wood", processedText);
+
+            loca.setVariable('#var#', "my");
+            loca.setVariable('#var2#', "88");
+            processedText = loca.getProcessedLocaData("txt_text6", 1);
+            impunit.assertEqual("my test2 88", processedText)
+            locatest.tearDown();
+        },
+        _testLocaProcessedMultiDiffVarDisabled: function () {
+            locatest.setup();
+            var processedText;
+            loca.setVariable('#var#', 66);
+            loca.setVariable('#var2#', 'wood');
+            processedText = loca.getProcessedLocaData("txt_text7", 0);
+            impunit.assertEqual("#var# test #var2#", processedText);
+
+            loca.setVariable('#var#', "my");
+            loca.setVariable('#var2#', "88");
+            processedText = loca.getProcessedLocaData("txt_text7", 1);
+            impunit.assertEqual("#var# test2 #var2#", processedText)
             locatest.tearDown();
         }
     }
@@ -392,7 +449,7 @@ var tests = (function () {
         },
 
         resetHasBeenCalled: false,
-        
+
         _testAnalyzerStop: function () {
             var callback = impunit.asyncCallback(function () {
                 // do another test
@@ -475,33 +532,33 @@ var tests = (function () {
             var text = ["bla", "blub"];
             var result = textMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
-                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
+                    + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
             impunit.assertEqual(expected, result);
         },
         _testMarkupParagraphs3 : function () {
             var text = ["bla", "blub", "honk"];
             var result = textMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
-                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
-                + '<span id="phrase2" style="color:#000000">honk</span> <br>\n';
+                    + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
+                    + '<span id="phrase2" style="color:#000000">honk</span> <br>\n';
             impunit.assertEqual(expected, result);
         },
         _testMarkupParagraphsArray : function () {
             var text = [["bla", "blub"]];
             var result = textMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> '
-                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
+                    + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
             impunit.assertEqual(expected, result);
         },
         _testMarkupParagraphsArray3 : function () {
             var text = [["bla", "blub"], ["bla", "blub"], ["bla", "blub"]];
             var result = textMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> '
-                + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
-                + '<span id="phrase2" style="color:#000000">bla</span> '
-                + '<span id="phrase3" style="color:#000000">blub</span> <br>\n'
-                + '<span id="phrase4" style="color:#000000">bla</span> '
-                + '<span id="phrase5" style="color:#000000">blub</span> <br>\n';
+                    + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
+                    + '<span id="phrase2" style="color:#000000">bla</span> '
+                    + '<span id="phrase3" style="color:#000000">blub</span> <br>\n'
+                    + '<span id="phrase4" style="color:#000000">bla</span> '
+                    + '<span id="phrase5" style="color:#000000">blub</span> <br>\n';
             impunit.assertEqual(expected, result);
         }
     };
