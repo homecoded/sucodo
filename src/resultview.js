@@ -16,7 +16,7 @@ var resultview = (function () {
     }
 
     // ---------------------------------------------
-    function show() {
+    function show(doShowAllSources) {
         resultView.fadeIn(1000);
 
         var numPhrases = 0,
@@ -57,16 +57,43 @@ var resultview = (function () {
         loca.setVariable('#percent_suspicious#', '<span class="resultPercent">'+resultPercent+'%</span>');
         loca.updateVariables('txt_percent_suspicious');
 
-        numSourcesToShow = (sourceArray.length > 10) ? 10 : sourceArray.length;
+        if (doShowAllSources === true)
+            numSourcesToShow = sourceArray.length;
+        else
+            numSourcesToShow = (sourceArray.length > 10) ? 10 : sourceArray.length;
+
         sourcesView = $('#most_used_sources');
         sourcesView.hide();
         sourcesView.html('');
 
+        var onMouseOverCode = ' onmouseover="$(this).addClass(\'resultSourceHover\')"';
+        var onMouseOutCode = ' onmouseout="$(this).removeClass(\'resultSourceHover\')"';
+
         for (i = 0; i < numSourcesToShow; i++) {
             url = sourceArray[i].url;
-            sourceShort = (url.length > 75) ? url.substring(0, 43) + '...' : url;
-            sourcesView.append('<a href="'+url+'" class="resultSource">'+sourceShort+'</a><br>');
+            var shortUrl = url.replace('http://www.', '');
+            shortUrl = shortUrl.replace('http://', '');
+            sourceShort = (shortUrl.length > 50) ?
+                    shortUrl.substring(0, 10) + '...' + shortUrl.substring(shortUrl.length - 27, shortUrl.length)
+                    : shortUrl;
+
+            var linkHTML = '<div' + onMouseOverCode + onMouseOutCode + '>'
+                + '<div class="linkImg"></div><a href="'+url+'" class="resultSource">'+sourceShort+'</a></div>';
+
+            sourcesView.append(linkHTML);
         }
+
+        var textShowSources = '';
+        var methodName = '';
+        if (doShowAllSources === true) {
+            textShowSources = loca.getLocaData('txt_show_less_sources');
+            methodName = 'showLess';
+        } else {
+            textShowSources = loca.getLocaData('txt_show_all_sources');
+            methodName = 'showAll';
+        }
+
+        sourcesView.append('<div class="toggleSources"><a href="javascript:resultview.'+methodName+'()">'+ textShowSources +'</a></div>');
 
         if (numSourcesToShow > 0) {
             sourcesView.show();
@@ -91,11 +118,21 @@ var resultview = (function () {
         }, 1000);
     }
 
+    function showAll() {
+        show(true);
+    }
+
+    function showLess() {
+        show(false);
+    }
+
     // ---------------------------------------------
     return {
         init: init,
         show: show,
         reset: reset,
-        scrollToResults: scrollToResults
+        scrollToResults: scrollToResults,
+        showAll : showAll,
+        showLess: showLess
     };
 })();

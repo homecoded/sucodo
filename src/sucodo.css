@@ -225,6 +225,7 @@ a {
     text-align: left;
     padding: 15px;
     width: 610px;
+    border: 1px dotted #333;
 }
 
 #content1, #content2 {
@@ -259,9 +260,32 @@ a {
     font-size: 150%;
     color: #800;
 }
+.resultSourceHover {
+    background-color: #aaa;
+}
+
+.linkImg {
+    background-image: url(data:image/gif;base64,R0lGODlhEAAQAMQfAOvx84i2163W+YrKdyVxxlarVTxDVNvo7aPYipvK+sjf8Tqa6m6wzNDpvFSR2y6WKKjO2kSgOj6MisfP2EunznjJTme1jX2fuEqot+f4yFJhe1dwkfL2+uXt9f///////yH5BAEAAB8ALAAAAAAQABAAAAWaoCeO5PidHhSs18W2l4cGRwfYR911wSZ7ig6kECE4IAoFZ+XzHAaFBjAgsQg4WI0IIPFkBgtLIyIoc7QehyCDwFAqA6gZTRAEGIt3AfGYiwgHeHlEfGUdaHsDFhgLBFVqCR0GWxEZFQ8EBAmaCQkHk04DEXEMDkadnqATHEOZDqidAKAbSjcdObgAE6AXG74awBoGw8NoJcckIQA7);
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    margin: 5px;
+    float: left;
+}
 
 .resultSource {
     line-height: 170%;
+    margin-left: 0px;
+}
+
+.toggleSources {
+    font-size: 90%;
+    line-height: 100%;
+    padding: 10px;
+    border: 1px dotted #444;
+    background-color: #ddd;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .resultNextSteps {

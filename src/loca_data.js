@@ -279,6 +279,18 @@ var LOCA_ENG = 0,
                 "Nächste Schritte:<br> Du kannst nun den Text durchgehen und alle rötlichen Textteile untersuchen, in dem Du Deine Maus darüber bewegst oder auf sie klickst. Eine manuelle (menschliche) Untersuchung aller verdächtigen Textstellen ist notwendig, um abschließend klären zu können, ob diese tatsächlich nur kopiert oder doch richtig zitiert wurden."
             ],
 
+    "txt_show_all_sources":
+            [
+                "Show All Sources",
+                "Alle Quellen anzeigen"
+            ],
+
+    "txt_show_less_sources":
+            [
+                "Show Most Likely Sources Only",
+                "Zeige wahrscheinlichste Quellen"
+            ],
+
     "last element":
             [
                 "",
