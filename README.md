@@ -17,17 +17,15 @@ USABILITY FEEDBACK:
 
 FEATURE REQUESTS :
 
-* show most likely source in mouse-over result info
+* add options:
+    * ignore correctly quoted sources (deselect from sources overview)
+	* read ignored sources from query string
+* enable passing the text via query-string
+* build bookmarklet that sends selected text from a website to sucodo
 * more heuristic search with additional keywords (input for "site must also contain these words" to increase hit chances for small test groups)
 * manual search by selecting the word groups manually
 * adding adjustable gaps between the test groups  
 * merge edit and analyze mode into one screen (like a rich text editor widget)
-* report after analysis:
-    * most use sources
-    * percentage indicator of how much text may be plagiarized
-* add a sources overview
-* add options:
-    * ignore correctly quoted sources (deselect from sources overview)
 
 ISSUES:
 
@@ -55,6 +53,11 @@ USABILITY FEEDBACK:
 FEATURE REQUESTS:
 
 * add a sample text that can be used to illustrate how sucodo works
+* show most likely source in mouse-over result info
+* report after analysis:
+    * most use sources
+    * percentage indicator of how much text may be plagiarized
+* add a sources overview
 
 ISSUES:
 
