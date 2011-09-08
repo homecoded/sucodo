@@ -78,7 +78,8 @@ var resultview = (function () {
                     : shortUrl;
 
             var linkHTML = '<div' + onMouseOverCode + onMouseOutCode + '>'
-                + '<div class="linkImg"></div><a href="'+url+'" class="resultSource">'+sourceShort+'</a></div>';
+                + '<div class="linkImg">'
+                +'</div><a href="'+url+'" class="resultSource">'+sourceShort+'</a></div>';
 
             sourcesView.append(linkHTML);
         }

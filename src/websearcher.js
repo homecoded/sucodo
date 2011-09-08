@@ -1,4 +1,4 @@
-var webSearcherTable = [];
+var webSearcherTable = (webSearcherTable) ? webSearcherTable : [];
 
 var webSearcher = (function () {
 

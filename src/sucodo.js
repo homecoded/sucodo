@@ -1,6 +1,8 @@
 /********************************************************************************************
  * Navi
  */
+var sucodo_isOfflineMode = true;
+
 var navi = {
     PAGE_ENTER_TEXT: 1,
     PAGE_ANALYZE: 2,
@@ -183,7 +185,12 @@ var navi = {
            resultview.scrollToResults();
         }));
 
-        textAnalyzer.setWebSearcher(webSearcher);
+        if (sucodo_isOfflineMode == true) {
+            textAnalyzer.setWebSearcher(webSearcherOffline);
+        } else {
+            textAnalyzer.setWebSearcher(webSearcher);
+        }
+
     }
 };
 
