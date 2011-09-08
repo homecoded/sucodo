@@ -5,7 +5,7 @@ var webSearcherOffline = (function () {
     var instance;
 
 
-    function createInstance()  {
+    function createInstance(id)  {
         // TODO remove api key and insert a warning
         var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7',
             callbacks = {},
@@ -28,7 +28,6 @@ var webSearcherOffline = (function () {
                 numSources = Math.floor(Math.random() * 12),
                 i;
 
-
             if (!urls) {
                 urls = [];
                 for (i = 0; i < 32; i++) {
@@ -48,29 +47,45 @@ var webSearcherOffline = (function () {
                 sources.push(urls[Math.floor(Math.random() * urls.length)]);
             }
 
-
-            setTimeout( function () {
+            scripts.push(function () {
                     cb(phrase, {
                         count : numSources,
                         sources : sources
                     });
-                }, 100);
+                });
+            setInterval(runScripts, 100);
         }
 
         function timeLeft() {
             return 0;
         }
 
+        function runScripts() {
+            if (scripts.length > 0) {
+                var script = scripts.pop();
+                script();
+                setInterval(runScripts, 100);
+            }
+        }
+
         function destroy () {
             webSearcherTable[wsId] = null;
+        }
+
+        function stop() {
+            callbacks = {};
+            phraseQueue = [];
+            scripts = [];
+
         }
 
         ws =  {
             createInstance: createInstance,
             destroy: destroy,
             search : search,
-            stop: function () {},
-            timeLeft: timeLeft
+            stop: stop,
+            timeLeft: timeLeft,
+            id: id
         };
         wsId = webSearcherTable.length;
         webSearcherTable.push(ws);

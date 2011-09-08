@@ -396,10 +396,11 @@ var tests = (function () {
                 impunit.assertEqual('test', phrase);
                 ws.destroy();
             });
-            var ws = webSearcher.createInstance();
+            var ws = webSearcherOffline.createInstance("_testSearch");
             ws.search('test', asyncCallback);
+            ws.destroy();
         },
-        multSearchWs:webSearcher.createInstance(),
+        multSearchWs:webSearcherOffline.createInstance("multSearchWs"),
         multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
         _testMultiSearch : function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, phraseData) {
@@ -478,7 +479,7 @@ var tests = (function () {
         _testAnalyzerStop: function () {
             var callback = impunit.asyncCallback(function () {
                 // do another test
-                var ws = webSearcher.createInstance();
+                var ws = webSearcherOffline.createInstance("_testAnalyzerStop");
                 var ta = textAnalyzer.createInstance();
                 ta.setWebSearcher(ws);
                 var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
@@ -538,8 +539,15 @@ var tests = (function () {
         _testAllWebSearchersDestroyed : function () {
 
             var checkCleanupCallback = impunit.asyncCallback(function () {
-                impunit.assertTrue(webSearcherTable[0] !== null, "The main websearcher does not exist");
-                for (var i = 1; i < webSearcherTable.length; i++) {
+                var webSearcherCount = 0, i;
+                if (webSearcher) webSearcherCount++;
+                if (webSearcherOffline) webSearcherCount++;
+
+                for (i = 0; i < webSearcherCount; i++) {
+                    impunit.assertTrue(webSearcherTable[i] !== null, "Main websearcher does not exist");
+                }
+
+                for (var i = webSearcherCount; i < webSearcherTable.length; i++) {
                     impunit.assertTrue(webSearcherTable[i] === null, "A test websearcher still exists at " + i);
                 }
             });
