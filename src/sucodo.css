@@ -261,8 +261,10 @@ a {
     color: #800;
 }
 .resultSourceHover {
-    background-color: #aaa;
+    background-color: #f4f3f1;
+    border: 1px dotted #aaa;
 }
+
 
 .linkImg {
     background-image: url(data:image/gif;base64,R0lGODlhEAAQAMQfAOvx84i2163W+YrKdyVxxlarVTxDVNvo7aPYipvK+sjf8Tqa6m6wzNDpvFSR2y6WKKjO2kSgOj6MisfP2EunznjJTme1jX2fuEqot+f4yFJhe1dwkfL2+uXt9f///////yH5BAEAAB8ALAAAAAAQABAAAAWaoCeO5PidHhSs18W2l4cGRwfYR911wSZ7ig6kECE4IAoFZ+XzHAaFBjAgsQg4WI0IIPFkBgtLIyIoc7QehyCDwFAqA6gZTRAEGIt3AfGYiwgHeHlEfGUdaHsDFhgLBFVqCR0GWxEZFQ8EBAmaCQkHk04DEXEMDkadnqATHEOZDqidAKAbSjcdObgAE6AXG74awBoGw8NoJcckIQA7);
@@ -271,6 +273,18 @@ a {
     padding: 0px;
     margin: 5px;
     float: left;
+}
+
+.resultSourceLinkContainer {
+    width: 100%;
+    border: 1px dotted #F4F3F1;
+;
+}
+
+.sourceLinkControl {
+    float: right;
+    line-height: 170%;
+    padding-right: 4px;
 }
 
 .resultSource {

@@ -77,10 +77,12 @@ var resultview = (function () {
                     shortUrl.substring(0, 10) + '...' + shortUrl.substring(shortUrl.length - 27, shortUrl.length)
                     : shortUrl;
 
-            var linkHTML = '<div' + onMouseOverCode + onMouseOutCode + '>'
-                + '<div class="linkImg">'
-                +'</div><a href="'+url+'" class="resultSource">'+sourceShort+'</a></div>';
-
+            var linkHTML = '<div class="resultSourceLinkContainer"' + onMouseOverCode + onMouseOutCode + '>'
+                + '<div class="linkImg"></div>'
+                + '<a href="'+url+'" class="resultSource">'+sourceShort+'</a> '
+                + '<a href="jojojo" class="sourceLinkControl">['+'ignore'+']</a>'
+                +'</div>';
+            
             sourcesView.append(linkHTML);
         }
 

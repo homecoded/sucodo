@@ -31,13 +31,18 @@ var webSearcherOffline = (function () {
             if (!urls) {
                 urls = [];
                 for (i = 0; i < 32; i++) {
+
+                    var link = 'http://www.' + words[Math.floor(Math.random()*words.length)]
+                            + domains[Math.floor(Math.random()*domains.length)];
+                    var len = Math.random()*9;
+                    for (var j = 0; j < len; j++) {
+                        link += '/' + words[Math.floor(Math.random()*words.length)];
+                    }
+                    link += '.html';
+
                     urls.push(
                         {
-                            Url : 'http://www.' + words[Math.floor(Math.random()*words.length)]
-                            + domains[Math.floor(Math.random()*domains.length)]
-                            + '/' + words[Math.floor(Math.random()*words.length)]
-                            + '/' + words[Math.floor(Math.random()*words.length)]
-                            + '.html'
+                            Url : link
                         }
                     );
                 }
