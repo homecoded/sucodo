@@ -1,4 +1,4 @@
-var webSearcherTable = (webSearcherTable) ? webSearcherTable : [];
+var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
 
 var webSearcherOffline = (function () {
 
@@ -6,13 +6,9 @@ var webSearcherOffline = (function () {
 
 
     function createInstance(id)  {
-        // TODO remove api key and insert a warning
-        var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7',
-            callbacks = {},
+        var callbacks = {},
             phraseQueue = [],
             scripts = [],
-            intervalId = null,
-            INTERVAL_WAIT_TIME = 250,
             wsId,
             ws,
             words = ['google', 'alpaka', 'homecoded', 'flaregames', 'sucodo', 'friendly',
@@ -74,7 +70,7 @@ var webSearcherOffline = (function () {
         }
 
         function destroy () {
-            webSearcherTable[wsId] = null;
+            delete webSearcherTable['tb' + wsId];
         }
 
         function stop() {
@@ -92,8 +88,9 @@ var webSearcherOffline = (function () {
             timeLeft: timeLeft,
             id: id
         };
-        wsId = webSearcherTable.length;
-        webSearcherTable.push(ws);
+        wsId = webSearcherTable.maxsize;
+        webSearcherTable['tb' + wsId] = ws;
+        webSearcherTable.maxsize++;
 
         return ws;
     }

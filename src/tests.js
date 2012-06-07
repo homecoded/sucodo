@@ -51,7 +51,6 @@ var impunit = (function () {
             testsRun = 0;
             testsFailed = 0;
             asyncTestsFailed = [];
-            asyncTestsRun = 0;
             asyncTestsRun = [];
             messages = '';
 
@@ -189,7 +188,6 @@ var tests = (function () {
         },
         _testLoca : function () {
             locatest.setup();
-            var onlk = loca.getLocaData('txt_test1');
             impunit.assertEqual('test1_1', loca.getLocaData('txt_test1'));
             impunit.assertEqual('test1_1', loca.getLocaData('txt_test1', 0));
             impunit.assertEqual('test1_2', loca.getLocaData('txt_test1', 1));
@@ -248,7 +246,7 @@ var tests = (function () {
 
             loca.setVariable('#var#', "my");
             processedText = loca.getProcessedLocaData("txt_text5", 1);
-            impunit.assertEqual("my test2 my", processedText)
+            impunit.assertEqual("my test2 my", processedText);
             locatest.tearDown();
         },
         _testLocaProcessedMultiDiffVar: function () {
@@ -262,7 +260,7 @@ var tests = (function () {
             loca.setVariable('#var#', "my");
             loca.setVariable('#var2#', "88");
             processedText = loca.getProcessedLocaData("txt_text6", 1);
-            impunit.assertEqual("my test2 88", processedText)
+            impunit.assertEqual("my test2 88", processedText);
             locatest.tearDown();
         },
         _testLocaProcessedMultiDiffVarDisabled: function () {
@@ -276,13 +274,12 @@ var tests = (function () {
             loca.setVariable('#var#', "my");
             loca.setVariable('#var2#', "88");
             processedText = loca.getProcessedLocaData("txt_text7", 1);
-            impunit.assertEqual("#var# test2 #var2#", processedText)
+            impunit.assertEqual("#var# test2 #var2#", processedText);
             locatest.tearDown();
         },
         _testLocaProcessedButton: function () {
             locatest.setup();
             loca.applyLocalization(0);
-            var processedText;
             loca.setVariable('#var#', 66);
             loca.updateVariables('btn_3', 0);
             impunit.assertEqual('66 test 66', $('#btn_3').val(), "Button 3 was not localized correctly");
@@ -293,7 +290,6 @@ var tests = (function () {
         },
         _testLocaProcessedSpan: function () {
             locatest.setup();
-            var processedText;
             loca.applyLocalization(0);
             loca.setVariable('#var#', 66);
             loca.updateVariables('txt_test4', 0);
@@ -343,7 +339,7 @@ var tests = (function () {
 
             for (var i = 0; i < htmlParts.length; i++)
             {
-                impunit.assertTrue(expHtml.indexOf(htmlParts[i]) >= 0);
+                impunit.assertTrue(expHtml.indexOf(htmlParts[i]) >= 0, 'html part is not contained');
             }
             helpControlTest.tearDown();
         }
@@ -387,7 +383,7 @@ var tests = (function () {
             impunit.assertEqual(null, textBreaker.breakUp(null, 3));
             impunit.assertEqual(null, textBreaker.breakUp(undef, 3));
         }
-    }
+    };
 
     var searcherTest =  {
         _testSearch : function () {
@@ -404,9 +400,9 @@ var tests = (function () {
         multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
         _testMultiSearch : function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, phraseData) {
-                impunit.assertTrue(phraseData.count > 0);
+                impunit.assertTrue(phraseData.count > 0, 'phraseData count is 0 for phrase ' + phrase);
                 var index = searcherTest.multiSearchTerms.indexOf(phrase);
-                impunit.assertTrue(index >= 0);
+                impunit.assertTrue(index >= 0, 'Index is littler than 0');
                 searcherTest.multiSearchTerms[index] = null;
             });
             for (var i = 0; i < searcherTest.multiSearchTerms.length; i++) {
@@ -469,7 +465,7 @@ var tests = (function () {
             var checkTextFinishedCallback = impunit.asyncCallback(function () {
                 impunit.assertEqual(2, textAnalyzerTest.callbackCount, "Not all test results were properly returned!");
 
-            })
+            });
             setTimeout(checkTextFinishedCallback, 2000);
             ta.go(text, 3, asyncCallback);
         },
@@ -510,7 +506,98 @@ var tests = (function () {
                 ta.go(text1, 3, resetCallCallback);
             });
             setTimeout(callback, 3000);
+        },
+
+        mockSearcher2 : {
+            search: function (phrase, cb) {
+                var result = {
+                    sources : [
+                        { Url: 'http://www.funny.com'},
+                        { Url: 'http://www.fake.com'},
+                        { Url: 'http://www.fun.com'},
+                        { Url: 'http://www.funeral.com'},
+                        { Url: 'http://www.finger.com'}
+                    ],
+                    count: 5
+                };
+                cb(phrase, result);
+            }
+        },
+
+        _testAnalyzerIgnoredSources: function () {
+            var ta = textAnalyzer.createInstance();
+            var text = "Ich bin ein Berliner.";
+            ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
+            ta.toggleIgnoreUrl('http://www.fun.com');
+            ta.toggleIgnoreUrl('http://www.finger.com');
+
+            var callback = function () {
+                var results = ta.getResult();
+                for (var phrase in results) {
+                    var data = results[phrase];
+                    for (var i  in data.sources) {
+                        if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
+                            || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored)
+                        {
+                            impunit.assertTrue(false, 'Not all ignored URLs were ignored ' + data.sources[i].Url);
+                        }
+                    }
+                    impunit.assertEqual(data.count, 3);
+                }
+            };
+            ta.go(text, 3, callback);
+        },
+
+        _testAnalyzerRemoveIgnoredSourcesFromResult: function () {
+            var ta = textAnalyzer.createInstance();
+            var text = "Ich bin ein Berliner.";
+            ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
+            ta.go(text, 4);
+            ta.toggleIgnoreUrl('http://www.fun.com');
+            ta.toggleIgnoreUrl('http://www.finger.com');
+            var result = ta.getResult();
+            for (var phrase in result) {
+                var data = result[phrase];
+                for (var i in data.sources) {
+                    if (!data.sources[i]) {
+                        impunit.assertTrue(false, 'No result at all!');
+                    }
+                    if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
+                        || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored) {
+                        impunit.assertTrue(false, 'The ignored source is still in the result!');
+                    }
+                }
+                impunit.assertEqual(data.count, 3);
+            }
+        },
+
+        _testAnalyzerRemoveAndAddIgnoredSourcesFromResult: function () {
+            var ta = textAnalyzer.createInstance();
+            var text = "Ich bin ein Berliner.";
+            ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
+            ta.go(text, 4);
+            ta.toggleIgnoreUrl('http://www.fun.com');
+            ta.toggleIgnoreUrl('http://www.fun.com');
+            var result = ta.getResult();
+            for (var phrase in result) {
+                var data = result[phrase];
+                if (data.sources) {
+                    for (var i in data.sources) {
+                        if (!data.sources[i]) {
+                            impunit.assertTrue(false, 'No result at all!');
+                        }
+                        if (data.sources[i].Url == 'http://www.fun.com'){
+                            impunit.assertTrue(data.sources[i].ignored === false, 'The source has not been correctly re-enabled');
+                        }
+                    }
+                    impunit.assertEqual(data.count, 5);
+                } else {
+                    impunit.assertTrue(false, 'result is invalid');
+                }
+
+            }
         }
+
     };
 
     var colorWarnerTest = {
@@ -539,16 +626,16 @@ var tests = (function () {
         _testAllWebSearchersDestroyed : function () {
 
             var checkCleanupCallback = impunit.asyncCallback(function () {
-                var webSearcherCount = 0, i;
+                var webSearcherCount = 0, j;
                 if (webSearcher) webSearcherCount++;
                 if (webSearcherOffline) webSearcherCount++;
 
-                for (i = 0; i < webSearcherCount; i++) {
-                    impunit.assertTrue(webSearcherTable[i] !== null, "Main websearcher does not exist");
+                for (j = 0; j < webSearcherCount; j++) {
+                    impunit.assertTrue(webSearcherTable[webSearcherTable['tb' + j]] !== null, "Main websearcher does not exist");
                 }
 
-                for (var i = webSearcherCount; i < webSearcherTable.length; i++) {
-                    impunit.assertTrue(webSearcherTable[i] === null, "A test websearcher still exists at " + i);
+                for (j = webSearcherCount; j < webSearcherTable.size; j++) {
+                    impunit.assertTrue(webSearcherTable['tb' + j] === null, "A test websearcher still exists at " + j);
                 }
             });
             setTimeout(checkCleanupCallback, 6000);

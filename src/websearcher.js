@@ -1,4 +1,4 @@
-var webSearcherTable = (webSearcherTable) ? webSearcherTable : [];
+var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
 
 var webSearcher = (function () {
 
@@ -13,7 +13,8 @@ var webSearcher = (function () {
             intervalId = null,
             INTERVAL_WAIT_TIME = 250,
             wsId,
-            ws;
+            ws
+            ;
 
         function search(phrase, cb) {
             if (cb) {
@@ -58,8 +59,15 @@ var webSearcher = (function () {
         function doSearch(phrase) {
             var script = document.createElement('script');
             script.type = "text/javascript";
-            script.src = 'http://api.search.live.net/json.aspx?JsonType=callback&JsonCallback=webSearcherTable['+wsId+'].searchDone&sources=web&Appid=' + apikey
-                    + '&query="' + phrase + '"';
+            script.src = 'http://api.bing.net/json.aspx?'
+                + 'JsonType=callback'
+                + '&JsonCallback=webSearcherTable.'+getSearcherTableId()+'.searchDone'
+                + '&Sources=Web'
+                + '&Version=2.0'
+                + '&Adult=Moderate'
+                + '&Appid=' + apikey
+                + '&Query="' + phrase + '"'
+                ;
             scripts.push(script);
             document.getElementsByTagName('head')[0].appendChild(script);
         }
@@ -100,7 +108,11 @@ var webSearcher = (function () {
 
         function destroy () {
             stopThread();
-            webSearcherTable[wsId] = null;
+            delete webSearcherTable[getSearcherTableId()];
+        }
+
+        function getSearcherTableId() {
+            return 'tb' + wsId;
         }
 
         ws =  {
@@ -111,8 +123,9 @@ var webSearcher = (function () {
             stop: stopScripts,
             timeLeft: timeLeft
         };
-        wsId = webSearcherTable.length;
-        webSearcherTable.push(ws);
+        wsId = webSearcherTable.maxsize;
+        webSearcherTable[getSearcherTableId()] = ws;
+        webSearcherTable.maxsize++;
 
         return ws;
     }
