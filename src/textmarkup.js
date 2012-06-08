@@ -85,15 +85,22 @@ var textMarkup = (function () {
     }
     
     function getMostLikelySourceUrl(sources) {
-        var i, url;
+        var i, url, firstValidSource;
+
         for (i = 0; i < sources.length; i++) {
+            if (sources[i].ignored) {
+                continue;
+            }
             url = sources[i].Url;
+            if (!firstValidSource) {
+                firstValidSource = url;
+            }
             if (url.indexOf('wikipedia') >= 0) {
                 return createLink(url);
             }
         }
 
-        return createLink(sources[0].Url);
+        return createLink(firstValidSource);
     }
 
     function updateMouseInteractivity() {

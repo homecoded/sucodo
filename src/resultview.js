@@ -77,10 +77,22 @@ var resultview = (function () {
                     shortUrl.substring(0, 10) + '...' + shortUrl.substring(shortUrl.length - 27, shortUrl.length)
                     : shortUrl;
 
-            var linkHTML = '<div class="resultSourceLinkContainer"' + onMouseOverCode + onMouseOutCode + '>'
+            var divId = 'source_' + i;
+            var ignoreLinkId = 'ignore_' + i;
+            var ignoreLink = "resultview.ignoreUrl('"+encodeURI(url)+"', "+i+")";
+            var ignoreClass = '';
+            var ignoreText = '';
+            if (textAnalyzer.isIgnoredSource(url)) {
+                ignoreClass = 'ignoredResultSource';
+                ignoreText = loca.getLocaData('txt_include');
+            } else {
+                ignoreText = loca.getLocaData('txt_ignore');
+            }
+
+            var linkHTML = '<div id="'+divId+'" class="resultSourceLinkContainer '+ignoreClass+'"' + onMouseOverCode + onMouseOutCode + '>'
                 + '<div class="linkImg"></div>'
                 + '<a href="'+url+'" class="resultSource">'+sourceShort+'</a> '
-                + '<a href="jojojo" class="sourceLinkControl">['+'ignore'+']</a>'
+                + '<a id="'+ignoreLinkId+'" href="javascript:void(0)" onclick="'+ignoreLink+'" class="sourceLinkControl">['+ignoreText+']</a>'
                 +'</div>';
             
             sourcesView.append(linkHTML);
@@ -115,6 +127,16 @@ var resultview = (function () {
         resultsPos = $('#scrollable_container').scrollTop() + $("#resultview_container").offset().top;
     }
 
+    function ignoreUrl(url, linkId) {
+        if (navi.toggleIgnoreUrl(url)) {
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include')+']');
+            $('#source_' + linkId).addClass('ignoredResultSource');
+        } else {
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_ignore')+']');
+            $('#source_' + linkId).removeClass('ignoredResultSource');
+        }
+    }
+
     function scrollToResults() {
        $('#scrollable_container').animate({
             scrollTop: resultsPos + 'px'
@@ -127,6 +149,7 @@ var resultview = (function () {
 
     function showLess() {
         show(false);
+        scrollToResults();
     }
 
     // ---------------------------------------------
@@ -136,6 +159,7 @@ var resultview = (function () {
         reset: reset,
         scrollToResults: scrollToResults,
         showAll : showAll,
-        showLess: showLess
+        showLess: showLess,
+        ignoreUrl: ignoreUrl
     };
 })();

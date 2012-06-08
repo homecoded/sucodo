@@ -225,7 +225,7 @@ a {
     text-align: left;
     padding: 15px;
     width: 610px;
-    border: 1px dotted #333;
+    border: 1px solid #333;
 }
 
 #content1, #content2 {
@@ -292,11 +292,15 @@ a {
     margin-left: 0px;
 }
 
+.ignoredResultSource a {
+    color: #aaa;
+}
+
 .toggleSources {
     font-size: 90%;
     line-height: 100%;
     padding: 10px;
-    border: 1px dotted #444;
+    border: 1px solid #444;
     background-color: #ddd;
     text-align: center;
     margin-top: 20px;

@@ -6,7 +6,10 @@ var textAnalyzer = (function () {
         var phrases,
             webSearcher,
             callback,
-            plagiarismCountMap;
+            plagiarismCountMap,
+            ignoredSources = {},
+            paragraphs
+            ;
 
         function setWebSearcher(searcher) {
             webSearcher = searcher;
@@ -16,8 +19,8 @@ var textAnalyzer = (function () {
             callback = cb;
             phrases = [];
             plagiarismCountMap = [];
-            var paragraphs = textBreaker.breakUp(newText, wordgrouplen),
-                i, j,
+            paragraphs = textBreaker.breakUp(newText, wordgrouplen);
+            var i, j,
                 randPhrases, sortRule,
                 reg,
                 paragraph,
@@ -55,7 +58,7 @@ var textAnalyzer = (function () {
 
             // count the search on sucodo.de
             reg = new Image();
-            reg.src='http://sucodo.de/reg.php'; 
+            //reg.src='http://sucodo.de/reg.php';
 
             return paragraphs;
         }
@@ -66,8 +69,30 @@ var textAnalyzer = (function () {
             phrases = [];
         }
 
+        function flagIgnoredSources(phraseData) {
+            var removeList = [], i;
+            if (phraseData.sources) {
+                for (i = 0; i < phraseData.sources.length; i++) {
+                    var source = phraseData.sources[i];
+                    if (ignoredSources[source.Url]) {
+                        if (!source.ignored) {
+                            source.ignored = true;
+                            phraseData.count--;
+                        }
+                    } else {
+                        if (source.ignored) {
+                            source.ignored = false;
+                            phraseData.count++;
+                        }
+                    }
+                }
+            }
+            return phraseData;
+        }
+
         function onNewResultReceived(phrase, phraseData) {
-            plagiarismCountMap[phrase] = phraseData;
+            plagiarismCountMap[phrase] = flagIgnoredSources(phraseData);
+
             if (callback) {
                 callback();
             }
@@ -77,14 +102,40 @@ var textAnalyzer = (function () {
             return plagiarismCountMap;
         }
 
+        function toggleIgnoreUrl(url) {
+            if (ignoredSources[url]) {
+                delete ignoredSources[url];
+            } else {
+                ignoredSources[url] = true;
+            }
+
+            for (var phrase in plagiarismCountMap) {
+                var data = plagiarismCountMap[phrase];
+                if (data && data.sources) {
+                    plagiarismCountMap[phrase] = flagIgnoredSources(data);
+                }
+            }
+            return ignoredSources[url];
+        }
+
+        function isIgnoredSource(url) {
+            return ignoredSources[url];
+        }
+
+
         return {
             createInstance: createInstance,
             go: go,
             stop: stop,
             getResult: getResult,
             setWebSearcher : setWebSearcher,
+            toggleIgnoreUrl: toggleIgnoreUrl,
+            isIgnoredSource: isIgnoredSource,
             timeLeft: function () {
                 return webSearcher.timeLeft();
+            },
+            getPhrases: function () {
+                return paragraphs;
             }
         };
 

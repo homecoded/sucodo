@@ -291,6 +291,18 @@ var LOCA_ENG = 0,
                 "Zeige wahrscheinlichste Quellen"
             ],
 
+    "txt_ignore":
+            [
+                "ignore",
+                "ignorieren"
+            ],
+
+    "txt_include":
+            [
+                "include",
+                "einbeziehen"
+            ],
+
     "last element":
             [
                 "",

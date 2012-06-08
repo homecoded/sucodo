@@ -1,7 +1,7 @@
 /********************************************************************************************
  * Navi
  */
-var sucodo_isOfflineMode = true;
+var sucodo_isOfflineMode = false;
 
 var navi = {
     PAGE_ENTER_TEXT: 1,
@@ -191,7 +191,15 @@ var navi = {
             textAnalyzer.setWebSearcher(webSearcher);
         }
 
-    }
+    },
+
+    toggleIgnoreUrl: function (url) {
+            var isIgnored = textAnalyzer.toggleIgnoreUrl(url);
+            var resultText = textMarkup.markup(textAnalyzer.getPhrases(), textAnalyzer.getResult());
+            $('#textview').html(resultText);
+            textMarkup.updateMouseInteractivity();
+            return isIgnored;
+        }
 };
 
 var colorWarner = {
