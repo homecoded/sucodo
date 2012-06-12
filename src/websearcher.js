@@ -45,6 +45,7 @@ var webSearcher = (function () {
                 return;
             }
             result.count = results.SearchResponse.Web.Total;
+            result.webResultCount = results.SearchResponse.Web.Total;
             result.sources = results.SearchResponse.Web.Results;
 
             cbs = callbacks[phrase];

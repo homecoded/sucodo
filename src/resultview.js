@@ -2,6 +2,7 @@ var resultview = (function () {
 
     var resultView = null;
     var resultsPos = -1;
+    var areAllSourcesShown = false;
 
     // ---------------------------------------------
     function reset() {
@@ -29,8 +30,10 @@ var resultview = (function () {
             if(resultMap.hasOwnProperty(phrase)) {
                 numPhrases+=1;
                 phraseData = resultMap[phrase];
-                if (phraseData.count > 0) {
-                    numSuspiciousPhrases+=1;
+                if (phraseData.webResultCount > 0) {
+                    if (phraseData.count > 0){
+                        numSuspiciousPhrases+=1;
+                    }
                     for (i = phraseData.sources.length - 1; i >= 0; i-=1 ) {
                         url = phraseData.sources[i].Url;
                         if (!sourceMap[url]) {
@@ -45,7 +48,12 @@ var resultview = (function () {
 
         for(url in sourceMap) {
             if(sourceMap.hasOwnProperty(url)) {
-                sourceArray.push( { url: url, count: sourceMap[url]} );
+                sourceArray.push(
+                        {
+                            url: url,
+                            count: sourceMap[url]
+                        }
+                    );
             }
         }
 
@@ -57,10 +65,13 @@ var resultview = (function () {
         loca.setVariable('#percent_suspicious#', '<span class="resultPercent">'+resultPercent+'%</span>');
         loca.updateVariables('txt_percent_suspicious');
 
-        if (doShowAllSources === true)
+        if (doShowAllSources === true) {
             numSourcesToShow = sourceArray.length;
-        else
+            areAllSourcesShown = true;
+        } else {
             numSourcesToShow = (sourceArray.length > 10) ? 10 : sourceArray.length;
+            areAllSourcesShown = false;
+        }
 
         sourcesView = $('#most_used_sources');
         sourcesView.hide();
@@ -84,9 +95,9 @@ var resultview = (function () {
             var ignoreText = '';
             if (textAnalyzer.isIgnoredSource(url)) {
                 ignoreClass = 'ignoredResultSource';
-                ignoreText = loca.getLocaData('txt_include');
+                ignoreText = loca.getLocaData('txt_include', sucodoLoca.lang);
             } else {
-                ignoreText = loca.getLocaData('txt_ignore');
+                ignoreText = loca.getLocaData('txt_ignore', sucodoLoca.lang);
             }
 
             var linkHTML = '<div id="'+divId+'" class="resultSourceLinkContainer '+ignoreClass+'"' + onMouseOverCode + onMouseOutCode + '>'
@@ -101,10 +112,10 @@ var resultview = (function () {
         var textShowSources = '';
         var methodName = '';
         if (doShowAllSources === true) {
-            textShowSources = loca.getLocaData('txt_show_less_sources');
+            textShowSources = loca.getLocaData('txt_show_less_sources', sucodoLoca.lang);
             methodName = 'showLess';
         } else {
-            textShowSources = loca.getLocaData('txt_show_all_sources');
+            textShowSources = loca.getLocaData('txt_show_all_sources', sucodoLoca.lang);
             methodName = 'showAll';
         }
 
@@ -129,10 +140,10 @@ var resultview = (function () {
 
     function ignoreUrl(url, linkId) {
         if (navi.toggleIgnoreUrl(url)) {
-            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include')+']');
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include', sucodoLoca.lang)+']');
             $('#source_' + linkId).addClass('ignoredResultSource');
         } else {
-            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_ignore')+']');
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_ignore', sucodoLoca.lang)+']');
             $('#source_' + linkId).removeClass('ignoredResultSource');
         }
     }
@@ -160,6 +171,7 @@ var resultview = (function () {
         scrollToResults: scrollToResults,
         showAll : showAll,
         showLess: showLess,
-        ignoreUrl: ignoreUrl
+        ignoreUrl: ignoreUrl,
+        areAllSourcesShown: function () { return areAllSourcesShown; }
     };
 })();

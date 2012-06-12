@@ -198,6 +198,7 @@ var navi = {
             var resultText = textMarkup.markup(textAnalyzer.getPhrases(), textAnalyzer.getResult());
             $('#textview').html(resultText);
             textMarkup.updateMouseInteractivity();
+            resultview.show(resultview.areAllSourcesShown());
             return isIgnored;
         }
 };
