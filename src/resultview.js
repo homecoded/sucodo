@@ -79,7 +79,7 @@ var resultview = (function () {
 
             var divId = 'source_' + i;
             var ignoreLinkId = 'ignore_' + i;
-            var ignoreLink = "resultview.ignoreUrl('"+encodeURI(url)+"', "+i+")";
+            var ignoreLink = "resultview.ignoreUrl('"+(url)+"', "+i+")";
             var ignoreClass = '';
             var ignoreText = '';
             if (textAnalyzer.isIgnoredSource(url)) {

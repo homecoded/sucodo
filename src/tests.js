@@ -535,14 +535,16 @@ var tests = (function () {
                 var results = ta.getResult();
                 for (var phrase in results) {
                     var data = results[phrase];
-                    for (var i  in data.sources) {
-                        if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
-                            || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored)
-                        {
-                            impunit.assertTrue(false, 'Not all ignored URLs were ignored ' + data.sources[i].Url);
+                    if (data) {
+                        for (var i in data.sources) {
+                            if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
+                                || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored)
+                            {
+                                impunit.assertTrue(false, 'Not all ignored URLs were ignored ' + data.sources[i].Url);
+                            }
                         }
+                        impunit.assertEqual(data.count, 3);
                     }
-                    impunit.assertEqual(data.count, 3);
                 }
             };
             ta.go(text, 3, callback);
@@ -552,22 +554,24 @@ var tests = (function () {
             var ta = textAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
-            ta.go(text, 4);
+            ta.go(text, 3);
             ta.toggleIgnoreUrl('http://www.fun.com');
             ta.toggleIgnoreUrl('http://www.finger.com');
             var result = ta.getResult();
             for (var phrase in result) {
                 var data = result[phrase];
-                for (var i in data.sources) {
-                    if (!data.sources[i]) {
-                        impunit.assertTrue(false, 'No result at all!');
+                if (data) {
+                    for (var i in data.sources) {
+                        if (!data.sources[i]) {
+                            impunit.assertTrue(false, 'No result at all!');
+                        }
+                        if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
+                            || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored) {
+                            impunit.assertTrue(false, 'The ignored source is still in the result!');
+                        }
                     }
-                    if (data.sources[i].Url == 'http://www.fun.com' && !data.sources[i].ignored
-                        || data.sources[i].Url == 'http://www.finger.com' && !data.sources[i].ignored) {
-                        impunit.assertTrue(false, 'The ignored source is still in the result!');
-                    }
+                    impunit.assertEqual(data.count, 3);
                 }
-                impunit.assertEqual(data.count, 3);
             }
         },
 

@@ -70,22 +70,23 @@ var textAnalyzer = (function () {
         }
 
         function flagIgnoredSources(phraseData) {
-            var removeList = [], i;
+            var i;
             if (phraseData.sources) {
+                var sourceCount = 0;
                 for (i = 0; i < phraseData.sources.length; i++) {
                     var source = phraseData.sources[i];
                     if (ignoredSources[source.Url]) {
                         if (!source.ignored) {
                             source.ignored = true;
-                            phraseData.count--;
                         }
                     } else {
                         if (source.ignored) {
                             source.ignored = false;
-                            phraseData.count++;
                         }
+                        sourceCount++;
                     }
                 }
+                phraseData.count = sourceCount;
             }
             return phraseData;
         }
@@ -111,8 +112,10 @@ var textAnalyzer = (function () {
 
             for (var phrase in plagiarismCountMap) {
                 var data = plagiarismCountMap[phrase];
+
                 if (data && data.sources) {
-                    plagiarismCountMap[phrase] = flagIgnoredSources(data);
+                    var phraseData = flagIgnoredSources(data);
+                    plagiarismCountMap[phrase] = phraseData;
                 }
             }
             return ignoredSources[url];
