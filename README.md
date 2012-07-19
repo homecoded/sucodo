@@ -31,8 +31,6 @@ ISSUES:
 
 * check why websearcher returns 0 time left of first update after second search
 * move the accept and close to the right (rename accept und apply)
-* update privacy (each search is tracked in terms of numbers)
-* remove bing API key and insert a warning if no api key is available
 
 DONE
 ====
@@ -60,6 +58,8 @@ FEATURE REQUESTS:
 
 ISSUES:
 
+* update privacy (each search is tracked in terms of numbers)
+* remove bing API key and insert a warning if no api key is available
 * fix tests in IE
 * analyze view: click anywhere on the page but another suspicious phrase, will leave phrase select mode
 * update the colors in analyze mode
