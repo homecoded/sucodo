@@ -5,8 +5,7 @@ var webSearcher = (function () {
     var instance;
 
     function createInstance()  {
-        // TODO remove api key and insert a warning
-        var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7',
+        var apikey = '',
             callbacks = {},
             phraseQueue = [],
             scripts = [],

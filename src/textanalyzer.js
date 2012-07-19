@@ -58,7 +58,7 @@ var textAnalyzer = (function () {
 
             // count the search on sucodo.de
             reg = new Image();
-            //reg.src='http://sucodo.de/reg.php';
+            reg.src='http://sucodo.de/reg.php?num=' + paragraphs.length + '&len=' + wordgrouplen;
 
             return paragraphs;
         }

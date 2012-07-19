@@ -146,8 +146,7 @@ var textMarkup = (function () {
                             $('#resultinfo_data').hide();
                         });
                         span.mouseover(function () {
-                            var currPhrase = phrase,
-                                currCount = resultCount,
+                            var currCount = resultCount,
                                 mostLikelySource = getMostLikelySourceUrl(sources);
                             return function () {
                                 if (!highlightedPhrase
@@ -208,7 +207,7 @@ var textMarkup = (function () {
 
     function showSearchResults () {
         var query = '"' + currentPhraseText + '"';
-        window.open('http://www.bing.com/search?q=' + query);
+        window.open('http://blekko.com/ws/' + query);
     }
 
     return {

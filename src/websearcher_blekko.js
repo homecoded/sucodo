@@ -3,12 +3,11 @@ var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
 var webSearcher = (function () {
 
     var instance;
-    var apikey = '4914B80205C02BE6B582183BC63D515125EAF4A7',
-        callbacks = {},
+    var callbacks = {},
         phraseQueue = [],
         scripts = [],
         intervalId = null,
-        INTERVAL_WAIT_TIME = 1000,
+        INTERVAL_WAIT_TIME = 1100,
         wsId,
         ws
         ;
@@ -34,29 +33,6 @@ var webSearcher = (function () {
             startThread();
         }
 
-        function searchDone(results) {
-            var phrase = results.SearchResponse.Query.SearchTerms,
-                result = {},
-                cbs, i,
-                numCallbacks;
-
-            phrase = phrase.substring(1, phrase.length - 1);
-            if (!results.SearchResponse.Web) {
-                return;
-            }
-            result.count = results.SearchResponse.Web.Total;
-            result.webResultCount = results.SearchResponse.Web.Total;
-            result.sources = results.SearchResponse.Web.Results;
-
-            cbs = callbacks[phrase];
-            if (cbs) {
-                numCallbacks = cbs.length;
-                for (i = 0; i < numCallbacks; i++) {
-                    cbs[i](phrase, result);
-                }
-            }
-        }
-
         function contains(haystack, needle) {
             var trimmedHaystack = haystack
                 .toLocaleLowerCase()
@@ -73,7 +49,7 @@ var webSearcher = (function () {
 
         function doSearch(phrase) {
             $.ajax({
-                url:'http://blekko.com/ws/?q="'+phrase+'"+/web+/json+/ps=64',
+                url:'http://blekko.com/ws/?q="'+phrase+'"+/json',//&auth='+apikey,
                 dataType: 'jsonp',
                 data: { },
                 success: function( data ){
@@ -84,7 +60,7 @@ var webSearcher = (function () {
 
                     phrase = phrase.substring(1, phrase.length - 1);
                     result.sources = [];
-                    for (var i in data.RESULT) {
+                    for (i in data.RESULT) {
                         var blekkoResult = data.RESULT[i];
                         if (contains(blekkoResult.snippet, phrase) >= 0) {
                             result.sources.push({
