@@ -48,20 +48,20 @@ var LOCA_ENG = 0,
 
     "txt_help":
             [
-                "Sucodo will help you find plagiarims in your text. Just click on 'Enter Text' and paste the text into textfield.",
-                "Sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
+                "sucodo will help you find plagiarims in your text. Just click on 'Enter Text' and paste the text into textfield.",
+                "sucodo hilft Dir, Plagiate in deinen Texten zu finden. Klicke einfach auf 'Text eingeben' und kopiere deinen Text in das Textfeld."
             ],
 
     "txt_hint_edit":
             [
-                "Sucodo examines a text and tells you about possible plagiarisms is finds. Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
-                "Sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
+                "sucodo examines a text and tells you about possible plagiarisms is finds. Enter or rather copy & paste the text you want to analyze into the text field.<br>You can also <a href='javascript:void(0)' id='link_sample_text'>add some sample text</a> if you just want to give it a spin.",
+                "sucodo untersucht einen Text und berichtet über mögliche Plagiate, die es darin findet. Gib den Text, den du analysieren willst, in das Textfeld ein (beziehungsweise benutze Kopieren und Einfügen).<br>Du kannst auch <a href='javascript:void(0)' id='link_sample_text'>einen Beispieltext benutzen</a>, wenn Du es nur mal ausprobieren möchtest."
             ],
 
     "txt_hint_analyze":
             [
-                "Sucodo colors any parts of the text it finds suspicious. The more red you see, the more likely the text contains plagiarisms! Use your mouse to inspect them.",
-                "Sucodo färbt alle Textteile ein, die es als verdächtig eintuft. Je mehr rot im Text zu sehen ist, desto wahrscheinlicher enthält der Text Plagiate. Benutze deine Maus um sie zu untersuchen."
+                "sucodo colors any parts of the text it finds suspicious. The more red you see, the more likely the text contains plagiarisms! Use your mouse to inspect them.",
+                "sucodo färbt alle Textteile ein, die es als verdächtig eintuft. Je mehr rot im Text zu sehen ist, desto wahrscheinlicher enthält der Text Plagiate. Benutze deine Maus um sie zu untersuchen."
             ],
 
     "txt_hint_analyze_click":
@@ -192,13 +192,13 @@ var LOCA_ENG = 0,
             ],
     "txt_privacy":
             [
-                "<strong>Privacy Policy:</strong><br>Sucodo is open source and provided free of charge. It does not use cookies. No personal data except IP addresses are logged (Apache access log). Your IP address may be also transmitted to Blekko while executing Blekko search queries. Sucodo does not log any texts or parts of texts processed through it. However, the number of search queries and wordgroup lengths are tracked.",
-                "<strong>Privatsphäre:</strong><br>Sucodo ist Open Source und wird kostenlos zur Verfügung gestellt. Es werden keine Cookies benutzt und keine persönlichen Daten außer IP-Adressen gespeichert (Server Log). Durch das Ausführen von Suchanfragen über Blekko wird deine IP auch an Blekko übertragen. Sucodo speichert keine damit untersuchte Texte oder Textteile. Es werden jedoch die Anzahl der Suchanfragen, sowie die Testgruppenlänge getrackt."
+                "<strong>Privacy Policy:</strong><br>Sucodo is open source and provided free of charge. It does not use cookies. No personal data except IP addresses are logged (Apache access log). Your IP address may be also transmitted to Blekko while executing Blekko search queries. Sucodo does not log any texts or parts of texts processed through it. However, the number of search queries needed for each text are tracked.",
+                "<strong>Privatsphäre:</strong><br>Sucodo ist Open Source und wird kostenlos zur Verfügung gestellt. Es werden keine Cookies benutzt und keine persönlichen Daten außer IP-Adressen gespeichert (Server Log). Durch das Ausführen von Suchanfragen über Blekko wird deine IP auch an Blekko übertragen. Sucodo speichert keine damit untersuchte Texte oder Textteile. Es werden jedoch die Anzahl der Suchanfragen, die für eine Text notwendig sind, getrackt."
             ],
     "txt_privacy_see_also":
             [
-                "Sucodo utilizes Blekko, which is subject to the following terms & conditions:  <a href=\"http://blekko.com/about/terms\">Blekko - Terms & Conditions</a>",
-                "Sucodo benutzt Blekko. Dafür gelten folgende Nutzungbedingungen: <a href=\"http://blekko.com/about/terms\">Blekko - Terms & Conditions</a>"
+                "sucodo utilizes Blekko, which is subject to the following terms & conditions:  <a href=\"http://blekko.com/about/terms\">Blekko - Terms & Conditions</a>",
+                "sucodo benutzt Blekko. Dafür gelten folgende Nutzungbedingungen: <a href=\"http://blekko.com/about/terms\">Blekko - Terms & Conditions</a>"
             ],
 
     "txt_sample_text":
