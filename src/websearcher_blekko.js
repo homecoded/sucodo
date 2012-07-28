@@ -1,3 +1,6 @@
+var sucodo = (sucodo) ? sucodo : {};
+sucodo.blekkoApiKey = '61fe9e4f';
+
 var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
 
 var webSearcher = (function () {
@@ -48,8 +51,13 @@ var webSearcher = (function () {
         }
 
         function doSearch(phrase) {
+            var apiAuth = '';
+            if (sucodo && sucodo.blekkoApiKey) {
+                apiAuth = '&auth=' + sucodo.blekkoApiKey;
+            }
+
             $.ajax({
-                url:'http://blekko.com/ws/?q="'+phrase+'"+/json',//&auth='+apikey,
+                url:'http://blekko.com/ws/?q="'+phrase+'"+/json' + apiAuth,
                 dataType: 'jsonp',
                 data: { },
                 success: function( data ){

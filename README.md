@@ -58,6 +58,7 @@ FEATURE REQUESTS:
 
 ISSUES:
 
+* use API key if available
 * update privacy (each search is tracked in terms of numbers)
 * remove bing API key and insert a warning if no api key is available
 * fix tests in IE
