@@ -605,19 +605,19 @@ var tests = (function () {
     var textMarkupTest = {
         _testMarkup : function () {
             var text = ["bla"];
-            var result = textMarkup.markup(text);
+            var result = Sucodo.TextMarkup.markup(text);
             impunit.assertEqual('<span id="phrase0" style="color:#000000">bla</span> <br>\n', result);
         },
         _testMarkupParagraphs : function () {
             var text = ["bla", "blub"];
-            var result = textMarkup.markup(text);
+            var result = Sucodo.TextMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
                     + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
             impunit.assertEqual(expected, result);
         },
         _testMarkupParagraphs3 : function () {
             var text = ["bla", "blub", "honk"];
-            var result = textMarkup.markup(text);
+            var result = Sucodo.TextMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> <br>\n'
                     + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
                     + '<span id="phrase2" style="color:#000000">honk</span> <br>\n';
@@ -625,14 +625,14 @@ var tests = (function () {
         },
         _testMarkupParagraphsArray : function () {
             var text = [["bla", "blub"]];
-            var result = textMarkup.markup(text);
+            var result = Sucodo.TextMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> '
                     + '<span id="phrase1" style="color:#000000">blub</span> <br>\n';
             impunit.assertEqual(expected, result);
         },
         _testMarkupParagraphsArray3 : function () {
             var text = [["bla", "blub"], ["bla", "blub"], ["bla", "blub"]];
-            var result = textMarkup.markup(text);
+            var result = Sucodo.TextMarkup.markup(text);
             var expected = '<span id="phrase0" style="color:#000000">bla</span> '
                     + '<span id="phrase1" style="color:#000000">blub</span> <br>\n'
                     + '<span id="phrase2" style="color:#000000">bla</span> '

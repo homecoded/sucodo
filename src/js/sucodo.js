@@ -99,7 +99,7 @@ Sucodo.Navi = {
                     wordGroupLen = parseInt($('#grouplen').val(), 10);
                     Sucodo.TextAnalyzer.stop();
                     phrases = Sucodo.TextAnalyzer.go(text, wordGroupLen, function () {
-                        resultText = textMarkup.markup(phrases, Sucodo.TextAnalyzer.getResult());
+                        resultText = Sucodo.TextMarkup.markup(phrases, Sucodo.TextAnalyzer.getResult());
                         $('#textview').html(resultText);
                         timeLeft = Math.round(Sucodo.TextAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
@@ -113,11 +113,11 @@ Sucodo.Navi = {
                             $('#infobar_analyze_done').show();
                             $('#infobar_analyze_progress').hide();
                             Sucodo.ResultView.show();
-                            textMarkup.updateMouseInteractivity();
+                            Sucodo.TextMarkup.updateMouseInteractivity();
                         }
                     });
                 }
-                textMarkup.closeDetails(true);
+                Sucodo.TextMarkup.closeDetails(true);
                 break;
         }
         return true;
@@ -175,7 +175,7 @@ Sucodo.Navi = {
         });
 
         // Analyze Screen
-        $('#resultinfo_inspect').click(textMarkup.showSearchResults);
+        $('#resultinfo_inspect').click(Sucodo.TextMarkup.showSearchResults);
         $('#btn_edit').click(function () {
             Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
         });
@@ -195,9 +195,9 @@ Sucodo.Navi = {
 
     toggleIgnoreUrl: function (url) {
             var isIgnored = Sucodo.TextAnalyzer.toggleIgnoreUrl(url);
-            var resultText = textMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
+            var resultText = Sucodo.TextMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
             $('#textview').html(resultText);
-            textMarkup.updateMouseInteractivity();
+            Sucodo.TextMarkup.updateMouseInteractivity();
             Sucodo.ResultView.show(resultview.areAllSourcesShown());
             return isIgnored;
         }

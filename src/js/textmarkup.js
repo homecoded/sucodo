@@ -1,4 +1,4 @@
-var textMarkup = (function () {
+Sucodo.TextMarkup = (function () {
 
     var id,
         phraseDict,
