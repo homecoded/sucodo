@@ -306,18 +306,18 @@ var tests = (function () {
             // one paragraph
             var text = "I am a text. I am a text. I am a text.";
 
-            var paragraphs = textBreaker.breakUp(text, 3);
+            var paragraphs = Sucodo.TextBreaker.breakUp(text, 3);
             impunit.assertEqual("I am a", paragraphs[0][0]);
             impunit.assertEqual("text. I am", paragraphs[0][1]);
             impunit.assertEqual("a text. I", paragraphs[0][2]);
             impunit.assertEqual("am a text.", paragraphs[0][3]);
 
-            paragraphs = textBreaker.breakUp(text, 4);
+            paragraphs = Sucodo.TextBreaker.breakUp(text, 4);
             impunit.assertEqual("I am a text.", paragraphs[0][0]);
             impunit.assertEqual("I am a text.", paragraphs[0][1]);
             impunit.assertEqual("I am a text.", paragraphs[0][2]);
 
-            paragraphs = textBreaker.breakUp(text, 5);
+            paragraphs = Sucodo.TextBreaker.breakUp(text, 5);
             impunit.assertEqual("I am a text. I", paragraphs[0][0]);
             impunit.assertEqual("am a text. I am", paragraphs[0][1]);
             impunit.assertEqual("a text.", paragraphs[0][2]);
@@ -325,7 +325,7 @@ var tests = (function () {
         _testTextBreakerOnParagraph: function () {
             // more than one paragraph
             var text = "I am a text. I am a text.\nI am 2nd paragraph. I am 2nd paragraph.";
-            paragraphs = textBreaker.breakUp(text, 3);
+            paragraphs = Sucodo.TextBreaker.breakUp(text, 3);
             impunit.assertEqual(2, paragraphs.length);
             impunit.assertEqual("I am a", paragraphs[0][0]);
             impunit.assertEqual("text. I am", paragraphs[0][1]);
@@ -336,8 +336,8 @@ var tests = (function () {
         },
         _testTextBreakerInvalidInput : function () {
             var undef;
-            impunit.assertEqual(null, textBreaker.breakUp(null, 3));
-            impunit.assertEqual(null, textBreaker.breakUp(undef, 3));
+            impunit.assertEqual(null, Sucodo.TextBreaker.breakUp(null, 3));
+            impunit.assertEqual(null, Sucodo.TextBreaker.breakUp(undef, 3));
         }
     };
 

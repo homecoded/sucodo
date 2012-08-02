@@ -1,4 +1,4 @@
-var textBreaker = {
+Sucodo.TextBreaker = {
     /*
      Breaks up the string according to specified parameters
      */
@@ -33,7 +33,6 @@ var textBreaker = {
             paragraph = paragraphs[i];
             parWords = paragraph.split(' ');
             numWords = parWords.length;
-            group;
             parWrdGroupd = [];
 
             for (j = 0; j < numWords; j+=wordGroupLen)

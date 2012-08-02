@@ -19,7 +19,7 @@ Sucodo.TextAnalyzer = (function () {
             callback = cb;
             phrases = [];
             plagiarismCountMap = [];
-            paragraphs = textBreaker.breakUp(newText, wordgrouplen);
+            paragraphs = Sucodo.TextBreaker.breakUp(newText, wordgrouplen);
             var i, j,
                 randPhrases, sortRule,
                 reg,
