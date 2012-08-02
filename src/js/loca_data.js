@@ -1,8 +1,7 @@
-
-var LOCA_ENG = 0,
-    LOCA_GER = 1,
-    NUM_LANGUAGES = 2,
-    loca__dictionary =
+sucodo.LOCA_ENG = 0;
+sucodo.LOCA_GER = 1;
+sucodo.NUM_LANGUAGES = 2;
+sucodo.loca_dictionary =
 {
     "txt_title":
             [

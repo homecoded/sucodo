@@ -2,7 +2,7 @@
 * sucodo loca
 */
 var sucodoLoca = {
-    lang: LOCA_ENG,
+    lang: sucodo.LOCA_ENG,
     setLang: function (id) {
         sucodoLoca.lang = id;
         loca.applyLocalization(id);
@@ -23,7 +23,7 @@ var sucodoLoca = {
             htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) + "<br>",
             i;
 
-        for (i = 0; i < NUM_LANGUAGES; i++)
+        for (i = 0; i < sucodo.NUM_LANGUAGES; i++)
         {
             htmlCode += '<a href="javascript:void(0)" onclick="sucodoLoca.setLang('+i+')" '
                 + 'class="lang_link">'
@@ -36,9 +36,9 @@ var sucodoLoca = {
         sucodoLoca.createLinks();
         var lang = sucodoLoca.getParameterByName("lang");
         if (lang === "de") {
-            sucodoLoca.lang = LOCA_GER;
+            sucodoLoca.lang = sucodo.LOCA_GER;
         } else {
-            sucodoLoca.lang = LOCA_ENG;
+            sucodoLoca.lang = sucodo.LOCA_ENG;
         }
 
     },

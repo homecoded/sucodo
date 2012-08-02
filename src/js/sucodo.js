@@ -214,7 +214,7 @@ $(document).ready(function () {
         tests.runTests();
     }
     // init language
-    loca.setDict(loca__dictionary);
+    loca.setDict(sucodo.loca_dictionary);
     loca.setButtonDict(null);
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
