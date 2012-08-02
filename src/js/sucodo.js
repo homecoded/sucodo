@@ -86,7 +86,7 @@ var navi = {
                         text = plagtext.val(),
                         wordGroupLen, phrases, timeLeft, resultText;
                 $('#resultinfo').hide();
-                resultview.reset();
+                Sucodo.ResultView.reset();
                 if (text.length === 0) {
                     plagtext.css('border', '5px solid #f00');
                     plagtext.css('background-color', '#fcc');
@@ -107,12 +107,12 @@ var navi = {
                             $('#textview').css('background-color', '#AAAAAA');
                             $('#infobar_analyze_done').hide();
                             $('#infobar_analyze_progress').fadeIn();
-                            resultview.reset();
+                            Sucodo.ResultView.reset();
                         } else {
                             $('#textview').css('background-color', '#FFFFFF');
                             $('#infobar_analyze_done').show();
                             $('#infobar_analyze_progress').hide();
-                            resultview.show();
+                            Sucodo.ResultView.show();
                             textMarkup.updateMouseInteractivity();
                         }
                     });
@@ -180,9 +180,9 @@ var navi = {
             navi.openPage(navi.PAGE_ENTER_TEXT);
         });
 
-        resultview.init();
+        Sucodo.ResultView.init();
         $('#btn_results').click((function () {
-           resultview.scrollToResults();
+            Sucodo.ResultView.scrollToResults();
         }));
 
         if (sucodo_isOfflineMode == true) {
@@ -198,7 +198,7 @@ var navi = {
             var resultText = textMarkup.markup(textAnalyzer.getPhrases(), textAnalyzer.getResult());
             $('#textview').html(resultText);
             textMarkup.updateMouseInteractivity();
-            resultview.show(resultview.areAllSourcesShown());
+            Sucodo.ResultView.show(resultview.areAllSourcesShown());
             return isIgnored;
         }
 };
@@ -214,7 +214,7 @@ $(document).ready(function () {
         tests.runTests();
     }
     // init language
-    loca.setDict(sucodo.loca_dictionary);
+    loca.setDict(Sucodo.loca_dictionary);
     loca.setButtonDict(null);
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);

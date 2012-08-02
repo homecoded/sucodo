@@ -1,5 +1,5 @@
 
-sucodo.colorWarner = {
+Sucodo.ColorWarner = {
     getColor: function (number) {
         if (number <= 0) {
             return '#000000';

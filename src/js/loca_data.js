@@ -1,7 +1,7 @@
-sucodo.LOCA_ENG = 0;
-sucodo.LOCA_GER = 1;
-sucodo.NUM_LANGUAGES = 2;
-sucodo.loca_dictionary =
+Sucodo.LOCA_ENG = 0;
+Sucodo.LOCA_GER = 1;
+Sucodo.NUM_LANGUAGES = 2;
+Sucodo.loca_dictionary =
 {
     "txt_title":
             [

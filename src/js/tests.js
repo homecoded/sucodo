@@ -562,23 +562,23 @@ var tests = (function () {
 
     var colorWarnerTest = {
         _testColorHighValues: function () {
-            impunit.assertEqual('#ff0000', sucodo.colorWarner.getColor(257));
-            impunit.assertEqual('#ff0000', sucodo.colorWarner.getColor(1000));
-            impunit.assertEqual('#ff0000', sucodo.colorWarner.getColor(1000000000));
+            impunit.assertEqual('#ff0000', Sucodo.ColorWarner.getColor(257));
+            impunit.assertEqual('#ff0000', Sucodo.ColorWarner.getColor(1000));
+            impunit.assertEqual('#ff0000', Sucodo.ColorWarner.getColor(1000000000));
         },
         _testColorMediumValues : function () {
-            impunit.assertEqual('#ff0000', sucodo.colorWarner.getColor(256), "256");
-            impunit.assertEqual('#ff0000', sucodo.colorWarner.getColor(255), "255");
-            impunit.assertEqual('#fe0100', sucodo.colorWarner.getColor(254), "254");
-            impunit.assertEqual('#bf2000', sucodo.colorWarner.getColor(128), "128");
+            impunit.assertEqual('#ff0000', Sucodo.ColorWarner.getColor(256), "256");
+            impunit.assertEqual('#ff0000', Sucodo.ColorWarner.getColor(255), "255");
+            impunit.assertEqual('#fe0100', Sucodo.ColorWarner.getColor(254), "254");
+            impunit.assertEqual('#bf2000', Sucodo.ColorWarner.getColor(128), "128");
         },
         _testColorSmallValues : function () {
-            impunit.assertEqual('#000000', sucodo.colorWarner.getColor(0), "0");
-            impunit.assertEqual('#000000', sucodo.colorWarner.getColor(-1), "-1");
-            impunit.assertEqual('#804000', sucodo.colorWarner.getColor(1), "1");
-            impunit.assertEqual('#804000', sucodo.colorWarner.getColor(2), "2");
-            impunit.assertEqual('#813f00', sucodo.colorWarner.getColor(3), "3");
-            impunit.assertEqual('#813f00', sucodo.colorWarner.getColor(4), "4");
+            impunit.assertEqual('#000000', Sucodo.ColorWarner.getColor(0), "0");
+            impunit.assertEqual('#000000', Sucodo.ColorWarner.getColor(-1), "-1");
+            impunit.assertEqual('#804000', Sucodo.ColorWarner.getColor(1), "1");
+            impunit.assertEqual('#804000', Sucodo.ColorWarner.getColor(2), "2");
+            impunit.assertEqual('#813f00', Sucodo.ColorWarner.getColor(3), "3");
+            impunit.assertEqual('#813f00', Sucodo.ColorWarner.getColor(4), "4");
         }
     };
 

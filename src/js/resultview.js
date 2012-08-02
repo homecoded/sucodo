@@ -1,4 +1,4 @@
-var resultview = (function () {
+Sucodo.ResultView = (function () {
 
     var resultView = null;
     var resultsPos = -1;

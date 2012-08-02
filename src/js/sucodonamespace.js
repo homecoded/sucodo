@@ -1,1 +1,1 @@
-var sucodo = {};
+var Sucodo = {};
