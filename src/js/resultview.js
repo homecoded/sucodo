@@ -95,9 +95,9 @@ Sucodo.ResultView = (function () {
             var ignoreText = '';
             if (textAnalyzer.isIgnoredSource(url)) {
                 ignoreClass = 'ignoredResultSource';
-                ignoreText = loca.getLocaData('txt_include', sucodoLoca.lang);
+                ignoreText = loca.getLocaData('txt_include', Sucodo.Loca.lang);
             } else {
-                ignoreText = loca.getLocaData('txt_ignore', sucodoLoca.lang);
+                ignoreText = loca.getLocaData('txt_ignore', Sucodo.Loca.lang);
             }
 
             var linkHTML = '<div id="'+divId+'" class="resultSourceLinkContainer '+ignoreClass+'"' + onMouseOverCode + onMouseOutCode + '>'
@@ -112,10 +112,10 @@ Sucodo.ResultView = (function () {
         var textShowSources = '';
         var methodName = '';
         if (doShowAllSources === true) {
-            textShowSources = loca.getLocaData('txt_show_less_sources', sucodoLoca.lang);
+            textShowSources = loca.getLocaData('txt_show_less_sources', Sucodo.Loca.lang);
             methodName = 'showLess';
         } else {
-            textShowSources = loca.getLocaData('txt_show_all_sources', sucodoLoca.lang);
+            textShowSources = loca.getLocaData('txt_show_all_sources', Sucodo.Loca.lang);
             methodName = 'showAll';
         }
 
@@ -131,19 +131,15 @@ Sucodo.ResultView = (function () {
             $('#result_negative').show();
             $('#most_used_sources_container').hide();
         }
-
-        var viewPos = $("#resultview_container").offset().top;
-        var containerPos = $("#scrollable_container").scrollTop();
-
         resultsPos = $('#scrollable_container').scrollTop() + $("#resultview_container").offset().top;
     }
 
     function ignoreUrl(url, linkId) {
         if (Sucodo.Navi.toggleIgnoreUrl(url)) {
-            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include', sucodoLoca.lang)+']');
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include', Sucodo.Loca.lang)+']');
             $('#source_' + linkId).addClass('ignoredResultSource');
         } else {
-            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_ignore', sucodoLoca.lang)+']');
+            $('#ignore_' + linkId).text('['+loca.getLocaData('txt_ignore', Sucodo.Loca.lang)+']');
             $('#source_' + linkId).removeClass('ignoredResultSource');
         }
     }

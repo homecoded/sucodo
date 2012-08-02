@@ -1,10 +1,10 @@
 /********************************************************************************************
 * sucodo loca
 */
-var sucodoLoca = {
+Sucodo.Loca = {
     lang: Sucodo.LOCA_ENG,
     setLang: function (id) {
-        sucodoLoca.lang = id;
+        Sucodo.Loca.lang = id;
         loca.applyLocalization(id);
 
         // update the options in the select boxes
@@ -12,7 +12,7 @@ var sucodoLoca = {
             $(this).text(loca.getLocaData(this.id, id));
         });
 
-        sucodoLoca.createLinks();
+        Sucodo.Loca.createLinks();
 
         // update the current page in case there were
         // any language specific settings
@@ -20,12 +20,11 @@ var sucodoLoca = {
     },
     createLinks: function () {
         var lang_select = $('#lang_select'),
-            htmlCode = loca.getLocaData('txt_lang_select', sucodoLoca.lang) + "<br>",
+            htmlCode = loca.getLocaData('txt_lang_select', Sucodo.Loca.lang) + "<br>",
             i;
 
-        for (i = 0; i < Sucodo.NUM_LANGUAGES; i++)
-        {
-            htmlCode += '<a href="javascript:void(0)" onclick="sucodoLoca.setLang('+i+')" '
+        for (i = 0; i < Sucodo.NUM_LANGUAGES; i++) {
+            htmlCode += '<a href="javascript:void(0)" onclick="Sucodo.Loca.setLang('+i+');" '
                 + 'class="lang_link">'
                 + loca.getLocaData('txt_lang_name', i)
                 + '</a>';
@@ -33,12 +32,12 @@ var sucodoLoca = {
         lang_select.html(htmlCode);
     },
     initialize: function () {
-        sucodoLoca.createLinks();
-        var lang = sucodoLoca.getParameterByName("lang");
+        Sucodo.Loca.createLinks();
+        var lang = Sucodo.Loca.getParameterByName("lang");
         if (lang === "de") {
-            sucodoLoca.lang = Sucodo.LOCA_GER;
+            Sucodo.Loca.lang = Sucodo.LOCA_GER;
         } else {
-            sucodoLoca.lang = Sucodo.LOCA_ENG;
+            Sucodo.Loca.lang = Sucodo.LOCA_ENG;
         }
 
     },

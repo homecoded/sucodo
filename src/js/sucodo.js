@@ -74,7 +74,7 @@ Sucodo.Navi = {
                 // update the add sample text link
                 $('#link_sample_text').click(function () {
                     var value = $('#plagtext').val(),
-                            sampletext = loca.getLocaData('txt_sample_text', sucodoLoca.lang);
+                            sampletext = loca.getLocaData('txt_sample_text', Sucodo.Loca.lang);
                     if (value.indexOf(sampletext) < 0) {
                         $('#plagtext').val( value + sampletext);
                     }
@@ -216,8 +216,8 @@ $(document).ready(function () {
     // init language
     loca.setDict(Sucodo.loca_dictionary);
     loca.setButtonDict(null);
-    sucodoLoca.initialize();
-    sucodoLoca.setLang(sucodoLoca.lang);
+    Sucodo.Loca.initialize();
+    Sucodo.Loca.setLang(Sucodo.Loca.lang);
     // setup callbacks
     Sucodo.Navi.setup();
 
