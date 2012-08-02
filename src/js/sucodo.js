@@ -97,11 +97,11 @@ Sucodo.Navi = {
                     return false;
                 } else {
                     wordGroupLen = parseInt($('#grouplen').val(), 10);
-                    textAnalyzer.stop();
-                    phrases = textAnalyzer.go(text, wordGroupLen, function () {
-                        resultText = textMarkup.markup(phrases, textAnalyzer.getResult());
+                    Sucodo.TextAnalyzer.stop();
+                    phrases = Sucodo.TextAnalyzer.go(text, wordGroupLen, function () {
+                        resultText = textMarkup.markup(phrases, Sucodo.TextAnalyzer.getResult());
                         $('#textview').html(resultText);
-                        timeLeft = Math.round(textAnalyzer.timeLeft() / 1000);
+                        timeLeft = Math.round(Sucodo.TextAnalyzer.timeLeft() / 1000);
                         if (timeLeft > 0) {
                             $('#analyze_time').html(timeLeft);
                             $('#textview').css('background-color', '#AAAAAA');
@@ -186,16 +186,16 @@ Sucodo.Navi = {
         }));
 
         if (Sucodo.sucodo_isOfflineMode == true) {
-            textAnalyzer.setWebSearcher(webSearcherOffline);
+            Sucodo.TextAnalyzer.setWebSearcher(webSearcherOffline);
         } else {
-            textAnalyzer.setWebSearcher(webSearcher);
+            Sucodo.TextAnalyzer.setWebSearcher(webSearcher);
         }
 
     },
 
     toggleIgnoreUrl: function (url) {
-            var isIgnored = textAnalyzer.toggleIgnoreUrl(url);
-            var resultText = textMarkup.markup(textAnalyzer.getPhrases(), textAnalyzer.getResult());
+            var isIgnored = Sucodo.TextAnalyzer.toggleIgnoreUrl(url);
+            var resultText = textMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
             $('#textview').html(resultText);
             textMarkup.updateMouseInteractivity();
             Sucodo.ResultView.show(resultview.areAllSourcesShown());

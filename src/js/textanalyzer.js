@@ -1,4 +1,4 @@
-var textAnalyzer = (function () {
+Sucodo.TextAnalyzer = (function () {
 
     var instance;
 
@@ -43,7 +43,7 @@ var textAnalyzer = (function () {
             // randomize the order in which phrases are searched
             randPhrases = phrases.slice(0);
             sortRule = function (a,b) {
-                return (Math.random() >= 0.5) ? 1 : -1;
+                return (Math.random() >= 0.5) ? (a/a) : -(b/b);
             };
             // make sure it really is random
             randPhrases.sort(sortRule);
@@ -111,11 +111,11 @@ var textAnalyzer = (function () {
             }
 
             for (var phrase in plagiarismCountMap) {
-                var data = plagiarismCountMap[phrase];
-
-                if (data && data.sources) {
-                    var phraseData = flagIgnoredSources(data);
-                    plagiarismCountMap[phrase] = phraseData;
+                if (plagiarismCountMap.hasOwnProperty(phrase)) {
+                    var data = plagiarismCountMap[phrase];
+                    if (data && data.sources) {
+                        plagiarismCountMap[phrase] = flagIgnoredSources(data);
+                    }
                 }
             }
             return ignoredSources[url];

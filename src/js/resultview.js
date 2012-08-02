@@ -22,7 +22,7 @@ Sucodo.ResultView = (function () {
 
         var numPhrases = 0,
                 numSuspiciousPhrases = 0,
-                resultMap = textAnalyzer.getResult(),
+                resultMap = Sucodo.TextAnalyzer.getResult(),
                 resultPercent, i, phraseData, url, numSourcesToShow, sourcesView, sourceShort,
                 sourceMap = {}, sourceArray = [];
 
@@ -93,7 +93,7 @@ Sucodo.ResultView = (function () {
             var ignoreLink = "resultview.ignoreUrl('"+(url)+"', "+i+")";
             var ignoreClass = '';
             var ignoreText = '';
-            if (textAnalyzer.isIgnoredSource(url)) {
+            if (Sucodo.TextAnalyzer.isIgnoredSource(url)) {
                 ignoreClass = 'ignoredResultSource';
                 ignoreText = loca.getLocaData('txt_include', Sucodo.Loca.lang);
             } else {

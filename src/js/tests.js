@@ -397,7 +397,7 @@ var tests = (function () {
         callbackCount: 0,
 
         _testAnalyzer : function () {
-            var ta = textAnalyzer.createInstance();
+            var ta = Sucodo.TextAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.\nIch bin zwei Hamburger.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher);
 
@@ -432,7 +432,7 @@ var tests = (function () {
             var callback = impunit.asyncCallback(function () {
                 // do another test
                 var ws = webSearcherOffline.createInstance("_testAnalyzerStop");
-                var ta = textAnalyzer.createInstance();
+                var ta = Sucodo.TextAnalyzer.createInstance();
                 ta.setWebSearcher(ws);
                 var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
                 var text2 = "Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood Mood ";
@@ -481,7 +481,7 @@ var tests = (function () {
         },
 
         _testAnalyzerIgnoredSources: function () {
-            var ta = textAnalyzer.createInstance();
+            var ta = Sucodo.TextAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
             ta.toggleIgnoreUrl('http://www.fun.com');
@@ -507,7 +507,7 @@ var tests = (function () {
         },
 
         _testAnalyzerRemoveIgnoredSourcesFromResult: function () {
-            var ta = textAnalyzer.createInstance();
+            var ta = Sucodo.TextAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
             ta.go(text, 3);
@@ -532,7 +532,7 @@ var tests = (function () {
         },
 
         _testAnalyzerRemoveAndAddIgnoredSourcesFromResult: function () {
-            var ta = textAnalyzer.createInstance();
+            var ta = Sucodo.TextAnalyzer.createInstance();
             var text = "Ich bin ein Berliner.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
             ta.go(text, 4);
