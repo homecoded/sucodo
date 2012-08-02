@@ -186,9 +186,9 @@ Sucodo.Navi = {
         }));
 
         if (Sucodo.sucodo_isOfflineMode == true) {
-            Sucodo.TextAnalyzer.setWebSearcher(webSearcherOffline);
+            Sucodo.TextAnalyzer.setWebSearcher(Sucodo.WebSearcherOffline);
         } else {
-            Sucodo.TextAnalyzer.setWebSearcher(webSearcher);
+            Sucodo.TextAnalyzer.setWebSearcher(Sucodo.WebSearcher);
         }
 
     },

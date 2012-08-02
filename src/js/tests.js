@@ -348,11 +348,11 @@ var tests = (function () {
                 impunit.assertEqual('test', phrase);
                 ws.destroy();
             });
-            var ws = webSearcherOffline.createInstance("_testSearch");
+            var ws = Sucodo.WebSearcherOffline.createInstance("_testSearch");
             ws.search('test', asyncCallback);
             ws.destroy();
         },
-        multSearchWs:webSearcherOffline.createInstance("multSearchWs"),
+        multSearchWs:Sucodo.WebSearcherOffline.createInstance("multSearchWs"),
         multiSearchTerms: ['Hausfrau', 'Mutter', 'Hund', 'Haus'],
         _testMultiSearch : function () {
             var asyncCallback = impunit.asyncCallback(function (phrase, phraseData) {
@@ -431,7 +431,7 @@ var tests = (function () {
         _testAnalyzerStop: function () {
             var callback = impunit.asyncCallback(function () {
                 // do another test
-                var ws = webSearcherOffline.createInstance("_testAnalyzerStop");
+                var ws = Sucodo.WebSearcherOffline.createInstance("_testAnalyzerStop");
                 var ta = Sucodo.TextAnalyzer.createInstance();
                 ta.setWebSearcher(ws);
                 var text1 = "Test Test Test Test Test Test Test Test Test Test Test ";
@@ -536,7 +536,9 @@ var tests = (function () {
             var text = "Ich bin ein Berliner.";
             ta.setWebSearcher(textAnalyzerTest.mockSearcher2);
             ta.go(text, 4);
+            // disable
             ta.toggleIgnoreUrl('http://www.fun.com');
+            // enable
             ta.toggleIgnoreUrl('http://www.fun.com');
             var result = ta.getResult();
             for (var phrase in result) {
@@ -587,15 +589,15 @@ var tests = (function () {
 
             var checkCleanupCallback = impunit.asyncCallback(function () {
                 var webSearcherCount = 0, j;
-                if (webSearcher) webSearcherCount++;
-                if (webSearcherOffline) webSearcherCount++;
+                if (Sucodo.WebSearcher) webSearcherCount++;
+                if (Sucodo.WebSearcherOffline) webSearcherCount++;
 
                 for (j = 0; j < webSearcherCount; j++) {
-                    impunit.assertTrue(webSearcherTable[webSearcherTable['tb' + j]] !== null, "Main websearcher does not exist");
+                    impunit.assertTrue(Sucodo.WebSearcherTable[Sucodo.WebSearcherTable['tb' + j]] !== null, "Main websearcher does not exist");
                 }
 
-                for (j = webSearcherCount; j < webSearcherTable.size; j++) {
-                    impunit.assertTrue(webSearcherTable['tb' + j] === null, "A test websearcher still exists at " + j);
+                for (j = webSearcherCount; j < Sucodo.WebSearcherTable.size; j++) {
+                    impunit.assertTrue(Sucodo.WebSearcherTable['tb' + j] === null, "A test websearcher still exists at " + j);
                 }
             });
             setTimeout(checkCleanupCallback, 6000);

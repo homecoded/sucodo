@@ -1,6 +1,6 @@
-var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
+Sucodo.WebSearcherTable = (Sucodo.WebSearcherTable) ? Sucodo.WebSearcherTable : {maxsize : 0};
 
-var webSearcherOffline = (function () {
+Sucodo.WebSearcherOffline = (function () {
 
     var instance;
 
@@ -70,7 +70,7 @@ var webSearcherOffline = (function () {
         }
 
         function destroy () {
-            delete webSearcherTable['tb' + wsId];
+            delete Sucodo.WebSearcherTable['tb' + wsId];
         }
 
         function stop() {
@@ -88,9 +88,9 @@ var webSearcherOffline = (function () {
             timeLeft: timeLeft,
             id: id
         };
-        wsId = webSearcherTable.maxsize;
-        webSearcherTable['tb' + wsId] = ws;
-        webSearcherTable.maxsize++;
+        wsId = Sucodo.WebSearcherTable.maxsize;
+        Sucodo.WebSearcherTable['tb' + wsId] = ws;
+        Sucodo.WebSearcherTable.maxsize++;
 
         return ws;
     }

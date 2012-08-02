@@ -1,6 +1,6 @@
-var webSearcherTable = (webSearcherTable) ? webSearcherTable : {maxsize : 0};
+Sucodo.WebSearcherTable = (Sucodo.WebSearcherTable) ? Sucodo.WebSearcherTable : {maxsize : 0};
 
-var webSearcher = (function () {
+Sucodo.WebSearcher = (function () {
 
     var instance;
     var callbacks = {},
@@ -64,12 +64,14 @@ var webSearcher = (function () {
 
                     phrase = phrase.substring(1, phrase.length - 1);
                     result.sources = [];
-                    for (i in data.RESULT) {
-                        var blekkoResult = data.RESULT[i];
-                        if (contains(blekkoResult.snippet, phrase) === true) {
-                            result.sources.push({
-                                Url : blekkoResult.url
-                            });
+                    if (data.RESULT) {
+                        for (i = 0; i < data.RESULT.length; i++) {
+                            var blekkoResult = data.RESULT[i];
+                            if (contains(blekkoResult.snippet, phrase) === true) {
+                                result.sources.push({
+                                    Url : blekkoResult.url
+                                });
+                            }
                         }
                     }
                     result.count = result.sources.length;
@@ -121,7 +123,7 @@ var webSearcher = (function () {
 
         function destroy () {
             stopThread();
-            delete webSearcherTable[getSearcherTableId()];
+            delete Sucodo.WebSearcherTable[getSearcherTableId()];
         }
 
         function getSearcherTableId() {
@@ -135,9 +137,9 @@ var webSearcher = (function () {
             stop: stopScripts,
             timeLeft: timeLeft
         };
-        wsId = webSearcherTable.maxsize;
-        webSearcherTable[getSearcherTableId()] = ws;
-        webSearcherTable.maxsize++;
+        wsId = Sucodo.WebSearcherTable.maxsize;
+        Sucodo.WebSearcherTable[getSearcherTableId()] = ws;
+        Sucodo.WebSearcherTable.maxsize++;
 
         return ws;
     }
