@@ -301,50 +301,6 @@ var tests = (function () {
         }
     };
 
-    var helpControlTest = {
-        setup: function () {
-            // craete a dict
-            var dict = {
-                txt_help_test1 : ['test1_1', 'test1_2'],
-                txt_help_test2 : ['test2_1', 'test2_2'],
-                txt_help_test3 : ['test3_1', 'test3_2']
-            };
-            // create the spans
-            $('#testresults').append('<div id="test_remove_me">'
-                    + '<span id="tooltip_help_test1"></span>'
-                    + '<p><span id="tooltip_help_test2"></span></p>'
-                    + '<p><div><span id="tooltip_help_test3"></span></div></p>'
-                    + '<div><p><div><span id="tooltip_help_test1"></span></div></p></div>'
-                    + '</div>'
-                    );
-
-            // init the loca
-            loca.dict = dict;
-        },
-        tearDown: function () {
-            loca.dict = null;
-            loca.buttonDict = null;
-            // remove the test elements
-            $('#test_remove_me').remove();
-        },
-        _testHelpControl: function () {
-            helpControlTest.setup();
-            helpControl.updateControls();
-            var element = $('#tooltip_help_test2');
-            var eHtml = element.html();
-            var expHtml = helpControl.infoHtml();
-            eHtml = eHtml.replace('<', '');
-            eHtml = eHtml.replace('>', '');
-            var htmlParts = eHtml.split(' ');
-
-            for (var i = 0; i < htmlParts.length; i++)
-            {
-                impunit.assertTrue(expHtml.indexOf(htmlParts[i]) >= 0, 'html part is not contained');
-            }
-            helpControlTest.tearDown();
-        }
-    };
-
     var textBreakerTest = {
         _testTextBreaker: function () {
             // one paragraph
@@ -690,8 +646,8 @@ var tests = (function () {
     return {
         runTests: function () {
             var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
-                colorWarnerTest, webSearcherCleanUpTest, textMarkupTest,
-                helpControlTest];
+                colorWarnerTest, webSearcherCleanUpTest, textMarkupTest
+                ];
             var testRun = 0, testsFailed = 0, messages = "";
 
             impunit.onAsyncTestFailed(function () {
