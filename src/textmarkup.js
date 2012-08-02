@@ -23,7 +23,7 @@ var textMarkup = (function () {
         phraseDict[text].push(id);
 
         return '<span id="phrase'+id
-                +'" style="color:' + colorWarner.getColor(count) + '">'
+                +'" style="color:' + sucodo.colorWarner.getColor(count) + '">'
                 + text + '</span>';
     }
 

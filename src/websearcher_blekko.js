@@ -15,7 +15,6 @@ var webSearcher = (function () {
         ws
         ;
 
-
     function createInstance()  {
 
         function search(phrase, cb) {
@@ -70,7 +69,7 @@ var webSearcher = (function () {
                     result.sources = [];
                     for (i in data.RESULT) {
                         var blekkoResult = data.RESULT[i];
-                        if (contains(blekkoResult.snippet, phrase) >= 0) {
+                        if (contains(blekkoResult.snippet, phrase) === true) {
                             result.sources.push({
                                 Url : blekkoResult.url
                             });
@@ -85,7 +84,6 @@ var webSearcher = (function () {
                             cbs[i](phrase, result);
                         }
                     }
-
                 }
             });
         }
