@@ -1,24 +1,24 @@
 /********************************************************************************************
  * Navi
  */
-var sucodo_isOfflineMode = false;
+Sucodo.sucodo_isOfflineMode = false;
 
-var navi = {
+Sucodo.Navi = {
     PAGE_ENTER_TEXT: 1,
     PAGE_ANALYZE: 2,
     PAGE_HELP: 3,
 
     currentPageId : -1,
-    openPage: function (id) {
-        var success = navi.execute(id);
+    "openPage": function (id) {
+        var success = Sucodo.Navi.execute(id);
         if (success) {
-            navi.highlight(id);
-            navi.showContent(id);
+            Sucodo.Navi.highlight(id);
+            Sucodo.Navi.showContent(id);
         } else {
             if (id === navi.PAGE_ANALYZE) {
                 // attempt to go to analyze screen but no text was entered
                 // then go to enter text screen
-                navi.openPage(navi.PAGE_ENTER_TEXT);
+                Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
             }
         }
     },
@@ -68,7 +68,7 @@ var navi = {
 
         switch (id)
         {
-            case navi.PAGE_ENTER_TEXT:
+            case Sucodo.Navi.PAGE_ENTER_TEXT:
                 showInfobarContents("#infobar_edit");
 
                 // update the add sample text link
@@ -80,7 +80,7 @@ var navi = {
                     }
                 });
                 break;
-            case navi.PAGE_ANALYZE:
+            case Sucodo.Navi.PAGE_ANALYZE:
                 showInfobarContents("#infobar_analyze");
                 var plagtext = $('#plagtext'),
                         text = plagtext.val(),
@@ -127,10 +127,10 @@ var navi = {
      */
     "execute": function (id) {
 
-        if (!navi.init(id)) {
+        if (!Sucodo.Navi.init(id)) {
             return false;
         }
-        navi.currentPageId = id;
+        Sucodo.Navi.currentPageId = id;
         return true;
     },
     /*
@@ -144,7 +144,7 @@ var navi = {
             $('#nav' + i).click((function () {
                 var id = i;
                 return function () {
-                    navi.openPage(id);
+                    Sucodo.Navi.openPage(id);
                 };
             })());
         }
@@ -155,9 +155,9 @@ var navi = {
         var oldTestGroupLength = -1;
         function closeSettings() {
             $('#settings').fadeOut(100);
-            if (navi.currentPageId === navi.PAGE_ANALYZE
+            if (Sucodo.Navi.currentPageId === Sucodo.Navi.PAGE_ANALYZE
                     && oldTestGroupLength !== $('#grouplen').val()) {
-                navi.openPage(navi.PAGE_ANALYZE);
+                Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ANALYZE);
             }
         }
 
@@ -171,13 +171,13 @@ var navi = {
 
         // Enter Text Screen
         $('#btn_analyze').click(function () {
-            navi.openPage(navi.PAGE_ANALYZE);
+            Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ANALYZE);
         });
 
         // Analyze Screen
         $('#resultinfo_inspect').click(textMarkup.showSearchResults);
         $('#btn_edit').click(function () {
-            navi.openPage(navi.PAGE_ENTER_TEXT);
+            Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
         });
 
         Sucodo.ResultView.init();
@@ -185,7 +185,7 @@ var navi = {
             Sucodo.ResultView.scrollToResults();
         }));
 
-        if (sucodo_isOfflineMode == true) {
+        if (Sucodo.sucodo_isOfflineMode == true) {
             textAnalyzer.setWebSearcher(webSearcherOffline);
         } else {
             textAnalyzer.setWebSearcher(webSearcher);
@@ -219,10 +219,10 @@ $(document).ready(function () {
     sucodoLoca.initialize();
     sucodoLoca.setLang(sucodoLoca.lang);
     // setup callbacks
-    navi.setup();
+    Sucodo.Navi.setup();
 
     // go to first site
-    navi.openPage(navi.PAGE_ENTER_TEXT);
+    Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
 
     // fade in infobar
     $('#infobar').fadeTo(2000, 0.9);

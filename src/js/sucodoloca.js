@@ -16,7 +16,7 @@ var sucodoLoca = {
 
         // update the current page in case there were
         // any language specific settings
-        navi.init(navi.currentPageId);
+        Sucodo.Navi.init(Sucodo.Navi.currentPageId);
     },
     createLinks: function () {
         var lang_select = $('#lang_select'),

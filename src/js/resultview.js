@@ -139,7 +139,7 @@ Sucodo.ResultView = (function () {
     }
 
     function ignoreUrl(url, linkId) {
-        if (navi.toggleIgnoreUrl(url)) {
+        if (Sucodo.Navi.toggleIgnoreUrl(url)) {
             $('#ignore_' + linkId).text('['+loca.getLocaData('txt_include', sucodoLoca.lang)+']');
             $('#source_' + linkId).addClass('ignoredResultSource');
         } else {
