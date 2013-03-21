@@ -1,3 +1,19 @@
+/*
+ Copyright 2012 Manuel Rülke, homecoded.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 /********************************************************************************************
  * Navi
  */
@@ -139,7 +155,7 @@ Sucodo.Navi = {
     setup: function () {
         // global navi
         var numLinks = $('#navlinks_inner').children().length,
-                i;
+            i, oldTestGroupLength;
         for (i = 1; i <= numLinks; i++) {
             $('#nav' + i).click((function () {
                 var id = i;
@@ -152,7 +168,7 @@ Sucodo.Navi = {
         // settings
         $('#settings_background').fadeTo(0, 0.5);
 
-        var oldTestGroupLength = -1;
+        oldTestGroupLength = -1;
         function closeSettings() {
             $('#settings').fadeOut(100);
             if (Sucodo.Navi.currentPageId === Sucodo.Navi.PAGE_ANALYZE
@@ -194,8 +210,8 @@ Sucodo.Navi = {
     },
 
     toggleIgnoreUrl: function (url) {
-            var isIgnored = Sucodo.TextAnalyzer.toggleIgnoreUrl(url);
-            var resultText = Sucodo.TextMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
+            var isIgnored = Sucodo.TextAnalyzer.toggleIgnoreUrl(url),
+                resultText = Sucodo.TextMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
             $('#textview').html(resultText);
             Sucodo.TextMarkup.updateMouseInteractivity();
             Sucodo.ResultView.show(resultview.areAllSourcesShown());

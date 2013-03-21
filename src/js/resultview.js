@@ -1,8 +1,24 @@
+/*
+ Copyright 2012 Manuel Rülke, homecoded.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 Sucodo.ResultView = (function () {
 
-    var resultView = null;
-    var resultsPos = -1;
-    var areAllSourcesShown = false;
+    var resultView = null,
+        resultsPos = -1,
+        areAllSourcesShown = false;
 
     // ---------------------------------------------
     function reset() {
@@ -17,6 +33,7 @@ Sucodo.ResultView = (function () {
     }
 
     // ---------------------------------------------
+    // TODO refactor spaghetti code
     function show(doShowAllSources) {
         resultView.fadeIn(1000);
 
@@ -24,9 +41,14 @@ Sucodo.ResultView = (function () {
                 numSuspiciousPhrases = 0,
                 resultMap = Sucodo.TextAnalyzer.getResult(),
                 resultPercent, i, phraseData, url, numSourcesToShow, sourcesView, sourceShort,
-                sourceMap = {}, sourceArray = [];
+                sourceMap = {}, sourceArray = [],
+                phrase,
+                onMouseOverCode, onMouseOutCode, shortUrl,
+                textShowSources, methodName,
+                divId, ignoreLinkId, ignoreLink, ignoreClass, ignoreText,
+                linkHTML;
 
-        for(var phrase in resultMap) {
+        for(phrase in resultMap) {
             if(resultMap.hasOwnProperty(phrase)) {
                 numPhrases+=1;
                 phraseData = resultMap[phrase];
@@ -77,22 +99,22 @@ Sucodo.ResultView = (function () {
         sourcesView.hide();
         sourcesView.html('');
 
-        var onMouseOverCode = ' onmouseover="$(this).addClass(\'resultSourceHover\')"';
-        var onMouseOutCode = ' onmouseout="$(this).removeClass(\'resultSourceHover\')"';
+        onMouseOverCode = ' onmouseover="$(this).addClass(\'resultSourceHover\')"';
+        onMouseOutCode = ' onmouseout="$(this).removeClass(\'resultSourceHover\')"';
 
         for (i = 0; i < numSourcesToShow; i++) {
             url = sourceArray[i].url;
-            var shortUrl = url.replace('http://www.', '');
+            shortUrl = url.replace('http://www.', '');
             shortUrl = shortUrl.replace('http://', '');
             sourceShort = (shortUrl.length > 50) ?
                     shortUrl.substring(0, 10) + '...' + shortUrl.substring(shortUrl.length - 27, shortUrl.length)
                     : shortUrl;
 
-            var divId = 'source_' + i;
-            var ignoreLinkId = 'ignore_' + i;
-            var ignoreLink = "resultview.ignoreUrl('"+(url)+"', "+i+")";
-            var ignoreClass = '';
-            var ignoreText = '';
+            divId = 'source_' + i;
+            gnoreLinkId = 'ignore_' + i;
+            ignoreLink = "resultview.ignoreUrl('"+(url)+"', "+i+")";
+            ignoreClass = '';
+            ignoreText = '';
             if (Sucodo.TextAnalyzer.isIgnoredSource(url)) {
                 ignoreClass = 'ignoredResultSource';
                 ignoreText = loca.getLocaData('txt_include', Sucodo.Loca.lang);
@@ -100,7 +122,7 @@ Sucodo.ResultView = (function () {
                 ignoreText = loca.getLocaData('txt_ignore', Sucodo.Loca.lang);
             }
 
-            var linkHTML = '<div id="'+divId+'" class="resultSourceLinkContainer '+ignoreClass+'"' + onMouseOverCode + onMouseOutCode + '>'
+            linkHTML = '<div id="'+divId+'" class="resultSourceLinkContainer '+ignoreClass+'"' + onMouseOverCode + onMouseOutCode + '>'
                 + '<div class="linkImg"></div>'
                 + '<a href="'+url+'" class="resultSource">'+sourceShort+'</a> '
                 + '<a id="'+ignoreLinkId+'" href="javascript:void(0)" onclick="'+ignoreLink+'" class="sourceLinkControl">['+ignoreText+']</a>'
@@ -109,8 +131,8 @@ Sucodo.ResultView = (function () {
             sourcesView.append(linkHTML);
         }
 
-        var textShowSources = '';
-        var methodName = '';
+        textShowSources = '';
+        methodName = '';
         if (doShowAllSources === true) {
             textShowSources = loca.getLocaData('txt_show_less_sources', Sucodo.Loca.lang);
             methodName = 'showLess';

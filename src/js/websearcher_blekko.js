@@ -1,9 +1,24 @@
+/*
+ Copyright 2012 Manuel Rülke, homecoded.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 Sucodo.WebSearcherTable = (Sucodo.WebSearcherTable) ? Sucodo.WebSearcherTable : {maxsize : 0};
 
 Sucodo.WebSearcher = (function () {
 
-    var instance;
-    var callbacks = {},
+    var instance, callbacks = {},
         phraseQueue = [],
         scripts = [],
         intervalId = null,
@@ -37,8 +52,8 @@ Sucodo.WebSearcher = (function () {
                 .toLocaleLowerCase()
                 .replace(/<(?:.|\n)*?>/gm, '')
                 .replace(/[^\w\s]/gi, '')
-                ;
-            var trimmedNeedle = needle
+                ,
+                trimmedNeedle = needle
                     .toLocaleLowerCase()
                     .replace(/<(?:.|\n)*?>/gm, '')
                     .replace(/[^\w\s]/gi, '')
@@ -60,13 +75,14 @@ Sucodo.WebSearcher = (function () {
                     var phrase = data.noslash_q,
                         result = {},
                         cbs, i,
-                        numCallbacks;
+                        numCallbacks,
+                        blekkoResult;
 
                     phrase = phrase.substring(1, phrase.length - 1);
                     result.sources = [];
                     if (data.RESULT) {
                         for (i = 0; i < data.RESULT.length; i++) {
-                            var blekkoResult = data.RESULT[i];
+                            blekkoResult = data.RESULT[i];
                             if (contains(blekkoResult.snippet, phrase) === true) {
                                 result.sources.push({
                                     Url : blekkoResult.url

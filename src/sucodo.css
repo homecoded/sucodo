@@ -1,4 +1,21 @@
 /*
+   Copyright 2012 Manuel Rülke, homecoded.com
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
+
+
     COLORS
 */
 .bgdark { background-color: #0079CE }
@@ -517,266 +534,16 @@ a {
     /* display: none; */
 }
 
-/*
+/* license */
 
-
-
-
-
-
-#lang_select, #navigation {
-    padding: 3px;
+#settings_content .license {
+	font-family: Arial, sans-serif;
+	font-size: 70%;
+	background-color: #eee;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
-#insert_sample_text {
-    float: left;
+.license-1 {
+	display: none;
 }
-
-#insert_sample_text_link a {
-    color: #555555;
-}
-
-#analyze_control, #edit_control {
-    width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#analyze_control {
-    text-align: left;
-}
-
-#edit_control {
-    text-align: right;
-}
-
-#btn_edit {
-}
-
-#grouplen_control {
-    float: right;
-}
-
-#content, #content1, #content2, #content3, #content4 {
-    margin: 0px;
-    padding: 0px;
-}
-
-#content1, #content2, #content3, #content4 {
-    border-bottom: 1px solid #7d5503;
-}
-
-#content1 {
-    background-color: #fbc576;
-    text-align: center;
-}
-
-#content2 {
-    background-color: #d9a04d;
-    text-align: center;
-}
-
-#content3 {
-    background-color: #d9a04d;
-    display: none;
-}
-
-#content4 {
-    background-color: #cd9035;
-    display: none;
-}
-
-#plagtext {
-    margin: auto;
-}
-
-#credits {
-    float: right;
-    margin-right: 10px;
-}
-
-#privacy {
-    float: left;
-    margin-left: 4px;
-}
-
-#testresults, #asynctestresults {
-    clear: both;
-    color: #AAA;
-    font-family: monospace;
-    margin-top: 20px;
-}
-
-#analyze_time_left {
-    font-size: 12pt;
-    font-weight: normal;
-}
-
-.textview_size, .textview {
-    width: 650px;
-    font-family: Georgia, Times New Roman, serif;
-    line-height: 140%;
-    font-size: 120%;
-    padding: 10px;
-}
-
-.textview {
-    overflow: auto;
-    margin: auto;
-    background-color: #FFFFFF;
-    border: 1px solid black;
-    padding: 5px;
-    text-align: left;
-}
-
-#resultinfo {
-    width: 300px;
-    height: 90px;
-    display: none;
-    padding: 5px;
-    position:fixed;
-    top: 50px;
-    right: 0px;
-    text-align:center;
-}
-
-#resultinfo_bg {
-    background-color: #492e01;
-    border-top: 1px solid #382300;
-    border-left: 1px solid #382300;
-    border-bottom: 1px solid #ffcc99;
-    border-right: 1px solid #ffcc99;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 0px;
-    margin: 0px;
-    z-index: 3;
-    filter:alpha(opacity=85);
-    -moz-opacity:0.85;
-    -khtml-opacity: 0.85;
-    opacity: 0.85;
-    top: 0px;
-    -moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px 4px 4px 4px;
-}
-
-#resultinfo_data {
-    z-index: 4;
-    font-size: 80%;
-    font-weight: normal;
-    padding: 4px;
-    color: #ffffff;
-    margin-bottom: 20px;
-    position: absolute;
-    top: 15px;
-    width: 100%
-}
-
-#explanation_process {
-    width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 30px;
-}
-
-.progress_indicator {
-    display: inline-block;
-}
-
-#txt_resultinfo_count, #resultinfo_count {
-    margin-left: 15px;
-}
-
-
-#resultinfo_count {
-    font-size: 180%;
-}
-
-#resultinfo_count {
-    font-weight: bold;
-}
-
-#resultinfo_stick {
-    width: 100%;
-    text-align: center;
-    bottom: 0px;
-}
-
-#resultinfo_close{
-    top: 0px;
-    right: 0px;
-}
-
-
-#resultinfo_close, #resultinfo_stick {
-    font-size: 70%;
-    margin: 4px;
-    position:absolute;
-    text-decoration: none;
-    display: none;
-    z-index: 4;
-}
-
-#resultinfo_controls {
-    border-top: 1px solid #533700;
-    padding: 3px;
-    margin-top: 4px;
-    display: none;
-    text-align: center;
-}
-
-
-#resultview, #textview {
-    text-align: left;
-}
-
-#textview_explanation {
-    width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#txt_textview {
-}
-
-#grouplen {
-    width: 45px;
-}
-
-#gaplen	{
-    width: 45px;
-}
-
-#txt_help {
-    padding: 20px;
-}
-
-.navspan {
-    margin-right: 30px;
-}
-
-.lang_link {
-    margin: 20px;
-}
-
-
-
-.content {
-    display: none;
-    margin: 0px;
-    color: #111111;
-}
-
-
-
-
-a {
-    color: #BBBBBB;
-}
-
-
-
-.suspicious_text {
-    font-weight: bold;
-}
-*/

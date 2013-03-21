@@ -1,3 +1,19 @@
+/*
+ Copyright 2012 Manuel Rülke, homecoded.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 Sucodo.TextAnalyzer = (function () {
 
     var instance;
@@ -70,11 +86,11 @@ Sucodo.TextAnalyzer = (function () {
         }
 
         function flagIgnoredSources(phraseData) {
-            var i;
+            var i, source, sourceCount;
             if (phraseData.sources) {
-                var sourceCount = 0;
+                sourceCount = 0;
                 for (i = 0; i < phraseData.sources.length; i++) {
-                    var source = phraseData.sources[i];
+                    source = phraseData.sources[i];
                     if (ignoredSources[source.Url]) {
                         if (!source.ignored) {
                             source.ignored = true;
@@ -110,9 +126,11 @@ Sucodo.TextAnalyzer = (function () {
                 ignoredSources[url] = true;
             }
 
-            for (var phrase in plagiarismCountMap) {
+            var phrase, data;
+
+            for (phrase in plagiarismCountMap) {
                 if (plagiarismCountMap.hasOwnProperty(phrase)) {
-                    var data = plagiarismCountMap[phrase];
+                    data = plagiarismCountMap[phrase];
                     if (data && data.sources) {
                         plagiarismCountMap[phrase] = flagIgnoredSources(data);
                     }
