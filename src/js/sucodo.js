@@ -214,7 +214,7 @@ Sucodo.Navi = {
                 resultText = Sucodo.TextMarkup.markup(Sucodo.TextAnalyzer.getPhrases(), Sucodo.TextAnalyzer.getResult());
             $('#textview').html(resultText);
             Sucodo.TextMarkup.updateMouseInteractivity();
-            Sucodo.ResultView.show(resultview.areAllSourcesShown());
+            Sucodo.ResultView.show(Sucodo.ResultView.areAllSourcesShown());
             return isIgnored;
         }
 };

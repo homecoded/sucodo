@@ -112,7 +112,7 @@ Sucodo.ResultView = (function () {
 
             divId = 'source_' + i;
             gnoreLinkId = 'ignore_' + i;
-            ignoreLink = "resultview.ignoreUrl('"+(url)+"', "+i+")";
+            ignoreLink = "Sucodo.ResultView.ignoreUrl('"+(url)+"', "+i+")";
             ignoreClass = '';
             ignoreText = '';
             if (Sucodo.TextAnalyzer.isIgnoredSource(url)) {
@@ -141,7 +141,7 @@ Sucodo.ResultView = (function () {
             methodName = 'showAll';
         }
 
-        sourcesView.append('<div class="toggleSources"><a href="javascript:resultview.'+methodName+'()">'+ textShowSources +'</a></div>');
+        sourcesView.append('<div class="toggleSources"><a href="javascript:Sucodo.ResultView.'+methodName+'()">'+ textShowSources +'</a></div>');
 
         if (numSourcesToShow > 0) {
             sourcesView.show();
