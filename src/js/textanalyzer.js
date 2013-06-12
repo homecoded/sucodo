@@ -32,6 +32,7 @@ Sucodo.TextAnalyzer = (function () {
         }
 
         function go (newText, wordgrouplen, cb) {
+
             callback = cb;
             phrases = [];
             plagiarismCountMap = [];
@@ -65,9 +66,10 @@ Sucodo.TextAnalyzer = (function () {
             randPhrases.sort(sortRule);
             randPhrases.sort(sortRule);
 
+
             for (i = 0; i < randPhrases.length; i++) {
                 phrase = randPhrases[i];
-                if (phrase !== '' && phrase.split(' ').length == wordgrouplen) {
+                if (phrase !== '' && ((phrase.split(' ').length == wordgrouplen) || (randPhrases.length == 1))) {
                     webSearcher.search(phrase, onNewResultReceived);
                 }
             }

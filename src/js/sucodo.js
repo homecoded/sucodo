@@ -31,7 +31,7 @@ Sucodo.Navi = {
             Sucodo.Navi.highlight(id);
             Sucodo.Navi.showContent(id);
         } else {
-            if (id === navi.PAGE_ANALYZE) {
+            if (id === Sucodo.Navi.PAGE_ANALYZE) {
                 // attempt to go to analyze screen but no text was entered
                 // then go to enter text screen
                 Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
