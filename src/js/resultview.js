@@ -141,7 +141,10 @@ Sucodo.ResultView = (function () {
             methodName = 'showAll';
         }
 
-        sourcesView.append('<div class="toggleSources"><a href="javascript:Sucodo.ResultView.'+methodName+'()">'+ textShowSources +'</a></div>');
+        // only add toggle sources when there are more than 10 entries
+        if (sourceArray.length > 10) {
+            sourcesView.append('<div class="toggleSources"><a href="javascript:Sucodo.ResultView.'+methodName+'()">'+ textShowSources +'</a></div>');
+        }
 
         if (numSourcesToShow > 0) {
             sourcesView.show();

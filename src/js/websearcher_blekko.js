@@ -22,7 +22,7 @@ Sucodo.WebSearcher = (function () {
         phraseQueue = [],
         scripts = [],
         intervalId = null,
-        INTERVAL_WAIT_TIME = 1100,
+        INTERVAL_WAIT_TIME = 500,
         wsId,
         ws
         ;
