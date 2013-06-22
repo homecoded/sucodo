@@ -12,15 +12,18 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
+
+ Check https://github.com/homecoded/impunit for documentation
  */
 
 var impunit = (function () {
 
     function createInstance() {
         var impunit = {}, messages = '', asyncMessages = '', isTestFailed,
-                testsRun = -1, testsFailed = -1, asyncTestsFailed = [],
-                silent = true, testName,
-                asyncTestsRun = [], asyncCb = null;
+            testsRun = -1, testsFailed = -1, asyncTestsFailed = [],
+            silent = true, testName, currentTestContext, asyncTestTeardown = {}, isAsyncTest,
+            asyncTestsRun = [], asyncCb = null, asyncTestsInProgress = {},
+            uniqueId = 0;
 
         // private function to report an error
         function reportError(msg, asyncTestName) {
@@ -42,33 +45,53 @@ var impunit = (function () {
         }
 
         // run the tests in a test container
-        impunit.runTests = function (testSuite) {
-            if (!testSuite) {
+        impunit.runTests = function (testSuites) {
+            if (!testSuites) {
                 reportError('ERROR: No Test Suite specified.');
             }
 
-            var test;
-            testsRun = 0;
-            testsFailed = 0;
-            asyncTestsFailed = [];
-            asyncTestsRun = [];
-            messages = '';
+            if (!(testSuites instanceof Array)) {
+                testSuites = [testSuites];
+            }
 
-            for (test in testSuite) {
-                if (testSuite.hasOwnProperty(test)) {
-                    testName = test;
-                    try {
-                        if (typeof (testSuite[testName]) === 'function' && testName.indexOf('_test') === 0) {
-                            isTestFailed = false;
-                            testsRun += 1;
-                            testSuite[testName]();
-                            if (isTestFailed) {
-                                testsFailed += 1;
+            var test;
+            testsRun = 0; testsFailed = 0; asyncTestsFailed = []; asyncTestsRun = 0;
+            asyncTestsRun = []; asyncTestTeardown = {}; messages = '';
+
+            var numTestSuites = testSuites.length;
+            for (i = 0; i < numTestSuites; i++) {
+                var testSuite = testSuites[i];
+                var setupMethod = (testSuite['_setup']) ? testSuite['_setup'] : function () {};
+                var teardownMethod = (testSuite['_teardown']) ? testSuite['_teardown'] : function () {};
+
+                for (test in testSuite) {
+                    if (testSuite.hasOwnProperty(test)) {
+                        testName = test;
+                        try {
+                            if (typeof (testSuite[testName]) === 'function' && testName.indexOf('_test') === 0) {
+                                uniqueId++;
+                                isTestFailed = false;
+                                testsRun += 1;
+                                currentTestContext = testSuite;
+                                isAsyncTest = false;
+                                setupMethod.call(currentTestContext);
+                                testSuite[testName].call(currentTestContext);
+                                if (isAsyncTest) {
+                                    asyncTestTeardown[testName+uniqueId] = teardownMethod;
+                                } else {
+                                    teardownMethod.call(currentTestContext);
+                                }
+                                if (isTestFailed) {
+                                    testsFailed += 1;
+                                }
+                            }
+                        } catch (e) {
+                            testsFailed += 1;
+                            reportError('TEST FAILED\nTest Name: ' + testName + '\nError: ' + e);
+                            if (teardownMethod) {
+                                teardownMethod.call(currentTestContext);
                             }
                         }
-                    } catch (e) {
-                        testsFailed += 1;
-                        reportError('TEST FAILED\nTest Name: ' + testName + '\nError: ' + e);
                     }
                 }
             }
@@ -76,9 +99,8 @@ var impunit = (function () {
 
         function assert(expr, testIdent, msg, asyncTestName) {
             if (expr === false) {
-                testIdent = testIdent.replace(/</gi, '&lt;');
                 reportError('TEST FAILED\nTest Name: ' + testName + '\n' + testIdent + ': ' + msg,
-                        asyncTestName);
+                    asyncTestName);
             }
             if (asyncTestName && asyncCb) {
                 if (asyncTestsRun.indexOf(asyncTestName) < 0 ) {
@@ -93,7 +115,7 @@ var impunit = (function () {
         };
 
         impunit.assertEqual = function (exp1, exp2, msg) {
-            assert(exp1 === exp2, 'assertEqual [' + exp1 + '] != [' + exp2 + ']', msg, impunit.assertEqual.caller.testName);
+            assert(exp1 === exp2, 'assertEqual (' + exp1 + ') != (' + exp2 + ')', msg, impunit.assertEqual.caller.testName);
         };
 
         impunit.messages = function () { return messages; };
@@ -118,8 +140,30 @@ var impunit = (function () {
         };
 
         impunit.asyncCallback = function (callback) {
+            isAsyncTest = true;
+            var context = currentTestContext;
             callback.testName = testName;
-            return callback;
+            callback.id = uniqueId;
+
+            var callbackWrapper = function () {
+                var testName = callback.testName;
+                if (asyncTestsInProgress[testName + callback.id]) {
+                    var index = asyncTestsInProgress[testName + callback.id].indexOf(callback);
+                    asyncTestsInProgress[testName + callback.id].splice(index, 1)
+                }
+                callback.apply(context, arguments);
+                if (!asyncTestsInProgress[testName + callback.id]
+                    || asyncTestsInProgress[testName + callback.id].length == 0) {
+                    if (asyncTestTeardown[testName+callback.id]) {
+                        asyncTestTeardown[testName+callback.id].call(context);
+                    }
+                }
+            }
+            if (!asyncTestsInProgress[testName+callback.id]) {
+                asyncTestsInProgress[testName+callback.id] = [];
+            }
+            asyncTestsInProgress[testName+callback.id].push(callback);
+            return callbackWrapper;
         };
 
         return impunit;
@@ -129,7 +173,6 @@ var impunit = (function () {
     impunit.createInstance = createInstance;
     return impunit;
 }());
-
 
 
 
@@ -645,10 +688,160 @@ var tests = (function () {
         }
     };
 
+    var storageTest = {
+        _testGetSetIntKey : function () {
+            var key = 2234,
+                value = 'this is test',
+                storage = Sucodo.Storage.getInstance()
+            ;
+            storage.set(key, value);
+            impunit.assertEqual(storage.get(key), value);
+        },
+        _testGetSetStringKey : function () {
+            var key = '2234',
+                value = 'this is also test',
+                storage = Sucodo.Storage.getInstance()
+                ;
+            storage.set(key, value);
+            impunit.assertEqual(storage.get(key), value);
+        },
+        _testGetSetObjectKey : function () {
+            var key = { id : '2234' },
+                value = 'this is also test',
+                storage = Sucodo.Storage.getInstance()
+                ;
+            storage.set(key, value);
+            impunit.assertEqual(storage.get(key), value);
+        },
+        _testGetSetMulti : function () {
+            var key = '2234',
+                key2 = 'test',
+                key3 = '32)(/)(/()',
+                value = 'this is also test',
+                value2 = 12345,
+                value3 = { test : 'blue' },
+                storage = Sucodo.Storage.getInstance()
+            ;
+            storage.set(key, value);
+            storage.set(key2, value2);
+            storage.set(key3, value3);
+            impunit.assertEqual(storage.get(key), value);
+            impunit.assertEqual(storage.get(key2), value2);
+            impunit.assertEqual(storage.get(key3), value3);
+        },
+        _testGetSetOverwrite : function () {
+            var key = '2234',
+                key2 = 'test',
+                key3 = '32)(/)(/()',
+                value = 'this is also test',
+                value2 = 12345,
+                value3 = { test : 'blue' },
+                storage = Sucodo.Storage.getInstance()
+            ;
+
+            storage.set(key, value);
+            impunit.assertEqual(storage.get(key), value);
+            storage.set(key, value2);
+            impunit.assertEqual(storage.get(key), value2);
+
+            storage.set(key2, value2);
+            storage.set(key2, value3);
+            impunit.assertEqual(storage.get(key2), value3);
+
+            storage.set(key, value3);
+            impunit.assertEqual(storage.get(key), value3);
+        },
+        _testDelete : function () {
+            var storage = Sucodo.Storage.getInstance();
+            storage.set('6554', 55344354387681);
+            impunit.assertEqual(storage.get('6554'), 55344354387681);
+
+            storage.set('6554', null);
+            impunit.assertEqual(storage.get('6554'), null);
+        },
+        _testUndefined : function () {
+            var storage = Sucodo.Storage.getInstance()
+            impunit.assertEqual(storage.get('undefined'), null);
+        }
+        ,
+        _testClear : function () {
+            var storage = Sucodo.Storage.getInstance();
+            storage.set(12368, 'my value 1');
+            storage.set(12367, 'my value 2');
+            impunit.assertEqual(storage.get(12368), 'my value 1');
+            impunit.assertEqual(storage.get(12367), 'my value 2');
+            storage.clear();
+            impunit.assertEqual(storage.get(12368), null);
+            impunit.assertEqual(storage.get(12367), null);
+        },
+        _testPermanentStorageLoadSave: function () {
+            var storage = Sucodo.Storage.getInstance();
+            if (storage.isPermanentStorageAvailable() == false) {
+                return;
+            }
+            // not yet initialized
+            storage.load('sucodo_test');
+            impunit.assertEqual(storage.get('test'), null);
+
+            // set and save
+            storage.set('test', '54321');
+            storage.save();
+            impunit.assertEqual(storage.get('test'), '54321');
+
+            // clear
+            storage.clear();
+            impunit.assertEqual(storage.get('test'), null);
+
+            // load again
+            storage.load('sucodo_test');
+            impunit.assertEqual(storage.get('test'), '54321');
+        },
+        _testPermanentStorageDelete: function () {
+            var storage = Sucodo.Storage.getInstance();
+            if (storage.isPermanentStorageAvailable() == false) {
+                return;
+            }
+
+            storage.load('sucodo_test');
+            impunit.assertEqual(storage.get('test'), null);
+            // set and save
+            storage.set('test', '54321');
+            storage.save();
+
+            // delete
+            storage.discard();
+            impunit.assertEqual(storage.get('test'), null);
+
+            // not loadable
+            storage.load('sucodo_test');
+            impunit.assertEqual(storage.get('test'), null);
+        },
+        _testMethodChainingLoad: function () {
+            var storage = Sucodo.Storage.getInstance();
+            storage.load('sucodo_test').set('__5252__', 'keller');
+            impunit.assertEqual(storage.get('__5252__'), 'keller');
+        },
+        _testMethodChainingSave: function () {
+            var storage = Sucodo.Storage.getInstance();
+            storage.load('sucodo_test').save().set('__5352__', 'koller');
+            impunit.assertEqual(storage.get('__5352__'), 'koller');
+        },
+        _testMethodChainingSet: function () {
+            var storage = Sucodo.Storage.getInstance();
+            impunit.assertEqual(storage.set('__5452__', 'kollur').get('__5452__'), 'kollur');
+        },
+
+        _teardown : function () {
+            var storage = Sucodo.Storage.getInstance();
+            storage.load('sucodo_test');
+            storage.discard();
+        }
+    };
+
     return {
         runTests: function () {
             var tests = [locatest, textBreakerTest, searcherTest, textAnalyzerTest,
-                colorWarnerTest, webSearcherCleanUpTest, textMarkupTest
+                colorWarnerTest, webSearcherCleanUpTest, textMarkupTest, storageTest
                 ];
             var testRun = 0, testsFailed = 0, messages = "";
 
