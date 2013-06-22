@@ -38,7 +38,6 @@ Sucodo.Storage = (function () {
          * @return object or value associated with the key, or null if the element was deleted or cleared
          */
         function get(id) {
-            console.log('get ' + id +  ' = ', storage[id]);
             if (storage[id]) {
                 return storage[id];
             }

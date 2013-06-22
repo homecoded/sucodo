@@ -66,7 +66,6 @@ Sucodo.TextAnalyzer = (function () {
             randPhrases.sort(sortRule);
             randPhrases.sort(sortRule);
 
-
             for (i = 0; i < randPhrases.length; i++) {
                 phrase = randPhrases[i];
                 if (phrase !== '' && ((phrase.split(' ').length == wordgrouplen) || (randPhrases.length == 1))) {
@@ -75,9 +74,11 @@ Sucodo.TextAnalyzer = (function () {
             }
 
             // count the search on sucodo.de
-            reg = new Image();
-            reg.src='http://sucodo.de/reg.php?num=' + randPhrases.length;
-
+            if (Sucodo.blekkoApiKey) {
+                // only count search querys that are counted against the apikey
+                reg = new Image();
+                reg.src='http://sucodo.de/reg.php?num=' + randPhrases.length;
+            }
             return paragraphs;
         }
 
@@ -111,7 +112,6 @@ Sucodo.TextAnalyzer = (function () {
 
         function onNewResultReceived(phrase, phraseData) {
             plagiarismCountMap[phrase] = flagIgnoredSources(phraseData);
-
             if (callback) {
                 callback();
             }

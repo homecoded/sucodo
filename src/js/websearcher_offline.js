@@ -70,7 +70,7 @@ Sucodo.WebSearcherOffline = (function () {
                         sources : sources
                     });
                 });
-            setInterval(runScripts, 100);
+            setTimeout(runScripts, 100);
         }
 
         function timeLeft() {
@@ -81,7 +81,7 @@ Sucodo.WebSearcherOffline = (function () {
             if (scripts.length > 0) {
                 var script = scripts.pop();
                 script();
-                setInterval(runScripts, 100);
+                setTimeout(runScripts, 100);
             }
         }
 
