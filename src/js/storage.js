@@ -24,12 +24,11 @@ Sucodo.Storage = (function () {
      * returns an instance of storage
      */
     function getInstance() {
-        /**
-         * Storage object
-         * @type {Object}
-         */
+
         var storage = {},
-            id = null
+            id = null,
+            timer = null,
+            LIFE_TIME = Sucodo.Storage.LIFE_TIME = 3 * 24 * 60 * 60 * 1000 // 3 days of cache lifetime
         ;
 
         /**
@@ -38,8 +37,9 @@ Sucodo.Storage = (function () {
          * @return object or value associated with the key, or null if the element was deleted or cleared
          */
         function get(id) {
+            _removeExpiredEntries(storage);
             if (storage[id]) {
-                return storage[id];
+                return storage[id].value
             }
             return null;
         }
@@ -47,11 +47,19 @@ Sucodo.Storage = (function () {
         /**
          * set an entry in the storage
          * @param id to be used as index in the storage (key)
-         * @param value object or value to be associated with the key
+         * @param newValue object or value to be associated with the key
          * @return object itself, for method chaining
          */
-        function set(id, value) {
-            storage[id] = value;
+        function set(id, newValue) {
+            var currentTimer = _getTimer();
+            if (newValue == null) {
+                storage[id] = null;
+            } else {
+                storage[id] = {
+                    value : newValue,
+                    expirationTime : currentTimer.getTime() + LIFE_TIME
+                };
+            }
             return this;
         }
 
@@ -90,8 +98,7 @@ Sucodo.Storage = (function () {
             if (isPermanentStorageAvailable() == false || id === null) {
                 return this;
             }
-            var storageObject = storage,
-                serializedStorage = JSON.stringify(storageObject);
+            var serializedStorage = JSON.stringify(storage);
             localStorage.setItem(id, serializedStorage);
             return this;
         }
@@ -116,6 +123,50 @@ Sucodo.Storage = (function () {
             return (typeof localStorage !== 'undefined');
         }
 
+        /**
+         * Sets an external timer (for testing)
+         * @param externalTimer timer object that has method getTime()
+         */
+        function setTimer(externalTimer) {
+            if (externalTimer && typeof externalTimer.getTime == 'function') {
+                timer = externalTimer;
+            } else {
+                throw 'timer object has no getTime function!';
+            }
+        }
+
+        /**
+         * Return a timer object
+         */
+        function _getTimer() {
+            if (timer == null) {
+                timer  = (function (){
+                    function getTime() { return (new Date()).getTime(); }
+                    return {
+                        getTime: getTime
+                    }
+                })();
+            }
+            return timer;
+        }
+
+        /**
+         * Removes all the entries from a storage that have expired
+         * @param storage storage object collection
+         */
+        function _removeExpiredEntries(storage) {
+            var time = _getTimer().getTime(),
+                storageObject;
+
+            for (var id in storage) {
+                if (storage.hasOwnProperty(id)) {
+                    storageObject = storage[id];
+                    if (storageObject != null && storageObject.expirationTime < time) {
+                        set(id, null);
+                    }
+                }
+            }
+        }
 
         return {
             get: get,
@@ -124,9 +175,10 @@ Sucodo.Storage = (function () {
             load: load,
             save: save,
             discard: discard,
-            isPermanentStorageAvailable : isPermanentStorageAvailable
+            isPermanentStorageAvailable : isPermanentStorageAvailable,
+            setTimer: setTimer
         }
-    };
+    }
 
     /**
      * public interface

@@ -830,6 +830,27 @@ var tests = (function () {
             var storage = Sucodo.Storage.getInstance();
             impunit.assertEqual(storage.set('__5452__', 'kollur').get('__5452__'), 'kollur');
         },
+        _testTimeout: function () {
+            var storage = Sucodo.Storage.getInstance(),
+                mockTimer  = (function (){
+                    var time = 0;
+                    function setTime(value) { time = value; }
+                    function getTime() {return time; }
+                    return {
+                        setTime: setTime,
+                        getTime: getTime
+                    }
+                })();
+
+            storage.setTimer(mockTimer);
+            storage.set('value', 'yeah');
+            mockTimer.setTime(Sucodo.Storage.LIFE_TIME/2);
+            impunit.assertEqual(storage.get('value'), 'yeah');
+            mockTimer.setTime(Sucodo.Storage.LIFE_TIME);
+            impunit.assertEqual(storage.get('value'), 'yeah');
+            mockTimer.setTime(Sucodo.Storage.LIFE_TIME + 1);
+            impunit.assertEqual(storage.get('value'), null);
+        },
 
         _teardown : function () {
             var storage = Sucodo.Storage.getInstance();
