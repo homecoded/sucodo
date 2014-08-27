@@ -25,7 +25,7 @@ Sucodo.Loca = {
 
         // update the options in the select boxes
         $.each($("#grouplen").children(), function () {
-            $(this).text(loca.getLocaData(this.id, id));
+            $(this).text(loca.getLocaData(this.getAttribute('data-loca-id'), id));
         });
 
         Sucodo.Loca.createLinks();
