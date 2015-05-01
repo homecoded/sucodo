@@ -204,7 +204,7 @@ Sucodo.Navi = {
         if (Sucodo.sucodo_isOfflineMode == true) {
             Sucodo.TextAnalyzer.setWebSearcher(Sucodo.WebSearcherOffline);
         } else {
-            Sucodo.TextAnalyzer.setWebSearcher(Sucodo.WebSearcher);
+            Sucodo.TextAnalyzer.setWebSearcher(Sucodo.WebSearcherGoogle);
         }
 
     },

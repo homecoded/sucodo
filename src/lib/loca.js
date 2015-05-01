@@ -137,24 +137,10 @@ var loca = (function () {
      */
     function updateVariables(objid, langId) {
 
-        if (!objid) {
-            if (currentLng >= 0) {
-                applyLocalization(currentLng);
-            } else {
-                return;
-            }
+        if (typeof langId == 'undefined') {
+            langId = currentLng;
         }
-
-        var obj = document.getElementById(objid), locaId;
-        if (!obj) {
-            return;
-        }
-        if (obj.tagName === 'SPAN') {
-            obj.innerHTML = getProcessedLocaData(objid, langId);
-        } else if (obj.tagName === 'INPUT') {
-            locaId = inputDict[obj.id];
-            obj.value = getProcessedLocaData(locaId, langId);
-        }
+        applyLocalization(langId);
     }
 
     /*
