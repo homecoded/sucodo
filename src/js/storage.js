@@ -120,7 +120,13 @@ Sucodo.Storage = (function () {
          * @return Boolean
          */
         function isPermanentStorageAvailable() {
-            return (typeof localStorage !== 'undefined');
+            // try if it's possible to use
+            try {
+                var bDoesBrowserHaveLocalStorage = typeof localStorage !== 'undefined';
+            } catch (e) {
+                return false;
+            }
+            return bDoesBrowserHaveLocalStorage;
         }
 
         /**
