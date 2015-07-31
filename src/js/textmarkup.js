@@ -223,7 +223,7 @@ Sucodo.TextMarkup = (function () {
 
     function showSearchResults () {
         var query = '"' + currentPhraseText + '"';
-        window.open('http://blekko.com/ws/' + query);
+        window.open('https://www.google.de/search?q=' + query + '&start=1');
     }
 
     return {
