@@ -53,13 +53,6 @@ Sucodo.Loca = {
     },
     initialize: function () {
         Sucodo.Loca.createLinks();
-        var lang = Sucodo.Loca.getParameterByName("lang");
-        if (lang === "de") {
-            Sucodo.Loca.lang = Sucodo.LOCA_GER;
-        } else {
-            Sucodo.Loca.lang = Sucodo.LOCA_ENG;
-        }
-
     },
     getParameterByName: function (name)
     {
