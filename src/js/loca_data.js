@@ -207,8 +207,8 @@ Sucodo.loca_dictionary =
             ],
     "txt_privacy":
             [
-                "<strong>Privacy Policy:</strong><br>Sucodo is open source and provided free of charge. It does not use cookies. No personal data except IP addresses are logged (Apache access log). Your IP address may be also transmitted to Google while executing Google search queries. Sucodo does not log any texts or parts of texts processed through it. However, the number of search queries needed for each text are tracked.",
-                "<strong>Privatsphäre:</strong><br>Sucodo ist Open Source und wird kostenlos zur Verfügung gestellt. Es werden keine Cookies benutzt und keine persönlichen Daten außer IP-Adressen gespeichert (Server Log). Durch das Ausführen von Suchanfragen über Google wird deine IP auch an Google übertragen. Sucodo speichert keine damit untersuchte Texte oder Textteile. Es werden jedoch die Anzahl der Suchanfragen, die für eine Text notwendig sind, getrackt."
+                "<strong>Privacy Policy:</strong><br>Sucodo is open-source and provided free of charge. It does not use cookies. No personal data are logged. Your IP address may be also transmitted to Google while executing Google-search queries and Google may set cookies. Sucodo does not log any texts or parts of texts processed through it. However, the number of search queries needed for each text are tracked.",
+                "<strong>Privatsphäre:</strong><br>Sucodo ist Open-Source und wird kostenlos zur Verfügung gestellt. Es benutzt selbst keine keine Cookies benutzt und es werden auch keine persönlichen Daten gespeichert. Durch das Ausführen von Suchanfragen über Google, wird deine IP jedoch an Google übertragen und Google setzt möglicherweise auch Cookies. Sucodo speichert keine damit untersuchte Texte oder Textteile. Es werden jedoch die Anzahl der Suchanfragen, die für eine Text notwendig sind, getrackt."
             ],
     "txt_privacy_see_also":
             [
