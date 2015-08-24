@@ -122,11 +122,12 @@ Sucodo.Storage = (function () {
         function isPermanentStorageAvailable() {
             // try if it's possible to use
             try {
-                var bDoesBrowserHaveLocalStorage = typeof localStorage !== 'undefined';
+                localStorage.setItem('sucodo_test_localstorage', 'test');
+                localStorage.removeItem('sucodo_test_localstorage');
             } catch (e) {
                 return false;
             }
-            return bDoesBrowserHaveLocalStorage;
+            return true;
         }
 
         /**
