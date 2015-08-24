@@ -225,28 +225,35 @@ Sucodo.Navi = {
  * entry point of app
  */
 $(document).ready(function () {
-    // run tests
-    if (typeof tests !== 'undefined') {
-        tests.runTests();
-    }
-    // init language
-    loca.setDict(Sucodo.loca_dictionary);
-    loca.setButtonDict(null);
-    Sucodo.Loca.initialize();
-    Sucodo.Loca.setLang(Sucodo.Loca.lang);
-    // setup callbacks
-    Sucodo.Navi.setup();
 
-    // go to first site
-    Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
+    $body = $('body');
 
-    // fade in infobar
-    $('#infobar').fadeTo(2000, 0.9);
-    $('#infobar').mouseenter(function () {
-        $('#infobar').fadeTo(200, 1);
-    });
-    $('#infobar').mouseleave(function () {
-        $('#infobar').fadeTo(200, 0.9);
+    $body.load('html/sucodo.html', function onHTMLReady() {
+
+        $body.addClass('bglight textFont darkText');
+        // run tests
+        if (typeof tests !== 'undefined') {
+            tests.runTests();
+        }
+        // init language
+        loca.setDict(Sucodo.loca_dictionary);
+        loca.setButtonDict(null);
+        Sucodo.Loca.initialize();
+        Sucodo.Loca.setLang(Sucodo.Loca.lang);
+        // setup callbacks
+        Sucodo.Navi.setup();
+
+        // go to first site
+        Sucodo.Navi.openPage(Sucodo.Navi.PAGE_ENTER_TEXT);
+
+        // fade in infobar
+        $('#infobar').fadeTo(2000, 0.9);
+        $('#infobar').mouseenter(function () {
+            $('#infobar').fadeTo(200, 1);
+        });
+        $('#infobar').mouseleave(function () {
+            $('#infobar').fadeTo(200, 0.9);
+        });
     });
 });
 
