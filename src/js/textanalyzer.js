@@ -74,11 +74,8 @@ Sucodo.TextAnalyzer = (function () {
             }
 
             // count the search on sucodo.de
-            if (Sucodo.blekkoApiKey) {
-                // only count search querys that are counted against the apikey
-                reg = new Image();
-                reg.src='http://sucodo.de/reg.php?num=' + randPhrases.length;
-            }
+            reg = new Image();
+            reg.src='http://sucodo.de/reg.php?num=' + randPhrases.length;
             return paragraphs;
         }
 
