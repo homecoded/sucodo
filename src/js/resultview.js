@@ -85,7 +85,7 @@ Sucodo.ResultView = (function () {
 
         resultPercent = Math.round(numSuspiciousPhrases / numPhrases * 100);
         loca.setVariable('#percent_suspicious#', '<span class="resultPercent">'+resultPercent+'%</span>');
-        loca.updateVariables('txt_percent_suspicious');
+        loca.updateVariables();
 
         if (doShowAllSources === true) {
             numSourcesToShow = sourceArray.length;

@@ -1,0 +1,15 @@
+{
+  "name": "sucodo",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A plagiarim detection web app.",
+  "repository": "https://github.com/homecoded/sucodo",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "gulp": "~3",
+    "gulp-concat": "~2.2",
+    "gulp-minify-css": "~0.3",
+    "gulp-uglify": "~0.3",
+    "del": "^1.2.1",
+  }
+}

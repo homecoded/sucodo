@@ -1,7 +1,7 @@
 /*
  The MIT License (MIT)
 
- Copyright (c) 2014 Manuel Rülke, homecoded
+ Copyright (c) 2014 Manuel Ruelke, homecoded
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,9 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
+/* global console */
 var loca = (function () {
-    var dict, inputDict, currentLng = -1,
+    var dict, currentLng = -1,
         varMap = {};
 
     /*
@@ -30,13 +31,6 @@ var loca = (function () {
      */
     function setDict(newDict) {
         dict = newDict;
-    }
-
-    /*
-     Set the current loca dictionary for buttons
-     */
-    function setButtonDict(newDict) {
-        inputDict = newDict;
     }
 
     /*
@@ -49,10 +43,19 @@ var loca = (function () {
             langId = 0;
         }
         if (!dict || !dict[id]) {
+            if (loca.debug) {
+                console.log('Warning! Could not find index in translation' + id);
+            }
             return null;
         }
         if (!dict[id][langId]) {
+            if (loca.debug) {
+                console.log('Warning! Could not find translation for ' + id + '. Using standard language.');
+            }
             return dict[id][0];
+        }
+        if (loca.debug) {
+            console.log(id,  dict[id][langId]);
         }
         return dict[id][langId];
     }
@@ -77,8 +80,8 @@ var loca = (function () {
         }
 
         // replace all the variables
-        for(var prop in varMap) {
-            if(varMap.hasOwnProperty(prop)) {
+        for (var prop in varMap) {
+            if (varMap.hasOwnProperty(prop)) {
                 varKey = prop;
                 varData = varMap[varKey];
                 regex = new RegExp(varKey, 'g');
@@ -88,59 +91,85 @@ var loca = (function () {
         return locaData;
     }
 
+    /**
+     * Get a list of html elements by list of tag names
+     *
+     * @param {Array<string>} tagNames
+     * @returns {Array<HTMLElement>}
+     */
+    function getElementsByTagNames(tagNames) {
+        var htmlElements = [],
+            collection
+            ;
+
+        for (var i = 0; i < tagNames.length; i++) {
+            collection = document.getElementsByTagName(tagNames[i]);
+            htmlElements = htmlElements.concat([].slice.call(collection));
+        }
+        return htmlElements;
+    }
+
+    /**
+     * Filter: Only items that have a translations data-attribute
+     *
+     * @param {Array<HTMLElement>} htmlElements
+     * @returns {Array<HTMLElement>}
+     */
+    function filterTranslatableElements(htmlElements) {
+        var translationId,
+            translatableHtmlElements = []
+            ;
+        for (var i = 0; i < htmlElements.length; i++) {
+            translationId = htmlElements[i].getAttribute('data-loca-id');
+            if (translationId) {
+                translatableHtmlElements.push(htmlElements[i]);
+            }
+        }
+        return translatableHtmlElements;
+    }
+
     /*
      Applies all loca keys to the texts
      */
-    function applyLocalization(langId)
-    {
+    function applyLocalization(langId) {
         currentLng = langId;
 
-        var textSpans = document.getElementsByTagName("span"),
+        var htmlElements = getElementsByTagNames(['span', 'button', 'div']),
+            htmlElement,
             inputs, input,
-            locaValue, i, locaId;
+            locaId,
+            locaValue, i
+            ;
 
-        if (!textSpans) {
-            return;
-        }
-        for (i = textSpans.length - 1; i >= 0; i--) {
-            locaValue = loca.getProcessedLocaData(textSpans[i].getAttribute('data-loca-id'), langId);
+        htmlElements = filterTranslatableElements(htmlElements);
+
+
+        for (i = htmlElements.length - 1; i >= 0; i--) {
+            htmlElement = htmlElements[i];
+            locaId = htmlElement.getAttribute('data-loca-id');
+            locaValue = loca.getProcessedLocaData(locaId, langId);
             if (locaValue !== null) {
-                textSpans[i].innerHTML = locaValue;
+                htmlElements[i].innerHTML = locaValue;
             }
         }
 
         // create a list of all inputs and their respective text-id
-        inputs = document.getElementsByTagName("input");
-        if (!inputDict && dict) {
-            inputDict = {};
-            for (i = inputs.length - 1; i >= 0; i--) {
-                input = inputs[i];
-                locaValue = getProcessedLocaData(input.value, langId);
-                if (locaValue !== null) {
-                    inputDict[input.id] = input.value;
-                }
-            }
-        }
+        inputs = getElementsByTagNames(['input']);
+        inputs = filterTranslatableElements(inputs);
 
         // update all inputs
         for (i = inputs.length - 1; i >= 0; i--) {
             input = inputs[i];
-            locaId = inputDict[input.id];
-            if (locaId && input.value) {
-                input.value = getProcessedLocaData(locaId, langId);
-            }
+            locaId = input.getAttribute('data-loca-id');
+            input.value = getProcessedLocaData(locaId, langId);
         }
     }
 
     /*
      Updates the text in specified object with variables
      */
-    function updateVariables(objid, langId) {
-
-        if (typeof langId == 'undefined') {
-            langId = currentLng;
-        }
-        applyLocalization(langId);
+    function updateVariables() {
+        applyLocalization(currentLng);
     }
 
     /*
@@ -152,13 +181,16 @@ var loca = (function () {
 
     return {
         setDict: setDict,
-        setButtonDict:setButtonDict,
         applyLocalization: applyLocalization,
         setVariable: setVariable,
         getLocaData: getLocaData,
         getProcessedLocaData: getProcessedLocaData,
         updateVariables: updateVariables,
-        getLanguage: function () { return currentLng; },
-        getVariable: function (key) { return varMap[key]; }
+        getLanguage: function () {
+            return currentLng;
+        },
+        getVariable: function (key) {
+            return varMap[key];
+        }
     };
 })();

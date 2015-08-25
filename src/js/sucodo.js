@@ -228,16 +228,13 @@ $(document).ready(function () {
 
     $body = $('body');
 
-    $body.load('html/sucodo.html', function onHTMLReady() {
-
-        $body.addClass('bglight textFont darkText');
+    function startApp() {
         // run tests
         if (typeof tests !== 'undefined') {
             tests.runTests();
         }
         // init language
         loca.setDict(Sucodo.loca_dictionary);
-        loca.setButtonDict(null);
         Sucodo.Loca.initialize();
         Sucodo.Loca.setLang(Sucodo.Loca.lang);
         // setup callbacks
@@ -254,7 +251,16 @@ $(document).ready(function () {
         $('#infobar').mouseleave(function () {
             $('#infobar').fadeTo(200, 0.9);
         });
-    });
+        $body.addClass('bglight textFont darkText');
+    }
+
+    if ($.trim($body.html()).length == 0) {
+        $body.load('html/sucodo.html', function onHTMLReady() {
+            startApp();
+        });
+    } else {
+        startApp();
+    }
 });
 
 /********************************************************************************************
