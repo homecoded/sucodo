@@ -30,27 +30,27 @@ gulp.task('build-js', ['clean'], function() {
         )
         .pipe(concat('sucodo.js'))
        // .pipe(uglify())
-        .pipe(gulp.dest('./deploy/work/js'))
+        .pipe(gulp.dest('./deploy/separated/js'))
         ;
 });
 
 gulp.task('build-css', ['clean'], function() {
     return gulp.src('./src/*.css')
         .pipe(minifyCss({compatibility: 'ie8'}))
-        .pipe(gulp.dest('./deploy/work/css'));
+        .pipe(gulp.dest('./deploy/separated/css'));
 });
 
 gulp.task('build-download-release', ['clean', 'build-js', 'build-css'], function(callback) {
     var sHtmlTemplate = '<!DOCTYPE HTML>' +
         '<html><head><meta charset="UTF-8"><title>sucodo</title><style>#style#</style><script>#code#</script>' +
         '</head><body>#html#<script>Sucodo.Loca.setLang(#loca_code#);</script></body></html>';
-    fs.readFile( __dirname + '/deploy/work/css/sucodo.css', function (err, data) {
+    fs.readFile( __dirname + '/deploy/separated/css/sucodo.css', function (err, data) {
         if (err) {
             throw err;
         }
         sHtmlTemplate = sHtmlTemplate.replace('#style#', data.toString());
 
-        fs.readFile( __dirname + '/deploy/work/js/sucodo.js', function (err, data) {
+        fs.readFile( __dirname + '/deploy/separated/js/sucodo.js', function (err, data) {
             if (err) {
                 throw err;
             }
@@ -72,10 +72,10 @@ gulp.task('build-download-release', ['clean', 'build-js', 'build-css'], function
                 mkdirSync(folderDe);
                 sHtmlTemplateDe = sHtmlTemplate.replace('#loca_code#', 'Sucodo.LOCA_GER');
                 fs.writeFileSync(folderDe + 'sucodo.html', sHtmlTemplateDe);
+                callback();
             });
         });
     });
-
 });
 
 // Default task
