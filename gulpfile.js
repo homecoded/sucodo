@@ -29,8 +29,19 @@ gulp.task('build-js', ['clean'], function() {
             ]
         )
         .pipe(concat('sucodo.js'))
-       // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('./deploy/separated/js'))
+        ;
+});
+
+gulp.task('build-html', ['clean'], function() {
+    return gulp.src(
+            [
+                './src/html/*.html'
+            ]
+        )
+        .pipe(concat('sucodo.html'))
+        .pipe(gulp.dest('./deploy/separated/html'))
         ;
 });
 
@@ -40,7 +51,7 @@ gulp.task('build-css', ['clean'], function() {
         .pipe(gulp.dest('./deploy/separated/css'));
 });
 
-gulp.task('build-download-release', ['clean', 'build-js', 'build-css'], function(callback) {
+gulp.task('build-download-release', ['clean', 'build-js', 'build-html', 'build-css'], function(callback) {
     var sHtmlTemplate = '<!DOCTYPE HTML>' +
         '<html><head><meta charset="UTF-8"><title>sucodo</title><style>#style#</style><script>#code#</script>' +
         '</head><body>#html#<script>Sucodo.Loca.setLang(#loca_code#);</script></body></html>';
@@ -81,5 +92,5 @@ gulp.task('build-download-release', ['clean', 'build-js', 'build-css'], function
 // Default task
 // --------------------------------------
 gulp.task('default', function () {
-    gulp.start('clean', 'build-js', 'build-css', 'build-download-release');
+    gulp.start('clean', 'build-js', 'build-html', 'build-css', 'build-download-release');
 });
