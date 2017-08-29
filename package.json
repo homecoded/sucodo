@@ -1,15 +1,24 @@
 {
   "name": "sucodo",
+  "main": "sucodo.js",
   "private": true,
   "version": "0.0.1",
-  "description": "A plagiarim detection web app.",
+  "description": "A plagiarim detection desktop app.",
   "repository": "https://github.com/homecoded/sucodo",
   "license": "Apache 2.0",
+  "dependencies": {
+    "sanitize-html": "^1.14.1",
+    "cheerio": "^0.22.0",
+    "striptags": "^3.1.0"
+  },
   "devDependencies": {
-    "gulp": "~3",
-    "gulp-concat": "~2.2",
-    "gulp-minify-css": "~0.3",
-    "gulp-uglify": "~0.3",
-    "del": "^1.2.1",
+    "electron": "^1.7.5",
+    "electron-packager": "^9.0.0",
+    "mocha": "^3.5.0",
+    "sleep": "^5.1.1"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "test": "./node_modules/.bin/mocha"
   }
 }
