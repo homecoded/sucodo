@@ -3,6 +3,8 @@ const assert = require('assert');
 const sleep = require('sleep');
 
 const snippet = 'We hold these truths to be self-evident, that all men are created equal';
+const quotedSnippet = 'All that we are is the result of what we have thought.';
+const quotedSnippetAppendix = ' Buddha';
 const numberOfResults = 10;
 
 describe('Websearcher',
@@ -49,7 +51,27 @@ describe('Websearcher',
                                         numberOfCaptionsContainingSnippet++;
                                     }
                                 }
-                                assert(numberOfCaptionsContainingSnippet > 0, 'No caption contained a snippet');
+                                assert(numberOfCaptionsContainingSnippet > 0, 'No caption contained the snippet');
+                            },
+                            numberOfResults
+                        )
+                    }
+                );
+                sleep.sleep(2);
+                it(
+                    'should correctly search for terms that contain quotation marks.',
+                    function () {
+                        sleep.sleep(1);
+                        websearch.search(
+                            '"' + quotedSnippet + '"' + quotedSnippetAppendix,
+                            (results) => {
+                                let numberOfCaptionsContainingSnippet = 0;
+                                for (let result of results) {
+                                    if (result.caption.indexOf(quotedSnippet)) {
+                                        numberOfCaptionsContainingSnippet++;
+                                    }
+                                }
+                                assert.equal(numberOfCaptionsContainingSnippet, numberOfResults, 'Not all results contained the quoted snippet');
                             },
                             numberOfResults
                         )
