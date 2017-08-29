@@ -33,7 +33,7 @@ How to Setup
 License
 =======
 
-   Copyright 2017 Manuel Rülke, homecoded.com
+   Copyright 2017 Manuel Ruelke, homecoded.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
