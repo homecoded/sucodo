@@ -3,7 +3,7 @@ const assert = require('assert');
 
 describe('Queue',
     function () {
-        describe('#search()',
+        describe('#Queue()',
             function () {
                 it(
                     'should run a task',
@@ -47,9 +47,10 @@ describe('Queue',
 
                 it(
                     'should run a task with delay',
-                    function () {
+                    function (done) {
                         let taskQueue = queue.create();
                         let isTaskRun = false;
+                        taskQueue.add(() => {});
                         taskQueue.add(() => {
                             isTaskRun = true
                         });
@@ -59,36 +60,66 @@ describe('Queue',
                         assert(!isTaskRun, 'The task must not yet have run.');
                         setTimeout(function () {
                             assert(isTaskRun, 'The task has not run.');
+                            done();
                         }, 250);
                     }
                 );
 
                 it(
                     'should run a tasks within delay limits',
-                    function () {
+                    function (done) {
+                        this.timeout(5000);
                         let taskQueue = queue.create();
                         let numTasksRun = 0;
-                        const numTasksToRun = 15;
+                        const numTasksToRun = 50;
+                        const minDelay = 20;
+                        const maxDelay = 90;
+                        const timeInaccuracyRange = 5; // allow 5 milliseconds of leeway for timing
                         let startTime = new Date().getTime();
 
                         function verify() {
                             let timePassed = new Date().getTime() - startTime;
                             startTime = new Date().getTime();
-                            assert(timePassed >= 50, 'The task was started too early.');
-                            assert(timePassed <= 90, 'The task was started too late.');
+                            assert(timePassed >= minDelay - timeInaccuracyRange, 'The task was started too early. ' + timePassed);
+                            assert(timePassed <= maxDelay + timeInaccuracyRange, 'The task was started too late. ' + timePassed);
                             numTasksRun++;
                         }
 
+                        taskQueue.add(() => {}); // first task get executed immediately, so add a blank one
                         for (let i = 0; i < numTasksToRun; i++) {
                             taskQueue.add(verify);
                         }
-                        taskQueue.setMinDelay(50);
-                        taskQueue.setMaxDelay(90);
+                        taskQueue.setMinDelay(minDelay);
+                        taskQueue.setMaxDelay(maxDelay);
                         taskQueue.run();
 
                         setTimeout(function () {
                             assert.equal(numTasksRun, numTasksToRun, 'Not all tasks have run');
-                        }, 500);
+                            done();
+                        }, maxDelay * numTasksToRun + timeInaccuracyRange);
+                    }
+                );
+
+                it(
+                    'should not start a queue twice',
+                    function () {
+                        let taskQueue = queue.create();
+                        let numTasks = 0;
+
+                        taskQueue.add(
+                            function () {
+                                assert.equal(numTasks, 0, 'The task has run already.');
+                                numTasks++;
+                            }
+                        );
+                        taskQueue.setMinDelay(50);
+                        taskQueue.setMaxDelay(90);
+                        assert(taskQueue.run(), 'The queue could not be started');
+                        assert(!taskQueue.run(), 'The queue should not be able to start twice.');
+
+                        setTimeout(function () {
+                            assert.equal(numTasks, 1, 'Number of runs do not match.');
+                        }, 120);
                     }
                 );
             }
