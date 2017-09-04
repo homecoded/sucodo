@@ -1,10 +1,12 @@
 const queue = require('../lib/queue');
 const assert = require('assert');
 
+//noinspection ES6ModulesDependencies
 describe('Queue',
     function () {
         describe('#Queue()',
             function () {
+                //noinspection ES6ModulesDependencies
                 it(
                     'should run a task',
                     function () {

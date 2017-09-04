@@ -4,10 +4,12 @@ const assert = require('assert');
 const timeOut = 10000;
 const delay = 1500;
 
+//noinspection NodeModulesDependencies,ES6ModulesDependencies
 describe('Queued Websearcher',
     function () {
         describe('#search()',
             function () {
+                //noinspection NodeModulesDependencies,ES6ModulesDependencies
                 it(
                     'should run web searches delayed',
                     function (done) {

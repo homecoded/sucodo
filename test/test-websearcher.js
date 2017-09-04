@@ -8,6 +8,7 @@ const quotedSnippetAppendix = ' Buddha';
 const numberOfResults = 10;
 const timeOut = 10000;
 
+//noinspection ES6ModulesDependencies
 /**
  * Note: the sleeps between tests are for stayking below a annoyance threshold for the search engine.
  * Contacting it too often might trigger an IP ban.
@@ -17,6 +18,7 @@ describe('Websearcher',
     function () {
         describe('#search()',
             function () {
+                //noinspection ES6ModulesDependencies
                 it(
                     'should return results for a snippet of the Declaration of Independence',
                     function (done) {
@@ -33,7 +35,7 @@ describe('Websearcher',
                 );
                 sleep.sleep(2);
                 it(
-                    'should return ' + numberOfResults +' results for a snippet of the Declaration of Independence, if num specified',
+                    'should return ' + numberOfResults + ' results for a snippet of the Declaration of Independence, if num specified',
                     function (done) {
                         this.timeout(timeOut);
                         sleep.sleep(1);
@@ -48,6 +50,7 @@ describe('Websearcher',
                     }
                 );
                 sleep.sleep(2);
+
                 it(
                     'should contain specified snippet text in caption',
                     function () {
@@ -69,6 +72,7 @@ describe('Websearcher',
                     }
                 );
                 sleep.sleep(2);
+
                 it(
                     'should correctly search for terms that contain quotation marks.',
                     function () {
