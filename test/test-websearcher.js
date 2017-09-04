@@ -8,6 +8,11 @@ const quotedSnippetAppendix = ' Buddha';
 const numberOfResults = 10;
 const timeOut = 10000;
 
+/**
+ * Note: the sleeps between tests are for stayking below a annoyance threshold for the search engine.
+ * Contacting it too often might trigger an IP ban.
+ */
+
 describe('Websearcher',
     function () {
         describe('#search()',
