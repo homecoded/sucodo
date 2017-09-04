@@ -23,7 +23,7 @@ describe('Websearcher',
                     'should return results for a snippet of the Declaration of Independence',
                     function (done) {
                         this.timeout(timeOut);
-                        sleep.sleep(1);
+                        sleep.msleep(1000);
                         websearch.search(
                             snippet,
                             (results) => {
@@ -33,12 +33,12 @@ describe('Websearcher',
                         )
                     }
                 );
-                sleep.sleep(2);
+                sleep.msleep(2000);
                 it(
                     'should return ' + numberOfResults + ' results for a snippet of the Declaration of Independence, if num specified',
                     function (done) {
                         this.timeout(timeOut);
-                        sleep.sleep(1);
+                        sleep.msleep(1000);
                         websearch.search(
                             snippet,
                             (results) => {
@@ -49,13 +49,13 @@ describe('Websearcher',
                         )
                     }
                 );
-                sleep.sleep(2);
+                sleep.msleep(2000);
 
                 it(
                     'should contain specified snippet text in caption',
                     function () {
                         this.timeout(timeOut);
-                        sleep.sleep(1);
+                        sleep.msleep(1000);
                         websearch.search(
                             snippet,
                             (results) => {
@@ -71,13 +71,13 @@ describe('Websearcher',
                         )
                     }
                 );
-                sleep.sleep(2);
+                sleep.msleep(2000);
 
                 it(
                     'should correctly search for terms that contain quotation marks.',
                     function () {
                         this.timeout(timeOut);
-                        sleep.sleep(1);
+                        sleep.msleep(1000);
                         websearch.search(
                             '"' + quotedSnippet + '"' + quotedSnippetAppendix,
                             (results) => {
