@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>sucodo</title>
+    <script src="node_modules/zepto/dist/zepto.min.js"></script>
+    <link rel="stylesheet" href="assets/css/sucodo.css">
 </head>
 <body>
-    <h1>sucodo desktop app</h1>
-
-    We are using node<script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <textarea id="sucodo_textinput" rows="15">
+    </textarea>
+    <button id="sample_text">Sample Text</button>
+    <button id="analyze">Analyze</button>
+    <div id="sucodo_results"></div>
+<script>
+    let sucodo = require('./sucodo');
+    sucodo.inject({
+        '$': $,
+        'nw_gui': require('nw.gui')
+    });
+    sucodo.run();
+</script>
 </body>
 </html>
