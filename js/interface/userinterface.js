@@ -22,7 +22,9 @@
  * - interactions with DOM elements like buttons
  */
 
-/* globals $, nw_gui, sucodoEmitter */
+/* globals $, Window, sucodoEmitter, sucodoTracker */
+/*jshint esversion: 6 */
+"use strict";
 
 function run() {
     maximizeWin();
@@ -30,21 +32,23 @@ function run() {
 }
 
 function initButtons() {
-    $('#analyze').click(
+    $("#analyze").click(
         () => {
-            sucodoEmitter.emit('onclick_analyze');
+            sucodoEmitter.emit("onclick_analyze");
+            sucodoTracker.track("onclick_analyze");
         }
     );
 
-    $('#sample_text').click(
+    $("#sample_text").click(
         () => {
-            sucodoEmitter.emit('onclick_sample_text');
+            sucodoEmitter.emit("onclick_sample_text");
+            sucodoTracker.track("onclick_sample_text");
         }
     );
 }
 
 function maximizeWin() {
-    nw_gui.Window.get().maximize();
+    Window.get().maximize();
 }
 
 /**
@@ -54,8 +58,8 @@ function maximizeWin() {
  * @param {string} value new content
  */
 function updateElement(name, value) {
-    let $element = $('#' + name);
-    if ($element.prop('tagName') === 'DIV') {
+    let $element = $("#" + name);
+    if ($element.prop("tagName") === "DIV") {
         $element.html(value);
     } else {
         $element.val(value);
@@ -69,11 +73,11 @@ function updateElement(name, value) {
  * @returns {string}
  */
 function getElementValue(name) {
-    return $('#' + name).val();
+    return $("#" + name).val();
 }
 
 module.exports = {
-    inject: require('../lib/dependencyInjection').getInjector(global),
+    inject: require("../lib/dependencyInjection").getInjector(global),
     run: run,
     updateElement: updateElement,
     getElementValue: getElementValue

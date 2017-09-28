@@ -11,16 +11,19 @@
     "cheerio": "^0.22.0",
     "striptags": "^3.1.0",
     "zepto": "^1.2.0",
-    "nw": "^1.2.0"
+    "nw": "^0.25.3",
+    "universal-analytics": "^0.4.15"
   },
   "devDependencies": {
+    "eslint": "^4.7.2",
+    "less": "^2.7.2",
     "mocha": "^3.5.0",
-    "sleep": "^5.1.1",
-    "less": "^2.7.2"
+    "sleep": "^5.1.1"
   },
   "scripts": {
     "start": "./node_modules/.bin/nw .",
     "test": "./node_modules/.bin/mocha",
-    "less": "./node_modules/.bin/lessc assets/less/sucodo.less assets/css/sucodo.css"
+    "less": "./node_modules/.bin/lessc assets/less/sucodo.less assets/css/sucodo.css",
+    "lint": "./node_modules/.bin/eslint test/ js/ --global it --global describe"
   }
 }

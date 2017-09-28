@@ -16,35 +16,41 @@
 
 /**
  * Entry point of the app
- * All modules and objects that need to be shared across the app will be instanciated here
+ * All modules and objects that need to be shared across the app will be instantiated here
  **/
 
-/* global nw_gui */
+/* global nw_gui, $ */
+/*jshint esversion: 6 */
+"use strict";
 
-const EventEmitter = require('events');
+const EventEmitter = require("events");
 class SucodoEmitter extends EventEmitter {}
 const sucodoEmitter = new SucodoEmitter();
+const sucodoTracker = require("./lib/tracking");
 
 
 let sucodoModules = [];
 
 function initApp() {
 
-    let sucodoInterface = initModule('./interface/userinterface', {
-        '$': $,
-        'nw_gui': nw_gui,
-        'sucodoEmitter': sucodoEmitter
+    let sucodoInterface = initModule("./interface/userinterface", {
+        "$": $,
+        "Window": nw_gui.Window,
+        "sucodoEmitter": sucodoEmitter,
+        "sucodoTracker": sucodoTracker
     });
 
-    initModule('./interface/event/sampletext', {
-        'sucodoInterface': sucodoInterface,
-        'sucodoEmitter': sucodoEmitter
+    initModule("./interface/event/sampletext", {
+        "sucodoInterface": sucodoInterface,
+        "sucodoEmitter": sucodoEmitter
     });
 
-    initModule('./interface/event/analyze', {
-        'sucodoInterface': sucodoInterface,
-        'sucodoEmitter': sucodoEmitter
+    initModule("./interface/event/analyze", {
+        "sucodoInterface": sucodoInterface,
+        "sucodoEmitter": sucodoEmitter
     });
+
+    sucodoTracker.track("open_app");
 }
 
 /**
@@ -63,12 +69,12 @@ function initModule(moduleSrc, dependencies) {
 
 function run() {
     initApp();
-    for (module of sucodoModules) {
-        module.run();
+    for (let sucodoModule of sucodoModules) {
+        sucodoModule.run();
     }
 }
 
 module.exports = {
-    inject: require('./lib/dependencyInjection').getInjector(global),
+    inject: require("./lib/dependencyInjection").getInjector(global),
     run: run
 };

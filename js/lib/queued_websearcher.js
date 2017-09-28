@@ -15,10 +15,14 @@
  */
 
 /**
- * Queued Websearcher, combines queue and websearcher.
+ * Queued Web Searcher, combines queue and web searcher.
  */
-const queue = require('./queue');
-const websearch = require('./websearch');
+
+/*jshint esversion: 6 */
+"use strict";
+
+const queue = require("./queue");
+const websearch = require("./websearch");
 
 const MIN_DELAY = 300;
 const MAX_DELAY = 700;
@@ -29,14 +33,22 @@ function create() {
     let searchQueue = queue.create();
     let searchResults = {};
 
-    setDelay(MIN_DELAY, MAX_DELAY);
+    /**
+     * @param {number} minDelay
+     * @param {number}maxDelay
+     */
+    function setDelay(minDelay, maxDelay) {
+        searchQueue.setMinDelay(minDelay);
+        searchQueue.setMaxDelay(maxDelay);
+    }
 
     /**
      * @param {string} term
      * @param {function} callback
      */
-    function search (term, callback) {
-        if (typeof searchResults[term] !== 'undefined') {
+    function search(term, callback) {
+        //noinspection JSLint
+        if (typeof searchResults[term] !== "undefined") {
             callback(searchResults[term]);
         }
 
@@ -56,22 +68,15 @@ function create() {
         searchQueue.run();
     }
 
-    /**
-     * @param {number} minDelay
-     * @param {number}maxDelay
-     */
-    function setDelay(minDelay, maxDelay) {
-        searchQueue.setMinDelay(minDelay);
-        searchQueue.setMaxDelay(maxDelay);
-    }
+    setDelay(MIN_DELAY, MAX_DELAY);
 
     return {
-        search : search,
+        search: search,
         setDelay: setDelay
-    }
+    };
 
 }
 
 module.exports = {
     create: create
-}
+};

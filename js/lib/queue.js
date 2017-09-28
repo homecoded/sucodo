@@ -20,16 +20,19 @@
  * Add tasks to a queue and they will be executed in the order they are added.
  * You can specify a delay to wait between runs.
  * The delay can be a range. If so, a random delay between min and max is chosen.
- *
  */
+
+/*jshint esversion: 6 */
+/*jshint latedef:false */
+"use strict";
+
 function create() {
 
     let tasks,
         timeOutId,
         minDelay,
         maxDelay,
-        isRunning
-        ;
+        isRunning;
 
     function reset() {
         if (timeOutId > 0) {
@@ -50,19 +53,6 @@ function create() {
         tasks.push(taskFunction);
     }
 
-    /**
-     * @returns {boolean} if successfully started. It returns false if already started.
-     */
-    function run() {
-        if (isRunning) {
-            return false;
-        }
-
-        next();
-
-        return true;
-    }
-
     function next() {
         if (tasks.length > 0) {
             let task = tasks.shift();
@@ -74,7 +64,8 @@ function create() {
                         task();
                         setTimeout(next, 0);
                     },
-                    minDelay + Math.floor(Math.random() * delayRange));
+                    minDelay + Math.floor(Math.random() * delayRange)
+                );
             } else {
                 task();
                 setTimeout(next, 0);
@@ -82,6 +73,19 @@ function create() {
             isRunning = true;
         }
     }
+
+    /**
+     * @returns {boolean} if successfully started. It returns false if already started.
+     */
+    function run() {
+        if (isRunning) {
+            return false;
+        }
+
+        next();
+        return true;
+    }
+
 
     /**
      * @param {number} newMinDelay
@@ -120,15 +124,11 @@ function create() {
         run: run,
         setMaxDelay: setMaxDelay,
         setMinDelay: setMinDelay,
-        getMinDelay: () => {
-            return minDelay;
-        },
-        getMaxDelay: () => {
-            return maxDelay;
-        }
-    }
+        getMinDelay: () => minDelay,
+        getMaxDelay: () => maxDelay
+    };
 }
 
 module.exports = {
     create: create
-}
+};

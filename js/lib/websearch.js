@@ -23,6 +23,9 @@
  * access attempts have been made from a single machine.
  */
 
+/*jshint esversion: 6 */
+"use strict";
+
 const https = require("https");
 const cheerio = require("cheerio");
 const sanitizeHtml = require("sanitize-html");
@@ -34,26 +37,26 @@ const sanitizeHtml = require("sanitize-html");
  */
 function scrapeBingHTML(query, callback, count) {
     const options = {
-        hostname: 'www.bing.com',
+        hostname: "www.bing.com",
         path: `/search?q="${encodeURIComponent(query)}"&count=${count}`,
         port: 443
     };
 
     let request = https.request(options, function (res) {
 
-        let data = '';
+        let data = "";
 
-        res.on('data', function (chunk) {
+        res.on("data", function (chunk) {
             data += chunk;
         });
 
-        res.on('end', function () {
+        res.on("end", function () {
             callback(data);
         });
 
-        res.on('error', function (info) {
+        res.on("error", function (info) {
             throw new Error(info);
-        })
+        });
     });
 
     request.end();
@@ -79,15 +82,15 @@ function search(term, callback, count = 30) {
 
             let results = [];
 
-            $('#b_results').find('.b_algo').each(function () {
+            $("#b_results").find(".b_algo").each(function () {
 
                 const $this = $(this);
-                const $link = $this.find($('h2 a'));
-                const $text = $this.find($('.b_caption p'));
+                const $link = $this.find($("h2 a"));
+                const $text = $this.find($(".b_caption p"));
 
                 results.push({
                     title: $link.text(),
-                    link: $link.attr('href'),
+                    link: $link.attr("href"),
                     caption: $text.text()
                 });
             });

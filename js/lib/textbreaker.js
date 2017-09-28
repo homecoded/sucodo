@@ -20,6 +20,9 @@
  * Break a text into word groups
  */
 
+/*jshint esversion: 6 */
+"use strict";
+
 /**
  *
  * @param {Array} array
@@ -27,30 +30,44 @@
  * @returns {Array}
  */
 function chunkArray(array, chunkSize) {
-    let result = [];
-    for (let i = 0, len = array.length; i < len; i += chunkSize)
+    let result = [],
+        i,
+        len = array.length
+        ;
+    for (i = 0; i < len; i += chunkSize) {
         result.push(array.slice(i, i + chunkSize));
+    }
     return result;
 }
 
+/**
+ *
+ * @param {string} paragraphText
+ * @param {number} wordGroupSize
+ * @returns {Array}
+ */
+function breakParagraph(paragraphText, wordGroupSize) {
+    let paragraph = [];
+    let words = paragraphText.split(" ");
+    let chunks = chunkArray(words, wordGroupSize);
+    for (let wordGroup of chunks) {
+        paragraph.push({
+            text: wordGroup.join(" ").trim()
+        });
+    }
+    return paragraph;
+}
 /**
  * @param {string} text
  * @param {number} wordGroupSize
  * @returns {Array}
  */
 function breakText(text, wordGroupSize) {
-    let paragraphs = text.split('\n');
+    let paragraphs = text.split("\n");
     let results = [];
 
     for (let paragraphText of paragraphs) {
-        let paragraph = [];
-        let words = paragraphText.split(' ');
-        let chunks = chunkArray(words, wordGroupSize);
-        for (let wordGroup of chunks) {
-            paragraph.push({
-                text: wordGroup.join(' ').trim()
-            });
-        }
+        let paragraph = breakParagraph(paragraphText, wordGroupSize);
         results.push(paragraph);
     }
     return results;
@@ -58,4 +75,4 @@ function breakText(text, wordGroupSize) {
 
 module.exports = {
     breakText: breakText
-}
+};

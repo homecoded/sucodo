@@ -14,6 +14,9 @@
  limitations under the License.
  */
 
+/*jshint esversion: 6 */
+"use strict";
+
 /**
  * factory function to inject objects into the global scope of a module
  *
@@ -23,11 +26,11 @@
 function getInjector(context) {
     return function inject(dependencies) {
         Object.keys(dependencies).forEach(
-            function(depName) {
+            function (depName) {
                 context[depName] = dependencies[depName];
             }
         );
-    }
+    };
 }
 
 module.exports = {
