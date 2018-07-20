@@ -63,7 +63,14 @@ function analyzeParagraph(paragraph) {
  * @param {number} result.length
  */
 function handler(term, result) {
-    resultText += term + "(" + result.length + ") ";
+    if (!result) {
+        return;
+    }
+    resultText += term + "(" + result.length + ") <br/>";
+    for (var i = 0; i < result.length; i++){
+        var link = result[i].link;
+        resultText += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"" + link + "\">" + link + "</a><br/>";
+    }
     sucodoInterface.updateElement("sucodo_results", resultText);
 }
 

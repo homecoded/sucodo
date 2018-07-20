@@ -21,7 +21,7 @@
     "sleep": "^5.1.1"
   },
   "scripts": {
-    "start": "./node_modules/.bin/nw .",
+    "start": "./node_modules/.bin/nw --enable-logging --enable-logging=stderr .",
     "test": "./node_modules/.bin/mocha",
     "less": "./node_modules/.bin/lessc assets/less/sucodo.less assets/css/sucodo.css",
     "lint": "./node_modules/.bin/eslint test/ js/ --global it --global describe"
