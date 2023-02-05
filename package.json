@@ -26,5 +26,11 @@
     "test": "./node_modules/.bin/mocha",
     "less": "./node_modules/.bin/lessc assets/less/sucodo.less assets/css/sucodo.css",
     "lint": "./node_modules/.bin/eslint test/ js/ --global it --global describe"
+  },
+  "overrides": {
+    "nw": {
+      "merge": "^2.1.1",
+      "got": "^11.8.5"
+    }
   }
 }
