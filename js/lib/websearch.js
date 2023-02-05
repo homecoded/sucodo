@@ -26,41 +26,10 @@
 /*jshint esversion: 6 */
 "use strict";
 
-const https = require("https");
 const cheerio = require("cheerio");
 const sanitizeHtml = require("sanitize-html");
 
-/**
- * @param {string} query
- * @param {function} callback, returns array containing elements like { title: string, link: string, caption: string}
- * @param {number} count number of max expected results
- */
-function scrapeBingHTML(query, callback, count) {
-    const options = {
-        hostname: "www.bing.com",
-        path: `/search?q="${encodeURIComponent(query)}"&count=${count}`,
-        port: 443
-    };
-
-    let request = https.request(options, function (res) {
-
-        let data = "";
-
-        res.on("data", function (chunk) {
-            data += chunk;
-        });
-
-        res.on("end", function () {
-            callback(data);
-        });
-
-        res.on("error", function (info) {
-            throw new Error(info);
-        });
-    });
-
-    request.end();
-}
+let emergencyBreak = false;
 
 /**
  *
@@ -70,35 +39,101 @@ function scrapeBingHTML(query, callback, count) {
  */
 function search(term, callback, count = 30) {
 
-    scrapeBingHTML(
-        term,
-        (html) => {
-            const $ = cheerio.load(sanitizeHtml(
-                html, {
-                    allowedTags: false,
-                    allowedAttributes: false
-                })
-            );
+    if (emergencyBreak) {
+        setTimeout(
+            function () {
+                search(term, callback, count);
+            },
+            8000
+        );
+        return;
+    }
 
-            let results = [];
+    nw.Window.open('https://google.de/search?q=%22' + term + '%22&nfpr=1',
+        {
+            width: 450 + Math.floor(200 * Math.random()),
+            height: 450 + Math.floor(200 * Math.random()),
+            position: 'center'
 
-            $("#b_results").find(".b_algo").each(function () {
-
-                const $this = $(this);
-                const $link = $this.find($("h2 a"));
-                const $text = $this.find($(".b_caption p"));
-
-                results.push({
-                    title: $link.text(),
-                    link: $link.attr("href"),
-                    caption: $text.text()
-                });
-            });
-
-            callback(results);
         },
-        count
+        function (win) {
+            const searchWin = win;
+            searchWin.on("loaded", () => {
+                    setTimeout(
+                        function () {
+                            const $ = cheerio.load(sanitizeHtml(
+                                searchWin.window.document.body.innerHTML, {
+                                    allowedTags: false,
+                                    allowedAttributes: false
+                                })
+                            );
+
+                            let results = [];
+
+                            $("a").each(function () {
+                                const $link = $(this);
+                                let linkHref = $link.attr('href');
+                                linkHref = decodeURIComponent(linkHref);
+                                if (linkHref.includes('/url?q=')) {
+                                    linkHref = linkHref.replace('/url?q=', '');
+                                    if (linkHref.indexOf('&') > 0) {
+                                        linkHref = linkHref.substring(0, linkHref.indexOf('&'));
+                                    }
+                                    if (
+                                        linkHref.indexOf('https://') >= 0
+                                        && linkHref.indexOf('//www.google.') < 0
+                                        && linkHref.indexOf('.google.com/') < 0
+                                    ) {
+                                        results.push({
+                                            title: $link.text(),
+                                            link: linkHref,
+                                            caption: $link.text()
+                                        });
+                                    }
+                                }
+                            });
+
+                            if (searchWin.window.document.body.innerHTML.indexOf('detected unusual traffic') < 0) {
+                                searchWin.close(true);
+                                emergencyBreak = false;
+                            } else {
+                                console.log('!!!! ERMERGENCY BREAK !!!!');
+                                emergencyBreak = true;
+                                return;
+                            }
+
+                            results = uniqBy(results, 'link');
+                            callback(results);
+                        },
+                        1000
+                    )
+                }
+            );
+        }
     );
+}
+
+function uniqBy(a, key) {
+    let seen = {};
+    return a.filter(function(item) {
+        const val = item[key];
+        let isAlreadyThere = false;
+        if (val) {
+            if (seen[val]) {
+                isAlreadyThere = true;
+            }
+            seen[val] = true;
+        }
+
+        return isAlreadyThere === false;
+    })
+}
+
+/**
+ * @param {Window] }window
+ */
+function setWindow(window) {
+    myWindow = window;
 }
 
 module.exports = {

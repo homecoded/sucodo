@@ -54,21 +54,21 @@ function create() {
     }
 
     function next() {
+        let delayRange = maxDelay - minDelay;
         if (tasks.length > 0) {
             let task = tasks.shift();
             if (maxDelay > 0 && isRunning === true) {
-                let delayRange = maxDelay - minDelay;
                 timeOutId = setTimeout(
                     function () {
                         timeOutId = -1;
                         task();
-                        setTimeout(next, 0);
+                        setTimeout(next, minDelay + Math.floor(Math.random() * delayRange));
                     },
                     minDelay + Math.floor(Math.random() * delayRange)
                 );
             } else {
                 task();
-                setTimeout(next, 0);
+                setTimeout(next, minDelay + Math.floor(Math.random() * delayRange));
             }
             isRunning = true;
         }

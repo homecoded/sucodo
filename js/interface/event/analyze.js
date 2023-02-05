@@ -26,7 +26,7 @@ const textBreaker = require("../../lib/textbreaker");
 const webSearcher = require("../../lib/queued_websearcher");
 
 let searcher = webSearcher.create();
-searcher.setDelay(300, 1200);
+searcher.setDelay(5000, 9000);
 
 let resultText = "";
 
@@ -50,6 +50,11 @@ function run() {
  */
 function analyzeParagraph(paragraph) {
     for (let wordGroup of paragraph) {
+        // skip small word groups
+        if (wordGroup.text.split(' ').length < 4) {
+            handler(wordGroup.text, []);
+            continue;
+        }
         searcher.search(
             wordGroup.text,
             handler

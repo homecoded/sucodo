@@ -26,7 +26,6 @@
 const EventEmitter = require("events");
 class SucodoEmitter extends EventEmitter {}
 const sucodoEmitter = new SucodoEmitter();
-const sucodoTracker = require("./lib/tracking");
 
 
 let sucodoModules = [];
@@ -36,8 +35,7 @@ function initApp() {
     let sucodoInterface = initModule("./interface/userinterface", {
         "$": $,
         "Window": nw_gui.Window,
-        "sucodoEmitter": sucodoEmitter,
-        "sucodoTracker": sucodoTracker
+        "sucodoEmitter": sucodoEmitter
     });
 
     initModule("./interface/event/sampletext", {
@@ -47,10 +45,10 @@ function initApp() {
 
     initModule("./interface/event/analyze", {
         "sucodoInterface": sucodoInterface,
-        "sucodoEmitter": sucodoEmitter
+        "sucodoEmitter": sucodoEmitter,
+        "$": $,
+        "Window": nw_gui.Window,
     });
-
-    sucodoTracker.track("open_app");
 }
 
 /**

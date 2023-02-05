@@ -35,14 +35,12 @@ function initButtons() {
     $("#analyze").click(
         () => {
             sucodoEmitter.emit("onclick_analyze");
-            sucodoTracker.track("onclick_analyze");
         }
     );
 
     $("#sample_text").click(
         () => {
             sucodoEmitter.emit("onclick_sample_text");
-            sucodoTracker.track("onclick_sample_text");
         }
     );
 }
