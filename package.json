@@ -1,15 +1,30 @@
 {
   "name": "sucodo",
+  "main": "sucodo.html",
   "private": true,
   "version": "0.0.1",
-  "description": "A plagiarim detection web app.",
+  "description": "A plagiarim detection desktop app.",
   "repository": "https://github.com/homecoded/sucodo",
+  "chromium-args": "--disable-setuid-sandbox --disable-web-security",
+  "user-agent": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
   "license": "Apache 2.0",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "nw": "^0.72.0",
+    "sanitize-html": "^2.9",
+    "striptags": "^3.2.0",
+    "zepto": "^1.2.0"
+  },
   "devDependencies": {
-    "gulp": "~3",
-    "gulp-concat": "~2.2",
-    "gulp-minify-css": "~0.3",
-    "gulp-uglify": "~0.3",
-    "del": "^1.2.1",
+    "eslint": "^8.33.0",
+    "less": "^4.1.3",
+    "mocha": "^10.2.0",
+    "sleep": "^6.3.0"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/nw --enable-logging --enable-logging=stderr .",
+    "test": "./node_modules/.bin/mocha",
+    "less": "./node_modules/.bin/lessc assets/less/sucodo.less assets/css/sucodo.css",
+    "lint": "./node_modules/.bin/eslint test/ js/ --global it --global describe"
   }
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sucodo</title>
+    <script src="node_modules/zepto/dist/zepto.min.js"></script>
+    <link rel="stylesheet" href="assets/css/sucodo.css">
+</head>
+<body>
+    <textarea id="sucodo_textinput" rows="15">
+    </textarea>
+    <button id="sample_text">Sample Text</button>
+    <button id="analyze">Analyze</button>
+    <div id="sucodo_results"></div>
+<script>
+    "use strict";
+    let sucodo = require('./js/sucodo');
+    sucodo.inject({
+        '$': $,
+        'nw_gui': require('nw.gui')
+    });
+    sucodo.run();
+</script>
+</body>
+</html>

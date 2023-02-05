@@ -1,5 +1,5 @@
 /*
- Copyright 2012 Manuel Rülke, homecoded.com
+ Copyright 2017 Manuel Ruelke, homecoded.com
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -14,4 +14,25 @@
  limitations under the License.
  */
 
-var Sucodo = {};
+/*jshint esversion: 6 */
+"use strict";
+
+/**
+ * factory function to inject objects into the global scope of a module
+ *
+ * @param {object} context
+ * @returns {function} injector function
+ */
+function getInjector(context) {
+    return function inject(dependencies) {
+        Object.keys(dependencies).forEach(
+            function (depName) {
+                context[depName] = dependencies[depName];
+            }
+        );
+    };
+}
+
+module.exports = {
+    getInjector: getInjector
+};
