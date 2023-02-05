@@ -51,7 +51,7 @@ function run() {
 function analyzeParagraph(paragraph) {
     for (let wordGroup of paragraph) {
         // skip small word groups
-        if (wordGroup.text.split(' ').length < 4) {
+        if (wordGroup.text.split(" ").length < 4) {
             handler(wordGroup.text, []);
             continue;
         }

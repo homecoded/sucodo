@@ -23,6 +23,7 @@
  * access attempts have been made from a single machine.
  */
 
+/* globals nw */
 /*jshint esversion: 6 */
 "use strict";
 
@@ -49,65 +50,65 @@ function search(term, callback, count = 30) {
         return;
     }
 
-    nw.Window.open('https://google.de/search?q=%22' + term + '%22&nfpr=1',
+    nw.Window.open("https://google.de/search?q=%22" + term + "%22&nfpr=1",
         {
-            width: 450 + Math.floor(200 * Math.random()),
+            width: 600 + Math.floor(200 * Math.random()),
             height: 450 + Math.floor(200 * Math.random()),
-            position: 'center'
+            position: "center"
 
         },
         function (win) {
             const searchWin = win;
             searchWin.on("loaded", () => {
-                    setTimeout(
-                        function () {
-                            const $ = cheerio.load(sanitizeHtml(
-                                searchWin.window.document.body.innerHTML, {
-                                    allowedTags: false,
-                                    allowedAttributes: false
-                                })
-                            );
+                setTimeout(
+                    function () {
+                        const $ = cheerio.load(sanitizeHtml(
+                            searchWin.window.document.body.innerHTML, {
+                                allowedTags: false,
+                                allowedAttributes: false
+                            })
+                        );
 
-                            let results = [];
+                        let results = [];
 
-                            $("a").each(function () {
-                                const $link = $(this);
-                                let linkHref = $link.attr('href');
-                                linkHref = decodeURIComponent(linkHref);
-                                if (linkHref.includes('/url?q=')) {
-                                    linkHref = linkHref.replace('/url?q=', '');
-                                    if (linkHref.indexOf('&') > 0) {
-                                        linkHref = linkHref.substring(0, linkHref.indexOf('&'));
-                                    }
-                                    if (
-                                        linkHref.indexOf('https://') >= 0
-                                        && linkHref.indexOf('//www.google.') < 0
-                                        && linkHref.indexOf('.google.com/') < 0
-                                    ) {
-                                        results.push({
-                                            title: $link.text(),
-                                            link: linkHref,
-                                            caption: $link.text()
-                                        });
-                                    }
+                        $("a").each(function () {
+                            const $link = $(this);
+                            let linkHref = $link.attr("href");
+                            linkHref = decodeURIComponent(linkHref);
+                            if (linkHref.includes("/url?q=")) {
+                                linkHref = linkHref.replace("/url?q=", "");
+                                if (linkHref.indexOf("&") > 0) {
+                                    linkHref = linkHref.substring(0, linkHref.indexOf("&"));
                                 }
-                            });
-
-                            if (searchWin.window.document.body.innerHTML.indexOf('detected unusual traffic') < 0) {
-                                searchWin.close(true);
-                                emergencyBreak = false;
-                            } else {
-                                console.log('!!!! ERMERGENCY BREAK !!!!');
-                                emergencyBreak = true;
-                                return;
+                                if (
+                                    linkHref.indexOf("https://") >= 0
+                                        && linkHref.indexOf("//www.google.") < 0
+                                        && linkHref.indexOf(".google.com/") < 0
+                                ) {
+                                    results.push({
+                                        title: $link.text(),
+                                        link: linkHref,
+                                        caption: $link.text()
+                                    });
+                                }
                             }
+                        });
 
-                            results = uniqBy(results, 'link');
-                            callback(results);
-                        },
-                        1000
-                    )
-                }
+                        if (searchWin.window.document.body.innerHTML.indexOf("detected unusual traffic") < 0) {
+                            searchWin.close(true);
+                            emergencyBreak = false;
+                        } else {
+                            console.log("!!!! ERMERGENCY BREAK !!!!");
+                            emergencyBreak = true;
+                            return;
+                        }
+
+                        results = uniqBy(results, "link");
+                        callback(results);
+                    },
+                    1000
+                );
+            }
             );
         }
     );
@@ -115,7 +116,7 @@ function search(term, callback, count = 30) {
 
 function uniqBy(a, key) {
     let seen = {};
-    return a.filter(function(item) {
+    return a.filter(function (item) {
         const val = item[key];
         let isAlreadyThere = false;
         if (val) {
@@ -126,14 +127,7 @@ function uniqBy(a, key) {
         }
 
         return isAlreadyThere === false;
-    })
-}
-
-/**
- * @param {Window] }window
- */
-function setWindow(window) {
-    myWindow = window;
+    });
 }
 
 module.exports = {

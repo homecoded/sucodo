@@ -22,7 +22,7 @@
  * - interactions with DOM elements like buttons
  */
 
-/* globals $, Window, sucodoEmitter, sucodoTracker */
+/* globals $, Window, sucodoEmitter */
 /*jshint esversion: 6 */
 "use strict";
 
