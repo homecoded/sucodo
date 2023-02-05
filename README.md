@@ -1,13 +1,18 @@
 sucodo
 =======
 
-... is an application written mainly in JavaScript that checks for
-plagiarisms in texts. The application runs locally and does not send
-any data to any server except to search engines. The search engines will
-only get chunks of the original data in a random order to make reconstructing
-the text on the side of the search engine provider a bit harder.
+... is a NW.js-application written mainly in JavaScript that checks for
+plagiarisms in texts. The application runs locally as a desktop app 
+and does not send any data to any server except to search engines. 
+The search engines will get chunks of the original data each one at
+a time.
 The checked texts are not cached in any way on a server. If there is caching, 
-it will will be locally on the users machine and under his/her control.
+it will be locally on the users machine and under his/her control.
+The results any analysis are not shared with anyone. 
+
+*WARNING*: This tool is highly experimental. It uses the Google search engine at the moment.
+Prepare to solve a lot of captchas when you have decent size text. The captchas will
+be in a popup.
 
 Things to consider if you want to use this software:
 ====================================================
@@ -33,7 +38,7 @@ How to Setup
 License
 =======
 
-   Copyright 2017 Manuel Ruelke, homecoded.com
+   Copyright 2012 and after, Manuel Rülke, homecoded.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
