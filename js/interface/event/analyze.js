@@ -26,7 +26,7 @@ const textBreaker = require("../../lib/textbreaker");
 const webSearcher = require("../../lib/queued_websearcher");
 
 let searcher = webSearcher.create();
-searcher.setDelay(5000, 9000);
+searcher.setDelay(700, 2000);
 
 let resultText = "";
 
@@ -35,7 +35,7 @@ function run() {
         "onclick_analyze",
         () => {
             let text = sucodoInterface.getElementValue("sucodo_textinput");
-            let paragraphs = textBreaker.breakText(text, 7);
+            let paragraphs = textBreaker.breakText(text, 9);
             resultText = "";
 
             for (let paragraph of paragraphs) {

@@ -22,7 +22,7 @@
 "use strict";
 
 const queue = require("./queue");
-const websearch = require("./websearch");
+const websearch = require("./websearch_bing");
 
 const MIN_DELAY = 300;
 const MAX_DELAY = 700;

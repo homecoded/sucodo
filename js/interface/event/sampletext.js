@@ -13,7 +13,7 @@ function run() {
     sucodoEmitter.on(
         "onclick_sample_text",
         () => {
-            fs.readFile("assets/text/sample_short.txt", "utf8", function (err, data) {
+            fs.readFile("assets/text/sample.txt", "utf8", function (err, data) {
                 if (err) { throw err; }
                 sucodoInterface.updateElement("sucodo_textinput", data);
             });
